@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{48BC2C07-29F7-44F2-B046-46C408DCD584}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Business.Utils</RootNamespace>
+    <AssemblyName>Business.Utils</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CodeScales.Http">
+      <HintPath>..\..\Library\CodeScales.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\..\Library\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Library\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NPinyin">
+      <HintPath>..\..\Library\NPinyin.dll</HintPath>
+    </Reference>
+    <Reference Include="SendMobileMsg">
+      <HintPath>..\..\Library\SendMobileMsg.dll</HintPath>
+    </Reference>
+    <Reference Include="SmartMoney.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Library\SmartMoney.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="SmartMoney.Log">
+      <HintPath>..\..\Library\SmartMoney.Log.dll</HintPath>
+    </Reference>
+    <Reference Include="SmartMoney.Service">
+      <HintPath>..\..\Library\SmartMoney.Service.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CheckSignature.cs" />
+    <Compile Include="CheckTools.cs" />
+    <Compile Include="ConfigHelper.cs" />
+    <Compile Include="ConvertTools.cs" />
+    <Compile Include="CookieManager.cs" />
+    <Compile Include="CoreDefaultValue.cs" />
+    <Compile Include="BadWordParse.cs" />
+    <Compile Include="EmailTools.cs" />
+    <Compile Include="EncryptTools.cs" />
+    <Compile Include="EnumTools.cs" />
+    <Compile Include="FileReader.cs" />
+    <Compile Include="FileTools.cs" />
+    <Compile Include="HttpRuntimeCache.cs" />
+    <Compile Include="Info\InfoBase.cs" />
+    <Compile Include="Info\InfoTools.cs" />
+    <Compile Include="Info\MsgInfo.cs" />
+    <Compile Include="MD5.cs" />
+    <Compile Include="PagerTool.cs" />
+    <Compile Include="PathTools.cs" />
+    <Compile Include="PinyinEx.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="MobileMsgGateway.cs" />
+    <Compile Include="RegexHelpper.cs" />
+    <Compile Include="SecurityCodeHelper.cs" />
+    <Compile Include="SensitiveWordHelper.cs" />
+    <Compile Include="SensitiveWordsFilter.cs" />
+    <Compile Include="StringTool.cs" />
+    <Compile Include="TypeTools.cs" />
+    <Compile Include="UTF8FileBody.cs" />
+    <Compile Include="ValidateCode\ValidateCode.cs" />
+    <Compile Include="ValidateCode\ValidateCodeBuilder.cs" />
+    <Compile Include="XMLHelper.cs" />
+    <Compile Include="ImageTools.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
