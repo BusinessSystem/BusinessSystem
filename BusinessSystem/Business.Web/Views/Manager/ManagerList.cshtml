@@ -107,9 +107,12 @@
                    移动到
                 <span class="icon-caret-down icon-on-right "></span>
             </button>
-             
-             <ul aria-activedescendant="ui-id-9" tabindex="0" role="menu" class="dropdown-menu width-120 ui-menu ui-widget ui-widget-content ui-corner-all" id="menu">
-                
+        
+             <ul  aria-activedescendant="ui-id-8" tabindex="0" role="menu" class="display-none dropdown-menu dropdown-light ui-menu ui-widget width-120 ui-widget-content ui-corner-all" id="menu">
+                 <li aria-disabled="true" role="presentation" class="ui-state-disabled ui-menu-item">
+                     <a role="menuitem" tabindex="-1" class="ui-corner-all" id="ui-id-3" href="#">Aberdeen</a>
+                 </li>
+
                  <li role="presentation" class="ui-menu-item">
                      <a role="menuitem" tabindex="-1" class="ui-corner-all" id="ui-id-4" href="#">Ada</a>
                  </li>
@@ -125,7 +128,7 @@
                  <li role="presentation" class="ui-menu-item">
                      <a role="menuitem" tabindex="-1" class="ui-corner-all" id="ui-id-7" aria-haspopup="true" href="#"><span class="ui-menu-icon ui-icon ui-icon-carat-1-e"></span>Delphi</a>
 
-                     <ul aria-hidden="true" aria-expanded="false" role="menu" style="display: none; top: 195.533px; left: 166.5px;" class="ui-menu ui-widget ui-widget-content ui-corner-all">
+                     <ul aria-expanded="false" aria-hidden="true" role="menu" style="display: none;" class="ui-menu ui-widget ui-widget-content ui-corner-all">
                          <li aria-disabled="true" role="presentation" class="ui-state-disabled ui-menu-item">
                              <a role="menuitem" tabindex="-1" class="ui-corner-all" id="ui-id-11" href="#">Ada</a>
                          </li>
@@ -194,6 +197,7 @@
                      <a role="menuitem" tabindex="-1" class="ui-corner-all" id="ui-id-10" href="#">Amesville</a>
                  </li>
              </ul>
+
          </div>
     </div>
 </div>
@@ -312,28 +316,7 @@
         <span class="btn btn-app btn-light btn-xs height-20">
             删除
         </span>
-        <span class="btn-group">
-            <button data-toggle="dropdown" class="btn btn-light  dropdown-toggle  width-100" >
-                  按地区划分
-                <span class="icon-caret-down icon-on-right "></span>
-            </button>
-
-            <ul class="dropdown-menu dropdown-light pull-right">
-                <li>
-                    <a href="#">Action</a>
-                </li>
-
-                <li>
-                    <a href="#">Another action</a>
-                </li>
-
-                <li class="divider"></li>
-
-                <li>
-                    <a href="#">Separated link</a>
-                </li>
-            </ul>
-        </span>
+        
     </div>
 </div>
 
@@ -348,8 +331,8 @@
             content: "确定删除" + id + "数据？",
             ok: function () {
                 $("#data-item" + id).remove();
-                this.close();
-S                return false;
+                 this.close();
+                 return false;
             },
             cancelVal: '关闭',
             cancel: true,
@@ -357,7 +340,7 @@ S                return false;
         });
     }
 
-    $(function () {
+    jQuery(function () {
        $("#menu").menu();
     });
 </script>
