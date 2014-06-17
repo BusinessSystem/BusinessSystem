@@ -7,6 +7,7 @@
 .btn-color {
     background:#F1F1F1;
 }
-.common-height{ height: 30px;}
-.height-20{ height: 35px;line-height: 35px;font-size: 12px;}
- 
+.common-height{ height: 37px;}
+.width-120{ width: 120px;min-width: 120px;}
+.height-35{ height: 35px;line-height: 35px;font-size: 12px;}
+.margin-top-2{ margin-top: -2px;}
