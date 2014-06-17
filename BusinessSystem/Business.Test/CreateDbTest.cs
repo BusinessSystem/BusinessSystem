@@ -6,9 +6,6 @@ using Business.Nhibernate.Base;
 using NUnit.Framework;
 using Business.Nhibernate;
 using Business.Utils;
-
-
-
 namespace Business.Test
 {
     [TestFixture]
