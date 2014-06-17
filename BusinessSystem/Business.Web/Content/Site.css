@@ -4,3 +4,9 @@
 .float-none {
     float: none;
 }
+.btn-color {
+    background:#F1F1F1;
+}
+.common-height{ height: 30px;}
+.height-20{ height: 35px;line-height: 35px;font-size: 12px;}
+ 
