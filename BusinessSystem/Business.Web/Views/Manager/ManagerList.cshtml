@@ -3,13 +3,202 @@
 }
 @model IList<Business.Core.Manager>
 
+ 
 <div class="widget-header widget-toolbar-light  widget-box transparent" style="padding-left: 0px;">
     <div class="widget-toolbar float-none  no-border">
-         <span class="btn btn-app btn-light btn-xs height-20">
+        <span class="btn btn-app btn-light btn-xs  no-border">
             <input type="checkbox"/>全选
         </span>
+        <span class="btn btn-app btn-light btn-xs ">
+            删除
+        </span>
+        <div class="btn-group margin-top-2">
+            <button data-toggle="dropdown" class="btn btn-light width-120 dropdown-toggle margin-top-2 common-height">
+                按地区划分
+                <span class="icon-caret-down icon-on-right "></span>
+            </button>
+
+            <ul class="dropdown-menu dropdown-light pull-right width-120">
+                <li>
+                    <a href="#">亚洲</a>
+                </li>
+
+                <li>
+                    <a href="#">欧洲</a>
+                </li>
+
+                <li>
+                    <a href="#">南美洲</a>
+                </li>
+
+                <li>
+                    <a href="#">北美洲</a>
+                </li>
+                <li>
+                    <a href="#">非洲</a>
+                </li>
+                <li>
+                    <a href="#">大洋洲</a>
+                </li>
+                <li>
+                    <a href="#">未识别</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="btn-group margin-top-2">
+            <button data-toggle="dropdown" class="btn btn-light width-120 dropdown-toggle margin-top-2 common-height">
+                按意向划分
+                <span class="icon-caret-down icon-on-right "></span>
+            </button>
+
+            <ul class="dropdown-menu dropdown-light pull-right width-120">
+                <li>
+                    <a href="#">添加意向</a>
+                </li>
+                <li class="divider"></li>
+                <li>
+                    <a href="#">A类客户</a>
+                </li>
+
+                <li>
+                    <a href="#">B类客户</a>
+                </li>
+
+                <li>
+                    <a href="#">C类客户</a>
+                </li>
+               
+                <li>
+                    <a href="#">未识别</a>
+                </li>
+            </ul>
+        </div>
+        
+        <div class="btn-group margin-top-2">
+            <button data-toggle="dropdown" class="btn btn-light width-120 dropdown-toggle margin-top-2 common-height">
+                自定义
+                <span class="icon-caret-down icon-on-right "></span>
+            </button>
+
+            <ul class="dropdown-menu dropdown-light pull-right width-120">
+                <li>
+                    <a href="#">添加自定义</a>
+                </li>
+                <li class="divider"></li>
+                <li>
+                    <a href="#">样品成交客户</a>
+                </li>
+
+                <li>
+                    <a href="#">订单成交客户</a>
+                </li>
+
+                <li>
+                    <a href="#">ABCD</a>
+                </li>
+               
+                 
+            </ul>
+        </div>
+        
+         <div class="btn-group margin-top-2">
+            <button data-toggle="dropdown" class="btn btn-light width-120 dropdown-toggle margin-top-2 common-height">
+                   移动到
+                <span class="icon-caret-down icon-on-right "></span>
+            </button>
+             
+             <ul aria-activedescendant="ui-id-9" tabindex="0" role="menu" class="dropdown-menu width-120 ui-menu ui-widget ui-widget-content ui-corner-all" id="menu">
+                
+                 <li role="presentation" class="ui-menu-item">
+                     <a role="menuitem" tabindex="-1" class="ui-corner-all" id="ui-id-4" href="#">Ada</a>
+                 </li>
+
+                 <li role="presentation" class="ui-menu-item">
+                     <a role="menuitem" tabindex="-1" class="ui-corner-all" id="ui-id-5" href="#">Adamsville</a>
+                 </li>
+
+                 <li role="presentation" class="ui-menu-item">
+                     <a role="menuitem" tabindex="-1" class="ui-corner-all" id="ui-id-6" href="#">Addyston</a>
+                 </li>
+
+                 <li role="presentation" class="ui-menu-item">
+                     <a role="menuitem" tabindex="-1" class="ui-corner-all" id="ui-id-7" aria-haspopup="true" href="#"><span class="ui-menu-icon ui-icon ui-icon-carat-1-e"></span>Delphi</a>
+
+                     <ul aria-hidden="true" aria-expanded="false" role="menu" style="display: none; top: 195.533px; left: 166.5px;" class="ui-menu ui-widget ui-widget-content ui-corner-all">
+                         <li aria-disabled="true" role="presentation" class="ui-state-disabled ui-menu-item">
+                             <a role="menuitem" tabindex="-1" class="ui-corner-all" id="ui-id-11" href="#">Ada</a>
+                         </li>
+
+                         <li role="presentation" class="ui-menu-item">
+                             <a role="menuitem" tabindex="-1" class="ui-corner-all" id="ui-id-12" href="#">Saarland</a>
+                         </li>
+
+                         <li role="presentation" class="ui-menu-item">
+                             <a role="menuitem" tabindex="-1" class="ui-corner-all" id="ui-id-13" href="#">Salzburg</a>
+                         </li>
+                     </ul>
+                 </li>
+
+                 <li role="presentation" class="ui-menu-item">
+                     <a role="menuitem" tabindex="-1" class="ui-corner-all" id="ui-id-8" href="#">Saarland</a>
+                 </li>
+
+                 <li role="presentation" class="ui-menu-item">
+                     <a role="menuitem" tabindex="-1" class="ui-corner-all" id="ui-id-9" aria-haspopup="true" href="#"><span class="ui-menu-icon ui-icon ui-icon-carat-1-e"></span>Salzburg</a>
+
+                     <ul aria-expanded="false" aria-hidden="true" role="menu" style="display: none;" class="ui-menu ui-widget ui-widget-content ui-corner-all">
+                         <li role="presentation" class="ui-menu-item">
+                             <a role="menuitem" tabindex="-1" class="ui-corner-all" id="ui-id-14" aria-haspopup="true" href="#"><span class="ui-menu-icon ui-icon ui-icon-carat-1-e"></span>Delphi</a>
+
+                             <ul aria-expanded="false" aria-hidden="true" role="menu" style="display: none;" class="ui-menu ui-widget ui-widget-content ui-corner-all">
+                                 <li role="presentation" class="ui-menu-item">
+                                     <a role="menuitem" tabindex="-1" class="ui-corner-all" id="ui-id-17" href="#">Ada</a>
+                                 </li>
+
+                                 <li role="presentation" class="ui-menu-item">
+                                     <a role="menuitem" tabindex="-1" class="ui-corner-all" id="ui-id-18" href="#">Saarland</a>
+                                 </li>
+
+                                 <li role="presentation" class="ui-menu-item">
+                                     <a role="menuitem" tabindex="-1" class="ui-corner-all" id="ui-id-19" href="#">Salzburg</a>
+                                 </li>
+                             </ul>
+                         </li>
+
+                         <li role="presentation" class="ui-menu-item">
+                             <a role="menuitem" tabindex="-1" class="ui-corner-all" id="ui-id-15" aria-haspopup="true" href="#"><span class="ui-menu-icon ui-icon ui-icon-carat-1-e"></span>Delphi</a>
+
+                             <ul aria-expanded="false" aria-hidden="true" role="menu" style="display: none;" class="ui-menu ui-widget ui-widget-content ui-corner-all">
+                                 <li role="presentation" class="ui-menu-item">
+                                     <a role="menuitem" tabindex="-1" class="ui-corner-all" id="ui-id-20" href="#">Ada</a>
+                                 </li>
+
+                                 <li role="presentation" class="ui-menu-item">
+                                     <a role="menuitem" tabindex="-1" class="ui-corner-all" id="ui-id-21" href="#">Saarland</a>
+                                 </li>
+
+                                 <li role="presentation" class="ui-menu-item">
+                                     <a role="menuitem" tabindex="-1" class="ui-corner-all" id="ui-id-22" href="#">Salzburg</a>
+                                 </li>
+                             </ul>
+                         </li>
+
+                         <li role="presentation" class="ui-menu-item">
+                             <a role="menuitem" tabindex="-1" class="ui-corner-all" id="ui-id-16" href="#">Perch</a>
+                         </li>
+                     </ul>
+                 </li>
+
+                 <li aria-disabled="true" role="presentation" class="ui-state-disabled ui-menu-item">
+                     <a role="menuitem" tabindex="-1" class="ui-corner-all" id="ui-id-10" href="#">Amesville</a>
+                 </li>
+             </ul>
+         </div>
     </div>
 </div>
+ 
+
 
 <div class="table-responsive">
     <table id="sample-table-1" class="table table-striped table-bordered table-hover">
@@ -56,7 +245,7 @@
                         <span class="label label-sm label-warning">Expiring</span>
                     </td>
 
-                    <td class="width-20">
+                    <td >
                         <div class="visible-md visible-lg hidden-sm hidden-xs btn-group">
                             <button class="btn btn-xs btn-success ">
                                 <i class="icon-ok bigger-120"></i>查看
@@ -115,12 +304,35 @@
     </table>
 </div><!-- /.table-responsive -->
 
-
-
 <div class="widget-header widget-toolbar-light  widget-box transparent" style="padding-left: 0px;">
     <div class="widget-toolbar float-none  no-border">
-        <span class="btn btn-app btn-light btn-xs height-20">
+        <span class="btn btn-app btn-light btn-xs height-20 no-border">
             <input type="checkbox"/>全选
+        </span>
+        <span class="btn btn-app btn-light btn-xs height-20">
+            删除
+        </span>
+        <span class="btn-group">
+            <button data-toggle="dropdown" class="btn btn-light  dropdown-toggle  width-100" >
+                  按地区划分
+                <span class="icon-caret-down icon-on-right "></span>
+            </button>
+
+            <ul class="dropdown-menu dropdown-light pull-right">
+                <li>
+                    <a href="#">Action</a>
+                </li>
+
+                <li>
+                    <a href="#">Another action</a>
+                </li>
+
+                <li class="divider"></li>
+
+                <li>
+                    <a href="#">Separated link</a>
+                </li>
+            </ul>
         </span>
     </div>
 </div>
@@ -144,4 +356,8 @@
             lock: true
         });
     }
+
+    $(function () {
+       $("#menu").menu();
+    });
 </script>
