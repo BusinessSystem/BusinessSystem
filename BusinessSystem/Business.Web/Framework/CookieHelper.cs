@@ -15,7 +15,7 @@ namespace Business.Web.Framework
         /// 用户密码加密KEY
         /// </summary>
         public static string LoginPassWord = "DsGvGstqONMsyfnH/IdtdxTNRpWni5uCrppYWdM9J+4JSROl7Ikmx2EDiHEtTm1HPzYi6Shp/wCSdhvwSiAjwf/7l3iEsJWz2xvETosDODqOuWxftkdG5FxcdxWyjPiXKcRZVtu2aMvwhL0OXTvxiOenPdvmGwssnrbJA02PxjQ=";
-        //public const string LoginPassWord = @"MGECAQACEQC+P8bHSkyH9z9eXiClSV8hAgMBAAECEFcqi13F+fiVEkLiDYS/f60CCQDpjhVvFNPiZwIJANCISDZ2x403AggVmYNX85go7wIIFsuO+UUqsykCCAlI0Nn6hJmW4dheEd+Z";
+         
         /// <summary>
         /// RSA通用密钥
         /// </summary>
@@ -97,8 +97,6 @@ namespace Business.Web.Framework
 
         public struct CookieConst
         {
-
-
             /// <summary>
             /// cookie 验证码加密 key 
             /// </summary>

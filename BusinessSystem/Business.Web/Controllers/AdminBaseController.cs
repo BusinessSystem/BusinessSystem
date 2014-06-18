@@ -33,16 +33,8 @@ namespace Business.Web.Controllers
                 return result;
             }
         }
-
-        private Manager _currentManager;
-        public Manager CurrentManager
-        {
-            get
-            {
-                return _currentManager;
-            }
-            set { _currentManager = value; }
-        }
+        
+        public Manager CurrentManager { get; set; }
 
         public bool IsManagerLogin()
         {
@@ -73,7 +65,7 @@ namespace Business.Web.Controllers
             }
             else
             {
-                filterContext.Result = Redirect("/html/permission/login.html");
+                filterContext.Result = Redirect("/Manager/Login");
             }
 
         }

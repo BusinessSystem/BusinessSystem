@@ -9,8 +9,7 @@ namespace Business.Web.Controllers
 {
     public class ManagerController : Controller
     {
-        //
-        // GET: /Manager/
+         
         [HttpGet]
         public ActionResult ManagerList()
         {
@@ -20,6 +19,18 @@ namespace Business.Web.Controllers
                 managers.Add(ManagerFactory.Create("楚中刀客", "tianyalang007", "tianyalang007"));
             }
             return View(managers);
+        }
+
+        [HttpGet]
+        public ActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Login(Manager manager)
+        {
+            return Json("JsonStr", JsonRequestBehavior.AllowGet);
         }
 
     }
