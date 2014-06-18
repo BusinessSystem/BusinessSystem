@@ -9,5 +9,6 @@ namespace Business.Nhibernate.IRepository
 {
     public interface IIntentionRepository : IRepository<Intention>
     {
+         IList<Intention> GetAllIntentions();
     }
 }

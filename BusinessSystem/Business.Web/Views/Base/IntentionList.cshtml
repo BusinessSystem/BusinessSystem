@@ -2,103 +2,108 @@
     ViewBag.Title = "用户意向";
 }
 @model IList<Business.Core.Intention>
-<br/>
-<form class="form-horizontal" role="form">
+<form class="form-horizontal" method="post" action="/Base/IntentionAdd" id="intenttion_form">
 <div class="form-group">
     <label class="col-sm-1    control-label no-padding-right" for="form-field-1">&nbsp; 意向名称：</label>
     <div class="col-sm-3">
-        <input id="form-field-1" placeholder="Username" class="col-xs-12 col-sm-12" type="text">
+        <input id="form-field-1" name="description" placeholder="意向名称" class="col-xs-12 col-sm-12" type="text">
     </div>
-    <button type="button" class="btn btn-sm btn-success btn-light    col-sm-1">
+    <button type="button" id="btn_intention_add" class="btn btn-sm btn-success btn-light  col-sm-1">
          添加												 
     </button>
 </div>
 </form>
- 
 <div class="table-responsive">
     <table id="sample-table-1" class="table table-striped table-bordered table-hover">
         <thead>
             <tr>
-                <th class="center">
+                <th class="center col-sm-2">
                     <label>
                         <span class="lbl">序号</span>
                     </label>
                 </th>
-                <th>意向</th>
-                <th>操作</th>
+                <th class="center ">意向名称</th>
+                <th class="center col-sm-2" >操作</th>
             </tr>
         </thead>
-          <tbody>
-           @foreach (var item in Model)
-            {
-                <tr id="data-item(@item.Id)">
-                    <td class="center">
-                        <label> 
-                            <span class="lbl">@item.Id</span>
-                        </label>
-                    </td>
+        <tbody>
+        @if (Model != null && Model.Count > 0)
+        {
+            foreach (var item in Model)
+             {
+                 <tr id="data-item(@item.Id)">
+                     <td class="center">
+                         <label> 
+                             <span class="lbl">@item.Id</span>
+                         </label>
+                     </td>
 
-                    <td>
-                        <a href="#">@item.Description</a>
-                    </td>
+                     <td class="center">
+                          @item.Description
+                     </td>
                
-                    <td >
-                        <div class="visible-md visible-lg hidden-sm hidden-xs btn-group">
-                            <button class="btn btn-xs btn-success ">
-                                <i class="icon-ok bigger-120"></i>查看
-                            </button>
+                     <td >
+                         <div class="visible-md visible-lg hidden-sm hidden-xs btn-group">
 
-                            <button class="btn btn-xs btn-info">
-                                <i class="icon-edit bigger-120"></i>编辑
-                            </button>
+                             <button class="btn btn-xs btn-info">
+                                 <i class="icon-edit bigger-120"></i>修改
+                             </button>
 
-                            <button class="btn btn-xs btn-danger" onclick="deleteManager('@item.Id')">
-                                <i class="icon-trash bigger-120"></i>删除
-                            </button>
+                             <button class="btn btn-xs btn-danger" onclick=" deleteManager('@item.Id') ">
+                                 <i class="icon-trash bigger-120"></i>删除
+                             </button>
+ 
+                         </div>
 
-                            <button class="btn btn-xs btn-warning">
-                                <i class="icon-flag bigger-120"></i>禁用
-                            </button>
-                        </div>
+                         <div class="visible-xs visible-sm hidden-md hidden-lg">
+                             <div class="inline position-relative">
+                                 <button class="btn btn-minier btn-primary dropdown-toggle" data-toggle="dropdown">
+                                     <i class="icon-cog icon-only bigger-110"></i>
+                                 </button>
 
-                        <div class="visible-xs visible-sm hidden-md hidden-lg">
-                            <div class="inline position-relative">
-                                <button class="btn btn-minier btn-primary dropdown-toggle" data-toggle="dropdown">
-                                    <i class="icon-cog icon-only bigger-110"></i>
-                                </button>
+                                 <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
+                                     <li>
+                                         <a href="#" class="tooltip-info" data-rel="tooltip" title="View">
+                                             <span class="blue">
+                                                 <i class="icon-zoom-in bigger-120"></i>
+                                             </span>
+                                         </a>
+                                     </li>
 
-                                <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
-                                    <li>
-                                        <a href="#" class="tooltip-info" data-rel="tooltip" title="View">
-                                            <span class="blue">
-                                                <i class="icon-zoom-in bigger-120"></i>
-                                            </span>
-                                        </a>
-                                    </li>
+                                     <li>
+                                         <a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
+                                             <span class="green">
+                                                 <i class="icon-edit bigger-120"></i>
+                                             </span>
+                                         </a>
+                                     </li>
 
-                                    <li>
-                                        <a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
-                                            <span class="green">
-                                                <i class="icon-edit bigger-120"></i>
-                                            </span>
-                                        </a>
-                                    </li>
-
-                                    <li>
-                                        <a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
-                                            <span class="red">
-                                                <i class="icon-trash bigger-120"></i>
-                                            </span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-            }
-        </tbody>
-   
+                                     <li>
+                                         <a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
+                                             <span class="red">
+                                                 <i class="icon-trash bigger-120"></i>
+                                             </span>
+                                         </a>
+                                     </li>
+                                 </ul>
+                             </div>
+                         </div>
+                     </td>
+                 </tr>
+             }
+        }
+        </tbody> 
     </table>
 </div><!-- /.table-responsive -->
+
+<script type="text/javascript">
+    $(function() {
+        $("#btn_intention_add").click(function () {
+            if ($("input[name=description]").val().trim() != "") {
+                $("form").submit();
+            }
+        });
+
+    });
+</script> 
  

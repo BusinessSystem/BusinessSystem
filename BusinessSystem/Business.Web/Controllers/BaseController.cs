@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Business.Core;
+using Business.Serives;
 
 namespace Business.Web.Controllers
 {
@@ -14,13 +16,18 @@ namespace Business.Web.Controllers
         [HttpGet]
         public ActionResult IntentionList()
         {
-            return View();
+            return View(BaseService.GetIntentions());
         }
 
         [HttpPost]
-        public ActionResult IntentionAdd()
+        public ActionResult IntentionAdd(string description)
         {
-            return null;
+            if (!string.IsNullOrEmpty(description))
+            {
+                Intention intention = IntentionFactory.Create(description, 1234);
+                BaseService.SaveIntention(intention);
+            }
+            return RedirectToAction("IntentionList");
         }
 
         [HttpPost]

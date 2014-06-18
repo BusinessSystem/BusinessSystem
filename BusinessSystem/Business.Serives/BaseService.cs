@@ -13,9 +13,18 @@ namespace Business.Serives
          private static  IUserDefinedRepository userDefinedRepository=new UserDefinedRepository();
          private static  IIntentionRepository intentionRepository = new IntentionRepository();
 
-         public static void Save(UserDefined userDefined)
+         public static void SaveUserDefined(UserDefined userDefined)
          {
              userDefinedRepository.Save(userDefined);
+         }
+         public static void SaveIntention(Intention intention)
+         {
+             intentionRepository.Save(intention);
+         }
+
+         public static IList<Intention> GetIntentions()
+         {
+             return intentionRepository.GetAllIntentions();
          }
      }
 }
