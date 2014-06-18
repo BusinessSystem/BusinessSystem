@@ -123,6 +123,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AdminBaseController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManagerController.cs" />
     <Compile Include="Framework\CookieHelper.cs" />
@@ -944,6 +945,7 @@
     <Content Include="Views\Shared\_Navbar.cshtml" />
     <Content Include="Views\Shared\_NavList.cshtml" />
     <Content Include="Views\Manager\Login.cshtml" />
+    <Content Include="Views\Base\IntentionList.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup>

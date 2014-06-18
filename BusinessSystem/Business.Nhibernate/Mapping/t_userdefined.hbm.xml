@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+	<class name="Business.Core.UserDefined, Business.Core" table="t_userdefined">
+		<id name="Id" type="Int64" unsaved-value="0">
+			<column name="ID" sql-type="bigint" not-null="true" unique="true"/>
+			<generator class="native" />
+		</id>
+		<property name="Description" length="200" />
+		<property name="CreatorId"/>
+		<property name="CreateTime"/>
+	</class>
+</hibernate-mapping>

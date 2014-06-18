@@ -8,7 +8,7 @@ using Business.Nhibernate.IRepository;
 
 namespace Business.Nhibernate.Repository
 {
-    public class ManagerRepository : Repository<Manager>, IManagerRepository
+    public class UserDefinedRepository : Repository<UserDefined>, IUserDefinedRepository
     { 
          
     }
