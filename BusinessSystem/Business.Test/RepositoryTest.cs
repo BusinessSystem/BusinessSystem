@@ -15,8 +15,7 @@ namespace Business.Test
         [TestCase(TestName = "测试仓储")]
         public void Repository_Test()
         {
-            Manager manager = ManagerFactory.Create("Tianyalang", "123456", "123456");
-            ManageService.Save(manager);
+           
         }
     }
 }

@@ -5,6 +5,9 @@ using System.Text;
 
 namespace Business.Core
 {
+    /// <summary>
+    /// 客户和他的URL对应表
+    /// </summary>
     public class ManagerProduct
     {
         public virtual long Id { get; set; }

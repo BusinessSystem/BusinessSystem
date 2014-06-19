@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using Newtonsoft.Json;
@@ -13,32 +14,31 @@ namespace Business.Core
         public virtual long Id { get; set; }
         public virtual string UserName { get; set; }
         public virtual string Password { get; set; }
-        public virtual string ScretKey { get; set; }
-        public virtual string SupplierName { get; set; }
-        public virtual string SupplierMobile { get; set; }
-        public virtual string SupplierCountry { get; set; }
-        public virtual short SuperManager { get; set; }
+        public virtual long ParentId { get; set; }
+        public virtual ManagerTypeEnum ManagerType { get; set; }
+        public virtual string RealName { get; set; }
+        public virtual string Company { get; set; }
+        public virtual short IsAutoDistribute { get; set; }
+        public virtual int Language { get; set; }
+        public virtual string Creator { get; set; }
         public virtual DateTime CreateTime { get; set; }
 
         public virtual void EncryptPassword()
         {
             Password = EncryptTools.GetMD5_32(Password);
         }
-
         public virtual bool MatchPassword(string plainPassword)
         {
             return this.Password == EncryptTools.GetMD5_32(plainPassword);
         }
-
         public virtual string GetManagerCookieString()
         {
             Hashtable cookieTable = new Hashtable();
             cookieTable.Add("id", Id);
             cookieTable.Add("mn", UserName);
-            cookieTable.Add("managerId", SuperManager);
+            cookieTable.Add("managerId", ManagerType);
             return JsonConvert.SerializeObject(cookieTable);
         }
-
         public static Manager GetFromCookieString(string cookieString)
         {
             if (string.IsNullOrEmpty(cookieString)) return null;
@@ -48,24 +48,36 @@ namespace Business.Core
             {
                 Id = int.Parse(cookieTable["id"].ToString()),
                 UserName = cookieTable["mn"].ToString(),
-                SuperManager = short.Parse(cookieTable["managerId"].ToString())
+                ManagerType = (ManagerTypeEnum)short.Parse(cookieTable["managerId"].ToString())
             };
             return manager;
         }
     }
 
+    public enum ManagerTypeEnum:short
+    {
+         [Description("超级管理员")]
+         Super=1,
+         [Description("普通管理员")]
+         Common
+    }
+
     public class ManagerFactory
     {
-        public static Manager Create(string userName, string password, string scretKey)
+        public static Manager Create(string userName, string password, long parentId, ManagerTypeEnum managerType
+            , string realName, string company, short isAutoDistribute, int language, string creator)
         {
             return new Manager()
             {
                 UserName = userName,
                 Password = password,
-                ScretKey = scretKey,
-                SupplierName = string.Empty,
-                SupplierMobile = string.Empty,
-                SupplierCountry = string.Empty,
+                ParentId = parentId,
+                ManagerType = managerType,
+                RealName=realName,
+                Company = company,
+                IsAutoDistribute = isAutoDistribute,
+                Language=language,
+                Creator = creator,
                 CreateTime = DateTime.Now
             };
         }
