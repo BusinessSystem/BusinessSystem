@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Newtonsoft.Json;
 
 namespace Business.Core
 {
@@ -29,6 +30,11 @@ namespace Business.Core
                 CreatorId = createorId,
                 CreateTime = DateTime.Now
             };
+        }
+
+        public static Intention Create(string jsonData)
+        {
+            return JsonConvert.DeserializeObject<Intention>(jsonData);
         }
     }
 }

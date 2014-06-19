@@ -1,17 +1,17 @@
 ﻿@{
     ViewBag.Title = "用户意向";
 }
-@model IList<Business.Core.Intention>
+@model IList<Business.Core.Intention> 
 <form class="form-horizontal" method="post" action="/Base/IntentionAdd" id="intenttion_form">
-<div class="form-group">
-    <label class="col-sm-1    control-label no-padding-right" for="form-field-1">&nbsp; 意向名称：</label>
-    <div class="col-sm-3">
-        <input id="form-field-1" name="description" placeholder="意向名称" class="col-xs-12 col-sm-12" type="text">
+    <div class="form-group">
+        <label class="col-sm-1    control-label no-padding-right" for="form-field-1">&nbsp; 意向名称：</label>
+        <div class="col-sm-3">
+            <input id="form-field-1" name="description" placeholder="意向名称" class="col-xs-12 col-sm-12" type="text">
+        </div>
+        <button type="button" id="btn_intention_add" class="btn btn-sm btn-success btn-light  col-sm-1 margin-top-2">
+            添加												 
+        </button>
     </div>
-    <button type="button" id="btn_intention_add" class="btn btn-sm btn-success btn-light  col-sm-1">
-         添加												 
-    </button>
-</div>
 </form>
 <div class="table-responsive">
     <table id="sample-table-1" class="table table-striped table-bordered table-hover">
@@ -44,12 +44,11 @@
                
                      <td >
                          <div class="visible-md visible-lg hidden-sm hidden-xs btn-group">
-
-                             <button class="btn btn-xs btn-info">
+                             <button class="btn btn-xs btn-info" onclick="modifyIntention('@item.Id','@item.Description')">
                                  <i class="icon-edit bigger-120"></i>修改
                              </button>
 
-                             <button class="btn btn-xs btn-danger" onclick=" deleteManager('@item.Id') ">
+                             <button class="btn btn-xs btn-danger" onclick="deleteIntention('@item.Id') ">
                                  <i class="icon-trash bigger-120"></i>删除
                              </button>
  
@@ -96,14 +95,59 @@
     </table>
 </div><!-- /.table-responsive -->
 
+
+<div class="form-group" id="modifyIntentionDiv" style="display: none;" >
+   <label class="col-sm-3 text-right  control-label no-padding-right" for="form-field-1">意向名称：</label>
+        <input name="intentionId_modify" type="hidden"/>
+     <div class="col-sm-6">
+    <input id="form-field-1"  name="description_modify" class="col-xs-6 col-sm-12" placeholder="意向名称"  type="text">
+    </div>
+    <button type="button" id="btn_intention_modify" class="btn btn-sm btn-success btn-light margin-top-2">
+           修改													 
+        </button>
+</div>
+
 <script type="text/javascript">
     $(function() {
-        $("#btn_intention_add").click(function () {
+        $("#btn_intention_add").click(function() {
             if ($("input[name=description]").val().trim() != "") {
                 $("form").submit();
             }
         });
-
     });
+
+    function modifyIntention(id, description) {
+        $("input[name=description_modify]").val(description);
+        $("input[name=intentionId_modify]").val(id);
+        $("#btn_intention_modify").click(function() {
+            var description_modify= $("input[name=description_modify]").val().trim();
+            var intentionId_modify= $("input[name=intentionId_modify]").val().trim();
+            if (intentionId_modify == "" || description_modify == "") {
+                art.dialog.tips("提交数据不能为空！");
+            }
+            $.ajax({
+                url:"/Base/IntentionEdit",
+                type:"post",
+                data: { Id: intentionId_modify, description: description_modify },
+                success:function(){},
+                error:function(){}
+            });
+        });
+        art.dialog({
+            id: "KHIFEWF001",
+            title: "修改意向",
+            content: document.getElementById("modifyIntentionDiv"),
+            lock: true,
+            width: 420,
+            close: function() {
+                $("input[name=description_modify]").val("");
+                $("input[name=intentionId_modify]").val("");
+            }
+        });
+    }
+
+    function deleteIntention() {
+        
+    }
 </script> 
  

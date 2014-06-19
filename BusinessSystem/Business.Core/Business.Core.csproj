@@ -45,10 +45,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Base\BaseDictionary .cs" />
     <Compile Include="Base\Intention.cs" />
     <Compile Include="Base\UserDefined.cs" />
+    <Compile Include="Base\VisitorRecord.cs" />
+    <Compile Include="Enquiry\Enquiry.cs" />
+    <Compile Include="Enquiry\EnquiryTransFollow.cs" />
+    <Compile Include="Manager\ManagerProduct.cs" />
+    <Compile Include="Manager\PwdChangeRecord.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Manager\Manager.cs" />
+    <Compile Include="Translation\EmailFollow.cs" />
+    <Compile Include="Translation\EmailTranslation.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
