@@ -13,7 +13,7 @@ namespace Business.Core
         public virtual long Id { get; set; }
         public virtual long ReceiverId { get; set; }
         public virtual long SenderId { get; set; }
-        public virtual DateTime SenTime { get; set; }
+        public virtual DateTime SendTime { get; set; }
         public virtual DateTime ReadTime { get; set; }
         public virtual string Theme { get; set; }
         public virtual string Content { get; set; }
@@ -39,7 +39,7 @@ namespace Business.Core
             {
                 ReceiverId = receiverId,
                 SenderId = senderId,
-                SenTime = DateTime.Now,
+                SendTime = DateTime.Now,
                 Theme = theme,
                 Content = content,
                 EmailStatus = EmailStatusEnum.HasSend,

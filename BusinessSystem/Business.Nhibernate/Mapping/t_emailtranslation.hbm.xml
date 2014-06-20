@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
-	<class name="Business.Core.Manager, Business.Core" table="t_manager">
+	<class name="Business.Core.EmailTranslation, Business.Core" table="t_emailtranslation">
 		<id name="Id" type="Int64" unsaved-value="0">
 			<column name="ID" sql-type="bigint" not-null="true" unique="true"/>
 			<generator class="native" />
 		</id>
-		<property name="UserName" length="200" />
-		<property name="Password"/>
-		<property name="ScretKey"  />
-		<property name="SupplierName"  />
-		<property name="SupplierMobile" length="200" />
-		<property name="SupplierCountry" length="200" />
-		<property name="CreateTime"  />
-		<property name="SuperManager"  />
+		<property name="ReceiverId" />
+		<property name="SenderId"/>
+		<property name="SendTime"  />
+		<property name="ReadTime"  />
+		<property name="Theme" />
+		<property name="Content" />
+		<property name="EmailStatus"  />
+		<property name="FilePath"  />
+		<property name="IsDeleted"  />
 	</class>
 </hibernate-mapping>

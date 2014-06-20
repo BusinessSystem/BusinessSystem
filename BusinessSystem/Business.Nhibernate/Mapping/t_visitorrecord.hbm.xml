@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
-	<class name="Business.Core.Intention, Business.Core" table="t_intention">
+	<class name="Business.Core.VisitorRecord, Business.Core" table="t_visitorrecord">
 		<id name="Id" type="Int64" unsaved-value="0">
 			<column name="ID" sql-type="bigint" not-null="true" unique="true"/>
 			<generator class="native" />
 		</id>
-		<property name="Description" length="200" />
-		<property name="CreatorId"/>
-		<property name="CreateTime"/>
+		<property name="PurchaserIp" />
+		<property name="PurchaserProduct"/>
+		<property name="Country"/>
+		<property name="VisitTime"/>
 	</class>
 </hibernate-mapping>

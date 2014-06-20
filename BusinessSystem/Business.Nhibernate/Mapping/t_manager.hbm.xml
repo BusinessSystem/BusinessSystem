@@ -7,11 +7,13 @@
 		</id>
 		<property name="UserName" length="200" />
 		<property name="Password"/>
-		<property name="ScretKey"  />
-		<property name="SupplierName"  />
-		<property name="SupplierMobile" length="200" />
-		<property name="SupplierCountry" length="200" />
-		<property name="CreateTime"  />
-		<property name="SuperManager"  />
+		<property name="ParentId"  />
+		<property name="ManagerType"  />
+		<property name="RealName" />
+		<property name="Company" />
+		<property name="IsAutoDistribute"  />
+		<property name="Language"/>
+		<property name="Creator"/>
+		<property name="CreateTime"/>
 	</class>
 </hibernate-mapping>

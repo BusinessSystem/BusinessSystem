@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
-	<class name="Business.Core.Intention, Business.Core" table="t_intention">
+	<class name="Business.Core.EnquiryTransFollow, Business.Core" table="t_enquirytransfollow">
 		<id name="Id" type="Int64" unsaved-value="0">
 			<column name="ID" sql-type="bigint" not-null="true" unique="true"/>
 			<generator class="native" />
 		</id>
-		<property name="Description" length="200" />
-		<property name="CreatorId"/>
-		<property name="CreateTime"/>
+		<property name="EnquiryId" />
+		<property name="OriginalContent"/>
+		<property name="TargetContent"/>
+		<property name="OriginalLanguage"/>
+		<property name="TargetLanguage"/>
+		<property name="TransTime"/>
 	</class>
 </hibernate-mapping>

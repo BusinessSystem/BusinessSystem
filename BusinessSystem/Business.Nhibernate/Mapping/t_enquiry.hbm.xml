@@ -1,12 +1,29 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
-	<class name="Business.Core.Intention, Business.Core" table="t_intention">
+	<class name="Business.Core.Enquiry, Business.Core" table="t_enquiry">
 		<id name="Id" type="Int64" unsaved-value="0">
 			<column name="ID" sql-type="bigint" not-null="true" unique="true"/>
 			<generator class="native" />
 		</id>
-		<property name="Description" length="200" />
-		<property name="CreatorId"/>
-		<property name="CreateTime"/>
+		<property name="IpString"/>
+		<property name="PurchaserEmail"/>
+		<property name="EnquiryContent"/>
+		<property name="ProductUrl"/>
+		<property name="PurchaserUserName"/>
+		<property name="PurchaserCompany"/>
+		<property name="PurchaserTel"/>
+		<property name="PurchaserMsn"/>
+		<property name="VisitLanguage"/>
+		<property name="PurchaserCountry"/>
+		<property name="EnquiryTime"/>
+		<property name="ReceiverId"/>
+		<property name="IsIssuedChildManager"/>
+		<property name="HandlerId"/>
+		<property name="HandlerStatus"/>
+		<property name="HandlerTime"/>
+		<property name="UserDefinedId"/>
+		<property name="IntentionId"/>
+		<property name="FollowUpTimes"/>
+		<property name="IsDeleted"/>
 	</class>
 </hibernate-mapping>

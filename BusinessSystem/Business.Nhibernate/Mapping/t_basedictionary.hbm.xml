@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
-	<class name="Business.Core.Intention, Business.Core" table="t_intention">
-		<id name="Id" type="Int64" unsaved-value="0">
-			<column name="ID" sql-type="bigint" not-null="true" unique="true"/>
+	<class name="Business.Core.BaseDictionary, Business.Core" table="t_basedictionary">
+		<id name="Id" type="Int32" unsaved-value="0">
+			<column name="ID" sql-type="int" not-null="true" unique="true"/>
 			<generator class="native" />
 		</id>
-		<property name="Description" length="200" />
-		<property name="CreatorId"/>
-		<property name="CreateTime"/>
+		<property name="ValueType"/>
+		<property name="DicId"/>
+		<property name="Value"/>
+		<property name="Description"/>
+		<property name="Operator"/>
+		<property name="OperatorTime"/>
+		<property name="OperatorDescritpion"/>
 	</class>
 </hibernate-mapping>
