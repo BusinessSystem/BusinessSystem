@@ -57,11 +57,10 @@
     <Compile Include="Base\IRepository.cs" />
     <Compile Include="Base\Repository.cs" />
     <Compile Include="Base\SqlHelper.cs" />
+    <Compile Include="IRepository\IBaseRepository.cs" />
     <Compile Include="IRepository\IEnquiryRepository.cs" />
     <Compile Include="IRepository\IManagerRepository.cs" />
     <Compile Include="IRepository\ITranslationRepository.cs" />
-    <Compile Include="IRepository\IUserDefinedRepository.cs" />
-    <Compile Include="IRepository\IIntentionRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\BaseDictionaryRepository.cs" />
     <Compile Include="Repository\EmailFollwRepository.cs" />

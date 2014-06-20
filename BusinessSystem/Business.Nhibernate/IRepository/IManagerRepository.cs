@@ -11,4 +11,14 @@ namespace Business.Nhibernate.IRepository
     {
 
     }
+
+    public interface IManagerProductRepository : IRepository<ManagerProduct>
+    {
+
+    }
+
+    public interface IPwdChangeRecordRepository : IRepository<PwdChangeRecord>
+    {
+
+    }
 }

@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Business.Core;
+using Business.Nhibernate.Base;
+using Business.Nhibernate.IRepository;
 
 namespace Business.Nhibernate.Repository
 {
-    class EmailFollwRepository
+    public class EmailFollwRepository : Repository<EmailFollow>,IEmailFollowRepository
     {
     }
 }
