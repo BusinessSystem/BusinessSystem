@@ -7,5 +7,6 @@ namespace Business.Serives
 {
     public class TranslationService
     {
+
     }
 }
