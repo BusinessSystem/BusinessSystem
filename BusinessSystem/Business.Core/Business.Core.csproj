@@ -45,7 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Base\BaseDictionary .cs" />
+    <Compile Include="Base\BaseDictionary.cs" />
     <Compile Include="Base\Intention.cs" />
     <Compile Include="Base\UserDefined.cs" />
     <Compile Include="Base\VisitorRecord.cs" />
