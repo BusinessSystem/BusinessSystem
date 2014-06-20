@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Business.Core;
 using Business.Serives;
+using Business.Utils.Info;
 
 namespace Business.Web.Controllers
 {
@@ -31,9 +32,22 @@ namespace Business.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult IntentionEdit()
+        public ActionResult IntentionEdit(long id, string description)
         {
-            return null;
+            if (id != 0 && !string.IsNullOrEmpty(description))
+            {
+                Intention intention = BaseService.GetIntentionById(id);
+                intention.Description = description;
+                BaseService.SaveIntention(intention);
+            }
+            return Json(InfoTools.GetMsgInfo("0"));
+        }
+
+        [HttpGet]
+        public ActionResult IntentionDelete(long id)
+        {
+            BaseService.DeleteIntention(id);
+            return RedirectToAction("IntentionList");
         }
     }
 }

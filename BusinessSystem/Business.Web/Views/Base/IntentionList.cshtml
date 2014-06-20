@@ -48,7 +48,7 @@
                                  <i class="icon-edit bigger-120"></i>修改
                              </button>
 
-                             <button class="btn btn-xs btn-danger" onclick="deleteIntention('@item.Id') ">
+                             <button class="btn btn-xs btn-danger" onclick="deleteItem('@item.Id') ">
                                  <i class="icon-trash bigger-120"></i>删除
                              </button>
  
@@ -129,7 +129,9 @@
                 url:"/Base/IntentionEdit",
                 type:"post",
                 data: { Id: intentionId_modify, description: description_modify },
-                success:function(){},
+                success:function() {
+                    
+                },
                 error:function(){}
             });
         });
@@ -146,8 +148,18 @@
         });
     }
 
-    function deleteIntention() {
-        
+    function deleteItem(id) {
+        art.dialog({
+            icon: "question",
+            content: "确定删除该数据？",
+            ok: function () {
+                this.close();
+                window.location.href = "/Base/IntentionDelete/" + id;
+            },
+            cancelVal: '关闭',
+            cancel: true,
+            lock: true
+        });
     }
 </script> 
  

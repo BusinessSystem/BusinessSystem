@@ -22,6 +22,20 @@ namespace Business.Serives
              intentionRepository.Save(intention);
          }
 
+         public static Intention GetIntentionById(long id)
+         {
+             return intentionRepository.GetById(id);
+         }
+
+         public static void DeleteIntention(long id)
+         {
+             Intention intention = intentionRepository.GetById(id);
+             if (intention != null)
+             {
+                 intentionRepository.Delete(intention);
+             }
+         }
+
          public static IList<Intention> GetIntentions()
          {
              return intentionRepository.GetAllIntentions();
