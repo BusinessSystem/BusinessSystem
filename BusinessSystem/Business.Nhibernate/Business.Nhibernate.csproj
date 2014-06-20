@@ -57,12 +57,22 @@
     <Compile Include="Base\IRepository.cs" />
     <Compile Include="Base\Repository.cs" />
     <Compile Include="Base\SqlHelper.cs" />
+    <Compile Include="IRepository\IEnquiryRepository.cs" />
     <Compile Include="IRepository\IManagerRepository.cs" />
+    <Compile Include="IRepository\ITranslationRepository.cs" />
     <Compile Include="IRepository\IUserDefinedRepository.cs" />
     <Compile Include="IRepository\IIntentionRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\BaseDictionaryRepository.cs" />
+    <Compile Include="Repository\EmailFollwRepository.cs" />
+    <Compile Include="Repository\EmailTranslationRepository.cs" />
+    <Compile Include="Repository\EnquiryRepository.cs" />
+    <Compile Include="Repository\EnquiryTransFollowRepository.cs" />
+    <Compile Include="Repository\ManagerProductRepository.cs" />
     <Compile Include="Repository\ManagerRepository.cs" />
+    <Compile Include="Repository\PwdChangeRecordRepository.cs" />
     <Compile Include="Repository\UserDefinedRepository.cs" />
+    <Compile Include="Repository\VisitorRecordRepository.cs" />
     <Compile Include="SessionProvider.cs" />
   </ItemGroup>
   <ItemGroup>

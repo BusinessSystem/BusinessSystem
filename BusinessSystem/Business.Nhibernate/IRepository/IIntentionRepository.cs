@@ -11,4 +11,5 @@ namespace Business.Nhibernate.IRepository
     {
          IList<Intention> GetAllIntentions();
     }
+    
 }
