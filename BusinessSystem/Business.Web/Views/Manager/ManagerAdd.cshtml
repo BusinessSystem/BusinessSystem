@@ -19,7 +19,7 @@
                 </div>
             </div>
             <div class="widget-body">
-                <form class="form-horizontal"   role="form">
+                <form class="form-horizontal" id="manager_add_form" enctype="multipart/form-data"   role="form">
                       <div class="space-4"></div>
                     <div class="form-group">
                         <label class="col-sm-3 control-label no-padding-right" for="form-field-1">用户名: </label>
@@ -78,14 +78,14 @@
                         <div class="col-sm-9">
                             <select name="language" class="form-control col-xs-8 col-sm-4 width-30" id="form-field-select-1">
                                 <option value="0">请选择</option>
-                                <option value="AL">Alabama</option>
-                                <option value="AK">Alaska</option>
-                                <option value="AZ">Arizona</option>
-                                <option value="AR">Arkansas</option>
-                                <option value="CA">California</option>
-                                <option value="CO">Colorado</option>
-                                <option value="CT">Connecticut</option>
-                                <option value="DE">Delaware</option>
+                                <option value="1">Alabama</option>
+                                <option value="2">Alaska</option>
+                                <option value="3">Arizona</option>
+                                <option value="4">Arkansas</option>
+                                <option value="5">California</option>
+                                <option value="6">Colorado</option>
+                                <option value="7">Connecticut</option>
+                                <option value="8">Delaware</option>
                             </select>
                             <span class="help-inline col-xs-12 col-sm-7">
                                 <span class="middle red">*</span>
@@ -101,7 +101,7 @@
                         <div class="col-sm-9">
                             <div class="col-xs-3">
                                 <label>
-                                    <input id="switch-field-1" name="isAutoDistribute" class="ace ace-switch ace-switch-7" type="checkbox">
+                                    <input id="switch-field-1" name="isAutoDistribute" checked="true" value="1" class="ace ace-switch ace-switch-7" type="checkbox">
                                     <span class="lbl"></span>
                                 </label>
                             </div>
@@ -139,13 +139,18 @@
                     type: "POST",
                     dataType: "json",
                     url: "/Manager/ManagerAdd",
-                    data: $('from').serialize(),
-                    success: function(response) {
+                    data: $('#manager_add_form').serialize(),
+                    success: function (response) {
                         art.dialog({
                             content: response.Description,
-                            time: 2,
-                            lock: true
+                            time: 3,
+                            lock: true,
+                            close:function() {
+                                if (response.Code == 0) {
+                                    window.location.href = "/Manager/ManagerList";}
+                            }
                         });
+
                     },
                     error: function(data) {
                         art.dialog({

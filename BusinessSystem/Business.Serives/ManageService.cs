@@ -34,6 +34,10 @@ namespace Business.Serives
              {
                  return ResponseCode.Managaer.CompanyNullOrEmpty;
              }
+             if (managerRepository.IsExist(manager))
+             {
+                 return ResponseCode.Managaer.UserNameHasExist;
+             }
              managerRepository.Save(manager);
              return ResponseCode.Ok;
          }

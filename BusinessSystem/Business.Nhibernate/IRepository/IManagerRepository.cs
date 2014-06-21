@@ -9,7 +9,12 @@ namespace Business.Nhibernate.IRepository
 {
     public interface IManagerRepository : IRepository<Manager>
     {
-
+        /// <summary>
+        /// 判断用户名是否存在
+        /// </summary>
+        /// <param name="manager"></param>
+        /// <returns>存在 返回true</returns>
+        bool IsExist(Manager manager);
     }
 
     public interface IManagerProductRepository : IRepository<ManagerProduct>

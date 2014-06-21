@@ -41,10 +41,15 @@ namespace Business.Web.Controllers
             return View();
         }
 
-        [HttpGet]
-        public ActionResult ManagerAdd(string userName, string password, short isAutoDistribute, string realName,
+        [HttpPost]
+        public ActionResult ManagerAdd(string userName, string password, string realName,
             string company, int language)
         {
+            short isAutoDistribute = Utils.CoreDefaultValue.False;
+            if (!string.IsNullOrEmpty(Request["isAutoDistribute"]))
+            {
+                isAutoDistribute = Utils.CoreDefaultValue.True;
+            }
             Manager manager = ManagerFactory.Create(userName, password, 0, ManagerTypeEnum.Super, realName, company,
                 isAutoDistribute, language, "");
             string responseCode = ManageService.Save(manager);

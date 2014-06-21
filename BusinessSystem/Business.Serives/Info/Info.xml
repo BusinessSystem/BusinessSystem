@@ -1,212 +1,31 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Infos>
-  <Default  Code="S0000" Message="成功" Level="1" Description="成功" />
-  <Default  Code="0" Message="成功" Level="1" Description="成功" />
-  <Default  Code="-1" Message="未知错误" Level="1" Description="未知错误" />
-  <Default  Code="-2" Message="未找到数据源" Level="1" Description="未找到数据源" />
-  <Default  Code="-3" Message="服务器错误" Level="1" Description="服务器错误" />
-  <Default  Code="-4" Message="请求参数错误" Level="1" Description="请求参数错误" />
-  <Default  Code="-6" Message="NoLogin" Level="1" Description="NoLogin" />
-  <Default  Code="-7" Message="数据出错" Level="1" Description="数据出错" />
-  <Default  Code="-8" Message="没有权限" Level="1" Description="没有权限执行此操作" />
-  <Default  Code="-9" Message="用户级别数据错误" Level="1" Description="用户级别数据错误" />
-  <Default  Code="-10" Message="用户邮箱数据错误" Level="1" Description="用户邮箱数据错误" />
-  <Default  Code="-11" Message="数量必须大于0" Level="1" Description="数量必须大于0" />
-  <Default  Code="-13" Message="用户手机已存在" Level="1" Description="用户手机已存在" />
+	<Default  Code="S0000" Message="成功" Level="1" Description="成功" />
+	<Default  Code="0" Message="成功" Level="1" Description="成功" />
+	<Default  Code="-1" Message="未知错误" Level="1" Description="未知错误" />
+	<Default  Code="-2" Message="未找到数据源" Level="1" Description="未找到数据源" />
+	<Default  Code="-3" Message="服务器错误" Level="1" Description="服务器错误" />
+	<Default  Code="-4" Message="请求参数错误" Level="1" Description="请求参数错误" />
+	<Default  Code="-6" Message="NoLogin" Level="1" Description="NoLogin" />
+	<Default  Code="-7" Message="数据出错" Level="1" Description="数据出错" />
+	<Default  Code="-8" Message="没有权限" Level="1" Description="没有权限执行此操作" />
+	<Default  Code="-9" Message="用户级别数据错误" Level="1" Description="用户级别数据错误" />
+	<Default  Code="-10" Message="用户邮箱数据错误" Level="1" Description="用户邮箱数据错误" />
+	<Default  Code="-11" Message="数量必须大于0" Level="1" Description="数量必须大于0" />
+	<Default  Code="-13" Message="用户手机已存在" Level="1" Description="用户手机已存在" />
 
 
-  <!-- Product -->
-  <Product  Code="100" Message="生产日期比结束日期大" Level="1" Description="生产日期比结束日期大" />
-  <Product  Code="101" Message="进货日期比结束日期大" Level="1" Description="进货日期比结束日期大" />
-  <Product  Code="200" Message="商品咨讯不存在" Level="1" Description="商品咨讯不存在" />
-  <Product  Code="201" Message="商品咨讯内容为空" Level="1" Description="商品咨讯内容为空" />
-  <Product  Code="202" Message="商品咨讯回复内容为空" Level="1" Description="商品咨讯回复内容为空" />
-  <Product  Code="250" Message="一个评价只能点一次" Level="1" Description="一个评价只能点一次" />
-  <Product  Code="251" Message="商品评论未找到" Level="1" Description="商品评论未找到" />
-  <Product  Code="301" Message="没有找到商品" Level="1" Description="没有找到商品" />
-  <Product  Code="302" Message="商品上过架，不能删除" Level="1" Description="商品上过架，不能删除" />
-  <Product  Code="303" Message="不包含没上架过的商品" Level="1" Description="不包含没上架过的商品" />
-  <Product  Code="304" Message="商品非上架状态" Level="1" Description="商品非上架状态" />
-
-  <!-- ThirdPartUser -->
-  <ThirdPartUser  Code="555" Message="第三方用户已在茶涂注册过" Level="1" Description="第三方注册或绑定茶涂用户错误" />
-  
-  <!-- ThirdParty -->
-  <ThirdParty  Code="651" Message="第三方平台服务出错" Level="1" Description="第三方平台服务出错" />
-  <ThirdParty  Code="652" Message="第三方平台数据暂未同步" Level="1" Description="第三方平台数据暂未同步" />
-  <ThirdParty  Code="653" Message="无效参数" Level="1" Description="无效参数" />
-  <ThirdParty  Code="654" Message="初始化出错" Level="1" Description="初始化出错" />
-  <ThirdParty  Code="655" Message="没有权限" Level="1" Description="没有权限" />
-  
-  <!--FakeComment-->
-  <ThirdParty  Code="701" Message="未选中评论条目" Level="1" Description="未选中评论条目" />
-
-  <!--FreeTrial-->
-  <Info  Code="6000" Message="用户名不能为空" Level="1" Description="用户名不能为空" />
-  <Info  Code="6001" Message="手机号不能为空" Level="1" Description="手机号不能为空" />
-  <Info  Code="6002" Message="申请理由不能为空" Level="1" Description="申请理由不能为空" />
-  <Info  Code="6003" Message="备注不能为空" Level="1" Description="备注不能为空" />
-  <Info  Code="6004" Message="未选择要修改的申请" Level="1" Description="未选择要修改的申请" />
-
-  <!--Coupon-->
-  <Coupon  Code="8001" Message="优惠券数量不够" Level="1" Description="优惠券数量不够" />
-  <Coupon  Code="8002" Message="优惠券还没有到领取时间" Level="1" Description="优惠券还没有到领取时间" />
-  <Coupon  Code="8003" Message="优惠券领取已结束" Level="1" Description="优惠券领取已结束" />
-  <Coupon  Code="8004" Message="该电子优惠券已经领取过" Level="1" Description="该电子优惠券已经领取过" />
-  <Coupon  Code="8005" Message="该优惠券活动已经生成过优惠券" Level="1" Description="该优惠券活动已经生成过优惠券,不能重复生成优惠券" />
-  <Coupon  Code="8006" Message=" VIP不能使用优惠券" Level="1" Description="由于VIP享受全站最惠折扣，所以VIP客户不能使用优惠券" />
-  <Coupon  Code="8007" Message="活动尚未开始" Level="1" Description="活动尚未开始" />
-  <Coupon  Code="8008" Message="活动已经结束" Level="1" Description="活动已经结束" />
-  <Coupon  Code="8009" Message="购物车未计算完成（系统错误）" Level="1" Description="购物车未计算完成，此信息属于系统错误。" />
-  <Coupon  Code="8010" Message="订单价格不符合优惠券最低订单价格限制" Level="1" Description="订单价格不符合优惠券最低订单价格限制" />
-  <Coupon  Code="8011" Message="该优惠券不适用于其他优惠活动的商品" Level="1" Description="该优惠券不适用于其他优惠活动的商品" />
-  <Coupon  Code="8012" Message="订单中未包含适用该优惠券的商品" Level="1" Description="订单中未包含适用该优惠券的商品" />
-  <Coupon  Code="8013" Message="该优惠券已被使用过" Level="1" Description="该优惠券已被使用过" />
-  <Coupon  Code="8014" Message="该优惠券活动无效" Level="1" Description="该优惠券活动无效" />
-  <Coupon  Code="8015" Message="该优惠券已审核" Level="1" Description="该优惠券已审核" />
-  <Coupon  Code="8016" Message="优惠券未过期" Level="1" Description="优惠券未过期" />
-  <Coupon  Code="8017" Message="用户数不能小于或等于0" Level="1" Description="用户数不能小于或等于0" />
-  <Coupon  Code="8018" Message="优惠券活动面额必须大于0" Level="1" Description="优惠券活动面额必须大于0" />
-  <Coupon  Code="8019" Message="优惠券活动暂未审核" Level="1" Description="优惠券活动暂未审核" />
-  <Coupon  Code="8020" Message="该优惠券已删除" Level="1" Description="该优惠券活动已删除" />
-  <Coupon  Code="8025" Message="优惠券尚未过期,不能续期" Level="1" Description="优惠券尚未过期,不能续期" />
-  <Coupon  Code="8026" Message="该优惠券已经作废" Level="1" Description="该优惠券已经作废" />
-  <Coupon  Code="8027" Message="该优惠券已经过期" Level="1" Description="该优惠券已经过期" />
-  
-  <!--Order-->
-  <Order  Code="8100" Message="找不到订单" Level="1" Description="找不到订单" />
-  <Order  Code="8101" Message="支付成功后更新订单失败" Level="1" Description="支付成功后更新订单失败" />
-  <Order  Code="8102" Message="执行添加退款记录发生错误" Level="1" Description="执行添加退款记录发生错误" />
-  <Order  Code="8103" Message="执行申请订单退货发生错误" Level="1" Description="执行申请订单退货发生错误" />
-  <Order  Code="8104" Message="确认收货时发生错误" Level="1" Description="确认收货时发生错误" />
-  <Order  Code="8105" Message="订单发货发生错误" Level="1" Description="订单发货发生错误" />
-  <Order  Code="8106" Message="取消订单发生错误" Level="1" Description="取消订单发生错误" />
-  <Order  Code="8107" Message="订单审核时发生错误" Level="1" Description="订单审核时发生错误" />
-  <Order  Code="8108" Message="提交订单时发生错误" Level="1" Description="提交订单时发生错误" />
-  <Order  Code="8109" Message="下单参数有误" Level="1" Description="下单参数有误" />
-  <Order  Code="8110" Message="订单不能关闭" Level="1" Description="订单不能关闭" />
-  <Order  Code="8111" Message="订单不属于当前登录用户" Level="1" Description="订单不属于当前登录用户" />
-  <Order  Code="8112" Message="订单不能取消" Level="1" Description="订单不能取消" />
-  <Order  Code="8113" Message="订单不能发货" Level="1" Description="订单不能发货" />
-  <Order  Code="8114" Message="订单不能确认收货" Level="1" Description="订单不能确认收货" />
-  <Order  Code="8115" Message="不能审核订单" Level="1" Description="不能审核订单" />
-  <Order  Code="8116" Message="订单还没有发货，不能完成订单" Level="1" Description="订单没有发货，不能完成订单" />
-  <Order  Code="8117" Message="订单还没有支付，不能完成订单" Level="1" Description="订单还没有支付，不能完成订单" />
-  <Order  Code="8118" Message="订单已经支付，不能关闭取消" Level="1" Description="订单已经支付，不能关闭取消" />
-  <Order  Code="8119" Message="确认订单失败，存在下架的商品" Level="1" Description="确认订单失败，存在下架的商品" />
-  <Order  Code="8120" Message="确认订单失败，存在库存不足的商品" Level="1" Description="确认订单失败，存在库存不足的商品" />
-  <Order  Code="8121" Message="确认订单失败，存在购买数量超过限购数量的商品" Level="1" Description="确认订单失败，存在购买数量超过限购数量的商品" />
-  <Order  Code="8122" Message="确认订单失败，存在商品数据错误的商品" Level="1" Description="确认订单失败，存在商品数据错误的商品" />
-  <Order  Code="8123" Message="确认订单失败，使用的优惠券不存在或者无效" Level="1" Description="确认订单失败，使用的优惠券不存在或者无效" />
-  <Order  Code="8124" Message="确认订单失败，使用的积分大于您的积分余额" Level="1" Description="确认订单失败，使用的积分大于您的积分余额" />
-  <Order  Code="8125" Message="抱歉，生成订单编号失败，请您联系茶途客服，确认订单失败！" Level="1" Description="抱歉，生成订单编号失败，请您联系茶途客服，确认订单失败！" />
-  <Order  Code="8126" Message="抱歉，系统系错，确认订单失败，请您联系茶途客服！" Level="1" Description="抱歉，系统系错，确认订单失败，请您联系茶途客服！" />
-  <Order  Code="8127" Message="购物车数据有变动，请返回购物车重新下单！" Level="1" Description="购物车数据有变动，请返回购物车重新下单！" />
-  <Order  Code="8128" Message="购物车里面没有商品，请返回购物车重新下单！" Level="1" Description="购物车里面没有商品，请返回购物车重新下单！" />
-  <Order  Code="8129" Message="优惠券不存在" Level="1" Description="优惠券不存在" />
-  <Order  Code="8130" Message="优惠券已使用过" Level="1" Description="优惠券已使用过" />
-  <Order  Code="8131" Message="优惠券使用日期非法" Level="1" Description="优惠券使用日期非法" />
-  <Order  Code="8132" Message="订单已支付" Level="1" Description="订单已支付" />
-  <Order  Code="8133" Message="错误" Level="1" Description="错误" />
-  <Order  Code="8134" Message="错误" Level="1" Description="错误" />
-  <Order  Code="8135" Message="错误" Level="1" Description="错误" />
-  <Order  Code="8136" Message="错误" Level="1" Description="错误" />
-  <Order  Code="8137" Message="订单还没有支付，不能发货!" Level="1" Description="订单还没有支付，不能发货!" />
-  <Order  Code="8138" Message="订单已支付，不能取消" Level="1" Description="订单已支付，不能取消" />
-  <Order  Code="8139" Message="付款金额与订单金额不一致" Level="1" Description="付款金额与订单金额不一致" />
-  <Order  Code="8140" Message="错误" Level="1" Description="错误" />
-  <Order  Code="8141" Message="错误" Level="1" Description="错误" />
-  <Order  Code="8142" Message="错误" Level="1" Description="错误" />
-  <Order  Code="8143" Message="错误" Level="1" Description="错误" />
-  <Order  Code="8144" Message="错误" Level="1" Description="错误" />
-  <Order  Code="8145" Message="错误" Level="1" Description="错误" />
-  <Order  Code="8146" Message="错误" Level="1" Description="错误" />
-  <Order  Code="8147" Message="错误" Level="1" Description="错误" />
-  <Order  Code="8148" Message="错误" Level="1" Description="错误" />
-  <Order  Code="8149" Message="错误" Level="1" Description="错误" />
-  <Order  Code="8150" Message="错误" Level="1" Description="错误" />
-  <Order  Code="8151" Message="错误" Level="1" Description="错误" />
-  <Order  Code="8152" Message="错误" Level="1" Description="错误" />
-  <Order  Code="8153" Message="错误" Level="1" Description="错误" />
-  <Order  Code="8154" Message="错误" Level="1" Description="错误" />
-  <Order  Code="8155" Message="错误" Level="1" Description="错误" />
-  <Order  Code="8156" Message="错误" Level="1" Description="错误" />
-  <Order  Code="8157" Message="错误" Level="1" Description="错误" />
-  <Order  Code="8158" Message="错误" Level="1" Description="错误" />
-  <Order  Code="8159" Message="错误" Level="1" Description="错误" />
-  <Order  Code="8160" Message="错误" Level="1" Description="错误" />
-  <Order  Code="8161" Message="错误" Level="1" Description="错误" />
-  <Order  Code="8162" Message="错误" Level="1" Description="错误" />
-  <Order  Code="8163" Message="错误" Level="1" Description="错误" />
-  <Order  Code="8164" Message="错误" Level="1" Description="错误" />
-  <Order  Code="8165" Message="错误" Level="1" Description="错误" />
-  <Order  Code="8166" Message="错误" Level="1" Description="错误" />
-  <Order  Code="8167" Message="错误" Level="1" Description="错误" />
-  <Order  Code="8168" Message="错误" Level="1" Description="错误" />
-  <Order  Code="8169" Message="错误" Level="1" Description="错误" />
-
-  <!--SecurityCode-->
-  <Info  Code="8401" Message="你购买的是正品请放心使用" Level="1" Description="防伪码验证" />
-  <Info  Code="8402" Message="你购买的不是正品" Level="1" Description="防伪码验证" />
-  <Info  Code="8403" Message="批号不能为空" Level="1" Description="批号不能为空" />
-  <Info  Code="8404" Message="批号已被使用" Level="1" Description="批号已被使用" />
-  <Info  Code="8405" Message="防伪码已被删除" Level="1" Description="防伪码已被删除" />
-
-  <!-- Cart -->
-  <Cart  Code="10000" Message="系统繁忙！" Level="1" Description="系统繁忙！" />
-  <Cart  Code="10001" Message="购物车错误" Level="1" Description="购物车错误" />
-  <Cart  Code="10002" Message="操作成功！" Level="1" Description="操作成功！" />
-  <Cart  Code="10003" Message="购物车里没有商品，请返回购物车重新下单！" Level="1" Description="购物车里没有商品，请返回购物车重新下单！" />
-  <Cart  Code="10006" Message="超出数量限制！" Level="1" Description="超出数量限制！" />
-  <Cart  Code="10009" Message="库存不足！" Level="1" Description="库存不足！" />
-  <Cart  Code="10010" Message="购物车容量不足！" Level="1" Description="购物车容量不足！" />
-  <Cart  Code="10011" Message="产品已下架(不出售)！" Level="1" Description="产品已下架(不出售)！" />
-  <Cart  Code="10012" Message="SKU不存在！" Level="1" Description="SKU不存在！" />
-  <Cart  Code="10016" Message="超出单件购买限制" Level="1" Description="超出单件购买限制" />
-
-  <!-- Item -->
-  <Info  Code="20001" Message="失败" Level="1" Description="失败" />
-  <Info  Code="20002" Message="成功" Level="1" Description="成功" />
-  <Info  Code="20003" Message="没有数据" Level="1" Description="没有数据" />
-
-  <!-- payment -->
-  <Info  Code="30017" Message="不支持的支付方式" Level="1" Description="不支持的支付方式" />
-
-  <!--Usr-->
-  <User  Code="50001" Message="输入验证码错误" Level="1" Description="用户错误" />
-  <User  Code="50002" Message="注册成功" Level="1" Description="用户错误" />
-  <User  Code="50003" Message="登录成功" Level="1" Description="用户错误" />
-  <User  Code="50004" Message="注册写入失败" Level="1" Description="用户错误" />
-  <User  Code="50010" Message="用户名可以注册" Level="1" Description="用户错误" />
-  <User  Code="50011" Message="用户名为邮箱" Level="1" Description="用户错误" />
-  <User  Code="50012" Message="用户名为手机号" Level="1" Description="用户错误" />
-  <User  Code="50013" Message="用户名包含中文" Level="1" Description="用户错误" />
-  <User  Code="50014" Message="用户名不能超过50长度" Level="1" Description="用户错误" />
-  <User  Code="50015" Message="用户名只能为手机号或者邮箱!" Level="1" Description="用户错误" />
-  <User  Code="50016" Message="用户名已经被注册" Level="1" Description="用户错误" />
-  <User  Code="50017" Message="用户名不存在" Level="1" Description="用户错误" />
-  <User  Code="50018" Message="用户名已存在" Level="1" Description="用户错误" />
-
-  <User  Code="50020" Message="密码设置正确" Level="1" Description="用户错误" />
-  <User  Code="50021" Message="密码长度不能少于6位" Level="1" Description="用户错误" />
-  <User  Code="50022" Message="密码长度不能超过50" Level="1" Description="用户错误" />
-  <User  Code="50023" Message="密码必须由数字加字母组成" Level="1" Description="用户错误" />
-  <User  Code="50024" Message="密码不能包含中文" Level="1" Description="用户错误" />
-  <User  Code="50025" Message="密码不正确" Level="1" Description="用户错误" />
-  <User  Code="50026" Message="用户名包含敏感词" Level="1" Description="用户错误" />
-  <User  Code="50027" Message="密码不能由纯字母构成" Level="1" Description="用户错误" />
-
-  <User  Code="50303" Message="手机已被激活过" Level="1" Description="用户错误" />
-  <User  Code="50304" Message="邮箱已被激活过" Level="1" Description="用户错误" />
-
-  <User  Code="50402" Message="手机号已被使用" Level="1" Description="用户错误" />
-  <User  Code="50403" Message="邮箱已被使用" Level="1" Description="用户错误" />
-
-  <User  Code="50605" Message="激活连接已过期，请重新验证" Level="1" Description="用户错误" />
-  <User  Code="50606" Message="激活验证码已过期，请重新验证" Level="1" Description="用户错误" />
-
-  <User  Code="50701" Message="尊敬的 {0} 您好：您在茶途网有 1 张优惠券即将到期，提醒您一下最近过期时间是{1}，请记得在有效期内使用，以免浪费。您可以点击 我的茶途 -- 优惠券信息 查看具体详情。" Level="1" Description="用户优惠券到期提醒" />
-  <User  Code="50702" Message="您茶途网的优惠券即将到期，快去及时使用，享受优惠吧！" Level="1" Description="用户优惠券到期提醒" />
-  <User  Code="50703" Message="尊敬的 {0} 您好：您在茶途网有 1 张优惠券即将到期，提醒您一下最近过期时间是{1}，请记得在有效期内使用，以免浪费。您可以点击 我的茶途 -- 优惠券信息 查看具体详情。" Level="1" Description="用户优惠券到期提醒" />
+	<!-- Manager -->
+	<Managaer  Code="1001" Message="用户名为空" Level="1" Description="用户名为空" />
+	<Managaer  Code="1002" Message="密码为空" Level="1" Description="密码为空" />
+	<Managaer  Code="1003" Message="语言为空" Level="1" Description="语言为空" />
+	<Managaer  Code="1004" Message="真实姓名为空" Level="1" Description="真实姓名为空" />
+	<Managaer  Code="1005" Message="公司名称为空" Level="1" Description="公司名称为空" />
+	<Managaer  Code="1006" Message="用户名已经存在" Level="1" Description="用户名已经存在" />
+	<Managaer  Code="1007" Message="商品评论未找到" Level="1" Description="商品评论未找到" />
+	<Managaer  Code="1008" Message="没有找到商品" Level="1" Description="没有找到商品" />
+	<Managaer  Code="1009" Message="商品上过架，不能删除" Level="1" Description="商品上过架，不能删除" />
+	<Managaer  Code="1010" Message="不包含没上架过的商品" Level="1" Description="不包含没上架过的商品" />
+	<Managaer  Code="1011" Message="商品非上架状态" Level="1" Description="商品非上架状态" />
 
 </Infos>
