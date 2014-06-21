@@ -960,7 +960,8 @@
     <Content Include="Views\Base\UserDefinedList.cshtml" />
     <Content Include="Views\Manager\Sample.cshtml" />
     <Content Include="Views\Manager\ManagerAdd.cshtml" />
-    <Content Include="Views\Manager\ManagerDelete.cshtml" />
+    <Content Include="Views\Manager\ManagerDetail.cshtml" />
+    <Content Include="Views\Manager\ManagerEdit.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup>

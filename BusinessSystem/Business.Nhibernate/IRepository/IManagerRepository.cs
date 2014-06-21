@@ -15,6 +15,8 @@ namespace Business.Nhibernate.IRepository
         /// <param name="manager"></param>
         /// <returns>存在 返回true</returns>
         bool IsExist(Manager manager);
+
+        IList<Manager> GetManagersByPage(ManagerTypeEnum managerType, int pageIndex, int pageSize, long  parentId);
     }
 
     public interface IManagerProductRepository : IRepository<ManagerProduct>

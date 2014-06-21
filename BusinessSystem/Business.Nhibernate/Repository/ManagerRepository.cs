@@ -25,5 +25,19 @@ namespace Business.Nhibernate.Repository
                         .RowCount() > 0;
             }
         }
+
+        public IList<Manager> GetManagersByPage(ManagerTypeEnum managerType,int pageIndex, int pageSize,long  parentId)
+        {
+            using (var session = GetSession())
+            {
+                return
+                    session.QueryOver<Manager>()
+                        .Where(m => m.ManagerType == managerType && m.ParentId == parentId)
+                        .OrderBy(m => m.Id)
+                        .Desc.Take(pageSize)
+                        .Skip((pageIndex - 1)*pageSize)
+                        .List();
+            }
+        }
     }
 }

@@ -15,11 +15,8 @@ namespace Business.Web.Controllers
         [HttpGet]
         public ActionResult ManagerList()
         {
-            IList<Manager> managers = new List<Manager>();
-            for (int i = 0; i < 10; i++)
-            {
-               // managers.Add(ManagerFactory.Create("楚中刀客", "tianyalang007", "tianyalang007"));
-            }
+            IList<Manager> managers = ManageService.GetManagersByPage(ManagerTypeEnum.Super, 1, 10, 0);
+            
             return View(managers);
         }
 
@@ -40,6 +37,20 @@ namespace Business.Web.Controllers
         {
             return View();
         }
+
+        [HttpGet]
+        public ActionResult ManagerEdit(long id)
+        {
+            return View(ManageService.GetManagerById(id));
+        }
+
+        [HttpPost]
+        public ActionResult ManagerEdit(string userName, string password, string realName,
+            string company, int language)
+        {
+            return View();
+        }
+
 
         [HttpPost]
         public ActionResult ManagerAdd(string userName, string password, string realName,
