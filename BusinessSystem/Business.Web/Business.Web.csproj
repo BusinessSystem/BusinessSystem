@@ -962,6 +962,7 @@
     <Content Include="Views\Manager\ManagerAdd.cshtml" />
     <Content Include="Views\Manager\ManagerDetail.cshtml" />
     <Content Include="Views\Manager\ManagerEdit.cshtml" />
+    <Content Include="Views\Base\BaseDictinaryList.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup>
