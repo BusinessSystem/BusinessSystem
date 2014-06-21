@@ -9,7 +9,7 @@ using Business.Utils.Info;
 
 namespace Business.Web.Controllers
 {
-    public class ManagerController : AdminBaseController
+    public class ManagerController :Controller
     {
          
         [HttpGet]
