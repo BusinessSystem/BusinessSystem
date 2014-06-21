@@ -68,7 +68,8 @@ namespace Business.Web.Framework
 
         public static void SaveManagerCookie(Manager manager)
         {
-            CookieManager.SetCookie(CookieConst.COOKIE_MANAMGER, EncryptTools.EncryptDES(manager.GetManagerCookieString(), EncryptKey));
+            CookieManager.SetCookie(CookieConst.COOKIE_MANAMGER,
+                EncryptTools.EncryptDES(manager.GetManagerCookieString(), EncryptKey),DateTime.Now.AddDays(14));
         }
 
         public static Manager GetManagerFromCookie()

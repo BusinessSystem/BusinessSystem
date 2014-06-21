@@ -65,7 +65,7 @@ namespace Business.Web.Controllers
             }
             else
             {
-                filterContext.Result = Redirect("/Manager/Login");
+                filterContext.Result = Redirect("/Handler/Login");
             }
 
         }

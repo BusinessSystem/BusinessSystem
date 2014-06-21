@@ -39,5 +39,15 @@ namespace Business.Nhibernate.Repository
                         .List();
             }
         }
+
+        public Manager GetManagerByUserName(string userName)
+        {
+            using (var session = GetSession())
+            {
+                return
+                    session.QueryOver<Manager>()
+                        .Where(m => m.UserName == userName).Take(1).SingleOrDefault();
+            }
+        }
     }
 }

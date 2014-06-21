@@ -48,7 +48,7 @@ namespace Business.Web.Controllers
         public ActionResult IntentionDelete(long id)
         {
             BaseService.DeleteIntention(id);
-            return RedirectToAction("IntentionList");
+            return Json(InfoTools.GetMsgInfo(ResponseCode.Ok));
         }
 
 
@@ -82,11 +82,11 @@ namespace Business.Web.Controllers
             return Json(InfoTools.GetMsgInfo(ResponseCode.DataError));
         }
 
-        [HttpGet]
+        [HttpPost]
         public ActionResult UserDefinedDelete(long id)
         {
             BaseService.DeleteUserDefined(id);
-            return RedirectToAction("UserDefinedList");
+            return Json(InfoTools.GetMsgInfo(ResponseCode.Ok));
         }
     }
 }

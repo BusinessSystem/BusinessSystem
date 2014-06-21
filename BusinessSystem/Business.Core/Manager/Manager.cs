@@ -23,7 +23,7 @@ namespace Business.Core
         public virtual string Creator { get; set; }
         public virtual DateTime CreateTime { get; set; }
 
-        public virtual void EncryptPassword()
+        public virtual void  EncryptPassword()
         {
             Password = EncryptTools.GetMD5_32(Password);
         }
@@ -39,6 +39,7 @@ namespace Business.Core
             cookieTable.Add("managerId", ManagerType);
             return JsonConvert.SerializeObject(cookieTable);
         }
+        
         public static Manager GetFromCookieString(string cookieString)
         {
             if (string.IsNullOrEmpty(cookieString)) return null;

@@ -9,7 +9,7 @@ using Business.Utils.Info;
 
 namespace Business.Web.Controllers
 {
-    public class ManagerController : Controller
+    public class ManagerController : AdminBaseController
     {
          
         [HttpGet]
@@ -20,20 +20,17 @@ namespace Business.Web.Controllers
             return View(managers);
         }
 
+    
+       
+
         [HttpGet]
-        public ActionResult Login()
+        public ActionResult ManagerAdd()
         {
             return View();
         }
 
-        [HttpPost]
-        public ActionResult Login(Manager manager)
-        {
-            return Json("JsonStr", JsonRequestBehavior.AllowGet);
-        }
-
         [HttpGet]
-        public ActionResult ManagerAdd()
+        public ActionResult ManagerDetail()
         {
             return View();
         }
@@ -63,8 +60,23 @@ namespace Business.Web.Controllers
             }
             Manager manager = ManagerFactory.Create(userName, password, 0, ManagerTypeEnum.Super, realName, company,
                 isAutoDistribute, language, "");
+            manager.EncryptPassword();
             string responseCode = ManageService.Save(manager);
             return Json(InfoTools.GetMsgInfo(responseCode), JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public ActionResult ManagerDelete(long id)
+        {
+             ManageService.DeleteManager(id);
+             return Json(InfoTools.GetMsgInfo(ResponseCode.Ok), JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public ActionResult ResetPassword(long id)
+        {
+            ManageService.ResetPassword(id);
+            return Json(InfoTools.GetMsgInfo(ResponseCode.Ok), JsonRequestBehavior.AllowGet);
         }
     }
 }

@@ -17,6 +17,7 @@ namespace Business.Nhibernate.IRepository
         bool IsExist(Manager manager);
 
         IList<Manager> GetManagersByPage(ManagerTypeEnum managerType, int pageIndex, int pageSize, long  parentId);
+        Manager GetManagerByUserName(string userName);
     }
 
     public interface IManagerProductRepository : IRepository<ManagerProduct>

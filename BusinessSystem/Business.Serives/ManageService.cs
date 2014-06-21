@@ -22,6 +22,22 @@ namespace Business.Serives
              return managerRepository.GetById(Id);
          }
 
+         public static string Login(string userName, string password,out Manager resultManager)
+         {
+             Manager manager = managerRepository.GetManagerByUserName(userName);
+             resultManager = manager;
+             if (manager == null)
+             {
+                 return ResponseCode.Managaer.UserNameError;
+             }
+             if (!manager.MatchPassword(password))
+             {
+                 return ResponseCode.Managaer.UserPasswordError;
+             }
+
+             return ResponseCode.Ok;
+         }
+
          public static string Save(Manager manager)
          {
              if (string.IsNullOrEmpty(manager.UserName))
@@ -50,6 +66,26 @@ namespace Business.Serives
              }
              managerRepository.Save(manager);
              return ResponseCode.Ok;
+         }
+
+         public static void DeleteManager(long id)
+         {
+             Manager manager = managerRepository.GetById(id);
+             if (manager != null)
+             {
+                 managerRepository.Delete(manager);
+             }
+         }
+
+         public static void ResetPassword(long id)
+         {
+             Manager manager = managerRepository.GetById(id);
+             if (manager != null)
+             {
+                 manager.Password = "123456";
+                 manager.EncryptPassword();
+                 managerRepository.Save(manager);
+             }
          }
      }
 }

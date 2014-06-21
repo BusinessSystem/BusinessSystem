@@ -83,12 +83,12 @@
                                                      <i class="icon-edit bigger-120"></i>编辑
                                                  </button>
 
-                                                 <button class="btn btn-xs btn-danger" onclick=" deleteManager('@item.Id') ">
+                                                 <button class="btn btn-xs btn-danger" onclick="deleteManager('@item.Id') ">
                                                      <i class="icon-trash bigger-120"></i>删除
                                                  </button>
 
                                                  <button class="btn btn-xs btn-warning">
-                                                     <i class="icon-flag bigger-120"></i>禁用
+                                                     <i class="icon-flag bigger-120" onclick="resetPassword('@item.Id')" ></i>重置密码
                                                  </button>
                                              </div>
 
@@ -138,8 +138,6 @@
     </div>
 </div>
 
-
-
 <script type="text/javascript">
  
     function deleteManager(id) {
@@ -148,18 +146,51 @@
     function deleteItem(id) {
          art.dialog({
             icon: "question",
-            content: "确定删除" + id + "数据？",
+            content: "确定删除该用户？",
             ok: function () {
-                $("#data-item" + id).remove();
-                 this.close();
-                 return false;
+                $.ajax({
+                    url: "/Manager/ManagerDelete",
+                    type: "post",
+                    datatype: "json",
+                    data: { id: id },
+                    success:function(response) {
+                        window.location.href = "/Manager/ManagerList";
+                    },
+                    error:function() {
+                        
+                    }
+
+                });
             },
             cancelVal: '关闭',
             cancel: true,
             lock: true
         });
     }
+    function resetPassword(id) {
+        art.dialog({
+            icon: "question",
+            content: "确定重置该用户密码？",
+            ok: function () {
+                $.ajax({
+                    url: "/Manager/ResetPassword",
+                    type: "post",
+                    datatype: "json",
+                    data: { id: id },
+                    success: function (response) {
+                        window.location.href = "/Manager/ManagerList";
+                    },
+                    error: function () {
 
+                    }
+
+                });
+            },
+            cancelVal: '关闭',
+            cancel: true,
+            lock: true
+        });
+    }
     jQuery(function () {
        $("#menu").menu();
     });

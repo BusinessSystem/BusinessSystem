@@ -90,6 +90,8 @@ namespace Business.Serives
             public const string RealNameNullOrEmpty = "1004";
             public const string CompanyNullOrEmpty = "1005";
             public const string UserNameHasExist = "1006";
+            public const string UserNameError = "1007";
+            public const string UserPasswordError = "1008";
         }
 
     }

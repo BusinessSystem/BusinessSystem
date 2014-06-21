@@ -170,12 +170,23 @@
             icon: "question",
             content: "确定删除该数据？",
             ok: function () {
+              $.ajax({
+                    url: "/Base/UserDefinedDelete/",
+                    type: "post",
+                    datatype: "json",
+                    data: { id: id },
+                    success:function (){},
+                    error:function(){}
+                });
                 this.close();
-                window.location.href = "/Base/UserDefinedDelete/" + id;
+                
             },
             cancelVal: '关闭',
             cancel: true,
-            lock: true
+            lock: true,
+            close:function() {
+                window.location.href = "/Base/UserDefinedList";
+            }
         });
     }
 </script> 
