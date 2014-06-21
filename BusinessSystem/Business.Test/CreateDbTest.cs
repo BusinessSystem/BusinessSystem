@@ -9,7 +9,6 @@ using Business.Utils;
 namespace Business.Test
 {
     [TestFixture]
-   
     public class CreateDbTest
     {
         /// <summary>
@@ -21,8 +20,5 @@ namespace Business.Test
         {
             SessionProvider.RebuildSchema();
         }
-
-
-
     }
 }

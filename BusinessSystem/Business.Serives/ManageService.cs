@@ -34,7 +34,6 @@ namespace Business.Serives
              {
                  return ResponseCode.Managaer.UserPasswordError;
              }
-
              return ResponseCode.Ok;
          }
 

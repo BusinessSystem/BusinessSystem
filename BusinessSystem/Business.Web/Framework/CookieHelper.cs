@@ -72,6 +72,20 @@ namespace Business.Web.Framework
                 EncryptTools.EncryptDES(manager.GetManagerCookieString(), EncryptKey),DateTime.Now.AddDays(14));
         }
 
+        public static void SaveManagerCookie(Manager manager, bool remember)
+        {
+            if (remember)
+            {
+                CookieManager.SetCookie(CookieConst.COOKIE_MANAMGER,
+                    EncryptTools.EncryptDES(manager.GetManagerCookieString(), EncryptKey), DateTime.Now.AddDays(14));
+            }
+            else
+            {
+                CookieManager.SetCookie(CookieConst.COOKIE_MANAMGER,
+                   EncryptTools.EncryptDES(manager.GetManagerCookieString(), EncryptKey));
+            }
+        }
+
         public static Manager GetManagerFromCookie()
         {
             try

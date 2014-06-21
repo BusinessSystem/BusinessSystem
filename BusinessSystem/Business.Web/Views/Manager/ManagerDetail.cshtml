@@ -1,5 +1,84 @@
 ﻿@{
-    ViewBag.Title = "ManagerDelete";
+    ViewBag.Title = "<li class=\"active\">用户详情</li>";
 }
+@model Business.Core.Manager
 
-<h2>ManagerDelete</h2>
+@if (Model != null)
+{
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="widget-box">
+                <div class="widget-header widget-header-blue widget-header-flat">
+                    <h4 class="lighter">用户详情</h4>
+                    <div class="widget-toolbar">
+                        <label>
+                            <small class="green">
+                                <b></b>
+                            </small>
+                        @if (Model.ParentId == 0)
+                        {
+                            <span onclick=" window.location.href = '/Manager/ManagerList' " class="btn btn-app btn-light btn-xs  no-border">
+                                用户管理
+                            </span>
+                        }
+                        </label>
+                    </div> 
+                </div>
+                <div class="widget-body">
+                <div class="space-4"></div>
+                    <div class="profile-user-info profile-user-info-striped">
+                        <div class="profile-info-row">
+                            <div class="profile-info-name"> 用户名： </div>
+
+                            <div class="profile-info-value">
+                                <span class="editable editable-click" id="username">@Model.UserName</span>
+                            </div>
+                        </div>
+
+                        <div class="profile-info-row">
+                            <div class="profile-info-name"> 真实姓名： </div>
+
+                            <div class="profile-info-value">
+                             <span class="editable editable-click" id="username">@Model.RealName</span>
+                            </div>
+                        </div>
+
+                        <div class="profile-info-row">
+                            <div class="profile-info-name"> 公司名称： </div>
+
+                            <div class="profile-info-value">
+                                <span class="editable editable-click" id="age">@Model.Company</span>
+                            </div>
+                        </div>
+
+                        <div class="profile-info-row">
+                            <div class="profile-info-name"> 语言： </div>
+
+                            <div class="profile-info-value">
+                                <span class="editable editable-click" id="signup">@Model.Language</span>
+                            </div>
+                        </div>
+
+                        <div class="profile-info-row">
+                            <div class="profile-info-name"> 是否自动分配 </div>
+
+                            <div class="profile-info-value">
+                                 @if (Model.IsAutoDistribute == Business.Utils.CoreDefaultValue.True)
+                                 {
+                                     <span class="editable editable-click" id="login">是</span>
+                                 }
+                                 else
+                                 {
+                                     <span class="editable editable-click" id="login">否</span>
+                                 }
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="space-4"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}

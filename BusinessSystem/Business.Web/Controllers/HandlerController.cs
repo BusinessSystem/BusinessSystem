@@ -25,7 +25,7 @@ namespace Business.Web.Controllers
             string result = ManageService.Login(userName, password,out manager);
             if (result == ResponseCode.Ok)
             {
-                CookieHelper.SaveManagerCookie(manager);
+                CookieHelper.SaveManagerCookie(manager,remember);
             }
             return Json(InfoTools.GetMsgInfo(result));
         }

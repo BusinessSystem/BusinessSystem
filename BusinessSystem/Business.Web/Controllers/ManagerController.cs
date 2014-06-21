@@ -30,9 +30,15 @@ namespace Business.Web.Controllers
         }
 
         [HttpGet]
-        public ActionResult ManagerDetail()
+        public ActionResult Index()
         {
-            return View();
+            return Redirect("/Manager/ManagerDetail/" + CurrentManager.Id);
+        }
+
+        [HttpGet]
+        public ActionResult ManagerDetail(long id)
+        {
+            return View(ManageService.GetManagerById(id));
         }
 
         [HttpGet]
@@ -42,10 +48,28 @@ namespace Business.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult ManagerEdit(string userName, string password, string realName,
+        public ActionResult ManagerEdit(long id,string userName, string password, string realName,
             string company, int language)
         {
-            return View();
+            short isAutoDistribute = Utils.CoreDefaultValue.False;
+            if (!string.IsNullOrEmpty(Request["isAutoDistribute"]))
+            {
+                isAutoDistribute = Utils.CoreDefaultValue.True;
+            }
+            string responseCode = ResponseCode.NotFoundData;
+            Manager manager = ManageService.GetManagerById(id);
+            if (manager != null)
+            {
+                manager.UserName = userName;
+                manager.Password = password;
+                manager.RealName = realName;
+                manager.Company = company;
+                manager.Language = language;
+                manager.IsAutoDistribute = isAutoDistribute;
+                manager.EncryptPassword();
+                responseCode = ManageService.Save(manager);
+            }
+            return Json(InfoTools.GetMsgInfo(responseCode), JsonRequestBehavior.AllowGet);
         }
 
 
@@ -58,8 +82,14 @@ namespace Business.Web.Controllers
             {
                 isAutoDistribute = Utils.CoreDefaultValue.True;
             }
-            Manager manager = ManagerFactory.Create(userName, password, 0, ManagerTypeEnum.Super, realName, company,
-                isAutoDistribute, language, "");
+            long parentId = 0;
+            if (CurrentManager.ManagerType ==ManagerTypeEnum.Common&&CurrentManager.ParentId == 0)
+            {
+                parentId = CurrentManager.ParentId;
+            }
+
+            Manager manager = ManagerFactory.Create(userName, password, parentId, ManagerTypeEnum.Common, realName, company,
+                isAutoDistribute, language, CurrentManager.UserName);
             manager.EncryptPassword();
             string responseCode = ManageService.Save(manager);
             return Json(InfoTools.GetMsgInfo(responseCode), JsonRequestBehavior.AllowGet);

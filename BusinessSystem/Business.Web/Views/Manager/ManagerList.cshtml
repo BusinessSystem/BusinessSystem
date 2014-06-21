@@ -47,87 +47,87 @@
                             @if (Model != null && Model.Count != 0)
                             {
                                 foreach (var item in Model)
-                                 {
-                                     <tr id="data-item(@item.Id)">
-                                         <td class="center">
-                                             <label>
-                                                 <input type="checkbox" class="ace" />
-                                                 <span class="lbl"></span>
-                                             </label>
-                                         </td>
+                                {
+                                    <tr id="data-item(@item.Id)">
+                                        <td class="center">
+                                            <label>
+                                                <input type="checkbox" class="ace" />
+                                                <span class="lbl"></span>
+                                            </label>
+                                        </td>
 
-                                         <td>
-                                             <a href="#">@item.UserName</a>
-                                         </td>
-                                         <td>@item.RealName</td>
-                                         <td class="hidden-480">@item.Company</td>
-                                         <td>@item.Language</td>
-                                         <td class="hidden-480">
-                                             @if (@item.IsAutoDistribute == Business.Utils.CoreDefaultValue.False)
-                                             {
-                                                 <span>否</span>
-                                             }
-                                             else
-                                             {
-                                                 <span>是</span>
-                                             }
-                                         </td>
+                                        <td>
+                                            <a href="#">@item.UserName</a>
+                                        </td>
+                                        <td>@item.RealName</td>
+                                        <td class="hidden-480">@item.Company</td>
+                                        <td>@item.Language</td>
+                                        <td class="hidden-480">
+                                            @if (@item.IsAutoDistribute == Business.Utils.CoreDefaultValue.False)
+                                            {
+                                                <span>否</span>
+                                            }
+                                            else
+                                            {
+                                                <span>是</span>
+                                            }
+                                        </td>
 
-                                         <td >
-                                             <div class="visible-md visible-lg hidden-sm hidden-xs btn-group">
-                                                 <button class="btn btn-xs btn-success ">
-                                                     <i class="icon-ok bigger-120"></i>查看
-                                                 </button>
+                                        <td >
+                                            <div class="visible-md visible-lg hidden-sm hidden-xs btn-group">
+                                                <button class="btn btn-xs btn-success" onclick=" window.location.href = '/Manager/ManagerDetail/@item.Id' ">
+                                                    <i class="icon-ok bigger-120"></i>查看
+                                                </button>
 
-                                                 <button class="btn btn-xs btn-info" onclick="window.location.href='/Manager/ManagerEdit/@item.Id'">
-                                                     <i class="icon-edit bigger-120"></i>编辑
-                                                 </button>
+                                                <button class="btn btn-xs btn-info" onclick=" window.location.href = '/Manager/ManagerEdit/@item.Id' ">
+                                                    <i class="icon-edit bigger-120"></i>编辑
+                                                </button>
 
-                                                 <button class="btn btn-xs btn-danger" onclick="deleteManager('@item.Id') ">
-                                                     <i class="icon-trash bigger-120"></i>删除
-                                                 </button>
+                                                <button class="btn btn-xs btn-danger" onclick="deleteManager('@item.Id')">
+                                                    <i class="icon-trash bigger-120"></i>删除
+                                                </button>
 
-                                                 <button class="btn btn-xs btn-warning">
-                                                     <i class="icon-flag bigger-120" onclick="resetPassword('@item.Id')" ></i>重置密码
-                                                 </button>
-                                             </div>
+                                                <button class="btn btn-xs btn-warning" onclick="resetPassword('@item.Id')">
+                                                    <i class="icon-flag bigger-120" ></i>重置密码
+                                                </button>
+                                            </div>
 
-                                             <div class="visible-xs visible-sm hidden-md hidden-lg">
-                                                 <div class="inline position-relative">
-                                                     <button class="btn btn-minier btn-primary dropdown-toggle" data-toggle="dropdown">
-                                                         <i class="icon-cog icon-only bigger-110"></i>
-                                                     </button>
+                                            <div class="visible-xs visible-sm hidden-md hidden-lg">
+                                                <div class="inline position-relative">
+                                                    <button class="btn btn-minier btn-primary dropdown-toggle" data-toggle="dropdown">
+                                                        <i class="icon-cog icon-only bigger-110"></i>
+                                                    </button>
 
-                                                     <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
-                                                         <li>
-                                                             <a href="#" class="tooltip-info" data-rel="tooltip" title="View">
-                                                                 <span class="blue">
-                                                                     <i class="icon-zoom-in bigger-120"></i>
-                                                                 </span>
-                                                             </a>
-                                                         </li>
+                                                    <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
+                                                        <li>
+                                                            <a href="#" class="tooltip-info" data-rel="tooltip" title="View">
+                                                                <span class="blue">
+                                                                    <i class="icon-zoom-in bigger-120"></i>
+                                                                </span>
+                                                            </a>
+                                                        </li>
 
-                                                         <li>
-                                                             <a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
-                                                                 <span class="green">
-                                                                     <i class="icon-edit bigger-120"></i>
-                                                                 </span>
-                                                             </a>
-                                                         </li>
+                                                        <li>
+                                                            <a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
+                                                                <span class="green">
+                                                                    <i class="icon-edit bigger-120"></i>
+                                                                </span>
+                                                            </a>
+                                                        </li>
 
-                                                         <li>
-                                                             <a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
-                                                                 <span class="red">
-                                                                     <i class="icon-trash bigger-120"></i>
-                                                                 </span>
-                                                             </a>
-                                                         </li>
-                                                     </ul>
-                                                 </div>
-                                             </div>
-                                         </td>
-                                     </tr>
-                                 }
+                                                        <li>
+                                                            <a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
+                                                                <span class="red">
+                                                                    <i class="icon-trash bigger-120"></i>
+                                                                </span>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
                             }
                         </tbody>
                     </table>
@@ -139,25 +139,26 @@
 </div>
 
 <script type="text/javascript">
- 
+
     function deleteManager(id) {
         deleteItem(id);
     }
+
     function deleteItem(id) {
-         art.dialog({
+        art.dialog({
             icon: "question",
             content: "确定删除该用户？",
-            ok: function () {
+            ok: function() {
                 $.ajax({
                     url: "/Manager/ManagerDelete",
                     type: "post",
                     datatype: "json",
                     data: { id: id },
-                    success:function(response) {
+                    success: function(response) {
                         window.location.href = "/Manager/ManagerList";
                     },
-                    error:function() {
-                        
+                    error: function() {
+
                     }
 
                 });
@@ -167,23 +168,23 @@
             lock: true
         });
     }
+
     function resetPassword(id) {
         art.dialog({
             icon: "question",
             content: "确定重置该用户密码？",
-            ok: function () {
+            ok: function() {
                 $.ajax({
                     url: "/Manager/ResetPassword",
                     type: "post",
                     datatype: "json",
                     data: { id: id },
-                    success: function (response) {
+                    success: function(response) {
                         window.location.href = "/Manager/ManagerList";
                     },
-                    error: function () {
+                    error: function() {
 
                     }
-
                 });
             },
             cancelVal: '关闭',
@@ -191,7 +192,4 @@
             lock: true
         });
     }
-    jQuery(function () {
-       $("#menu").menu();
-    });
 </script>
