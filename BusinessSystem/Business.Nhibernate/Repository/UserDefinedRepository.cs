@@ -9,7 +9,13 @@ using Business.Nhibernate.IRepository;
 namespace Business.Nhibernate.Repository
 {
     public class UserDefinedRepository : Repository<UserDefined>, IUserDefinedRepository
-    { 
-         
+    {
+        public IList<UserDefined> GetAllUserDefineds()
+        {
+            using (var session = GetSession())
+            {
+                return session.QueryOver<UserDefined>().List();
+            }
+        }
     }
 }

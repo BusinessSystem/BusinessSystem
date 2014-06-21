@@ -14,7 +14,7 @@ namespace Business.Nhibernate.IRepository
 
     public interface IUserDefinedRepository : IRepository<UserDefined>
     {
-
+        IList<UserDefined> GetAllUserDefineds();
     }
 
     public interface IVisitorRecordRepository : IRepository<VisitorRecord>

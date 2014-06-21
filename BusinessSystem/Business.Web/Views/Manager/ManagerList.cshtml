@@ -1,324 +1,137 @@
 ﻿@{
-    ViewBag.Title = "ManagerList";
+    ViewBag.Title = "<li><i class=\"\"></i><a href=\"/Manager/ManagerList\">服务中心</a></li><li class=\"active\">用户管理</li>";
 }
 @model IList<Business.Core.Manager>
-
  
-<div class="widget-header widget-toolbar-light  widget-box transparent" style="padding-left: 0px;">
-    <div class="widget-toolbar float-none  no-border">
-        <span class="btn btn-app btn-light btn-xs  no-border">
-            <input type="checkbox"/>全选
-        </span>
-        <span class="btn btn-app btn-light btn-xs ">
-            删除
-        </span>
-        <div class="btn-group margin-top-2">
-            <button data-toggle="dropdown" class="btn btn-light width-120 dropdown-toggle margin-top-2 common-height">
-                按地区划分
-                <span class="icon-caret-down icon-on-right "></span>
-            </button>
-
-            <ul class="dropdown-menu dropdown-light pull-right width-120">
-                <li>
-                    <a href="#">亚洲</a>
-                </li>
-
-                <li>
-                    <a href="#">欧洲</a>
-                </li>
-
-                <li>
-                    <a href="#">南美洲</a>
-                </li>
-
-                <li>
-                    <a href="#">北美洲</a>
-                </li>
-                <li>
-                    <a href="#">非洲</a>
-                </li>
-                <li>
-                    <a href="#">大洋洲</a>
-                </li>
-                <li>
-                    <a href="#">未识别</a>
-                </li>
-            </ul>
-        </div>
-
-        <div class="btn-group margin-top-2">
-            <button data-toggle="dropdown" class="btn btn-light width-120 dropdown-toggle margin-top-2 common-height">
-                按意向划分
-                <span class="icon-caret-down icon-on-right "></span>
-            </button>
-
-            <ul class="dropdown-menu dropdown-light pull-right width-120">
-                <li>
-                    <a href="#">添加意向</a>
-                </li>
-                <li class="divider"></li>
-                <li>
-                    <a href="#">A类客户</a>
-                </li>
-
-                <li>
-                    <a href="#">B类客户</a>
-                </li>
-
-                <li>
-                    <a href="#">C类客户</a>
-                </li>
-               
-                <li>
-                    <a href="#">未识别</a>
-                </li>
-            </ul>
-        </div>
-        
-        <div class="btn-group margin-top-2">
-            <button data-toggle="dropdown" class="btn btn-light width-120 dropdown-toggle margin-top-2 common-height">
-                自定义
-                <span class="icon-caret-down icon-on-right "></span>
-            </button>
-
-            <ul class="dropdown-menu dropdown-light pull-right width-120">
-                <li>
-                    <a href="#">添加自定义</a>
-                </li>
-                <li class="divider"></li>
-                <li>
-                    <a href="#">样品成交客户</a>
-                </li>
-
-                <li>
-                    <a href="#">订单成交客户</a>
-                </li>
-
-                <li>
-                    <a href="#">ABCD</a>
-                </li>
-               
-                 
-            </ul>
-        </div>
-        
-         <div class="btn-group margin-top-2">
-            <button data-toggle="dropdown" class="btn btn-light width-120 dropdown-toggle margin-top-2 common-height">
-                   移动到
-                <span class="icon-caret-down icon-on-right "></span>
-            </button>
-        
-             <ul  aria-activedescendant="ui-id-8" tabindex="0" role="menu" class="display-none dropdown-menu dropdown-light ui-menu ui-widget width-120 ui-widget-content ui-corner-all" id="menu">
-                 <li aria-disabled="true" role="presentation" class="ui-state-disabled ui-menu-item">
-                     <a role="menuitem" tabindex="-1" class="ui-corner-all" id="ui-id-3" href="#">Aberdeen</a>
-                 </li>
-
-                 <li role="presentation" class="ui-menu-item">
-                     <a role="menuitem" tabindex="-1" class="ui-corner-all" id="ui-id-4" href="#">Ada</a>
-                 </li>
-
-                 <li role="presentation" class="ui-menu-item">
-                     <a role="menuitem" tabindex="-1" class="ui-corner-all" id="ui-id-5" href="#">Adamsville</a>
-                 </li>
-
-                 <li role="presentation" class="ui-menu-item">
-                     <a role="menuitem" tabindex="-1" class="ui-corner-all" id="ui-id-6" href="#">Addyston</a>
-                 </li>
-
-                 <li role="presentation" class="ui-menu-item">
-                     <a role="menuitem" tabindex="-1" class="ui-corner-all" id="ui-id-7" aria-haspopup="true" href="#"><span class="ui-menu-icon ui-icon ui-icon-carat-1-e"></span>Delphi</a>
-
-                     <ul aria-expanded="false" aria-hidden="true" role="menu" style="display: none;" class="ui-menu ui-widget ui-widget-content ui-corner-all">
-                         <li aria-disabled="true" role="presentation" class="ui-state-disabled ui-menu-item">
-                             <a role="menuitem" tabindex="-1" class="ui-corner-all" id="ui-id-11" href="#">Ada</a>
-                         </li>
-
-                         <li role="presentation" class="ui-menu-item">
-                             <a role="menuitem" tabindex="-1" class="ui-corner-all" id="ui-id-12" href="#">Saarland</a>
-                         </li>
-
-                         <li role="presentation" class="ui-menu-item">
-                             <a role="menuitem" tabindex="-1" class="ui-corner-all" id="ui-id-13" href="#">Salzburg</a>
-                         </li>
-                     </ul>
-                 </li>
-
-                 <li role="presentation" class="ui-menu-item">
-                     <a role="menuitem" tabindex="-1" class="ui-corner-all" id="ui-id-8" href="#">Saarland</a>
-                 </li>
-
-                 <li role="presentation" class="ui-menu-item">
-                     <a role="menuitem" tabindex="-1" class="ui-corner-all" id="ui-id-9" aria-haspopup="true" href="#"><span class="ui-menu-icon ui-icon ui-icon-carat-1-e"></span>Salzburg</a>
-
-                     <ul aria-expanded="false" aria-hidden="true" role="menu" style="display: none;" class="ui-menu ui-widget ui-widget-content ui-corner-all">
-                         <li role="presentation" class="ui-menu-item">
-                             <a role="menuitem" tabindex="-1" class="ui-corner-all" id="ui-id-14" aria-haspopup="true" href="#"><span class="ui-menu-icon ui-icon ui-icon-carat-1-e"></span>Delphi</a>
-
-                             <ul aria-expanded="false" aria-hidden="true" role="menu" style="display: none;" class="ui-menu ui-widget ui-widget-content ui-corner-all">
-                                 <li role="presentation" class="ui-menu-item">
-                                     <a role="menuitem" tabindex="-1" class="ui-corner-all" id="ui-id-17" href="#">Ada</a>
-                                 </li>
-
-                                 <li role="presentation" class="ui-menu-item">
-                                     <a role="menuitem" tabindex="-1" class="ui-corner-all" id="ui-id-18" href="#">Saarland</a>
-                                 </li>
-
-                                 <li role="presentation" class="ui-menu-item">
-                                     <a role="menuitem" tabindex="-1" class="ui-corner-all" id="ui-id-19" href="#">Salzburg</a>
-                                 </li>
-                             </ul>
-                         </li>
-
-                         <li role="presentation" class="ui-menu-item">
-                             <a role="menuitem" tabindex="-1" class="ui-corner-all" id="ui-id-15" aria-haspopup="true" href="#"><span class="ui-menu-icon ui-icon ui-icon-carat-1-e"></span>Delphi</a>
-
-                             <ul aria-expanded="false" aria-hidden="true" role="menu" style="display: none;" class="ui-menu ui-widget ui-widget-content ui-corner-all">
-                                 <li role="presentation" class="ui-menu-item">
-                                     <a role="menuitem" tabindex="-1" class="ui-corner-all" id="ui-id-20" href="#">Ada</a>
-                                 </li>
-
-                                 <li role="presentation" class="ui-menu-item">
-                                     <a role="menuitem" tabindex="-1" class="ui-corner-all" id="ui-id-21" href="#">Saarland</a>
-                                 </li>
-
-                                 <li role="presentation" class="ui-menu-item">
-                                     <a role="menuitem" tabindex="-1" class="ui-corner-all" id="ui-id-22" href="#">Salzburg</a>
-                                 </li>
-                             </ul>
-                         </li>
-
-                         <li role="presentation" class="ui-menu-item">
-                             <a role="menuitem" tabindex="-1" class="ui-corner-all" id="ui-id-16" href="#">Perch</a>
-                         </li>
-                     </ul>
-                 </li>
-
-                 <li aria-disabled="true" role="presentation" class="ui-state-disabled ui-menu-item">
-                     <a role="menuitem" tabindex="-1" class="ui-corner-all" id="ui-id-10" href="#">Amesville</a>
-                 </li>
-             </ul>
-
-         </div>
-    </div>
-</div>
- 
-
-
-<div class="table-responsive">
-    <table id="sample-table-1" class="table table-striped table-bordered table-hover">
-        <thead>
-            <tr>
-                <th class="center">
+<div class="row-fluid">
+    <div class="span12">
+        <div class="widget-box">
+            <div class="widget-header widget-header-blue widget-header-flat">
+                <h4 class="lighter">用户列表</h4>
+                <div class="widget-toolbar">
                     <label>
-                        <span class="lbl">序号</span>
+                        <small class="green">
+                            <b></b>
+                        </small>
+
+                        <span onclick="window.location.href='/Manager/ManagerAdd'" class="btn btn-app btn-light btn-xs  no-border">
+                            添加
+                        </span>
                     </label>
-                </th>
-                <th>Domain</th>
-                <th>Price</th>
-                <th class="hidden-480">Clicks</th>
+                </div>
+            </div>
+            <div class="widget-body">
+                
+                <div class="table-responsive">
+                    <table id="sample-table-1" class="table table-striped table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th class="center">
+                                    <label>
+                                        <span class="lbl">序号</span>
+                                    </label>
+                                </th>
+                                <th>Domain</th>
+                                <th>Price</th>
+                                <th class="hidden-480">Clicks</th>
 
-                <th>
-                    <i class="icon-time bigger-110 hidden-480"></i>
-                    Update
-                </th>
-                <th class="hidden-480">Status</th>
+                                <th>
+                                    <i class="icon-time bigger-110 hidden-480"></i>
+                                    Update
+                                </th>
+                                <th class="hidden-480">Status</th>
 
-                <th></th>
-            </tr>
-        </thead>
+                                <th></th>
+                            </tr>
+                        </thead>
 
-        <tbody>
-           @foreach (var item in Model)
-            {
-                <tr id="data-item(@item.Id)">
-                    <td class="center">
-                        <label>
-                            <input type="checkbox" class="ace" />
-                            <span class="lbl"></span>
-                        </label>
-                    </td>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr id="data-item(@item.Id)">
+                                    <td class="center">
+                                        <label>
+                                            <input type="checkbox" class="ace" />
+                                            <span class="lbl"></span>
+                                        </label>
+                                    </td>
 
-                    <td>
-                        <a href="#">@item.UserName</a>
-                    </td>
-                    <td>@item.Password</td>
-                    <td class="hidden-480">4,400</td>
-                    <td>@item.CreateTime</td>
+                                    <td>
+                                        <a href="#">@item.UserName</a>
+                                    </td>
+                                    <td>@item.Password</td>
+                                    <td class="hidden-480">4,400</td>
+                                    <td>@item.CreateTime</td>
 
-                    <td class="hidden-480">
-                        <span class="label label-sm label-warning">Expiring</span>
-                    </td>
+                                    <td class="hidden-480">
+                                        <span class="label label-sm label-warning">Expiring</span>
+                                    </td>
 
-                    <td >
-                        <div class="visible-md visible-lg hidden-sm hidden-xs btn-group">
-                            <button class="btn btn-xs btn-success ">
-                                <i class="icon-ok bigger-120"></i>查看
-                            </button>
+                                    <td >
+                                        <div class="visible-md visible-lg hidden-sm hidden-xs btn-group">
+                                            <button class="btn btn-xs btn-success ">
+                                                <i class="icon-ok bigger-120"></i>查看
+                                            </button>
 
-                            <button class="btn btn-xs btn-info">
-                                <i class="icon-edit bigger-120"></i>编辑
-                            </button>
+                                            <button class="btn btn-xs btn-info">
+                                                <i class="icon-edit bigger-120"></i>编辑
+                                            </button>
 
-                            <button class="btn btn-xs btn-danger" onclick="deleteManager('@item.Id')">
-                                <i class="icon-trash bigger-120"></i>删除
-                            </button>
+                                            <button class="btn btn-xs btn-danger" onclick="deleteManager('@item.Id')">
+                                                <i class="icon-trash bigger-120"></i>删除
+                                            </button>
 
-                            <button class="btn btn-xs btn-warning">
-                                <i class="icon-flag bigger-120"></i>禁用
-                            </button>
-                        </div>
+                                            <button class="btn btn-xs btn-warning">
+                                                <i class="icon-flag bigger-120"></i>禁用
+                                            </button>
+                                        </div>
 
-                        <div class="visible-xs visible-sm hidden-md hidden-lg">
-                            <div class="inline position-relative">
-                                <button class="btn btn-minier btn-primary dropdown-toggle" data-toggle="dropdown">
-                                    <i class="icon-cog icon-only bigger-110"></i>
-                                </button>
+                                        <div class="visible-xs visible-sm hidden-md hidden-lg">
+                                            <div class="inline position-relative">
+                                                <button class="btn btn-minier btn-primary dropdown-toggle" data-toggle="dropdown">
+                                                    <i class="icon-cog icon-only bigger-110"></i>
+                                                </button>
 
-                                <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
-                                    <li>
-                                        <a href="#" class="tooltip-info" data-rel="tooltip" title="View">
-                                            <span class="blue">
-                                                <i class="icon-zoom-in bigger-120"></i>
-                                            </span>
-                                        </a>
-                                    </li>
+                                                <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
+                                                    <li>
+                                                        <a href="#" class="tooltip-info" data-rel="tooltip" title="View">
+                                                            <span class="blue">
+                                                                <i class="icon-zoom-in bigger-120"></i>
+                                                            </span>
+                                                        </a>
+                                                    </li>
 
-                                    <li>
-                                        <a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
-                                            <span class="green">
-                                                <i class="icon-edit bigger-120"></i>
-                                            </span>
-                                        </a>
-                                    </li>
+                                                    <li>
+                                                        <a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
+                                                            <span class="green">
+                                                                <i class="icon-edit bigger-120"></i>
+                                                            </span>
+                                                        </a>
+                                                    </li>
 
-                                    <li>
-                                        <a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
-                                            <span class="red">
-                                                <i class="icon-trash bigger-120"></i>
-                                            </span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
-</div><!-- /.table-responsive -->
+                                                    <li>
+                                                        <a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
+                                                            <span class="red">
+                                                                <i class="icon-trash bigger-120"></i>
+                                                            </span>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div><!-- /.table-responsive -->
 
-<div class="widget-header widget-toolbar-light  widget-box transparent" style="padding-left: 0px;">
-    <div class="widget-toolbar float-none  no-border">
-        <span class="btn btn-app btn-light btn-xs height-20 no-border">
-            <input type="checkbox"/>全选
-        </span>
-        <span class="btn btn-app btn-light btn-xs height-20">
-            删除
-        </span>
-        
+            </div>
+        </div>
     </div>
 </div>
+
+
 
 <script type="text/javascript">
  

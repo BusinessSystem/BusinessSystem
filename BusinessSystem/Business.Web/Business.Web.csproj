@@ -957,6 +957,10 @@
     <Content Include="Views\Shared\_NavList.cshtml" />
     <Content Include="Views\Manager\Login.cshtml" />
     <Content Include="Views\Base\IntentionList.cshtml" />
+    <Content Include="Views\Base\UserDefinedList.cshtml" />
+    <Content Include="Views\Manager\Sample.cshtml" />
+    <Content Include="Views\Manager\ManagerAdd.cshtml" />
+    <Content Include="Views\Manager\ManagerDelete.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup>

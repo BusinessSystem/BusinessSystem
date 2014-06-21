@@ -1,12 +1,12 @@
 ﻿@{
     ViewBag.Title = "用户意向";
 }
-@model IList<Business.Core.Intention> 
-<form class="form-horizontal" method="post" action="/Base/IntentionAdd" id="intenttion_form">
+@model IList<Business.Core.UserDefined> 
+<form class="form-horizontal" method="post" action="/Base/UserDefinedAdd" id="intenttion_form">
     <div class="form-group">
-        <label class="col-sm-1    control-label no-padding-right" for="form-field-1">&nbsp; 意向名称：</label>
+        <label class="col-sm-1    control-label no-padding-right" for="form-field-1">&nbsp; 自定义名称：</label>
         <div class="col-sm-3">
-            <input id="form-field-1" name="description" placeholder="意向名称" class="col-xs-12 col-sm-12" type="text">
+            <input id="form-field-1" name="description" placeholder="自定义名称" class="col-xs-12 col-sm-12" type="text">
         </div>
         <button type="button" id="btn_intention_add" class="btn btn-sm btn-success btn-light  col-sm-1 margin-top-2">
             添加												 
@@ -22,7 +22,7 @@
                         <span class="lbl">序号</span>
                     </label>
                 </th>
-                <th class="center ">意向名称</th>
+                <th class="center ">自定义名称</th>
                 <th class="center col-sm-2" >操作</th>
             </tr>
         </thead>
@@ -46,7 +46,7 @@
                
                      <td >
                          <div class="visible-md visible-lg hidden-sm hidden-xs btn-group">
-                             <button class="btn btn-xs btn-info" onclick="modifyIntention('@item.Id','@item.Description')">
+                             <button class="btn btn-xs btn-info" onclick="modifyUserDefined('@item.Id','@item.Description')">
                                  <i class="icon-edit bigger-120"></i>修改
                              </button>
 
@@ -99,10 +99,10 @@
 
 
 <div class="form-group" id="modifyIntentionDiv" style="display: none;" >
-   <label class="col-sm-3 text-right  control-label no-padding-right" for="form-field-1">意向名称：</label>
-        <input name="intentionId_modify" type="hidden"/>
+   <label class="col-sm-3 text-right  control-label no-padding-right" for="form-field-1">名称：</label>
+        <input name="userdefinedId_modify" type="hidden"/>
      <div class="col-sm-6">
-    <input id="form-field-1"  name="description_modify" class="col-xs-6 col-sm-12" placeholder="意向名称"  type="text">
+    <input id="form-field-1"  name="description_modify" class="col-xs-6 col-sm-12" placeholder="自定义名称"  type="text">
     </div>
     <button type="button" id="btn_intention_modify" class="btn btn-sm btn-success btn-light margin-top-2">
            修改													 
@@ -118,14 +118,14 @@
         });
 
     });
-     
-    function modifyIntention(id, description) {
+
+    function modifyUserDefined(id, description) {
         $("input[name=description_modify]").val(description);
-        $("input[name=intentionId_modify]").val(id);
+        $("input[name=userdefinedId_modify]").val(id);
         $("#btn_intention_modify").click(function() {
             var description_modify= $("input[name=description_modify]").val().trim();
-            var intentionId_modify= $("input[name=intentionId_modify]").val().trim();
-            if (intentionId_modify == "" || description_modify == "") {
+            var userdefinedId_modify = $("input[name=userdefinedId_modify]").val().trim();
+            if (userdefinedId_modify == "" || description_modify == "") {
                 art.dialog({
                     content: '提交数据不能为空！',
                     time: 2,
@@ -134,13 +134,13 @@
                 return false;
             }
             $.ajax({
-                url:"/Base/IntentionEdit",
+                url: "/Base/UserDefinedEdit",
                 type: "post",
                 dataType:"json",
-                data: { id: intentionId_modify, description: description_modify },
+                data: { id: userdefinedId_modify, description: description_modify },
                 success:function(reponse) {
                      if (reponse.Code == 0) {
-                         window.location.href = "/Base/IntentionList";
+                         window.location.href = "/Base/UserDefinedList";
                      } else {
                          art.dialog({
                              content: '数据处理异常，请稍后重试！',
@@ -154,13 +154,13 @@
         });
         art.dialog({
             id: "KHIFEWF001",
-            title: "修改意向",
+            title: "修改自定义",
             content: document.getElementById("modifyIntentionDiv"),
             lock: true,
             width: 420,
             close: function() {
                 $("input[name=description_modify]").val("");
-                $("input[name=intentionId_modify]").val("");
+                $("input[name=UserDefinedDelete]").val("");
             }
         });
     }
@@ -171,7 +171,7 @@
             content: "确定删除该数据？",
             ok: function () {
                 this.close();
-                window.location.href = "/Base/IntentionDelete/" + id;
+                window.location.href = "/Base/UserDefinedDelete/" + id;
             },
             cancelVal: '关闭',
             cancel: true,

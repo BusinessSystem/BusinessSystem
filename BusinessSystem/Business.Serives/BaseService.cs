@@ -13,10 +13,7 @@ namespace Business.Serives
          private static  IUserDefinedRepository userDefinedRepository=new UserDefinedRepository();
          private static  IIntentionRepository intentionRepository = new IntentionRepository();
 
-         public static void SaveUserDefined(UserDefined userDefined)
-         {
-             userDefinedRepository.Save(userDefined);
-         }
+         
          public static void SaveIntention(Intention intention)
          {
              intentionRepository.Save(intention);
@@ -39,6 +36,31 @@ namespace Business.Serives
          public static IList<Intention> GetIntentions()
          {
              return intentionRepository.GetAllIntentions();
+         }
+
+
+         public static void SaveUserDefined(UserDefined userDefined)
+         {
+             userDefinedRepository.Save(userDefined);
+         }
+
+         public static UserDefined GetUserDefinedById(long id)
+         {
+             return userDefinedRepository.GetById(id);
+         }
+
+         public static void DeleteUserDefined(long id)
+         {
+             UserDefined userDefined = userDefinedRepository.GetById(id);
+             if (userDefined != null)
+             {
+                 userDefinedRepository.Delete(userDefined);
+             }
+         }
+
+         public static IList<UserDefined> GetUserDefineds()
+         {
+             return userDefinedRepository.GetAllUserDefineds();
          }
      }
 }
