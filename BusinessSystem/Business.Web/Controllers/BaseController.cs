@@ -88,5 +88,11 @@ namespace Business.Web.Controllers
             BaseService.DeleteUserDefined(id);
             return Json(InfoTools.GetMsgInfo(ResponseCode.Ok));
         }
+
+        [HttpGet]
+        public ActionResult DictionaryList()
+        {
+            return View();
+        }
     }
 }
