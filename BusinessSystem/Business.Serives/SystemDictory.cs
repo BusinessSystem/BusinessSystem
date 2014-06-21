@@ -37,7 +37,7 @@ namespace Business.Serives
 
         public void Add(BaseDictionary baseDictionary)
         {
-            sysDictionary.Add(baseDictionary.Id, baseDictionary);
+            //sysDictionary.Add(baseDictionary.Id, baseDictionary);
         }
 
         public BaseDictionary GetBaseDictionary(int key)

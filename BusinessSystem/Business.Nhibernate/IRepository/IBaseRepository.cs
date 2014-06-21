@@ -24,6 +24,6 @@ namespace Business.Nhibernate.IRepository
 
     public interface IBaseDictionaryRepository : IRepository<BaseDictionary>
     {
-
+        IList<BaseDictionary> GetBaseDictionaries(ValueTypeEnum valueType);
     }
 }

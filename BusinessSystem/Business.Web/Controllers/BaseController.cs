@@ -5,11 +5,13 @@ using System.Web;
 using System.Web.Mvc;
 using Business.Core;
 using Business.Serives;
+using Business.Utils;
 using Business.Utils.Info;
+using Business.Web.PageModel;
 
 namespace Business.Web.Controllers
 {
-    public class BaseController : Controller
+    public class BaseController : AdminBaseController
     {
         //
         // GET: /Base/
@@ -92,7 +94,44 @@ namespace Business.Web.Controllers
         [HttpGet]
         public ActionResult DictionaryList()
         {
-            return View();
+            PageDictionary pageModel = new PageDictionary();
+            ValueTypeEnum valueType = ValueTypeEnum.Language;
+            if (!string.IsNullOrEmpty(Request["valueType"]))
+            {
+                valueType = (ValueTypeEnum) short.Parse(Request["valueType"].ToString());
+            }
+            ViewBag.ValueType = valueType;
+            pageModel.BaseDictionaries = BaseService.GetBaseDictionaries(valueType);
+            pageModel.ValueTypes = EnumTools.GetEnumDescriptions<ValueTypeEnum>();
+            return View(pageModel);
+        }
+
+        [HttpGet]
+        public ActionResult DictionaryAdd()
+        {
+            Dictionary<ValueTypeEnum, string> dictionary = EnumTools.GetEnumDescriptions<ValueTypeEnum>();
+            return View(dictionary);
+        }
+
+        [HttpPost]
+        public ActionResult DictionaryAdd(string dataValue, string description, string datasort, ValueTypeEnum valueType)
+        {
+            int dataSort = 1;
+            if (!int.TryParse(datasort, out dataSort))
+            {
+                dataSort = 1;
+            }
+            BaseDictionary baseDictionary = BaseDictionaryFactory.Create(valueType, dataSort, dataValue, description,
+                CurrentManager.UserName, description);
+            string responseCode = BaseService.SaveDictionary(baseDictionary);
+            return Json(InfoTools.GetMsgInfo(responseCode));
+        }
+
+        [HttpPost]
+        public ActionResult DictionaryDelete(long id)
+        {
+            BaseService.DictionaryDelete(id);
+            return Json(InfoTools.GetMsgInfo(ResponseCode.Ok));
         }
     }
 }

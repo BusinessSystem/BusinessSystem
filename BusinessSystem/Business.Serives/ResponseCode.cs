@@ -94,5 +94,11 @@ namespace Business.Serives
             public const string UserPasswordError = "1008";
         }
 
+        public struct Base
+        {
+            public const string ValueNullOrEmpty = "2001";
+           
+        }
+
     }
 }

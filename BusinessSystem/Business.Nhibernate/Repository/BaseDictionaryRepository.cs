@@ -10,6 +10,12 @@ namespace Business.Nhibernate.Repository
 {
     public class BaseDictionaryRepository:Repository<BaseDictionary>,IBaseDictionaryRepository
     {
-
+        public IList<BaseDictionary> GetBaseDictionaries(ValueTypeEnum valueType)
+        {
+            using (var session=GetSession())
+            {
+                return session.QueryOver<BaseDictionary>().Where(m => m.ValueType == valueType).List();
+            }
+        }
     }
 }

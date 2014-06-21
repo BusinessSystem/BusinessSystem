@@ -142,6 +142,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="PageModel\PageDictionary.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -964,6 +965,7 @@
     <Content Include="Views\Manager\ManagerDetail.cshtml" />
     <Content Include="Views\Manager\ManagerEdit.cshtml" />
     <Content Include="Views\Base\DictionaryList.cshtml" />
+    <Content Include="Views\Base\DictionaryAdd.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup>

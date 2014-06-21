@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using System.Text;
 using Business.Core;
 using Business.Nhibernate.IRepository;
@@ -11,7 +12,8 @@ namespace Business.Serives
      public  class BaseService
      {
          private static  IUserDefinedRepository userDefinedRepository=new UserDefinedRepository();
-         private static  IIntentionRepository intentionRepository = new IntentionRepository();
+         private static IIntentionRepository intentionRepository = new IntentionRepository();
+         private static IBaseDictionaryRepository baseDictionaryRepository = new BaseDictionaryRepository();
 
          
          public static void SaveIntention(Intention intention)
@@ -62,5 +64,29 @@ namespace Business.Serives
          {
              return userDefinedRepository.GetAllUserDefineds();
          }
+
+         public static IList<BaseDictionary> GetBaseDictionaries(ValueTypeEnum valueType)
+         {
+             return baseDictionaryRepository.GetBaseDictionaries(valueType);
+         }
+
+         public static string SaveDictionary(BaseDictionary baseDictionary)
+         {
+             if (string.IsNullOrEmpty(baseDictionary.Value))
+             {
+                 return ResponseCode.Base.ValueNullOrEmpty;
+             }
+             baseDictionaryRepository.Save(baseDictionary);
+             return ResponseCode.Ok;
+         }
+
+         public static void DictionaryDelete(long id)
+         {
+             BaseDictionary baseDictionary = baseDictionaryRepository.GetById(id);
+             if (baseDictionary != null)
+             {
+                 baseDictionaryRepository.Delete(baseDictionary);
+             }
+         } 
      }
 }
