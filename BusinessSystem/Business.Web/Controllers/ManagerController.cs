@@ -9,14 +9,14 @@ using Business.Utils.Info;
 
 namespace Business.Web.Controllers
 {
-    public class ManagerController :Controller
+    public class ManagerController :AdminBaseController
     {
          
         [HttpGet]
         public ActionResult ManagerList()
         {
-            IList<Manager> managers = ManageService.GetManagersByPage(ManagerTypeEnum.Super, 1, 10, 0);
             
+            IList<Manager> managers = ManageService.GetManagersByPage(ManagerTypeEnum.Super, 1, 10, 0);
             return View(managers);
         }
 
