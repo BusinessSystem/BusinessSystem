@@ -14,7 +14,7 @@ namespace Business.Nhibernate.Repository
         {
             using (var session=GetSession())
             {
-                return session.QueryOver<BaseDictionary>().Where(m => m.ValueType == valueType).List();
+                return session.QueryOver<BaseDictionary>().Where(m => m.ValueType == valueType).OrderBy(m=>m.DicId).Asc.List();
             }
         }
     }

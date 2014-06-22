@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Business.Core;
@@ -10,6 +11,7 @@ using Business.Web.Framework;
 
 namespace Business.Web.Controllers
 {
+     
     public class HandlerController : Controller
     {
         [HttpGet]
@@ -28,6 +30,13 @@ namespace Business.Web.Controllers
                 CookieHelper.SaveManagerCookie(manager,remember);
             }
             return Json(InfoTools.GetMsgInfo(result));
+        }
+
+        [HttpGet]
+        public ActionResult LoginOut()
+        {
+            CookieHelper.ClearLoginCookie();
+            return RedirectToAction("Login");
         }
 
 

@@ -11,4 +11,10 @@ namespace Business.Web.PageModel
         public IList<BaseDictionary> BaseDictionaries { get; set; }
         public Dictionary<ValueTypeEnum, string> ValueTypes { get; set; }
     }
+
+    public class EditDictionary
+    {
+        public BaseDictionary BaseDictionary { get; set; }
+        public Dictionary<ValueTypeEnum, string> ValueTypes { get; set; }
+    }
 }

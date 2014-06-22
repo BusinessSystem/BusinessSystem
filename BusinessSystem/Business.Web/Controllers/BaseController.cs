@@ -133,5 +133,36 @@ namespace Business.Web.Controllers
             BaseService.DictionaryDelete(id);
             return Json(InfoTools.GetMsgInfo(ResponseCode.Ok));
         }
+
+        [HttpGet]
+        public ActionResult DictionaryEdit(long id)
+        {
+            EditDictionary editDictionary = new EditDictionary();
+            editDictionary.BaseDictionary = BaseService.GetDictionaryById(id);
+            editDictionary.ValueTypes = EnumTools.GetEnumDescriptions<ValueTypeEnum>();
+            return View(editDictionary);
+        }
+
+        [HttpPost]
+        public ActionResult DictionaryEdit(long id, string dataValue, string description, string datasort,
+            ValueTypeEnum valueType)
+        {
+            int dataSort = 1;
+            if (!int.TryParse(datasort, out dataSort))
+            {
+                dataSort = 1;
+            }
+            BaseDictionary baseDictionary = BaseService.GetDictionaryById(id);
+            if (baseDictionary != null)
+            {
+                baseDictionary.Value = dataValue;
+                baseDictionary.Description = description;
+                baseDictionary.DicId = dataSort;
+                baseDictionary.ValueType = valueType;
+                string responseCode = BaseService.SaveDictionary(baseDictionary);
+                return Json(InfoTools.GetMsgInfo(responseCode));
+            }
+            return Json(InfoTools.GetMsgInfo(ResponseCode.NotFoundData));
+        }
     }
 }

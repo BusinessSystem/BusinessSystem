@@ -966,6 +966,7 @@
     <Content Include="Views\Manager\ManagerEdit.cshtml" />
     <Content Include="Views\Base\DictionaryList.cshtml" />
     <Content Include="Views\Base\DictionaryAdd.cshtml" />
+    <Content Include="Views\Base\DictionaryEdit.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup>

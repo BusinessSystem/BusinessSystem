@@ -87,6 +87,11 @@ namespace Business.Serives
              {
                  baseDictionaryRepository.Delete(baseDictionary);
              }
-         } 
+         }
+
+         public static BaseDictionary GetDictionaryById(long id)
+         {
+             return baseDictionaryRepository.GetById(id);
+         }
      }
 }

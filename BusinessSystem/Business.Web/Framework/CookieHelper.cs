@@ -35,7 +35,7 @@ namespace Business.Web.Framework
 
         public static void ClearLoginCookie()
         {
-            CookieManager.ClearCookie(CookieConst.COOKIE_USER);
+            CookieManager.ClearCookie(CookieConst.COOKIE_MANAMGER);
         }
 
        
