@@ -967,6 +967,7 @@
     <Content Include="Views\Base\DictionaryList.cshtml" />
     <Content Include="Views\Base\DictionaryAdd.cshtml" />
     <Content Include="Views\Base\DictionaryEdit.cshtml" />
+    <Content Include="Views\Manager\ChangePassword.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup>
