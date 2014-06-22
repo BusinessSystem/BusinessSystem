@@ -1,5 +1,165 @@
 ﻿@{
     ViewBag.Title = "<li><i class=\"\"></i><a href=\"/Manager/ManagerList\">邮件翻译</a></li><li class=\"active\">添加邮件防译翻御</li>";
 }
+@model IList<Business.Core.BaseDictionary>
+<div class="row-fluid">
+    <div class="span12">
+        <div class="widget-box">
+            <div class="widget-header widget-header-blue widget-header-flat">
+                <h4 class="lighter">添加邮件翻译</h4>
+                <div class="widget-toolbar">
+                    <label>
+                        <small class="green">
+                            <b></b>
+                        </small>
+                    </label>
+                </div>
+            </div>
+            <div class="widget-body">
+                <form class="form-horizontal" id="translation_add_form" method="post" action="/Translation/EmailTranslationAdd" enctype="multipart/form-data"   role="form">
+                    <div class="space-4"></div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label no-padding-right" for="form-field-1">邮件主题: </label>
 
-<h2>EmailTranalationAdd</h2>
+                        <div class="col-sm-9">
+                            <input id="form-field-1" name="emailTheme" placeholder="邮件主题" class="col-xs-10 col-sm-5" type="text">
+                            <span class="help-inline col-xs-12 col-sm-7">
+                                <span class="middle red">*</span>
+                            </span>
+                        </div>
+                    </div>
+                       
+                    <div class="space-4"></div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label no-padding-right" for="form-field-select-1">由: </label>
+                        <div class="col-sm-9">
+                            <select name="originalLanguage" class="form-control col-xs-8 col-sm-4 width-30" id="form-field-select-1">
+                                @if (Model != null && Model.Count != 0)
+                                {
+                                    foreach (var dic in Model)
+                                    {
+                                        <option value="@(dic.Id)">@dic.Value</option>
+                                    }
+                                   
+                                }
+                            </select>
+                            <label class="col-sm-1 control-label  text-center" for="form-field-select-2">译成</label>
+                            <select name="targetLanguage" class="form-control col-xs-8 col-sm-4 width-30" id="form-field-select-2">
+                                @if (Model != null && Model.Count != 0)
+                                {
+                                    foreach (var dic in Model)
+                                    {
+                                        <option value="@(dic.Id)">@dic.Value</option>
+                                    }
+
+                                }
+                            </select>
+                                 
+                            <span class="help-inline col-xs-12 col-sm-7">
+                                <span class="middle red"></span>
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <div class="space-4"></div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label no-padding-right" for="switch-field-1">翻译内容: </label>
+                        <div class="col-sm-8">
+                            <div class="widget-box">
+                                <div class="widget-header widget-header-small  header-color-green ">
+                                    <div class="widget-toolbar">
+                                        <a href="#" data-action="collapse">
+                                            <i class="icon-chevron-up"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                <textarea name="translationContent" class="hidden" id="translationContent"></textarea>
+                                <div class="widget-body">
+                                    <div class="widget-main no-padding">
+                                        <div class="wysiwyg-editor" id="editor2"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                     <div class="space-4"></div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label no-padding-right" for="id-input-file-2">添加附件: </label>
+                        <div class="col-sm-4">
+                            <input type="file" name="translationFile" id="id-input-file-2" />
+                             <span class="help-inline col-xs-12 col-sm-10">
+                                <span class="middle red">上传多个文件时请压缩上传,文件不超过5M</span>
+                            </span>                          
+                        </div>
+                    </div>
+                    <div class="clearfix form-actions">
+                        <div class="col-md-offset-3 col-md-9">
+                            <button id="btn_translation_add" class="btn btn-info" type="button">
+                                <i class="icon-ok bigger-110"></i>
+                                提交
+                            </button>
+                             
+                            <button class="btn" type="reset">
+                                <i class="icon-undo bigger-110"></i>
+                                重置
+                            </button>
+                            <span class="middle">（红色*为必填项）</span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/assets/js/markdown/markdown.min.js"></script>
+<script src="/assets/js/markdown/bootstrap-markdown.min.js"></script>
+<script src="/assets/js/jquery.hotkeys.min.js"></script>
+<script src="/assets/js/bootstrap-wysiwyg.min.js"></script>
+<script type="text/javascript">
+    $(function() {
+        $('#editor2').css({ 'height': '200px' }).ace_wysiwyg({
+            toolbar_place: function(toolbar) {
+                var obj = $(this).closest('.widget-box').find('.widget-header').prepend(toolbar).children(0).addClass('inline');
+                $(this).closest('.widget-box').find(".widget-toolbar").remove();
+                return obj;
+            },
+            toolbar:
+            [
+                'bold',
+                { name: 'italic', title: 'Change Title!', icon: 'icon-leaf' },
+                'strikethrough',
+                null,
+                'insertunorderedlist',
+                'insertorderedlist',
+                null,
+                'justifyleft',
+                'justifycenter',
+                'justifyright'
+            ],
+            speech_button: false
+        });
+        $('#id-input-file-2').ace_file_input({
+            no_file: 'No File ...',
+            btn_choose: 'Choose',
+            btn_change: 'Change',
+            droppable: false,
+            onchange: null,
+            thumbnail: false
+        });
+        $("#btn_translation_add").click(function () {
+            $("#translationContent").html($('#editor2').html());
+            if ($("input[name=emailTheme]").val().trim() == "") {
+                art.dialog({
+                    content: "邮件主题为空",
+                    time: 2,
+                    lock: true,
+                    width: 200
+                });
+                return false;
+            }
+            $("#translation_add_form").submit();
+        });
+    });
+</script>
