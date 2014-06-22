@@ -1,5 +1,154 @@
 ﻿@{
-    ViewBag.Title = "<li><i class=\"\"></i><a href=\"/Manager/ManagerList\">邮件翻译</a></li><li class=\"active\">一斤</li>";
+    ViewBag.Title = "<li><i class=\"\"></i><a href=\"/Manager/ManagerList\">邮件翻译</a></li><li class=\"active\">已读邮件翻译</li>";
 }
 
-<h2>HasReadTranslationList</h2>
+@model Business.Web.PageModel.PageTranslations
+ 
+<div class="row-fluid">
+    <div class="span12">
+        <div class="widget-box">
+            <div class="widget-header widget-header-blue widget-header-flat">
+                <h4 class="lighter">已读邮件翻译</h4>
+                <div class="widget-toolbar">
+                </div>
+            </div>
+            <div class="widget-body">
+                
+                <div class="widget-header widget-toolbar-light  widget-box transparent" style="padding-left: 0px;">
+    <div class="widget-toolbar float-none  no-border">
+        <span class="btn btn-app btn-light btn-xs  no-border">
+            <input type="checkbox"/>全选
+        </span>
+        <span class="btn btn-app btn-light btn-xs ">
+            删除
+        </span>
+     
+
+        <div class="btn-group margin-top-2">
+            <button data-toggle="dropdown" class="btn btn-light width-120 dropdown-toggle margin-top-2 common-height">
+                按意向划分
+                <span class="icon-caret-down icon-on-right "></span>
+            </button>
+
+            <ul class="dropdown-menu dropdown-light pull-right width-120">
+                <li>
+                    <a href="#">添加意向</a>
+                </li>
+                <li class="divider"></li>
+                @if (Model.Intentions != null && Model.Intentions.Count != 0)
+                {
+                    foreach (var item in  Model.Intentions)
+                    {
+                        <li>
+                            <a href="javascript:;" data-value="@item.Id">@item.Description</a>
+                        </li>
+                    }
+                }
+               <li class="divider"></li>
+                <li>
+                    <a href="">未识别</a>
+                </li>
+            </ul>
+        </div>
+        
+       
+         <div class="btn-group margin-top-2">
+            <button data-toggle="dropdown" class="btn btn-light width-120 dropdown-toggle margin-top-2 common-height">
+                   移动到
+                <span class="icon-caret-down icon-on-right "></span>
+            </button>
+        
+             <ul  aria-activedescendant="ui-id-8" tabindex="0" role="menu" class="display-none dropdown-menu dropdown-light ui-menu ui-widget width-120 ui-widget-content ui-corner-all" id="menu">
+                
+                 <li role="presentation" class="ui-menu-item">
+                     <a role="menuitem" tabindex="-1" class="ui-corner-all" id="ui-id-7" aria-haspopup="true" href="#"><span class="ui-menu-icon ui-icon ui-icon-carat-1-e"></span>意向客户</a>
+
+                     <ul aria-expanded="false" aria-hidden="true" role="menu" style="display: none;" class="ui-menu ui-widget ui-widget-content ui-corner-all">
+                            @if (Model.Intentions != null && Model.Intentions.Count != 0)
+                            {
+                                foreach (var item in  Model.Intentions)
+                                {
+                                    <li role="presentation" class="ui-menu-item">
+                                        <a role="menuitem" tabindex="-1" class="ui-corner-all" href="javascript:;" data-value="@item.Id">@item.Description</a>
+                                    </li>
+                                }
+                            }
+                        
+                     </ul>
+                 </li>
+
+                 <li role="presentation" class="ui-menu-item">
+                     <a role="menuitem" tabindex="-1" class="ui-corner-all" id="ui-id-8" href="#">返回总账号arland</a>
+                 </li>
+
+                   
+             </ul>
+
+         </div>
+    </div>
+</div>
+ 
+
+
+                <div class="table-responsive">
+                    <table id="sample-table-1" class="table table-striped table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th class="center">
+                                    <label>
+                                        <span class="lbl">序号</span>
+                                    </label>
+                                </th>
+                                <th>主题</th>
+                                <th>提交时间</th>
+                                <th class="hidden-480">语言</th>
+                                <th>
+                                    跟进次数
+                                </th>
+                                <th class="hidden-480">意向状况</th>
+
+                                <th>处理人</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @if (Model.EmailTranslations != null && Model.EmailTranslations.Count != 0)
+                            {
+                                foreach (var item in Model.EmailTranslations)
+                                {
+                                    <tr id="data-item(@item.Id)">
+                                        <td class="center">
+                                            <label>
+                                                <input type="checkbox" class="ace" />
+                                                <span class="lbl"></span>
+                                            </label>
+                                        </td>
+
+                                        <td>
+                                            <a href="#">@item.Theme</a>
+                                        </td>
+                                        <td>@item.SendTime</td>
+                                        <td class="hidden-480"></td>
+                                        <td></td>
+                                        <td class="hidden-480">
+                                            
+                                        </td>
+
+                                        <td >
+                                           
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div><!-- /.table-responsive -->
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $("#menu").menu();
+</script>

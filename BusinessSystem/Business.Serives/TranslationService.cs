@@ -24,5 +24,10 @@ namespace Business.Serives
             emailFollowRepository.Save(emailFollow);
             return ResponseCode.Ok; 
         }
+
+        public static IList<EmailTranslation> GetEmailTranslations(EmailStatusEnum emailStatus,long intentionId,int pageIndex,int pageSize)
+        {
+           return  emailTranslationRepository.GetEmailTranslations(emailStatus, intentionId, pageIndex, pageSize);
+        }
     }
 }

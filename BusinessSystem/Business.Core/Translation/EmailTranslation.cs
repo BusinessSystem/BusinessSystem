@@ -20,6 +20,8 @@ namespace Business.Core
         public virtual string Content { get; set; }
         public virtual EmailStatusEnum ReceiverStatus { get; set; }
         public virtual EmailStatusEnum SenderStatus { get; set; }
+        public virtual int IntentionId { get; set; }
+        public virtual string IntentionDescription { get; set; }
         public virtual string FilePath { get; set; }
         public virtual short IsDeleted { get; set; }
     }

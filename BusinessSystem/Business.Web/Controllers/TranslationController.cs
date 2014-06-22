@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using Business.Core;
 using Business.Serives;
 using Business.Utils.Info;
+using Business.Web.PageModel;
 
 namespace Business.Web.Controllers
 {
@@ -49,7 +50,9 @@ namespace Business.Web.Controllers
         [HttpGet]
         public ActionResult HasReadTranslationList()
         {
-            return View();
+            PageTranslations pageTranslations = new PageTranslations();
+            pageTranslations.Intentions = BaseService.GetIntentions();
+            return View(pageTranslations);
         }
         [HttpGet]
         public ActionResult UnReadTranslationList()
