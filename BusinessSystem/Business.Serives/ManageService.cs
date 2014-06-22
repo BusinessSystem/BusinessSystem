@@ -18,6 +18,11 @@ namespace Business.Serives
              return managerRepository.GetManagersByPage(managerType,pageIndex,pageSize,parentId);
          }
 
+         public static Manager GetSuperManager()
+         {
+             return managerRepository.GetSuperManager();
+         }
+
          public static Manager GetManagerById(long Id)
          {
              return managerRepository.GetById(Id);

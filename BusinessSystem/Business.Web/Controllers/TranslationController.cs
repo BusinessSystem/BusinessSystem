@@ -8,7 +8,7 @@ using Business.Serives;
 
 namespace Business.Web.Controllers
 {
-    public class TranslationController : Controller
+    public class TranslationController : AdminBaseController
     {
        
         [HttpGet]
@@ -19,14 +19,17 @@ namespace Business.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult EmailTranslationAdd(string emailTheme, long originalLanguage, long targetLanguage)
+        public ActionResult EmailTranslationAdd(string emailTheme,string translationContent,long originalLanguage, long targetLanguage)
         {
             string filePath = string.Empty;
-            if (Request.Files.Count > 0 && Request.Files[0].ContentLength>0)
+            if (Request.Files.Count > 0 && Request.Files[0].ContentLength > 0)
             {
                 HttpPostedFileBase file = Request.Files[0];
-                file.SaveAs(Server.MapPath(@"\uploadFile"));
             }
+            EmailTranslation emailTranslation = EmailTranslationFactory.Create(0, CurrentManager.Id, emailTheme,
+                translationContent, filePath);
+            EmailFollow emailFollow = EmailFollowFactory.Create(0, SystemDictionary.GetInstance.GetBaseDictionary(originalLanguage).Value, SystemDictionary.GetInstance.GetBaseDictionary(targetLanguage).Value);
+            
             return null;
         }
 

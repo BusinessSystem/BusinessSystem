@@ -40,6 +40,18 @@ namespace Business.Nhibernate.Repository
             }
         }
 
+
+        public Manager GetSuperManager()
+        {
+            using (var session = GetSession())
+            {
+                return
+                    session.QueryOver<Manager>()
+                        .Where(m => m.ManagerType == ManagerTypeEnum.Super).Take(1).SingleOrDefault();
+                         
+            }
+        }
+
         public Manager GetManagerByUserName(string userName)
         {
             using (var session = GetSession())

@@ -18,6 +18,8 @@ namespace Business.Nhibernate.IRepository
 
         IList<Manager> GetManagersByPage(ManagerTypeEnum managerType, int pageIndex, int pageSize, long  parentId);
         Manager GetManagerByUserName(string userName);
+
+        Manager GetSuperManager();
     }
 
     public interface IManagerProductRepository : IRepository<ManagerProduct>
