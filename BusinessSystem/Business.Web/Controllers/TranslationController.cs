@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Business.Core;
 using Business.Serives;
+using Business.Utils.Info;
 
 namespace Business.Web.Controllers
 {
@@ -19,6 +20,7 @@ namespace Business.Web.Controllers
         }
 
         [HttpPost]
+        [ValidateInput(false)] 
         public ActionResult EmailTranslationAdd(string emailTheme,string translationContent,long originalLanguage, long targetLanguage)
         {
             string filePath = string.Empty;
@@ -26,11 +28,22 @@ namespace Business.Web.Controllers
             {
                 HttpPostedFileBase file = Request.Files[0];
             }
-            EmailTranslation emailTranslation = EmailTranslationFactory.Create(0, CurrentManager.Id, emailTheme,
-                translationContent, filePath);
-            EmailFollow emailFollow = EmailFollowFactory.Create(0, SystemDictionary.GetInstance.GetBaseDictionary(originalLanguage).Value, SystemDictionary.GetInstance.GetBaseDictionary(targetLanguage).Value);
-            
-            return null;
+            Manager superManager = ManageService.GetSuperManager();
+            if (superManager != null)
+            {
+                EmailTranslation emailTranslation = EmailTranslationFactory.Create(superManager.Id, CurrentManager.Id,
+                    emailTheme,
+                    translationContent, filePath);
+                EmailFollow emailFollow = EmailFollowFactory.Create(0,
+                    SystemDictionary.GetInstance.GetBaseDictionary(originalLanguage).Value,
+                    SystemDictionary.GetInstance.GetBaseDictionary(targetLanguage).Value);
+                string result=TranslationService.SaveTranslation(emailTranslation, emailFollow);
+                if (result == ResponseCode.Ok)
+                {
+                    return RedirectToAction("HasReadTranslationList");
+                }
+            }
+            return RedirectToAction("EmailTranslationAdd");
         }
 
         [HttpGet]
