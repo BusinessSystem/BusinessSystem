@@ -17,6 +17,7 @@ namespace Business.Web.Controllers
         [ChildActionOnly]
         public ActionResult _NavList()
         {
+            ViewBag.CurrentUrl = System.Web.HttpContext.Current.Request.RawUrl;
             return PartialView();
         }
     }

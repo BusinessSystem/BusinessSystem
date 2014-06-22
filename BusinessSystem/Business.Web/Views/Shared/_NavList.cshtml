@@ -1,11 +1,12 @@
-﻿<ul class="nav nav-list">
+﻿
+<ul class="nav nav-list">
     <li>
         <a href="index.html">
             <i class="icon-dashboard"></i>
             <span class="menu-text"> 控制台 </span>
         </a>
     </li>
-    
+     
     <li   class="active">
         <a href="#" class="dropdown-toggle">
             <i class="icon-desktop"></i>
@@ -46,7 +47,7 @@
     </li>
 
     <li>
-        <a href="#" class="dropdown-toggle">
+        <a href="/Translation/UnReadTranslationList" class="dropdown-toggle">
             <i class="icon-list"></i>
             <span class="menu-text"> 邮件翻译 </span>
 
@@ -55,26 +56,26 @@
 
         <ul class="submenu">
             <li>
-                <a href="tables.html">
+                <a href="/Translation/UnReadTranslationList">
                     <i class="icon-double-angle-right"></i>
                     未读邮件翻译
                 </a>
             </li>
 
             <li>
-                <a href="jqgrid.html">
+                <a href="/Translation/HasReadTranslationList">
                     <i class="icon-double-angle-right"></i>
                     已读邮件翻译
                 </a>
             </li>
             <li>
-                <a href="jqgrid.html">
+                <a href="/Translation/EmailTranslationAdd">
                     <i class="icon-double-angle-right"></i>
                     添加邮件翻译
                 </a>
             </li>
             <li>
-                <a href="jqgrid.html">
+                <a href="/Translation/RecycledTranslationList">
                     <i class="icon-double-angle-right"></i>
                     回收站
                 </a>
@@ -188,3 +189,18 @@
         </a>
     </li>
 </ul><!-- /.nav-list -->
+
+<script type="text/javascript">
+    $(function () {
+        var controller = "@ViewContext.RouteData.Route.GetRouteData(this.Context).Values["controller"].ToString()";
+        var action = "@ViewContext.RouteData.Route.GetRouteData(this.Context).Values["action"].ToString()";
+        var val = "/"+controller+"/"+action;
+        $(".nav-list").find("li").removeClass("active");
+        $(".nav-list").find("a").each(function() {
+            if ($(this).attr("href").toString()== val) {
+                $(this).parent().addClass("active");
+                $(this).parent().parent().parent().addClass("active");
+            }
+        });
+    });
+</script>
