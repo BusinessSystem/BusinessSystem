@@ -1,4 +1,6 @@
-﻿<div class="navbar-header pull-right" role="navigation">
+﻿@model Business.Core.Manager
+    
+<div class="navbar-header pull-right" role="navigation">
     <ul class="nav ace-nav">
         <li class="grey">
             <a data-toggle="dropdown" title="未读询盘" class="dropdown-toggle" href="#">
@@ -25,8 +27,12 @@
             <a data-toggle="dropdown" href="#" class="dropdown-toggle">
                 <img class="nav-user-photo" src="/assets/avatars/avatar2.png" alt="Jason's Photo" />
                 <span class="user-info">
+                    
                     <small>Welcome</small>
-                    Json
+                    @if (Model != null)
+                    {
+                        <span>@Model.UserName</span>
+                    }
                 </span>
 
                 <i class="icon-caret-down"></i>

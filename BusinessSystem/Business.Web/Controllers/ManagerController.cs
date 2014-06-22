@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using Business.Core;
 using Business.Serives;
 using Business.Utils.Info;
+using Business.Web.Framework;
 
 namespace Business.Web.Controllers
 {
@@ -116,9 +117,12 @@ namespace Business.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult ChangePassword(string oldPassword,string newPassword,string confirmPassword)
+        public ActionResult ChangePassword(string oldPassword, string newPassword, string confirmPassword)
         {
-            return View();
+            string responseCode = ManageService.ChangePassword(CurrentManager, oldPassword, newPassword, confirmPassword);
+            CurrentManager.Password = string.Empty;
+            CookieHelper.SaveManagerCookie(CurrentManager);
+            return Json(InfoTools.GetMsgInfo(responseCode));
         }
     }
 }

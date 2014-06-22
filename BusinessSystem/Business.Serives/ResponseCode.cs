@@ -92,6 +92,10 @@ namespace Business.Serives
             public const string UserNameHasExist = "1006";
             public const string UserNameError = "1007";
             public const string UserPasswordError = "1008";
+            public const string OldPasswordNullOrEmpty = "1009";
+            public const string NewPasswordNullOrEmpty = "1010";
+            public const string ConfirmPasswordError = "1011";
+            public const string OldPasswordError = "1012";
         }
 
         public struct Base

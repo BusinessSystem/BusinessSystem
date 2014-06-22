@@ -36,6 +36,9 @@ namespace Business.Core
             Hashtable cookieTable = new Hashtable();
             cookieTable.Add("id", Id);
             cookieTable.Add("mn", UserName);
+            cookieTable.Add("pId", ParentId);
+            cookieTable.Add("rnm", RealName);
+            cookieTable.Add("cp", Company);
             cookieTable.Add("managerId", ManagerType);
             return JsonConvert.SerializeObject(cookieTable);
         }
@@ -49,6 +52,9 @@ namespace Business.Core
             {
                 Id = int.Parse(cookieTable["id"].ToString()),
                 UserName = cookieTable["mn"].ToString(),
+                ParentId = long.Parse(cookieTable["pId"].ToString()),
+                RealName = cookieTable["rnm"].ToString(),
+                Company = cookieTable["cp"].ToString(),
                 ManagerType = (ManagerTypeEnum)short.Parse(cookieTable["managerId"].ToString())
             };
             return manager;

@@ -104,8 +104,7 @@
 						</small>
 					</a><!-- /.brand -->
 				</div><!-- /.navbar-header -->
-
-			    @Html.Partial("_Navbar")
+			    @{ Html.RenderAction("_Navbar", "Shared"); }
 			</div><!-- /.container -->
 		</div>
 
@@ -126,8 +125,9 @@
 					</script>
 
 				     @Html.Partial("_Header")
-
-		        	 @Html.Partial("_NavList")
+                     
+                     @{ Html.RenderAction("_NavList", "Shared"); }
+				    
 
 					<div class="sidebar-collapse" id="sidebar-collapse">
 						<i class="icon-double-angle-left" data-icon1="icon-double-angle-left" data-icon2="icon-double-angle-right"></i>

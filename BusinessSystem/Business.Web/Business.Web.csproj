@@ -137,6 +137,7 @@
     <Compile Include="Controllers\HandlerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManagerController.cs" />
+    <Compile Include="Controllers\SharedController.cs" />
     <Compile Include="Controllers\TranslationController.cs" />
     <Compile Include="Framework\CookieHelper.cs" />
     <Compile Include="Global.asax.cs">

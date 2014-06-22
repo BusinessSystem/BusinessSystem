@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using Business.Core;
 using Business.Nhibernate.IRepository;
@@ -85,6 +86,36 @@ namespace Business.Serives
                  manager.EncryptPassword();
                  managerRepository.Save(manager);
              }
+         }
+
+         public static string ChangePassword(Manager manager, string oldPassword, string newPassword, string confirmPassword)
+         {
+             if (string.IsNullOrEmpty(oldPassword))
+             {
+                 return ResponseCode.Managaer.OldPasswordNullOrEmpty;
+             }
+             if (string.IsNullOrEmpty(newPassword))
+             {
+                 return ResponseCode.Managaer.NewPasswordNullOrEmpty;
+             }
+             if (newPassword!=confirmPassword)
+             {
+                 return ResponseCode.Managaer.ConfirmPasswordError;
+             }
+             Manager manage = managerRepository.GetById(manager.Id);
+             if (manage != null)
+             {
+                 if (!manage.MatchPassword(oldPassword))
+                 {
+                     return ResponseCode.Managaer.OldPasswordError;
+                 }
+                 manage.Password = newPassword;
+                 manage.EncryptPassword();
+                 managerRepository.Save(manage);
+                 manager = manage;
+                 return ResponseCode.Ok;
+             }
+             return ResponseCode.NotFoundData;
          }
      }
 }
