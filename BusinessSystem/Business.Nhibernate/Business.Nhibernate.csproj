@@ -74,6 +74,7 @@
     <Compile Include="Repository\UserDefinedRepository.cs" />
     <Compile Include="Repository\VisitorRecordRepository.cs" />
     <Compile Include="SessionProvider.cs" />
+    <Compile Include="Test\TestQuery.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

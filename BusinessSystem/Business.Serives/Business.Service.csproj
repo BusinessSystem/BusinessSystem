@@ -64,6 +64,7 @@
     <ProjectReference Include="..\Business.Nhibernate\Business.Nhibernate.csproj">
       <Project>{EF09171E-729E-4F3A-95DE-7E372B5D6728}</Project>
       <Name>Business.Nhibernate</Name>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
     </ProjectReference>
     <ProjectReference Include="..\Business.Utils\Business.Utils.csproj">
       <Project>{65B19D8A-9CB3-4D75-BE38-98BCD2E141F5}</Project>
