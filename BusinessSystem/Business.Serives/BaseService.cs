@@ -69,7 +69,10 @@ namespace Business.Serives
          {
              return baseDictionaryRepository.GetBaseDictionaries(valueType);
          }
-
+         public static IList<BaseDictionary> GetAllBaseDictionaries()
+         {
+             return baseDictionaryRepository.GetAllBaseDictionaries();
+         }
          public static string SaveDictionary(BaseDictionary baseDictionary)
          {
              if (string.IsNullOrEmpty(baseDictionary.Value))

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Business.Core;
 
 namespace Business.Serives
 {
@@ -10,7 +11,7 @@ namespace Business.Serives
     /// </summary>
     public class SystemApplication
     {
-        public void Start()
+        public static void Start()
         {
             LoadSysDictionary();
         }
@@ -18,9 +19,13 @@ namespace Business.Serives
         /// <summary>
         /// 加载字典常驻内存(大大减少不必要的读库操作)
         /// </summary>
-        private void LoadSysDictionary()
+        private static void LoadSysDictionary()
         {
-
+            IList<BaseDictionary> allDictionaries = BaseService.GetAllBaseDictionaries();
+            foreach (BaseDictionary baseDictionary in allDictionaries)
+            {
+                SystemDictionary.GetInstance.Add(baseDictionary);
+            }
         }
     }
 }

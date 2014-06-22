@@ -17,5 +17,14 @@ namespace Business.Nhibernate.Repository
                 return session.QueryOver<BaseDictionary>().Where(m => m.ValueType == valueType).OrderBy(m=>m.DicId).Asc.List();
             }
         }
+
+
+        public IList<BaseDictionary> GetAllBaseDictionaries()
+        {
+            using (var session = GetSession())
+            {
+                return session.QueryOver<BaseDictionary>().List();
+            }
+        }
     }
 }

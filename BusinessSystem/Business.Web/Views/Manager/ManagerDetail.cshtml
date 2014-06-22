@@ -1,6 +1,7 @@
 ﻿@{
     ViewBag.Title = "<li class=\"active\">用户详情</li>";
 }
+@using Business.Serives
 @using Business.Utils
 @model Business.Core.Manager
 
@@ -56,7 +57,7 @@
                             <div class="profile-info-name"> 语言： </div>
 
                             <div class="profile-info-value">
-                                <span class="editable editable-click" id="signup">@Model.Language</span>
+                                <span class="editable editable-click" id="signup">@SystemDictionary.GetInstance.GetBaseDictionary(Model.Language).Value</span>
                             </div>
                         </div>
 

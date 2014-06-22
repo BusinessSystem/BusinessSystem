@@ -10,11 +10,11 @@ namespace Business.Serives
     {
         private static SystemDictionary instance = null;
         private static object objLock=new object();
-
-        private Dictionary<int, BaseDictionary> sysDictionary = null;
+        
+        private Dictionary<long, BaseDictionary> sysDictionary = null;
         private SystemDictionary()
         {
-            sysDictionary = new Dictionary<int, BaseDictionary>();
+            sysDictionary = new Dictionary<long, BaseDictionary>();
         }
 
         public static SystemDictionary GetInstance
@@ -37,12 +37,22 @@ namespace Business.Serives
 
         public void Add(BaseDictionary baseDictionary)
         {
-            //sysDictionary.Add(baseDictionary.Id, baseDictionary);
+            sysDictionary.Add(baseDictionary.Id, baseDictionary);
         }
 
-        public BaseDictionary GetBaseDictionary(int key)
+        public BaseDictionary GetBaseDictionary(long key)
         {
-            return sysDictionary[key];
+            if (sysDictionary.ContainsKey(key))
+            {
+                return sysDictionary[key];
+            }
+            BaseDictionary baseDictionary = BaseService.GetDictionaryById(key);
+            if (baseDictionary != null)
+            {
+                sysDictionary.Add(baseDictionary.Id, baseDictionary);
+                return sysDictionary[key];
+            }
+            return new BaseDictionary();
         }
     }
 }
