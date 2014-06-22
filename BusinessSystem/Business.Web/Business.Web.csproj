@@ -970,6 +970,10 @@
     <Content Include="Views\Base\DictionaryEdit.cshtml" />
     <Content Include="Views\Manager\ChangePassword.cshtml" />
     <Content Include="Views\Base\VisitorRecordList.cshtml" />
+    <Content Include="Views\Translation\EmailTranslationAdd.cshtml" />
+    <Content Include="Views\Translation\HasReadTranslationList.cshtml" />
+    <Content Include="Views\Translation\UnReadTranslationList.cshtml" />
+    <Content Include="Views\Translation\RecycledTranslationList.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup>

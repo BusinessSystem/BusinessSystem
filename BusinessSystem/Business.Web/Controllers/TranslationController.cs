@@ -8,13 +8,23 @@ namespace Business.Web.Controllers
 {
     public class TranslationController : Controller
     {
-        //
-        // GET: /Translation/
-
-        public ActionResult Index()
+       
+        public ActionResult EmailTranslationAdd()
+        {
+            return View();
+        }
+        public ActionResult HasReadTranslationList()
+        {
+            return View();
+        }
+        public ActionResult UnReadTranslationList()
         {
             return View();
         }
 
+        public ActionResult RecycledTranslationList()
+        {
+            return View();
+        }
     }
 }
