@@ -108,5 +108,17 @@ namespace Business.Web.Controllers
             ManageService.ResetPassword(id);
             return Json(InfoTools.GetMsgInfo(ResponseCode.Ok), JsonRequestBehavior.AllowGet);
         }
+
+        [HttpGet]
+        public ActionResult ChangePassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult ChangePassword(string oldPassword,string newPassword,string confirmPassword)
+        {
+            return View();
+        }
     }
 }

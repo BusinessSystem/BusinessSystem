@@ -866,7 +866,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Enquiry\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
@@ -968,6 +968,7 @@
     <Content Include="Views\Base\DictionaryAdd.cshtml" />
     <Content Include="Views\Base\DictionaryEdit.cshtml" />
     <Content Include="Views\Manager\ChangePassword.cshtml" />
+    <Content Include="Views\Base\VisitorRecordList.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup>
