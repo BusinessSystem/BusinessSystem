@@ -25,7 +25,6 @@
             <div class="widget-body">
                 <div class="widget-header widget-toolbar-light  widget-box transparent" style="padding-left: 0px;">
                     <div class="widget-toolbar float-none  no-border">
-                        
                         <label class="col-sm-1 control-label text-right" for="form-field-select-1">账户类型: </label>
                         <select name="managerType" class="form-control col-xs-6 col-sm-3 width-20" id="form-field-select-1">
                           @if (managerTypes != null && managerTypes.Count != 0)
@@ -155,6 +154,13 @@
                             }
                         </tbody>
                     </table>
+                    
+                    <div class="widget-header widget-toolbar-light  widget-box transparent" style="padding-left: 0px;">
+                        <div class="widget-toolbar float-none  no-border">
+                            <ul class="pagination bpagination" id="pagination2"></ul>
+                        </div>
+                    </div>
+                   
                 </div><!-- /.table-responsive -->
 
             </div>
@@ -163,10 +169,22 @@
 </div>
 
 <script type="text/javascript">
-
     $(function () {
         $("#form-field-select-1").change(function () {
             window.location.href = "/Manager/ManagerList?managerType=" + $(this).val();
+        });
+        $.jqPaginator('#pagination2', {
+            totalPages: 100,
+            visiblePages: 10,
+            currentPage: 3,
+            prev: '<li class="prev"><a href="javascript:;">上一页</a></li>',
+            first: '<li class="first"><a href="javascript:;">首页</a></li>',
+            next: '<li class="next"><a href="javascript:;">下一页</a></li>',
+            last: '<li class="last"><a href="javascript:;">尾页</a></li>',
+            page: '<li class="page"><a href="javascript:;">{{page}}</a></li>',
+            onPageChange: function (num, type) {
+             
+            }
         });
     });
 

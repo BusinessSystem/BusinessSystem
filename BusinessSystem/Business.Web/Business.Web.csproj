@@ -352,6 +352,7 @@
     <Content Include="assets\js\jqGrid\i18n\grid.locale-ua.js" />
     <Content Include="assets\js\jqGrid\i18n\grid.locale-vi.js" />
     <Content Include="assets\js\jqGrid\jquery.jqGrid.min.js" />
+    <Content Include="assets\js\jqPaginator.js" />
     <Content Include="assets\js\jquery-1.10.2.min.js" />
     <Content Include="assets\js\jquery-2.0.3.min.js" />
     <Content Include="assets\js\jquery-ui-1.10.3.custom.min.js" />

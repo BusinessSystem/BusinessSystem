@@ -22,6 +22,7 @@
 		<property name="FilePath"  />
 		<property name="IsDeleted"  />
 		<property name="IntentionId"  />
+		<property name="FollowTimes"  />
 		<property name="IntentionDescription"  />
 	</class>
 </hibernate-mapping>

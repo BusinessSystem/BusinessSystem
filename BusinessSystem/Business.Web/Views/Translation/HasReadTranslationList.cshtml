@@ -19,7 +19,7 @@
                 <div class="widget-header widget-toolbar-light  widget-box transparent" style="padding-left: 0px;">
                     <div class="widget-toolbar float-none  no-border">
                         <span class="btn btn-app btn-light btn-xs  no-border">
-                            <input type="checkbox"/>全选
+                            <input type="checkbox"  class="checkalltranslation"/>全选
                         </span>
                         <span class="btn btn-app btn-light btn-xs ">
                             删除
@@ -63,15 +63,15 @@
                             <ul  aria-activedescendant="ui-id-8" tabindex="0" role="menu" class="display-none dropdown-menu dropdown-light ui-menu ui-widget width-120 ui-widget-content ui-corner-all" id="menu">
                 
                                 <li role="presentation" class="ui-menu-item">
-                                    <a role="menuitem" tabindex="-1" class="ui-corner-all" id="ui-id-7" aria-haspopup="true" href="#"><span class="ui-menu-icon ui-icon ui-icon-carat-1-e"></span>意向客户</a>
+                                    <a role="menuitem" tabindex="-1" class="ui-corner-all" id="ui-id-7" aria-haspopup="true" href="javascript:;"><span class="ui-menu-icon ui-icon ui-icon-carat-1-e"></span>意向客户</a>
 
                                     <ul aria-expanded="false" aria-hidden="true" role="menu" style="display: none;" class="ui-menu ui-widget ui-widget-content ui-corner-all">
                                         @if (Model.Intentions != null && Model.Intentions.Count != 0)
                                         {
                                             foreach (var item in  Model.Intentions)
                                             {
-                                                <li role="presentation" class="ui-menu-item">
-                                                    <a role="menuitem" tabindex="-1" class="ui-corner-all" href="javascript:;" data-value="@item.Id">@item.Description</a>
+                                                <li role="presentation" class="ui-menu-item"  onclick="moveTranslation('@item.Id')">
+                                                    <a role="menuitem" tabindex="-1" class="ui-corner-all" href="javascript:;" >@item.Description</a>
                                                 </li>
                                             }
                                         }
@@ -121,7 +121,7 @@
                                     <tr id="data-item(@item.Id)">
                                         <td class="center">
                                             <label>
-                                                <input type="checkbox" class="ace" />
+                                                <input name="translationcheck" value="@item.Id" type="checkbox" class="ace" />
                                                 <span class="lbl"></span>
                                             </label>
                                         </td>
@@ -131,13 +131,13 @@
                                         </td>
                                         <td>@item.SendTime</td>
                                         <td class="hidden-480">
-                                            @item.LanguageName
+                                            @(item.LanguageName??"未识别")
                                         </td>
-                                        <td></td>
+                                        <td>@item.FollowTimes</td>
                                         <td class="hidden-480">
-                                           
+                                            @item.IntentionDescription
                                         </td>
-                                         @item.IntentionDescription
+                                         
                                         <td >
                                            @Model.CurrentManager.RealName
                                         </td>
@@ -147,10 +147,10 @@
                         </tbody>
                     </table>
                 </div><!-- /.table-responsive -->
-                 <div class="widget-header widget-toolbar-light  widget-box transparent margin-top-2tyle="padding-left: 0px;">
+                 <div class="widget-header widget-toolbar-light  widget-box transparent margin-top-2" style="padding-left: 0px;">
                     <div class="widget-toolbar float-none  no-border">
                         <span class="btn btn-app btn-light btn-xs  no-border">
-                            <input type="checkbox"/>全选
+                            <input type="checkbox"  class="checkalltranslation"/>全选
                         </span>
                         <span class="btn btn-app btn-light btn-xs ">
                             删除
@@ -163,5 +163,36 @@
 </div>
 
 <script type="text/javascript">
-    $("#menu").menu();
+    $(function() {
+        $("#menu").menu();
+        $(".checkalltranslation").click(function() {
+            var checkeds = $(this).is(':checked');
+            if (checkeds) {
+                $("input[name='translationcheck']").attr("checked", this.checked);
+            } else {
+                $("input[name='translationcheck']").attr("checked", this.checked);
+            }
+
+        });
+    });
+
+    function moveTranslation(intentionId) {
+        var transSelected = [];
+        $("input[name='translationcheck']:checked").each(function() {
+            transSelected.push($(this).val());
+        });
+        var translationIds = transSelected.join(",");
+        $.ajax({
+            url: "/Translation/MoveTransToIntention",
+            type: "post",
+            datatype: "json",
+            data: { translationIds: translationIds, intentionId: intentionId },
+            success: function(response) {
+                window.location.href = "/Translation/HasReadTranslationList?";
+            },
+            error: function() {
+
+            }
+        });
+    }
 </script>

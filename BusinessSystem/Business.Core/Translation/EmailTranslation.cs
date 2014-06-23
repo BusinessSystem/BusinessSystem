@@ -30,6 +30,7 @@ namespace Business.Core
         public virtual string IntentionDescription { get; set; }
         public virtual string FilePath { get; set; }
         public virtual short IsDeleted { get; set; }
+        public virtual int  FollowTimes { get; set; }
     }
 
     /// <summary>
@@ -77,7 +78,8 @@ namespace Business.Core
                 FilePath = filepath,
                 IsDeleted = Utils.CoreDefaultValue.False,
                 LanguageName = language,
-                SenderName = senderName
+                SenderName = senderName,
+                FollowTimes = 1
             };
         }
     }

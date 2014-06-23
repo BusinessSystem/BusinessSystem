@@ -30,9 +30,10 @@ namespace Business.Web.Controllers
                 HttpPostedFileBase file = Request.Files[0];
             }
             Manager superManager = ManageService.GetSuperManager();
+            Manager selfManager = ManageService.GetManagerById(CurrentManager.Id);
             if (superManager != null)
             {
-                EmailTranslation emailTranslation = EmailTranslationFactory.Create(superManager.Id,SystemDictionary.GetInstance.GetBaseDictionary(CurrentManager.Language).Value,CurrentManager.RealName, CurrentManager.Id,
+                EmailTranslation emailTranslation = EmailTranslationFactory.Create(superManager.Id, SystemDictionary.GetInstance.GetBaseDictionary(selfManager.Language).Value, selfManager.RealName, CurrentManager.Id,
                     emailTheme,
                     translationContent, filePath);
                 EmailFollow emailFollow = EmailFollowFactory.Create(0,
@@ -66,6 +67,20 @@ namespace Business.Web.Controllers
         public ActionResult RecycledTranslationList()
         {
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult MoveTransToIntention(string translationIds, long intentionId)
+        {
+            if (!string.IsNullOrEmpty(translationIds))
+            {
+                string[] translationArray = translationIds.Split(',');
+                foreach (var translationId in translationArray)
+                {
+                    TranslationService.MoveToIntentionCustom(long.Parse(translationId), intentionId);
+                }
+            }
+            return Json(InfoTools.GetMsgInfo(ResponseCode.Ok));
         }
     }
 }
