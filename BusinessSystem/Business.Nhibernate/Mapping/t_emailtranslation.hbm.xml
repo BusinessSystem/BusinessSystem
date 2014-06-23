@@ -6,7 +6,11 @@
 			<generator class="native" />
 		</id>
 		<property name="ReceiverId" />
-		<property name="SenderId"/>
+		<property name="HandlerManagerName" />
+    <property name="HandlerManagerId" />
+    <property name="SenderId"/>
+    <property name="FollowId"/>
+    <property name="FollowName"/>
 		<property name="SendTime"  />
 		<property name="ReadTime"  />
 		<property name="Theme" />

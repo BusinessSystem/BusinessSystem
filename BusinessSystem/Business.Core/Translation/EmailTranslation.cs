@@ -13,7 +13,11 @@ namespace Business.Core
     {
         public virtual long Id { get; set; }
         public virtual long ReceiverId { get; set; }
+        public virtual string HandlerManagerName { get; set; }//对方处理人
+        public virtual string HandlerManagerId { get; set; }//对方处理人
         public virtual long SenderId { get; set; }
+        public virtual long FollowId { get; set; }//跟踪员
+        public virtual long FollowName { get; set; }//跟踪员
         public virtual DateTime SendTime { get; set; }
         public virtual DateTime ReadTime { get; set; }
         public virtual string Theme { get; set; }

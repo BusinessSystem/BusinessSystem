@@ -192,8 +192,8 @@
 
 <script type="text/javascript">
     $(function () {
-        var controller = "@ViewContext.RouteData.Route.GetRouteData(this.Context).Values["controller"].ToString()";
-        var action = "@ViewContext.RouteData.Route.GetRouteData(this.Context).Values["action"].ToString()";
+        var controller = '@ViewContext.RouteData.Route.GetRouteData(this.Context).Values["controller"].ToString()';
+        var action = '@ViewContext.RouteData.Route.GetRouteData(this.Context).Values["action"].ToString()';
         var val = "/"+controller+"/"+action;
         $(".nav-list").find("li").removeClass("active");
         $(".nav-list").find("a").each(function() {

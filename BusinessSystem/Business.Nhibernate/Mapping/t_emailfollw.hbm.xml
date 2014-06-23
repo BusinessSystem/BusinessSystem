@@ -5,7 +5,9 @@
 			<column name="ID" sql-type="bigint" not-null="true" unique="true"/>
 			<generator class="native" />
 		</id>
-		<property name="EmailTransId" />
+    <property name="EmailTransId" />
+    <property name="FollowId" />
+    <property name="HandleManagerId" />
 		<property name="OriginalContent"/>
 		<property name="TargetContent"/>
 		<property name="OriginalLanguage"/>
