@@ -10,5 +10,6 @@ namespace Business.Web.PageModel
     {
         public IList<Intention> Intentions { get; set; }
         public IList<EmailTranslation> EmailTranslations { get; set; }
+        public Manager CurrentManager { get; set; }
     }
 }

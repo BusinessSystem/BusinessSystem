@@ -10,16 +10,22 @@ namespace Business.Nhibernate.Repository
 {
     public class EmailTranslationRepository:Repository<EmailTranslation>,IEmailTranslationRepository
     {
-        public IList<EmailTranslation> GetEmailTranslations(EmailStatusEnum emailStatus, long intentionId, int pageIndex, int pageSize)
+        public IList<EmailTranslation> GetEmailTranslations(EmailStatusEnum emailStatus,long receiveId, long intentionId, int pageIndex, int pageSize)
         {
             using (var session = GetSession())
             {
                 var query = session.QueryOver<EmailTranslation>();
+                query =
+                    query.Where(
+                        m =>
+                            m.SenderStatus == emailStatus &&
+                            (m.ReceiverId == receiveId || m.SenderId == receiveId || m.HandlerManagerId == receiveId ||
+                             m.FollowId == receiveId));
                 if (intentionId != 0)
                 {
-                    query = query.Where(m => m.IntentionId == intentionId);
+                    query = query.And(m => m.IntentionId == intentionId);
                 }
-                query = query.And(m => m.SenderStatus == emailStatus);
+
                 return query.Take(pageSize).Skip((pageIndex - 1)*pageSize).List();
             }
         }

@@ -25,9 +25,9 @@ namespace Business.Serives
             return ResponseCode.Ok; 
         }
 
-        public static IList<EmailTranslation> GetEmailTranslations(EmailStatusEnum emailStatus,long intentionId,int pageIndex,int pageSize)
+        public static IList<EmailTranslation> GetEmailTranslations(EmailStatusEnum emailStatus,long receiveId,long intentionId,int pageIndex,int pageSize)
         {
-           return  emailTranslationRepository.GetEmailTranslations(emailStatus, intentionId, pageIndex, pageSize);
+           return  emailTranslationRepository.GetEmailTranslations(emailStatus,receiveId, intentionId, pageIndex, pageSize);
         }
 
         /// <summary>

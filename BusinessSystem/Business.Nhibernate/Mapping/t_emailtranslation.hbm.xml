@@ -7,10 +7,12 @@
 		</id>
 		<property name="ReceiverId" />
 		<property name="HandlerManagerName" />
-    <property name="HandlerManagerId" />
-    <property name="SenderId"/>
-    <property name="FollowId"/>
-    <property name="FollowName"/>
+		<property name="HandlerManagerId" />
+		<property name="SenderId"/>
+		<property name="FollowId"/>
+		<property name="LanguageName"/>
+		<property name="SenderName"/>
+		<property name="FollowName"/>
 		<property name="SendTime"  />
 		<property name="ReadTime"  />
 		<property name="Theme" />

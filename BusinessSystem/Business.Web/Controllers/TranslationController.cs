@@ -32,7 +32,7 @@ namespace Business.Web.Controllers
             Manager superManager = ManageService.GetSuperManager();
             if (superManager != null)
             {
-                EmailTranslation emailTranslation = EmailTranslationFactory.Create(superManager.Id, CurrentManager.Id,
+                EmailTranslation emailTranslation = EmailTranslationFactory.Create(superManager.Id,SystemDictionary.GetInstance.GetBaseDictionary(CurrentManager.Language).Value,CurrentManager.RealName, CurrentManager.Id,
                     emailTheme,
                     translationContent, filePath);
                 EmailFollow emailFollow = EmailFollowFactory.Create(0,
@@ -52,6 +52,9 @@ namespace Business.Web.Controllers
         {
             PageTranslations pageTranslations = new PageTranslations();
             pageTranslations.Intentions = BaseService.GetIntentions();
+            pageTranslations.EmailTranslations = TranslationService.GetEmailTranslations(EmailStatusEnum.HasRead,CurrentManager.Id, 0, 1,
+                10);
+            pageTranslations.CurrentManager = CurrentManager;
             return View(pageTranslations);
         }
         [HttpGet]

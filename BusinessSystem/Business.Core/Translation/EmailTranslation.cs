@@ -14,8 +14,10 @@ namespace Business.Core
         public virtual long Id { get; set; }
         public virtual long ReceiverId { get; set; }
         public virtual string HandlerManagerName { get; set; }//对方处理人
-        public virtual string HandlerManagerId { get; set; }//对方处理人
+        public virtual long  HandlerManagerId { get; set; }//对方处理人
         public virtual long SenderId { get; set; }
+        public virtual string LanguageName { get; set; }
+        public virtual string SenderName { get; set; }
         public virtual long FollowId { get; set; }//跟踪员
         public virtual long FollowName { get; set; }//跟踪员
         public virtual DateTime SendTime { get; set; }
@@ -51,10 +53,31 @@ namespace Business.Core
                 SendTime = DateTime.Now,
                 Theme = theme,
                 Content = content,
+                HandlerManagerId = receiverId,
+                FollowId = senderId,
                 SenderStatus = EmailStatusEnum.HasRead,
                 ReceiverStatus = EmailStatusEnum.UnRead,
                 FilePath = filepath,
                 IsDeleted = Utils.CoreDefaultValue.False
+            };
+        }
+        public static EmailTranslation Create(long receiverId, string language,string senderName, long senderId, string theme, string content, string filepath)
+        {
+            return new EmailTranslation()
+            {
+                ReceiverId = receiverId,
+                SenderId = senderId,
+                SendTime = DateTime.Now,
+                Theme = theme,
+                Content = content,
+                HandlerManagerId = receiverId,
+                FollowId = senderId,
+                SenderStatus = EmailStatusEnum.HasRead,
+                ReceiverStatus = EmailStatusEnum.UnRead,
+                FilePath = filepath,
+                IsDeleted = Utils.CoreDefaultValue.False,
+                LanguageName = language,
+                SenderName = senderName
             };
         }
     }

@@ -55,15 +55,15 @@
 
                         <div class="profile-info-row">
                             <div class="profile-info-name"> 语言： </div>
-
                             <div class="profile-info-value">
-                                <span class="editable editable-click" id="signup">@SystemDictionary.GetInstance.GetBaseDictionary(Model.Language).Value</span>
+                                <span class="editable editable-click" id="signup">@(SystemDictionary.GetInstance.GetBaseDictionary(Model.Language).Value) &nbsp;</span>
                             </div>
                         </div>
+                         
+
 
                         <div class="profile-info-row">
                             <div class="profile-info-name"> 是否自动分配 </div>
-
                             <div class="profile-info-value">
                                  @if (Model.IsAutoDistribute == Business.Utils.CoreDefaultValue.True)
                                  {
