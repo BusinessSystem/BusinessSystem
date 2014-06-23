@@ -5,29 +5,40 @@ using System.Web;
 using System.Web.Mvc;
 using Business.Core;
 using Business.Serives;
+using Business.Utils;
 using Business.Utils.Info;
 using Business.Web.Framework;
+using Business.Web.PageModel;
 
 namespace Business.Web.Controllers
 {
     public class ManagerController :AdminBaseController
     {
-         
+
         [HttpGet]
         public ActionResult ManagerList()
         {
-            
-            IList<Manager> managers = ManageService.GetManagersByPage(ManagerTypeEnum.Super, 1, 10, 0);
+            ViewBag.ManagerTypes = EnumTools.GetEnumDescriptions<ManagerTypeEnum>();
+            ManagerTypeEnum managerType = CurrentManager.ManagerType;
+            if (!string.IsNullOrEmpty(Request["managerType"]))
+            {
+                managerType = (ManagerTypeEnum) short.Parse(Request["managerType"].ToString());
+            }
+            ViewBag.CurrentManagerType = managerType;
+            IList<Manager> managers = ManageService.GetManagersByPage(managerType, 1, 10, 0);
             return View(managers);
         }
 
-    
-       
+
+
 
         [HttpGet]
         public ActionResult ManagerAdd()
         {
-            return View();
+            PageManager pageManager = new PageManager();
+            pageManager.BaseDictionaries = BaseService.GetBaseDictionaries(ValueTypeEnum.Language);
+            pageManager.ManagerTypes = EnumTools.GetEnumDescriptions<ManagerTypeEnum>();
+            return View(pageManager);
         }
 
         [HttpGet]
@@ -45,12 +56,16 @@ namespace Business.Web.Controllers
         [HttpGet]
         public ActionResult ManagerEdit(long id)
         {
-            return View(ManageService.GetManagerById(id));
+            PageManager pageManager = new PageManager();
+            pageManager.BaseDictionaries = BaseService.GetBaseDictionaries(ValueTypeEnum.Language);
+            pageManager.ManagerTypes = EnumTools.GetEnumDescriptions<ManagerTypeEnum>();
+            pageManager.ManagerBase = ManageService.GetManagerById(id);
+            return View(pageManager);
         }
 
         [HttpPost]
         public ActionResult ManagerEdit(long id,string userName, string password, string realName,
-            string company, int language)
+            string company, int language,ManagerTypeEnum managerType)
         {
             short isAutoDistribute = Utils.CoreDefaultValue.False;
             if (!string.IsNullOrEmpty(Request["isAutoDistribute"]))
@@ -67,8 +82,9 @@ namespace Business.Web.Controllers
                 manager.Company = company;
                 manager.Language = language;
                 manager.IsAutoDistribute = isAutoDistribute;
+                manager.ManagerType = managerType;
                 manager.EncryptPassword();
-                responseCode = ManageService.Save(manager);
+                responseCode = ManageService.Save(CurrentManager,manager);
             }
             return Json(InfoTools.GetMsgInfo(responseCode), JsonRequestBehavior.AllowGet);
         }
@@ -76,7 +92,7 @@ namespace Business.Web.Controllers
 
         [HttpPost]
         public ActionResult ManagerAdd(string userName, string password, string realName,
-            string company, int language)
+            string company, int language, ManagerTypeEnum managerType)
         {
             short isAutoDistribute = Utils.CoreDefaultValue.False;
             if (!string.IsNullOrEmpty(Request["isAutoDistribute"]))
@@ -89,10 +105,10 @@ namespace Business.Web.Controllers
                 parentId = CurrentManager.ParentId;
             }
 
-            Manager manager = ManagerFactory.Create(userName, password, parentId, ManagerTypeEnum.Common, realName, company,
+            Manager manager = ManagerFactory.Create(userName, password, parentId, managerType, realName, company,
                 isAutoDistribute, language, CurrentManager.UserName);
             manager.EncryptPassword();
-            string responseCode = ManageService.Save(manager);
+            string responseCode = ManageService.Save(CurrentManager,manager);
             return Json(InfoTools.GetMsgInfo(responseCode), JsonRequestBehavior.AllowGet);
         }
 

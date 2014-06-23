@@ -1,6 +1,7 @@
 ﻿@{
     ViewBag.Title = "<li><i class=\"\"></i><a href=\"/Manager/ManagerList\">服务中心</a></li><li class=\"active\">添加用户</li>";
 }
+@model Business.Web.PageModel.PageManager
 <div class="row-fluid">
     <div class="span12">
         <div class="widget-box">
@@ -77,15 +78,13 @@
 
                         <div class="col-sm-9">
                             <select name="language" class="form-control col-xs-8 col-sm-4 width-30" id="form-field-select-1">
-                                <option value="0">请选择</option>
-                                <option value="1">Alabama</option>
-                                <option value="2">Alaska</option>
-                                <option value="3">Arizona</option>
-                                <option value="4">Arkansas</option>
-                                <option value="5">California</option>
-                                <option value="6">Colorado</option>
-                                <option value="7">Connecticut</option>
-                                <option value="8">Delaware</option>
+                                    @if (Model != null && Model.BaseDictionaries != null && Model.BaseDictionaries.Count != 0)
+                                    {
+                                        foreach (var baseDic in Model.BaseDictionaries)
+                                        {
+                                            <option value="@((short)baseDic.Id)">@baseDic.Value</option>
+                                        }
+                                    }
                             </select>
                             <span class="help-inline col-xs-12 col-sm-7">
                                 <span class="middle red">*</span>
@@ -93,7 +92,28 @@
                         </div>
                     </div>
                     
-                       <div class="space-4"></div>
+                    <div class="space-4"></div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right" for="form-field-select-1">账户类型: </label>
+
+                        <div class="col-sm-9">
+                            <select name="managerType" class="form-control col-xs-8 col-sm-4 width-30" id="form-field-select-1">
+                                @if (Model != null && Model.ManagerTypes != null && Model.ManagerTypes.Count != 0)
+                                {
+                                    foreach (var managerType in Model.ManagerTypes)
+                                    {
+                                        <option value="@((short) managerType.Key)">@managerType.Value</option>
+                                    }
+                                }
+                            </select>
+                            <span class="help-inline col-xs-12 col-sm-7">
+                                <span class="middle  red">*</span>(普通用户不能常见管理员账号)
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <div class="space-4"></div>
 
                     <div class="form-group">
                         <label class="col-sm-3 control-label no-padding-right" for="switch-field-1">是否自动分配: </label>

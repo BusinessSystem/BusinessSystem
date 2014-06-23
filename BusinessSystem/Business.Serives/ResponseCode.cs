@@ -96,6 +96,19 @@ namespace Business.Serives
             public const string NewPasswordNullOrEmpty = "1010";
             public const string ConfirmPasswordError = "1011";
             public const string OldPasswordError = "1012";
+            /// <summary>
+            /// 普通子账号没有创建用户权限
+            /// </summary>
+            public const string ComonChildNoPermission = "1013";
+            /// <summary>
+            /// 管理员子账号不能创建管理员
+            /// </summary>
+            public const string SuperChildNoPermission = "1014";
+
+            /// <summary>
+            /// 普通账号不能创建管理员账号
+            /// </summary>
+            public const string CommonPermission = "1015";
         }
 
         public struct Base

@@ -43,7 +43,7 @@ namespace Business.Serives
              return ResponseCode.Ok;
          }
 
-         public static string Save(Manager manager)
+         public static string Save(Manager currentManager,Manager manager)
          {
              if (string.IsNullOrEmpty(manager.UserName))
              {
@@ -64,6 +64,18 @@ namespace Business.Serives
              if (string.IsNullOrEmpty(manager.Company))
              {
                  return ResponseCode.Managaer.CompanyNullOrEmpty;
+             }
+             if (currentManager.ManagerType == ManagerTypeEnum.Common && currentManager.ParentId!=0)
+             {
+                 return ResponseCode.Managaer.ComonChildNoPermission;
+             }
+             if (currentManager.ManagerType == ManagerTypeEnum.Common && manager.ManagerType == ManagerTypeEnum.Super)
+             {
+                 return ResponseCode.Managaer.CommonPermission;
+             }
+             if (currentManager.ManagerType == ManagerTypeEnum.Super && currentManager.ParentId != 0 &&manager.ManagerType==ManagerTypeEnum.Super)
+             {
+                 return ResponseCode.Managaer.SuperChildNoPermission;
              }
              if (managerRepository.IsExist(manager))
              {

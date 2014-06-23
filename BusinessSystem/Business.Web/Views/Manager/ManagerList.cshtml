@@ -1,6 +1,8 @@
 ﻿@{
     ViewBag.Title = "<li><i class=\"\"></i><a href=\"/Manager/ManagerList\">服务中心</a></li><li class=\"active\">用户管理</li>";
+    Dictionary<ManagerTypeEnum, string> managerTypes = (Dictionary<ManagerTypeEnum, string>)ViewBag.ManagerTypes;
 }
+@using Business.Core
 @model IList<Business.Core.Manager>
  
 <div class="row-fluid">
@@ -21,7 +23,29 @@
                 </div>
             </div>
             <div class="widget-body">
-                
+                <div class="widget-header widget-toolbar-light  widget-box transparent" style="padding-left: 0px;">
+                    <div class="widget-toolbar float-none  no-border">
+                        
+                        <label class="col-sm-1 control-label text-right" for="form-field-select-1">账户类型: </label>
+                        <select name="managerType" class="form-control col-xs-6 col-sm-3 width-20" id="form-field-select-1">
+                          @if (managerTypes != null && managerTypes.Count != 0)
+                          {
+                              foreach (var managerType in managerTypes)
+                              {
+                                  if (ViewBag.CurrentManagerType == managerType.Key)
+                                  {
+                                      <option value="@((short) managerType.Key)" selected="true">@managerType.Value</option>
+                                  }
+                                  else
+                                  {
+                                      <option value="@((short) managerType.Key)">@managerType.Value</option>
+                                  }
+                              }
+                          }
+                        </select>
+                        <div class="space-4"></div>
+                    </div>
+                </div>
                 <div class="table-responsive">
                     <table id="sample-table-1" class="table table-striped table-bordered table-hover">
                         <thead>
@@ -139,6 +163,12 @@
 </div>
 
 <script type="text/javascript">
+
+    $(function () {
+        $("#form-field-select-1").change(function () {
+            window.location.href = "/Manager/ManagerList?managerType=" + $(this).val();
+        });
+    });
 
     function deleteManager(id) {
         deleteItem(id);

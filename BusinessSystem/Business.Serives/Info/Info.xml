@@ -22,10 +22,13 @@
 	<Managaer  Code="1004" Message="真实姓名为空" Level="1" Description="真实姓名为空" />
 	<Managaer  Code="1005" Message="公司名称为空" Level="1" Description="公司名称为空" />
 	<Managaer  Code="1006" Message="用户名已经存在" Level="1" Description="用户名已经存在" />
-	<Managaer  Code="1007" Message="商品评论未找到" Level="1" Description="商品评论未找到" />
-	<Managaer  Code="1008" Message="没有找到商品" Level="1" Description="没有找到商品" />
-	<Managaer  Code="1009" Message="商品上过架，不能删除" Level="1" Description="商品上过架，不能删除" />
-	<Managaer  Code="1010" Message="不包含没上架过的商品" Level="1" Description="不包含没上架过的商品" />
-	<Managaer  Code="1011" Message="商品非上架状态" Level="1" Description="商品非上架状态" />
-
+	<Managaer  Code="1007" Message="用户名不存在" Level="1" Description="用户名不存在" />
+	<Managaer  Code="1008" Message="用户密码错误" Level="1" Description="用户密码错误" />
+	<Managaer  Code="1009" Message="原密码为空" Level="1" Description="原密码为空" />
+	<Managaer  Code="1010" Message="新密码为空" Level="1" Description="新密码为空" />
+	<Managaer  Code="1011" Message="确认密码错误" Level="1" Description="确认密码错误" />
+	<Managaer  Code="1012" Message="原密码错误" Level="1" Description="原密码错误" />
+	<Managaer  Code="1013" Message="普通子账号没有创建用户权限" Level="1" Description="普通子账号没有创建用户权限" />
+	<Managaer  Code="1014" Message="管理员子账号不能创建管理员" Level="1" Description="管理员子账号不能创建管理员" />
+	<Managaer  Code="1015" Message="普通账号不能创建管理员账号" Level="1" Description="普通账号不能创建管理员账号" />
 </Infos>

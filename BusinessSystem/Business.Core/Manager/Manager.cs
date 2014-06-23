@@ -61,12 +61,10 @@ namespace Business.Core
         }
     }
 
-    public enum ManagerTypeEnum:short
+    public enum ManagerTypeEnum : short
     {
-         [Description("超级管理员")]
-         Super=1,
-         [Description("普通管理员")]
-         Common
+        [Description("管理员")] Super = 1,
+        [Description("普通用户")] Common
     }
 
     public class ManagerFactory
