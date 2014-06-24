@@ -54,6 +54,7 @@
     <Compile Include="Enquiry\EnquiryTransFollow.cs" />
     <Compile Include="Manager\ManagerProduct.cs" />
     <Compile Include="Manager\PwdChangeRecord.cs" />
+    <Compile Include="PageModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Manager\Manager.cs" />
     <Compile Include="Translation\EmailFollow.cs" />

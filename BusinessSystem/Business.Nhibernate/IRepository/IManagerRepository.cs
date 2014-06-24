@@ -16,7 +16,9 @@ namespace Business.Nhibernate.IRepository
         /// <returns>存在 返回true</returns>
         bool IsExist(Manager manager);
 
-        IList<Manager> GetManagersByPage(ManagerTypeEnum managerType, int pageIndex, int pageSize, long  parentId);
+        IList<Manager> GetManagersByPage(ManagerTypeEnum managerType, int pageIndex, int pageSize, long parentId,
+            out int totalCount);
+
         Manager GetManagerByUserName(string userName);
 
         Manager GetSuperManager();

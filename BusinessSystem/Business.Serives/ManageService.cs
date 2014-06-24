@@ -13,9 +13,13 @@ namespace Business.Serives
      {
          private static  IManagerRepository managerRepository=new ManagerRepository();
 
-         public static IList<Manager> GetManagersByPage(ManagerTypeEnum managerType,int pageIndex,int pageSize,long parentId)
+         public static PageModel<Manager> GetManagerPages(ManagerTypeEnum managerType, int pageIndex, int pageSize,
+             long parentId)
          {
-             return managerRepository.GetManagersByPage(managerType,pageIndex,pageSize,parentId);
+             int totalCount = 0;
+             IList<Manager> managers = managerRepository.GetManagersByPage(managerType, pageIndex, pageSize, parentId,
+                 out totalCount);
+             return new PageModel<Manager>(managers, pageIndex, pageSize, totalCount);
          }
 
          public static Manager GetSuperManager()

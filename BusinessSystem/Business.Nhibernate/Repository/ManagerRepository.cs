@@ -26,14 +26,21 @@ namespace Business.Nhibernate.Repository
             }
         }
 
-        public IList<Manager> GetManagersByPage(ManagerTypeEnum managerType,int pageIndex, int pageSize,long  parentId)
+        public IList<Manager> GetManagersByPage(ManagerTypeEnum managerType, int pageIndex, int pageSize, long parentId,
+            out int totalCount)
         {
             using (var session = GetSession())
             {
+
+                var query = session.QueryOver<Manager>()
+                    .Where(m => m.ManagerType == managerType);
+                if (parentId != 0)
+                {
+                    query = query.And(m => m.ParentId == parentId);
+                }
+                totalCount = query.RowCount();
                 return
-                    session.QueryOver<Manager>()
-                        .Where(m => m.ManagerType == managerType && m.ParentId == parentId)
-                        .OrderBy(m => m.Id)
+                    query.OrderBy(m => m.Id)
                         .Desc.Take(pageSize)
                         .Skip((pageIndex - 1)*pageSize)
                         .List();

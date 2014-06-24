@@ -18,6 +18,18 @@ namespace Business.Web.Controllers
         [HttpGet]
         public ActionResult ManagerList()
         {
+            int pageIndex = 1;
+            int pageSize = 10;
+            if (!string.IsNullOrEmpty(Request["pageIndex"]))
+            {
+                 int.TryParse(Request["pageIndex"].ToString(),out pageIndex);
+            }
+
+            if (!string.IsNullOrEmpty(Request["pageSize"]))
+            {
+                int.TryParse(Request["pageSize"].ToString(), out pageSize);
+            }
+
             ViewBag.ManagerTypes = EnumTools.GetEnumDescriptions<ManagerTypeEnum>();
             ManagerTypeEnum managerType = CurrentManager.ManagerType;
             if (!string.IsNullOrEmpty(Request["managerType"]))
@@ -25,8 +37,8 @@ namespace Business.Web.Controllers
                 managerType = (ManagerTypeEnum) short.Parse(Request["managerType"].ToString());
             }
             ViewBag.CurrentManagerType = managerType;
-            IList<Manager> managers = ManageService.GetManagersByPage(managerType, 1, 10, 0);
-            return View(managers);
+            PageModel<Manager> pageModel = ManageService.GetManagerPages(managerType, pageIndex, pageSize, CurrentManager.ParentId);
+            return View(pageModel);
         }
 
 
