@@ -15,7 +15,8 @@ namespace Business.Serives
         private static IEmailTranslationRepository emailTranslationRepository = new EmailTranslationRepository();
         private static IIntentionRepository intentionRepository = new IntentionRepository();
         private static IManagerRepository managerRepository = new ManagerRepository();
-        public static string SaveTranslation(EmailTranslation emailTranslation,EmailFollow emailFollow)
+
+        public static string SaveTranslation(EmailTranslation emailTranslation, EmailFollow emailFollow)
         {
             if (string.IsNullOrEmpty(emailTranslation.Theme))
             {
@@ -24,26 +25,27 @@ namespace Business.Serives
             emailTranslationRepository.Save(emailTranslation);
             emailFollow.EmailTransId = emailTranslation.Id;
             emailFollowRepository.Save(emailFollow);
-            return ResponseCode.Ok; 
+            return ResponseCode.Ok;
         }
 
-        public static PageModel<EmailTranslation> GetHasReadEmailTranslations(ManagerTypeEnum managerType,
+        public static PageModel<EmailTranslation> GetEmailTranslations(ManagerTypeEnum managerType,
             EmailStatusEnum emailStatus, short isDeleted, long receiveId,
             long intentionId, int pageIndex, int pageSize)
         {
             int totalCount = 0;
             IList<EmailTranslation> emailTranslations =
-                emailTranslationRepository.GetHasReadEmailTranslations(managerType, emailStatus, isDeleted, receiveId,
+                emailTranslationRepository.GetEmailTranslations(managerType, emailStatus, isDeleted, receiveId,
                     intentionId, pageIndex, pageSize, out totalCount);
             return new PageModel<EmailTranslation>(emailTranslations, pageIndex, pageSize, totalCount);
         }
 
-        public static PageModel<EmailTranslation> GetRecycledTranslationList(long receiveId,
-            long intentionId, int pageIndex, int pageSize)
+
+        public static PageModel<EmailTranslation> GetRecycledTranslationList(ManagerTypeEnum managerType, long receiveId,
+            int pageIndex, int pageSize)
         {
             int totalCount = 0;
             IList<EmailTranslation> emailTranslations =
-                emailTranslationRepository.RecycledTranslationList(Utils.CoreDefaultValue.True, receiveId, intentionId,
+                emailTranslationRepository.RecycledTranslationList(managerType, receiveId,
                     pageIndex, pageSize, out totalCount);
             return new PageModel<EmailTranslation>(emailTranslations, pageIndex, pageSize, totalCount);
         }
@@ -52,10 +54,10 @@ namespace Business.Serives
         /// 移动到意向客户
         /// </summary>
         /// <param name="id"></param>
-        public static void MoveToIntentionCustom(long translationId,long intentId)
+        public static void MoveToIntentionCustom(long translationId, long intentId)
         {
             EmailTranslation emailTranslation = emailTranslationRepository.GetById(translationId);
-            emailTranslation.IntentionId = (int)intentId;
+            emailTranslation.IntentionId = (int) intentId;
             emailTranslation.IntentionDescription = intentionRepository.GetById(intentId).Description;
             emailTranslationRepository.Save(emailTranslation);
         }
@@ -73,19 +75,27 @@ namespace Business.Serives
             emailTranslationRepository.Save(emailTranslation);
         }
 
-        public static string  DeleteTranslation(long translationId,long managerId)
+        public static string DeleteTranslation(long translationId, long managerId)
         {
             EmailTranslation emailTranslation = emailTranslationRepository.GetById(translationId);
-            if (emailTranslation.FollowId == managerId || emailTranslation.ReceiverId == managerId || emailTranslation.SenderId == managerId)
+            if (emailTranslation.FollowId == managerId || emailTranslation.ReceiverId == managerId ||
+                emailTranslation.SenderId == managerId)
             {
                 emailTranslation.IsDeleted = Utils.CoreDefaultValue.True;
-                emailTranslationRepository.Delete(emailTranslation);
+                emailTranslationRepository.Save(emailTranslation);
                 return ResponseCode.Ok;
             }
-            return ResponseCode.Translation.NoPermissionDeleteTrans;//无权
+            return ResponseCode.Translation.NoPermissionDeleteTrans; //无权
         }
 
+        public static IList<EmailFollow> GetEmailFollows(long translationId)
+        {
+            return emailFollowRepository.GetEmailFollowsByTransId(translationId);
+        }
 
-        
+        public static EmailTranslation GeEmailTranslationById(long translationId)
+        {
+            return emailTranslationRepository.GetById(translationId);
+        }
     }
 }

@@ -9,14 +9,16 @@ namespace Business.Nhibernate.IRepository
 {
     public interface IEmailFollowRepository : IRepository<EmailFollow>
     {
-
+        IList<EmailFollow> GetEmailFollowsByTransId(long transId);
     }
 
     public interface IEmailTranslationRepository : IRepository<EmailTranslation>
     {
-        IList<EmailTranslation> GetHasReadEmailTranslations(ManagerTypeEnum managerType, EmailStatusEnum emailStatus, short isDeleted, long receiveId, long intentionId, int pageIndex, int pageSize, out int totalCount);
 
-        IList<EmailTranslation> RecycledTranslationList(short isDeleted, long receiveId, long intentionId,
+        IList<EmailTranslation> RecycledTranslationList(ManagerTypeEnum managerType, long receiveId,
             int pageIndex, int pageSize, out int totalCount);
+
+        IList<EmailTranslation> GetEmailTranslations(ManagerTypeEnum managerType, EmailStatusEnum emailStatus,
+            short isDeleted, long receiveId, long intentionId, int pageIndex, int pageSize, out int totalCount);
     }
 }

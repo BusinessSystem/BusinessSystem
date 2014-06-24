@@ -22,11 +22,13 @@ namespace Business.Nhibernate.IRepository
         Manager GetManagerByUserName(string userName);
 
         Manager GetSuperManager();
+
+        IList<Manager> GetChildManagers(long parentId);
     }
 
     public interface IManagerProductRepository : IRepository<ManagerProduct>
     {
-
+        
     }
 
     public interface IPwdChangeRecordRepository : IRepository<PwdChangeRecord>

@@ -2,7 +2,7 @@
     ViewBag.Title = "<li><i class=\"\"></i><a href=\"/Manager/ManagerList\">邮件翻译</a></li><li class=\"active\">已读邮件翻译</li>";
     IList<Intention> intentions = ViewBag.Intentions;
     Manager currentManager = ViewBag.CurrentManager;
-    
+    IList<Manager> childManagers = ViewBag.ChildManagers;
 }
 
 @using System.Web.UI.WebControls
@@ -30,6 +30,31 @@
                             删除
                         </span>
      
+     
+                         @if (currentManager.ManagerType == ManagerTypeEnum.Super)
+                         {
+                             <div class="btn-group margin-top-2">
+                                 <button data-toggle="dropdown" class="btn btn-light width-120 dropdown-toggle margin-top-2 common-height">
+                                     分配给
+                                     <span class="icon-caret-down icon-on-right "></span>
+                                 </button>
+
+                                 <ul class="dropdown-menu dropdown-light pull-right width-120">
+                                 
+                                     @if (childManagers != null && childManagers.Count != 0)
+                                     {
+                                         foreach (var childManager in childManagers)
+                                         {
+                                             <li >
+                                                 <a href="javascript:;"  onclick=" IssueToChildManager('@childManager.Id') ">@childManager.RealName</a>
+                                             </li>
+                                         }
+                                     }
+                                 
+                                 </ul>
+                             </div>
+                         }
+                        
 
                         <div class="btn-group margin-top-2">
                             <button data-toggle="dropdown" class="btn btn-light width-120 dropdown-toggle margin-top-2 common-height">
@@ -65,9 +90,9 @@
                                 <span class="icon-caret-down icon-on-right "></span>
                             </button>
         
-                            <ul  aria-activedescendant="ui-id-8" tabindex="0" role="menu" class="display-none dropdown-menu dropdown-light ui-menu ui-widget width-120 ui-widget-content ui-corner-all" id="menu">
+                             <ul  aria-activedescendant="ui-id-8" tabindex="0" role="menu" class="display-none dropdown-menu dropdown-light ui-menu ui-widget width-120 ui-widget-content ui-corner-all" id="menu">
                 
-                                <li role="presentation" class="ui-menu-item">
+                                 <li role="presentation" class="ui-menu-item">
                                     <a role="menuitem" tabindex="-1" class="ui-corner-all" id="ui-id-7" aria-haspopup="true" href="javascript:;"><span class="ui-menu-icon ui-icon ui-icon-carat-1-e"></span>意向客户</a>
 
                                     <ul aria-expanded="false" aria-hidden="true" role="menu" style="display: none;" class="ui-menu ui-widget ui-widget-content ui-corner-all">
@@ -132,7 +157,7 @@
                                         </td>
 
                                         <td>
-                                            <a href="#">@item.Theme</a>
+                                            <a href="/Translation/EmailTranslationDetail/@item.Id">@item.Theme</a>
                                         </td>
                                         <td>@item.SendTime</td>
                                         <td class="hidden-480">
@@ -227,7 +252,7 @@
 
     function backtomainer() {
         var transSelected = [];
-        $("input[name='translationcheck']:checked").each(function () {
+        $("input[name='translationcheck']:checked").each(function() {
             transSelected.push($(this).val());
         });
         var translationIds = transSelected.join(",");
@@ -236,10 +261,10 @@
             type: "post",
             datatype: "json",
             data: { translationIds: translationIds },
-            success: function (response) {
+            success: function(response) {
                 window.location.href = "/Translation/HasReadTranslationList";
             },
-            error: function () {
+            error: function() {
 
             }
         });
@@ -247,7 +272,7 @@
 
     function deletetranslation() {
         var transSelected = [];
-        $("input[name='translationcheck']:checked").each(function () {
+        $("input[name='translationcheck']:checked").each(function() {
             transSelected.push($(this).val());
         });
         var translationIds = transSelected.join(",");
@@ -256,12 +281,16 @@
             type: "post",
             datatype: "json",
             data: { translationIds: translationIds },
-            success: function (response) {
+            success: function(response) {
                 window.location.href = "/Translation/HasReadTranslationList?";
             },
-            error: function () {
+            error: function() {
 
             }
         });
+    }
+
+    function IssueToChildManager(id) {
+        alert(id);
     }
 </script>

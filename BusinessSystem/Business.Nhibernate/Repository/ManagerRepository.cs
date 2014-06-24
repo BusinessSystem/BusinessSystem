@@ -68,5 +68,15 @@ namespace Business.Nhibernate.Repository
                         .Where(m => m.UserName == userName).Take(1).SingleOrDefault();
             }
         }
+
+        public IList<Manager> GetChildManagers(long parentId)
+        {
+            using (var session = GetSession())
+            {
+                return
+                    session.QueryOver<Manager>()
+                        .Where(m => m.ParentId == parentId).List();
+            }
+        }
     }
 }

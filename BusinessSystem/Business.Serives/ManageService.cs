@@ -138,5 +138,11 @@ namespace Business.Serives
              }
              return ResponseCode.NotFoundData;
          }
+
+
+         public static IList<Manager> GetChildManagers(long parentId)
+         {
+             return managerRepository.GetChildManagers(parentId);
+         }
      }
 }

@@ -36,7 +36,7 @@ namespace Business.Core
             {
                 EmailTransId = emailTransId,
                 OriginalContent = originalContent,
-                OriginalLanguage = originalContent,
+                OriginalLanguage = originalLanguage,
                 TransTime = DateTime.Now
             };
         }

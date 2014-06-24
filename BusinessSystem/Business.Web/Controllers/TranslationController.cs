@@ -40,8 +40,7 @@ namespace Business.Web.Controllers
                     CurrentManager.Id,
                     emailTheme,
                     translationContent, filePath);
-                EmailFollow emailFollow = EmailFollowFactory.Create(0,
-                    SystemDictionary.GetInstance.GetBaseDictionary(originalLanguage).Value,
+                EmailFollow emailFollow = EmailFollowFactory.Create(0, translationContent,
                     SystemDictionary.GetInstance.GetBaseDictionary(targetLanguage).Value);
                 string result = TranslationService.SaveTranslation(emailTranslation, emailFollow);
                 if (result == ResponseCode.Ok)
@@ -73,8 +72,9 @@ namespace Business.Web.Controllers
             ViewBag.IntentionId = intentionId;
             ViewBag.Intentions = BaseService.GetIntentions();
             ViewBag.CurrentManager = CurrentManager;
+            ViewBag.ChildManagers = ManageService.GetChildManagers(CurrentManager.Id);
             return
-                View(TranslationService.GetHasReadEmailTranslations(CurrentManager.ManagerType, EmailStatusEnum.HasRead,
+                View(TranslationService.GetEmailTranslations(CurrentManager.ManagerType, EmailStatusEnum.HasRead,
                     Utils.CoreDefaultValue.False,
                     CurrentManager.Id, intentionId, pageIndex, pageSize));
         }
@@ -100,9 +100,11 @@ namespace Business.Web.Controllers
             ViewBag.IntentionId = intentionId;
             ViewBag.Intentions = BaseService.GetIntentions();
             ViewBag.CurrentManager = CurrentManager;
-            return null;
-           // return View(TranslationService.GetEmailTranslations(EmailStatusEnum.UnRead, Utils.CoreDefaultValue.False,
-             //   CurrentManager.Id, intentionId, pageIndex, pageSize));
+            ViewBag.ChildManagers = ManageService.GetChildManagers(CurrentManager.Id);
+            return
+                View(TranslationService.GetEmailTranslations(CurrentManager.ManagerType, EmailStatusEnum.UnRead,
+                    Utils.CoreDefaultValue.False,
+                    CurrentManager.Id, intentionId, pageIndex, pageSize));
         }
 
         [HttpGet]
@@ -110,6 +112,7 @@ namespace Business.Web.Controllers
         {
             int pageIndex = 1;
             int pageSize = 10;
+            ViewBag.CurrentManager = CurrentManager;
             if (!string.IsNullOrEmpty(Request["pageIndex"]))
             {
                 int.TryParse(Request["pageIndex"].ToString(), out pageIndex);
@@ -118,16 +121,9 @@ namespace Business.Web.Controllers
             {
                 int.TryParse(Request["pageSize"].ToString(), out pageSize);
             }
-            long intentionId = 0;
-            if (!string.IsNullOrEmpty(Request["intentionId"]))
-            {
-                long.TryParse(Request["intentionId"].ToString(), out intentionId);
-            }
-            ViewBag.IntentionId = intentionId;
-            ViewBag.Intentions = BaseService.GetIntentions();
-            ViewBag.CurrentManager = CurrentManager;
-            return View(TranslationService.GetRecycledTranslationList(
-                CurrentManager.Id, intentionId, pageIndex, pageSize));
+
+            return View(TranslationService.GetRecycledTranslationList(CurrentManager.ManagerType,
+                CurrentManager.Id, pageIndex, pageSize));
         }
 
         [HttpPost]
@@ -170,6 +166,15 @@ namespace Business.Web.Controllers
                 }
             }
             return Json(InfoTools.GetMsgInfo(ResponseCode.Ok), JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public ActionResult EmailTranslationDetail(long id)
+        {
+            PageTranslationFollow translationFollow =
+                new PageTranslationFollow(TranslationService.GeEmailTranslationById(id),
+                    TranslationService.GetEmailFollows(id));
+            return View(translationFollow);
         }
     }
 }
