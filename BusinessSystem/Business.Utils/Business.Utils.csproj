@@ -68,6 +68,7 @@
     <Compile Include="Info\InfoBase.cs" />
     <Compile Include="Info\InfoTools.cs" />
     <Compile Include="Info\MsgInfo.cs" />
+    <Compile Include="MailHelper.cs" />
     <Compile Include="MD5.cs" />
     <Compile Include="PagerTool.cs" />
     <Compile Include="PathTools.cs" />
