@@ -1,10 +1,15 @@
 ﻿@{
     ViewBag.Title = "<li><i class=\"\"></i><a href=\"/Manager/ManagerList\">邮件翻译</a></li><li class=\"active\">已读邮件翻译</li>";
+    IList<Intention> intentions = ViewBag.Intentions;
+    Manager currentManager = ViewBag.CurrentManager;
+    
 }
 
+@using System.Web.UI.WebControls
+@using Business.Core
 @using Business.Serives
 @using Business.Utils
-@model Business.Web.PageModel.PageTranslations
+@model Business.Core.PageModel<Business.Core.EmailTranslation>
  
 <div class="row-fluid">
     <div class="span12">
@@ -37,18 +42,18 @@
                                     <a href="/Base/IntentionList">添加意向</a>
                                 </li>
                                 <li class="divider"></li>
-                                @if (Model.Intentions != null && Model.Intentions.Count != 0)
+                                @if (intentions != null && intentions.Count != 0)
                                 {
-                                    foreach (var item in  Model.Intentions)
+                                    foreach (var item in intentions)
                                     {
-                                        <li>
-                                            <a href="javascript:;" data-value="@item.Id">@item.Description</a>
+                                        <li >
+                                            <a href="/Translation/HasReadTranslationList?intentionId=@item.Id" data-value="@item.Id">@item.Description</a>
                                         </li>
                                     }
                                 }
                                 <li class="divider"></li>
-                                <li>
-                                    <a href="">未识别</a>
+                                <li >
+                                    <a href="/Translation/HasReadTranslationList?intentionId=0">未识别</a>
                                 </li>
                             </ul>
                         </div>
@@ -66,9 +71,9 @@
                                     <a role="menuitem" tabindex="-1" class="ui-corner-all" id="ui-id-7" aria-haspopup="true" href="javascript:;"><span class="ui-menu-icon ui-icon ui-icon-carat-1-e"></span>意向客户</a>
 
                                     <ul aria-expanded="false" aria-hidden="true" role="menu" style="display: none;" class="ui-menu ui-widget ui-widget-content ui-corner-all">
-                                        @if (Model.Intentions != null && Model.Intentions.Count != 0)
+                                        @if (intentions != null && intentions.Count != 0)
                                         {
-                                            foreach (var item in  Model.Intentions)
+                                            foreach (var item in intentions)
                                             {
                                                 <li role="presentation" class="ui-menu-item"  onclick="moveTranslation('@item.Id')">
                                                     <a role="menuitem" tabindex="-1" class="ui-corner-all" href="javascript:;" >@item.Description</a>
@@ -114,9 +119,9 @@
                         </thead>
 
                         <tbody>
-                            @if (Model.EmailTranslations != null && Model.EmailTranslations.Count != 0)
+                            @if (Model != null &&Model.PageList!=null&& Model.PageList.Count != 0)
                             {
-                                foreach (var item in Model.EmailTranslations)
+                                foreach (var item in Model.PageList)
                                 {
                                     <tr id="data-item(@item.Id)">
                                         <td class="center">
@@ -139,7 +144,7 @@
                                         </td>
                                          
                                         <td >
-                                           @Model.CurrentManager.RealName
+                                           @currentManager.RealName
                                         </td>
                                     </tr>
                                 }
@@ -174,13 +179,14 @@
                 $("input[name='translationcheck']").attr("checked", this.checked);
             }
         });
-        var totalCount = '10';
+        var currentIntentionId = '@ViewBag.IntentionId';
+        var totalCount = '@Model.TotalCount';
         totalCount = parseInt(totalCount);
-        var visiblePages = '10';
+        var visiblePages = '@Model.VisiblePages';
         visiblePages = parseInt(visiblePages);
-        var currentPage = '3';
+        var currentPage = '@Model.CurrentPage';
         currentPage = parseInt(currentPage);
-        var pageSize = 1;
+        var pageSize = 10;
         $.jqPaginator('#pagination2', {
             totalCounts: totalCount,
             visiblePages: visiblePages,
@@ -190,7 +196,7 @@
                 if (num == currentPage) {
                     //每次初始化都会执行此处
                 } else {
-                    window.location.href = "/Manager/ManagerList?managerType=" + managerType + "&pageIndex=" + num + "&pageSize=" + pageSize;
+                    window.location.href = "/Translation/HasReadTranslationList?intentionId=" + currentIntentionId + "&pageIndex=" + num + "&pageSize=" + pageSize;
                 }
             }
         });

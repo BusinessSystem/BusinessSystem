@@ -41,16 +41,16 @@ namespace Business.Web.Controllers
                 Intention intention = BaseService.GetIntentionById(id);
                 intention.Description = description;
                 BaseService.SaveIntention(intention);
-                return Json(InfoTools.GetMsgInfo(ResponseCode.Ok));
+                return Json(InfoTools.GetMsgInfo(ResponseCode.Ok), JsonRequestBehavior.AllowGet);
             }
-            return Json(InfoTools.GetMsgInfo(ResponseCode.DataError));
+            return Json(InfoTools.GetMsgInfo(ResponseCode.DataError), JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
         public ActionResult IntentionDelete(long id)
         {
             BaseService.DeleteIntention(id);
-            return Json(InfoTools.GetMsgInfo(ResponseCode.Ok));
+            return Json(InfoTools.GetMsgInfo(ResponseCode.Ok),JsonRequestBehavior.AllowGet);
         }
 
 
@@ -81,14 +81,14 @@ namespace Business.Web.Controllers
                 BaseService.SaveUserDefined(userDefined);
                 return Json(InfoTools.GetMsgInfo(ResponseCode.Ok));
             }
-            return Json(InfoTools.GetMsgInfo(ResponseCode.DataError));
+            return Json(InfoTools.GetMsgInfo(ResponseCode.DataError), JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
         public ActionResult UserDefinedDelete(long id)
         {
             BaseService.DeleteUserDefined(id);
-            return Json(InfoTools.GetMsgInfo(ResponseCode.Ok));
+            return Json(InfoTools.GetMsgInfo(ResponseCode.Ok), JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
@@ -124,14 +124,14 @@ namespace Business.Web.Controllers
             BaseDictionary baseDictionary = BaseDictionaryFactory.Create(valueType, dataSort, dataValue, description,
                 CurrentManager.UserName, description);
             string responseCode = BaseService.SaveDictionary(baseDictionary);
-            return Json(InfoTools.GetMsgInfo(responseCode));
+            return Json(InfoTools.GetMsgInfo(responseCode), JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
         public ActionResult DictionaryDelete(long id)
         {
             BaseService.DictionaryDelete(id);
-            return Json(InfoTools.GetMsgInfo(ResponseCode.Ok));
+            return Json(InfoTools.GetMsgInfo(ResponseCode.Ok), JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
@@ -162,7 +162,7 @@ namespace Business.Web.Controllers
                 string responseCode = BaseService.SaveDictionary(baseDictionary);
                 return Json(InfoTools.GetMsgInfo(responseCode));
             }
-            return Json(InfoTools.GetMsgInfo(ResponseCode.NotFoundData));
+            return Json(InfoTools.GetMsgInfo(ResponseCode.NotFoundData), JsonRequestBehavior.AllowGet);
         }
     }
 }

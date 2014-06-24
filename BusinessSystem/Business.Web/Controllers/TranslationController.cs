@@ -67,13 +67,11 @@ namespace Business.Web.Controllers
             {
                 long.TryParse(Request["intentionId"].ToString(), out intentionId);
             }
-            
-            PageTranslations pageTranslations = new PageTranslations();
-            pageTranslations.Intentions = BaseService.GetIntentions();
-            pageTranslations.EmailTranslations = TranslationService.GetEmailTranslations(EmailStatusEnum.HasRead,
-                CurrentManager.Id, 0, pageIndex, pageSize);
-            pageTranslations.CurrentManager = CurrentManager;
-            return View(pageTranslations);
+            ViewBag.IntentionId = intentionId;
+            ViewBag.Intentions = BaseService.GetIntentions();
+            ViewBag.CurrentManager = CurrentManager;
+            return View(TranslationService.GetEmailTranslations(EmailStatusEnum.HasRead,
+                CurrentManager.Id, intentionId, pageIndex, pageSize));
         }
         [HttpGet]
         public ActionResult UnReadTranslationList()
