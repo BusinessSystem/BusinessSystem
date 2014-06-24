@@ -95,7 +95,21 @@ namespace Business.Web.Controllers
                     TranslationService.MoveToIntentionCustom(long.Parse(translationId), intentionId);
                 }
             }
-            return Json(InfoTools.GetMsgInfo(ResponseCode.Ok));
+            return Json(InfoTools.GetMsgInfo(ResponseCode.Ok),JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public ActionResult BackToMainAccount(string translationIds)
+        {
+            if (!string.IsNullOrEmpty(translationIds))
+            {
+                string[] translationArray = translationIds.Split(',');
+                foreach (var translationId in translationArray)
+                {
+                    TranslationService.BackTranslationToMain(long.Parse(translationId), CurrentManager.ParentId);
+                }
+            }
+            return Json(InfoTools.GetMsgInfo(ResponseCode.Ok), JsonRequestBehavior.AllowGet);
         }
     }
 }

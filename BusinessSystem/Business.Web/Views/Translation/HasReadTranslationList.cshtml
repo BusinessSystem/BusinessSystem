@@ -84,8 +84,8 @@
                                     </ul>
                                 </li>
 
-                                <li role="presentation" class="ui-menu-item">
-                                    <a role="menuitem" tabindex="-1" class="ui-corner-all" id="ui-id-8" href="#">返回总账号</a>
+                                <li role="presentation" class="ui-menu-item" onclik="backtomainer()">
+                                    <a role="menuitem" tabindex="-1" class="ui-corner-all" id="ui-id-8" href="javascript:;">返回总账号</a>
                                 </li>
 
                    
@@ -220,7 +220,25 @@
 
             }
         });
-        
+    }
 
+    function backtomainer() {
+        var transSelected = [];
+        $("input[name='translationcheck']:checked").each(function () {
+            transSelected.push($(this).val());
+        });
+        var translationIds = transSelected.join(",");
+        $.ajax({
+            url: "/Translation/BackToMainAccount",
+            type: "post",
+            datatype: "json",
+            data: { translationIds: translationIds },
+            success: function (response) {
+                window.location.href = "/Translation/HasReadTranslationList";
+            },
+            error: function () {
+
+            }
+        });
     }
 </script>

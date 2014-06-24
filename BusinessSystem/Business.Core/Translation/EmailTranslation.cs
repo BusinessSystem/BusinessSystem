@@ -19,7 +19,7 @@ namespace Business.Core
         public virtual string LanguageName { get; set; }
         public virtual string SenderName { get; set; }
         public virtual long FollowId { get; set; }//跟踪员
-        public virtual long FollowName { get; set; }//跟踪员
+        public virtual string  FollowName { get; set; }//跟踪员
         public virtual DateTime SendTime { get; set; }
         public virtual DateTime ReadTime { get; set; }
         public virtual string Theme { get; set; }

@@ -19,7 +19,7 @@ namespace Business.Nhibernate.Repository
                     query.Where(
                         m =>
                             m.SenderStatus == emailStatus &&
-                            (m.ReceiverId == receiveId || m.SenderId == receiveId || m.HandlerManagerId == receiveId ||
+                            (m.HandlerManagerId == receiveId ||
                              m.FollowId == receiveId));
                 if (intentionId != 0)
                 {
