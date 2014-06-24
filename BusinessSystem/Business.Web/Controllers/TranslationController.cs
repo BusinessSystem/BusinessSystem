@@ -154,5 +154,19 @@ namespace Business.Web.Controllers
             }
             return Json(InfoTools.GetMsgInfo(ResponseCode.Ok), JsonRequestBehavior.AllowGet);
         }
+
+        [HttpPost]
+        public ActionResult TranslationDelete(string translationIds)
+        {
+            if (!string.IsNullOrEmpty(translationIds))
+            {
+                string[] translationArray = translationIds.Split(',');
+                foreach (var translationId in translationArray)
+                {
+                    TranslationService.BackTranslationToMain(long.Parse(translationId), CurrentManager.ParentId);
+                }
+            }
+            return Json(InfoTools.GetMsgInfo(ResponseCode.Ok), JsonRequestBehavior.AllowGet);
+        }
     }
 }

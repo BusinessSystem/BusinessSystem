@@ -31,4 +31,13 @@
 	<Managaer  Code="1013" Message="普通子账号没有创建用户权限" Level="1" Description="普通子账号没有创建用户权限" />
 	<Managaer  Code="1014" Message="管理员子账号不能创建管理员" Level="1" Description="管理员子账号不能创建管理员" />
 	<Managaer  Code="1015" Message="普通账号不能创建管理员账号" Level="1" Description="普通账号不能创建管理员账号" />
+
+
+  <!-- Base -->
+  <Base  Code="2001" Message="基础数据值为空" Level="1" Description="基础数据值为空" />
+  
+  
+  <!-- Translation -->
+  <Translation  Code="3001" Message="邮件翻译主题不能为空" Level="1" Description="邮件翻译主题不能为空" />
+  <Translation  Code="3002" Message="无权删除该邮件翻译，" Level="1" Description="无权删除该邮件翻译" />
 </Infos>

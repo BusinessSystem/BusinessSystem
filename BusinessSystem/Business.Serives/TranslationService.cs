@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Xml.Serialization;
 using Business.Core;
 using Business.Nhibernate.IRepository;
 using Business.Nhibernate.Repository;
@@ -69,5 +70,18 @@ namespace Business.Serives
             emailTranslation.FollowTimes = 2;
             emailTranslationRepository.Save(emailTranslation);
         }
+
+        public static string  DeleteTranslation(long translationId,long managerId)
+        {
+            EmailTranslation emailTranslation = emailTranslationRepository.GetById(translationId);
+            if (emailTranslation.FollowId == managerId || emailTranslation.ReceiverId == managerId || emailTranslation.SenderId == managerId)
+            {
+                emailTranslation.IsDeleted = Utils.CoreDefaultValue.True;
+                emailTranslationRepository.Delete(emailTranslation);
+                return ResponseCode.Ok;
+            }
+            return ResponseCode.Translation.NoPermissionDeleteTrans;//无权
+        }
+
     }
 }

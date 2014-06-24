@@ -120,6 +120,7 @@ namespace Business.Serives
         public struct Translation
         {
             public const string EmailThemeNullOrEmpty = "3001";
+            public const string NoPermissionDeleteTrans = "3002";
         }
     }
 }
