@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+
 namespace Business.Serives.Events
 {
-    class Pulish
+    public class EventPublisherExtensions
     {
+        
     }
 }
