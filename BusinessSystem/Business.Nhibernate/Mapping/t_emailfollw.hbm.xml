@@ -5,11 +5,15 @@
 			<column name="ID" sql-type="bigint" not-null="true" unique="true"/>
 			<generator class="native" />
 		</id>
-    <property name="EmailTransId" />
-    <property name="FollowId" />
-    <property name="HandleManagerId" />
-		<property name="OriginalContent"/>
-		<property name="TargetContent"/>
+		<property name="EmailTransId" />
+		<property name="FollowId" />
+		<property name="HandleManagerId" />
+		<property name="OriginalContent" type="String">
+			<column name="OriginalContent" sql-type="Text"/>
+		</property>
+		<property name="TargetContent" type="String">
+			<column name="TargetContent" sql-type="Text"/>
+		</property>
 		<property name="OriginalLanguage"/>
 		<property name="TargetLanguage"/>
 		<property name="TransTime"/>

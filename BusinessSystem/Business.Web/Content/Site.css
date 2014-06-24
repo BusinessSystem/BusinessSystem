@@ -17,4 +17,4 @@
 table.translationfoor{ width: 100%;min-width:100%;line-height: 25px;font-family: verdana,sans-serif;border: 1px solid #DCEBF7;background-color: #EDF3F4;border-collapse: collapse;border-spacing: 0px;}
 table.translationfoor .lefrtr{width:10%; color:#336199;font-size: 20px;font-weight: bold;text-align: center;vertical-align: central; }
 table.translationfoor .rightheader{width: 90%;height: 30px;line-height: 25px;padding-left: 20px; text-align: left; background-color: #EDF3F4;color:#336199; }
-table.translationfoor .rightcontent{ background-color: #fffffF;padding: 10px;}
+table.translationfoor .rightcontent{height: auto; background-color: #FFFFFF;padding: 10px;}

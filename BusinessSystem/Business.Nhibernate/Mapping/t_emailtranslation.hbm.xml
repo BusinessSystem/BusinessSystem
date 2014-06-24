@@ -16,7 +16,9 @@
 		<property name="SendTime"  />
 		<property name="ReadTime"  />
 		<property name="Theme" />
-		<property name="Content" />
+		<property name="Content" type="String">
+			<column name="Content" sql-type="Text"/>
+		</property>
 		<property name="ReceiverStatus"  />
 		<property name="SenderStatus"  />
 		<property name="FilePath"  />

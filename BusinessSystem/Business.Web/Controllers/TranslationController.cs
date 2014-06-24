@@ -171,10 +171,27 @@ namespace Business.Web.Controllers
         [HttpGet]
         public ActionResult EmailTranslationDetail(long id)
         {
+            ViewBag.CurrentManager = CurrentManager;
             PageTranslationFollow translationFollow =
                 new PageTranslationFollow(TranslationService.GeEmailTranslationById(id),
                     TranslationService.GetEmailFollows(id));
             return View(translationFollow);
+        }
+
+        [HttpPost]
+        public ActionResult TranslationReply()
+        {
+            string filePath = string.Empty;
+            if (Request.Files.Count > 0 && Request.Files[0].ContentLength > 0)
+            {
+                HttpPostedFileBase file = Request.Files[0];
+            }
+            
+            if (!string.IsNullOrEmpty(Request["emailfollowId"]))
+            {
+
+            }
+            return null;
         }
     }
 }

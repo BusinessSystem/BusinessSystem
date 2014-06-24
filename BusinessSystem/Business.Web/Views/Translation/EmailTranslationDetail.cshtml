@@ -1,6 +1,9 @@
 ﻿@{
     ViewBag.Title = "<li><i class=\"\"></i><a href=\"/Manager/ManagerList\">邮件翻译</a></li><li class=\"active\">邮件详细信息</li>";
+    Manager currentManager = ViewBag.CurrentManager;
 }
+@using Business.Core
+@using NHibernate.AdoNet
 @model Business.Web.PageModel.PageTranslationFollow
 @if (Model != null &&Model.EmailTranslationModel!=null && Model.EmailFollows!=null&&Model.EmailFollows.Count!=0)
 {
@@ -52,7 +55,7 @@
                         <div class="profile-info-row">
                             <div class="profile-info-name"> 询盘内容： </div>
                             <div class="profile-info-value">
-                                <span class="editable editable-click" id="signup">
+                                <span class="editable " id="signup">
                                     @(new MvcHtmlString(Model.EmailTranslationModel.Content))
                                 </span>
                             </div>
@@ -74,17 +77,27 @@
                                         <td class="rightheader">原文:</td>
                                     </tr>
                                     <tr>
-                                        <td class="rightcontent">@(Html.Encode(item.OriginalContent)) &nbsp;</td>
+                                        <td class="rightcontent">@(new MvcHtmlString(item.OriginalContent)) &nbsp;</td>
                                     </tr>
                                     <tr>
-                                        <td class="rightheader">译文:</td>
+                                        <td class="rightheader">译文:
+                                        @if (currentManager.ManagerType == ManagerTypeEnum.Super && string.IsNullOrEmpty(item.TargetContent))
+                                        {
+                                            <button class="btn btn-app btn-light btn-xs btn-small" onclick=" showReplyTranlationForm('@item.Id') ">
+                                                翻译
+                                            </button>
+                                        }
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td class="rightcontent">
-                                           
-                                            @(item.TargetContent)
-                                             &nbsp;
-                                           </td>
+                                            @if (string.IsNullOrEmpty(item.TargetContent))
+                                            {
+                                                item.TargetContent = "&nbsp;<br/><br/><br/><br/>";
+                                            }
+                                            @(new MvcHtmlString(item.TargetContent))
+                                            
+                                        </td>
                                     </tr>
                                 </table>
                            
@@ -97,9 +110,17 @@
                 
 
                     <div class="profile-user-info profile-user-info-striped">
-                 
-                        <form class="form-horizontal margin-20" id="translation_add_form" method="post" action="/Translation/EmailTranslationAdd" enctype="multipart/form-data"   role="form">
-                        
+                        @{
+
+                            string display = string.Empty;
+                        }
+                        @if (currentManager.ManagerType == ManagerTypeEnum.Super)
+                        {
+                              display = "display-none";
+                        }
+                        <form class="form-horizontal margin-20 @(display)" id="translation_reply_form" method="post" action="/Translation/TranslationReply" enctype="multipart/form-data"   role="form">
+                            <input type="hidden" name="replyfollowId" />
+                            <input type="hidden" name="emailTranslationId" value="@Model.EmailTranslationModel.Id" />
                             <div class="form-group">
                                 <div class="col-sm-10">
                                     <div class="widget-box">
@@ -133,10 +154,20 @@
              
                             <div class="clearfix form-actions">
                                 <div class="col-md-offset-1 col-md-9">
-                                    <button id="btn_translation_add" class="btn btn-info" type="button">
-                                        <i class="icon-ok bigger-110"></i>
-                                        转ETW国际翻译
-                                    </button>
+                                     @if (currentManager.ManagerType == ManagerTypeEnum.Super)
+                                     {
+                                         <button id="btn_translation_reply" class="btn btn-info" type="button">
+                                             <i class="icon-ok bigger-110"></i>
+                                              提交翻译
+                                         </button>
+                                     }
+                                     else
+                                     {
+                                           <button id="btn_translation_add" class="btn btn-info" type="button">
+                                             <i class="icon-ok bigger-110"></i>
+                                             转ETW国际翻译
+                                         </button>
+                                     }
                                 </div>
                             </div>
                         </form>
@@ -186,20 +217,35 @@
                 onchange: null,
                 thumbnail: false
             });
-            $("#btn_translation_add").click(function() {
+           
+        });
+
+        function showReplyTranlationForm(followId) {
+            $("input[name=replyfollowId]").val(followId);
+            $("#translation_reply_form").show();
+            $("#btn_translation_reply").click(function () {
                 $("#translationContent").html($('#editor2').html());
-                if ($("input[name=emailTheme]").val().trim() == "") {
+                if ($("input[name=replyfollowId]").val().trim() == "") {
                     art.dialog({
-                        content: "邮件主题为空",
+                        content: "操作异常",
                         time: 2,
                         lock: true,
                         width: 200
                     });
                     return false;
                 }
-                $("#translation_add_form").submit();
+                if ( $("#translationContent").html().trim() == "") {
+                    art.dialog({
+                        content: "邮件翻译内容为空",
+                        time: 2,
+                        lock: true,
+                        width: 200
+                    });
+                    return false;
+                }
+                $("#translation_reply_form").submit();
             });
-        });
+        }
     </script>
 
 }
