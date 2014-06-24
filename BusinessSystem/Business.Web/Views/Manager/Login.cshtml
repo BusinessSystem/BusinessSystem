@@ -5,7 +5,7 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
-		<title>Login Page - Ace Admin</title>
+		<title>ETW 登陆</title>
 
 		<meta name="description" content="User login page" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -142,7 +142,6 @@
 		        document.onkeydown = function (event) {
 		            var e = event || window.event || arguments.callee.caller.arguments[0];
 		            if (e.keyCode == 13) {
-		              
 		                $("#btn_login").trigger("click");
 		            }
     		    };
@@ -162,6 +161,8 @@
     		                    success: function(response) {
     		                        if (response.Code == 0) {
     		                            window.location = "/Manager/Index";
+    		                        } else {
+    		                            
     		                        }
     		                    },
     		                    error: function() {
