@@ -155,6 +155,7 @@
                         <span class="btn btn-app btn-light btn-xs ">
                             删除
                         </span>
+                         <ul class="pagination bpagination" id="pagination2"></ul>
                     </div>
                 </div>
             </div>
@@ -172,7 +173,26 @@
             } else {
                 $("input[name='translationcheck']").attr("checked", this.checked);
             }
-
+        });
+        var totalCount = '10';
+        totalCount = parseInt(totalCount);
+        var visiblePages = '10';
+        visiblePages = parseInt(visiblePages);
+        var currentPage = '3';
+        currentPage = parseInt(currentPage);
+        var pageSize = 1;
+        $.jqPaginator('#pagination2', {
+            totalCounts: totalCount,
+            visiblePages: visiblePages,
+            currentPage: currentPage,
+            pageSize: pageSize,
+            onPageChange: function(num, type) {
+                if (num == currentPage) {
+                    //每次初始化都会执行此处
+                } else {
+                    window.location.href = "/Manager/ManagerList?managerType=" + managerType + "&pageIndex=" + num + "&pageSize=" + pageSize;
+                }
+            }
         });
     });
 
@@ -194,5 +214,7 @@
 
             }
         });
+        
+
     }
 </script>

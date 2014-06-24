@@ -174,20 +174,21 @@
             window.location.href = "/Manager/ManagerList?managerType=" + $(this).val();
         });
         var totalCount = '@Model.TotalCount';
+        totalCount = parseInt(totalCount);
         var visiblePages = '@Model.VisiblePages';
+        visiblePages = parseInt(visiblePages);
         var currentPage = '@Model.CurrentPage';
-        var pageSize = 1;
+        currentPage = parseInt(currentPage);
+        var pageSize = 10;
         var managerType = $("#form-field-select-1").val();
         $.jqPaginator('#pagination2', {
             totalCounts: totalCount,
             visiblePages: visiblePages,
             currentPage: currentPage,
             pageSize:pageSize,
-            prev: '<li class="prev"><a href="javascript:;">上一页</a></li>',
-            next: '<li class="next"><a href="javascript:;">下一页</a></li>',
-            page: '<li class="page"><a href="javascript:;">{{page}}</a></li>',
             onPageChange: function(num, type) {
                 if (num == currentPage) {
+                     //每次初始化都会执行此处
                 } else {
                     window.location.href = "/Manager/ManagerList?managerType=" + managerType + "&pageIndex=" + num + "&pageSize=" + pageSize;
                 }

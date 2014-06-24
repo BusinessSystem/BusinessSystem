@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI;
 using Business.Core;
 using Business.Serives;
 using Business.Utils.Info;
@@ -51,10 +52,26 @@ namespace Business.Web.Controllers
         [HttpGet]
         public ActionResult HasReadTranslationList()
         {
+            int pageIndex = 1;
+            int pageSize = 10;
+            if (!string.IsNullOrEmpty(Request["pageIndex"]))
+            {
+                int.TryParse(Request["pageIndex"].ToString(), out pageIndex);
+            }
+            if (!string.IsNullOrEmpty(Request["pageSize"]))
+            {
+                int.TryParse(Request["pageSize"].ToString(), out pageSize);
+            }
+            long intentionId = 0;
+            if (!string.IsNullOrEmpty(Request["intentionId"]))
+            {
+                long.TryParse(Request["intentionId"].ToString(), out intentionId);
+            }
+            
             PageTranslations pageTranslations = new PageTranslations();
             pageTranslations.Intentions = BaseService.GetIntentions();
-            pageTranslations.EmailTranslations = TranslationService.GetEmailTranslations(EmailStatusEnum.HasRead,CurrentManager.Id, 0, 1,
-                10);
+            pageTranslations.EmailTranslations = TranslationService.GetEmailTranslations(EmailStatusEnum.HasRead,
+                CurrentManager.Id, 0, pageIndex, pageSize);
             pageTranslations.CurrentManager = CurrentManager;
             return View(pageTranslations);
         }

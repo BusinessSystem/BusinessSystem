@@ -10,7 +10,7 @@ namespace Business.Nhibernate.Repository
 {
     public class EmailTranslationRepository:Repository<EmailTranslation>,IEmailTranslationRepository
     {
-        public IList<EmailTranslation> GetEmailTranslations(EmailStatusEnum emailStatus,long receiveId, long intentionId, int pageIndex, int pageSize)
+        public IList<EmailTranslation> GetEmailTranslations(EmailStatusEnum emailStatus, long receiveId, long intentionId, int pageIndex, int pageSize, out int totalCount)
         {
             using (var session = GetSession())
             {
@@ -25,7 +25,7 @@ namespace Business.Nhibernate.Repository
                 {
                     query = query.And(m => m.IntentionId == intentionId);
                 }
-
+                totalCount = query.RowCount();
                 return query.Take(pageSize).Skip((pageIndex - 1)*pageSize).List();
             }
         }
