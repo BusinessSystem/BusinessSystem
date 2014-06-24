@@ -44,7 +44,7 @@
 		<![endif]-->
 	</head>
 
-	<body class="login-layout">
+	<body class="login-layout" >
 		<div class="main-container">
 			<div class="main-content">
 				<div class="row">
@@ -128,7 +128,7 @@
 
 		<!--[if IE]>
 <script type="text/javascript">
- window.jQuery || document.write("<script src='/assets/js/jquery-1.10.2.min.js'>"+"<"+"/script>");
+    window.jQuery || document.write("<script src='/assets/js/jquery-1.10.2.min.js'>"+"<"+"/script>");
 </script>
 <![endif]-->
 
@@ -138,31 +138,40 @@
 
 		<!-- inline scripts related to this page -->
 
-		<script type="text/javascript">
-		    $(function() {
-		        $("#btn_login").click(function () {
-		            var userName = $("input[name=userName]").val().trim();
-		            var password = $("input[name=password]").val().trim();
-		            var remember = $("input[name=remember]").is(':checked');
-		            if (userName != "" && password != "") {
-		                $.ajax({
-		                    url:"/Handler/Login",
-                            type:"post",
-                            datatype:"json",
-                            data: { userName: userName, password: password, remember: remember },
-                            success:function(response) {
-                                if (response.Code == 0) {
-                                    window.location = "/Manager/Index";
-                                }
-                            },
-                            error:function() {
-                                
-                            }
-		                });
+		    <script type="text/javascript">
+		        document.onkeydown = function (event) {
+		            var e = event || window.event || arguments.callee.caller.arguments[0];
+		            if (e.keyCode == 13) {
+		              
+		                $("#btn_login").trigger("click");
 		            }
-		        });
+    		    };
+    		 
 
-		    });
-		</script>
+    		    $(function() {
+    		        $("#btn_login").click(function() {
+    		            var userName = $("input[name=userName]").val().trim();
+    		            var password = $("input[name=password]").val().trim();
+    		            var remember = $("input[name=remember]").is(':checked');
+    		            if (userName != "" && password != "") {
+    		                $.ajax({
+    		                    url: "/Handler/Login",
+    		                    type: "post",
+    		                    datatype: "json",
+    		                    data: { userName: userName, password: password, remember: remember },
+    		                    success: function(response) {
+    		                        if (response.Code == 0) {
+    		                            window.location = "/Manager/Index";
+    		                        }
+    		                    },
+    		                    error: function() {
+
+    		                    }
+    		                });
+    		            }
+    		        });
+
+    		    });
+    		</script>
 	</body>
 </html>
