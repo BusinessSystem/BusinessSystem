@@ -73,8 +73,10 @@ namespace Business.Web.Controllers
             ViewBag.IntentionId = intentionId;
             ViewBag.Intentions = BaseService.GetIntentions();
             ViewBag.CurrentManager = CurrentManager;
-            return View(TranslationService.GetEmailTranslations(EmailStatusEnum.HasRead, Utils.CoreDefaultValue.False,
-                CurrentManager.Id, intentionId, pageIndex, pageSize));
+            return
+                View(TranslationService.GetHasReadEmailTranslations(CurrentManager.ManagerType, EmailStatusEnum.HasRead,
+                    Utils.CoreDefaultValue.False,
+                    CurrentManager.Id, intentionId, pageIndex, pageSize));
         }
 
         [HttpGet]
@@ -98,8 +100,9 @@ namespace Business.Web.Controllers
             ViewBag.IntentionId = intentionId;
             ViewBag.Intentions = BaseService.GetIntentions();
             ViewBag.CurrentManager = CurrentManager;
-            return View(TranslationService.GetEmailTranslations(EmailStatusEnum.UnRead, Utils.CoreDefaultValue.False,
-                CurrentManager.Id, intentionId, pageIndex, pageSize));
+            return null;
+           // return View(TranslationService.GetEmailTranslations(EmailStatusEnum.UnRead, Utils.CoreDefaultValue.False,
+             //   CurrentManager.Id, intentionId, pageIndex, pageSize));
         }
 
         [HttpGet]

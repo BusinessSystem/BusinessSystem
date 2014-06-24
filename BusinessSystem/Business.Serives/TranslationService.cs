@@ -27,12 +27,14 @@ namespace Business.Serives
             return ResponseCode.Ok; 
         }
 
-        public static PageModel<EmailTranslation> GetEmailTranslations(EmailStatusEnum emailStatus,short isDeleted, long receiveId,
+        public static PageModel<EmailTranslation> GetHasReadEmailTranslations(ManagerTypeEnum managerType,
+            EmailStatusEnum emailStatus, short isDeleted, long receiveId,
             long intentionId, int pageIndex, int pageSize)
         {
-           int totalCount = 0;
-            IList<EmailTranslation> emailTranslations = emailTranslationRepository.GetEmailTranslations(emailStatus,
-               isDeleted, receiveId, intentionId, pageIndex, pageSize, out totalCount);
+            int totalCount = 0;
+            IList<EmailTranslation> emailTranslations =
+                emailTranslationRepository.GetHasReadEmailTranslations(managerType, emailStatus, isDeleted, receiveId,
+                    intentionId, pageIndex, pageSize, out totalCount);
             return new PageModel<EmailTranslation>(emailTranslations, pageIndex, pageSize, totalCount);
         }
 

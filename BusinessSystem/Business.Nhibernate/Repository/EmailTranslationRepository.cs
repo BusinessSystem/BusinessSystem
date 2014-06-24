@@ -10,17 +10,31 @@ namespace Business.Nhibernate.Repository
 {
     public class EmailTranslationRepository:Repository<EmailTranslation>,IEmailTranslationRepository
     {
-        public IList<EmailTranslation> GetEmailTranslations(EmailStatusEnum emailStatus, short isDeleted,long receiveId, long intentionId, int pageIndex, int pageSize, out int totalCount)
+        public IList<EmailTranslation> GetHasReadEmailTranslations(ManagerTypeEnum managerType,
+            EmailStatusEnum emailStatus, short isDeleted, long receiveId, long intentionId, int pageIndex, int pageSize,
+            out int totalCount)
         {
             using (var session = GetSession())
             {
                 var query = session.QueryOver<EmailTranslation>();
-                query =
-                    query.Where(
-                        m =>
-                            m.SenderStatus == emailStatus && m.IsDeleted == isDeleted &&
-                            (m.HandlerManagerId == receiveId ||
-                             m.FollowId == receiveId));
+                query = query.Where(m => m.IsDeleted == isDeleted);
+                if (managerType == ManagerTypeEnum.Super)
+                {
+                    query =
+                        query.And(
+                            m =>
+                                m.ReceiverStatus == EmailStatusEnum.HasRead &&
+                                (m.ReceiverId == receiveId || m.HandlerManagerId == receiveId));
+
+                }
+                if (managerType == ManagerTypeEnum.Common)
+                {
+                    query =
+                        query.And(
+                            m =>
+                                m.SenderStatus == EmailStatusEnum.HasRead &&
+                                (m.SenderId == receiveId || m.FollowId == receiveId));
+                }
                 if (intentionId != 0)
                 {
                     query = query.And(m => m.IntentionId == intentionId);
