@@ -26,16 +26,25 @@ namespace Business.Serives
             return ResponseCode.Ok; 
         }
 
-        public static PageModel<EmailTranslation> GetEmailTranslations(EmailStatusEnum emailStatus, long receiveId,
+        public static PageModel<EmailTranslation> GetEmailTranslations(EmailStatusEnum emailStatus,short isDeleted, long receiveId,
             long intentionId, int pageIndex, int pageSize)
         {
-
-            int totalCount = 0;
+           int totalCount = 0;
             IList<EmailTranslation> emailTranslations = emailTranslationRepository.GetEmailTranslations(emailStatus,
-                receiveId, intentionId, pageIndex,
-                pageSize, out totalCount);
+               isDeleted, receiveId, intentionId, pageIndex, pageSize, out totalCount);
             return new PageModel<EmailTranslation>(emailTranslations, pageIndex, pageSize, totalCount);
         }
+
+        public static PageModel<EmailTranslation> GetRecycledTranslationList(long receiveId,
+            long intentionId, int pageIndex, int pageSize)
+        {
+            int totalCount = 0;
+            IList<EmailTranslation> emailTranslations =
+                emailTranslationRepository.RecycledTranslationList(Utils.CoreDefaultValue.True, receiveId, intentionId,
+                    pageIndex, pageSize, out totalCount);
+            return new PageModel<EmailTranslation>(emailTranslations, pageIndex, pageSize, totalCount);
+        }
+
         /// <summary>
         /// 移动到意向客户
         /// </summary>

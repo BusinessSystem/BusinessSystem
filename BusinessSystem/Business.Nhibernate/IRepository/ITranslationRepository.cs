@@ -14,6 +14,9 @@ namespace Business.Nhibernate.IRepository
 
     public interface IEmailTranslationRepository : IRepository<EmailTranslation>
     {
-        IList<EmailTranslation> GetEmailTranslations(EmailStatusEnum emailStatus,long receiveId, long intentionId, int pageIndex, int pageSize,out int totalCount);
+        IList<EmailTranslation> GetEmailTranslations(EmailStatusEnum emailStatus, short isDeleted, long receiveId, long intentionId, int pageIndex, int pageSize, out int totalCount);
+
+        IList<EmailTranslation> RecycledTranslationList(short isDeleted, long receiveId, long intentionId,
+            int pageIndex, int pageSize, out int totalCount);
     }
 }

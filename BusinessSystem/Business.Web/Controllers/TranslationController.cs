@@ -70,18 +70,57 @@ namespace Business.Web.Controllers
             ViewBag.IntentionId = intentionId;
             ViewBag.Intentions = BaseService.GetIntentions();
             ViewBag.CurrentManager = CurrentManager;
-            return View(TranslationService.GetEmailTranslations(EmailStatusEnum.HasRead,
+            return View(TranslationService.GetEmailTranslations(EmailStatusEnum.HasRead,Utils.CoreDefaultValue.False,
                 CurrentManager.Id, intentionId, pageIndex, pageSize));
         }
         [HttpGet]
         public ActionResult UnReadTranslationList()
         {
-            return View();
+            int pageIndex = 1;
+            int pageSize = 10;
+            if (!string.IsNullOrEmpty(Request["pageIndex"]))
+            {
+                int.TryParse(Request["pageIndex"].ToString(), out pageIndex);
+            }
+            if (!string.IsNullOrEmpty(Request["pageSize"]))
+            {
+                int.TryParse(Request["pageSize"].ToString(), out pageSize);
+            }
+            long intentionId = 0;
+            if (!string.IsNullOrEmpty(Request["intentionId"]))
+            {
+                long.TryParse(Request["intentionId"].ToString(), out intentionId);
+            }
+            ViewBag.IntentionId = intentionId;
+            ViewBag.Intentions = BaseService.GetIntentions();
+            ViewBag.CurrentManager = CurrentManager;
+            return View(TranslationService.GetEmailTranslations(EmailStatusEnum.UnRead, Utils.CoreDefaultValue.False,
+                CurrentManager.Id, intentionId, pageIndex, pageSize));
         }
+
         [HttpGet]
         public ActionResult RecycledTranslationList()
         {
-            return View();
+            int pageIndex = 1;
+            int pageSize = 10;
+            if (!string.IsNullOrEmpty(Request["pageIndex"]))
+            {
+                int.TryParse(Request["pageIndex"].ToString(), out pageIndex);
+            }
+            if (!string.IsNullOrEmpty(Request["pageSize"]))
+            {
+                int.TryParse(Request["pageSize"].ToString(), out pageSize);
+            }
+            long intentionId = 0;
+            if (!string.IsNullOrEmpty(Request["intentionId"]))
+            {
+                long.TryParse(Request["intentionId"].ToString(), out intentionId);
+            }
+            ViewBag.IntentionId = intentionId;
+            ViewBag.Intentions = BaseService.GetIntentions();
+            ViewBag.CurrentManager = CurrentManager;
+            return View(TranslationService.GetRecycledTranslationList(
+                CurrentManager.Id, intentionId, pageIndex, pageSize));
         }
 
         [HttpPost]
