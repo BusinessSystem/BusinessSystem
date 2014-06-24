@@ -163,7 +163,7 @@ namespace Business.Web.Controllers
                 string[] translationArray = translationIds.Split(',');
                 foreach (var translationId in translationArray)
                 {
-                    TranslationService.BackTranslationToMain(long.Parse(translationId), CurrentManager.ParentId);
+                    TranslationService.DeleteTranslation(long.Parse(translationId), CurrentManager.Id);
                 }
             }
             return Json(InfoTools.GetMsgInfo(ResponseCode.Ok), JsonRequestBehavior.AllowGet);

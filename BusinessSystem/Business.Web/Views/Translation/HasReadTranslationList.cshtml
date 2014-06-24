@@ -26,7 +26,7 @@
                         <span class="btn btn-app btn-light btn-xs  no-border">
                             <input type="checkbox"  class="checkalltranslation"/>全选
                         </span>
-                        <span class="btn btn-app btn-light btn-xs ">
+                        <span class="btn btn-app btn-light btn-xs" onclick="deletetranslation()">
                             删除
                         </span>
      
@@ -157,7 +157,7 @@
                         <span class="btn btn-app btn-light btn-xs  no-border">
                             <input type="checkbox"  class="checkalltranslation"/>全选
                         </span>
-                        <span class="btn btn-app btn-light btn-xs " class="deletetranslation">
+                        <span class="btn btn-app btn-light btn-xs " onclick="deletetranslation()">
                             删除
                         </span>
                          <ul class="pagination bpagination" id="pagination2"></ul>
@@ -179,25 +179,9 @@
                 $("input[name='translationcheck']").attr("checked", this.checked);
             }
         });
-        $(".deletetranslation").click(function () {
-            var transSelected = [];
-            $("input[name='translationcheck']:checked").each(function () {
-                transSelected.push($(this).val());
-            });
-            var translationIds = transSelected.join(",");
-            $.ajax({
-                url: "/Translation/TranslationDelete",
-                type: "post",
-                datatype: "json",
-                data: { translationIds: translationIds},
-                success: function (response) {
-                    window.location.href = "/Translation/HasReadTranslationList?";
-                },
-                error: function () {
 
-                }
-            });
-        });
+       
+
         var currentIntentionId = '@ViewBag.IntentionId';
         var totalCount = '@Model.TotalCount';
         totalCount = parseInt(totalCount);
@@ -254,6 +238,26 @@
             data: { translationIds: translationIds },
             success: function (response) {
                 window.location.href = "/Translation/HasReadTranslationList";
+            },
+            error: function () {
+
+            }
+        });
+    }
+
+    function deletetranslation() {
+        var transSelected = [];
+        $("input[name='translationcheck']:checked").each(function () {
+            transSelected.push($(this).val());
+        });
+        var translationIds = transSelected.join(",");
+        $.ajax({
+            url: "/Translation/TranslationDelete",
+            type: "post",
+            datatype: "json",
+            data: { translationIds: translationIds },
+            success: function (response) {
+                window.location.href = "/Translation/HasReadTranslationList?";
             },
             error: function () {
 
