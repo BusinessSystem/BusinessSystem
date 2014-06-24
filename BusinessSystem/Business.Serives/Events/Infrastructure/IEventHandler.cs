@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Business.Serives.Events
 {
-    public interface IConsumer<T>
+    public interface IEventHandler<T>
     {
         void HandleEvent(T eventMessage);
     }

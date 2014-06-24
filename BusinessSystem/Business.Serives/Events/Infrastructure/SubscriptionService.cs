@@ -10,9 +10,9 @@ namespace Business.Serives.Events
 {
     public class SubscriptionService:ISubscriptionService
     {
-        public IList<IConsumer<T>> GetSubscriptions<T>()
+        public IList<IEventHandler<T>> GetSubscriptions<T>()
         {
-            IList<IConsumer<T>> consumers = new List<IConsumer<T>>();
+            IList<IEventHandler<T>> consumers = new List<IEventHandler<T>>();
             Type[] types = Assembly.Load("Business.Serives.Events").GetTypes();
             foreach (var type in types)
             {
@@ -23,9 +23,9 @@ namespace Business.Serives.Events
                 var implementInterfaces = type.GetInterfaces();
                 foreach (var implementInterface in implementInterfaces)
                 {
-                    if (implementInterface.IsGenericType && implementInterface == typeof (IConsumer<T>))
+                    if (implementInterface.IsGenericType && implementInterface == typeof(IEventHandler<T>))
                     {
-                        IConsumer<T> temp = (IConsumer<T>) Activator.CreateInstance(type);
+                        IEventHandler<T> temp = (IEventHandler<T>)Activator.CreateInstance(type);
                         consumers.Add(temp);
                     }
                 }

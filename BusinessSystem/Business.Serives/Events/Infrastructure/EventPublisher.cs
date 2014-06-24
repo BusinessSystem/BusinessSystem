@@ -25,7 +25,7 @@ namespace Business.Serives.Events
         /// <typeparam name="T">Type</typeparam>
         /// <param name="x">Event consumer</param>
         /// <param name="eventMessage">Event message</param>
-        protected   void PublishToConsumer<T>(IConsumer<T> x, T eventMessage)
+        protected void PublishToConsumer<T>(IEventHandler<T> x, T eventMessage)
         {
             x.HandleEvent(eventMessage);
         }

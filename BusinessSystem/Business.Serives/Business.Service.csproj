@@ -47,11 +47,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EnquiryService.cs" />
-    <Compile Include="Events\EventHandler\EmailSendConsumer.cs" />
+    <Compile Include="Events\EventHandler\SendEmailEventHandler.cs" />
     <Compile Include="Events\Event\EmailSendEvent.cs" />
     <Compile Include="Events\Infrastructure\EventPublisher.cs" />
     <Compile Include="Events\Infrastructure\EventPublisherExtensions.cs" />
-    <Compile Include="Events\Infrastructure\IConsumer.cs" />
+    <Compile Include="Events\Infrastructure\IEventHandler.cs" />
     <Compile Include="Events\Infrastructure\IPublish.cs" />
     <Compile Include="Events\Infrastructure\ISubscriptionService.cs" />
     <Compile Include="Events\Infrastructure\SubscriptionService.cs" />

@@ -11,6 +11,6 @@ namespace Business.Serives.Events
     /// </summary>
     public interface ISubscriptionService
     {
-        IList<IConsumer<T>> GetSubscriptions<T>();
+        IList<IEventHandler<T>> GetSubscriptions<T>();
     }
 }

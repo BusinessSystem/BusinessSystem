@@ -7,7 +7,7 @@ using Business.Utils;
 
 namespace Business.Serives.Events
 {
-    public class EmailSendConsumer : IConsumer<EmailSendEvent>
+    public class SendEmailEventHandler : IEventHandler<EmailSendEvent>
     {
 
         public void HandleEvent(EmailSendEvent eventMessage)
