@@ -11,15 +11,7 @@ namespace Business.Serives.Events
 
         public void HandleEvent(EmailSendEvent eventMessage)
         {
-            Console.WriteLine("我来了 EmailSendEvent ");
-        }
-    }
-    public class EmailSendConsumer2 : IConsumer<EmailSendEvent>
-    {
-
-        public void HandleEvent(EmailSendEvent eventMessage)
-        {
-            Console.WriteLine("我来了 EmailSendEvent 2");
+             
         }
     }
 }

@@ -47,14 +47,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EnquiryService.cs" />
-    <Compile Include="Events\EmailSendConsumer.cs" />
-    <Compile Include="Events\EmailSendEvent.cs" />
-    <Compile Include="Events\EventPublisher.cs" />
-    <Compile Include="Events\EventPublisherExtensions.cs" />
-    <Compile Include="Events\IConsumer.cs" />
-    <Compile Include="Events\IPublish.cs" />
-    <Compile Include="Events\ISubscriptionService.cs" />
-    <Compile Include="Events\SubscriptionService.cs" />
+    <Compile Include="Events\EventHandler\EmailSendConsumer.cs" />
+    <Compile Include="Events\Event\EmailSendEvent.cs" />
+    <Compile Include="Events\Infrastructure\EventPublisher.cs" />
+    <Compile Include="Events\Infrastructure\EventPublisherExtensions.cs" />
+    <Compile Include="Events\Infrastructure\IConsumer.cs" />
+    <Compile Include="Events\Infrastructure\IPublish.cs" />
+    <Compile Include="Events\Infrastructure\ISubscriptionService.cs" />
+    <Compile Include="Events\Infrastructure\SubscriptionService.cs" />
     <Compile Include="ManageService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BaseService.cs" />
