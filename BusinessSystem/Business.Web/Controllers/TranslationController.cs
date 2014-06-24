@@ -13,7 +13,7 @@ namespace Business.Web.Controllers
 {
     public class TranslationController : AdminBaseController
     {
-       
+
         [HttpGet]
         public ActionResult EmailTranslationAdd()
         {
@@ -22,8 +22,9 @@ namespace Business.Web.Controllers
         }
 
         [HttpPost]
-        [ValidateInput(false)] 
-        public ActionResult EmailTranslationAdd(string emailTheme,string translationContent,long originalLanguage, long targetLanguage)
+        [ValidateInput(false)]
+        public ActionResult EmailTranslationAdd(string emailTheme, string translationContent, long originalLanguage,
+            long targetLanguage)
         {
             string filePath = string.Empty;
             if (Request.Files.Count > 0 && Request.Files[0].ContentLength > 0)
@@ -34,13 +35,15 @@ namespace Business.Web.Controllers
             Manager selfManager = ManageService.GetManagerById(CurrentManager.Id);
             if (superManager != null)
             {
-                EmailTranslation emailTranslation = EmailTranslationFactory.Create(superManager.Id, SystemDictionary.GetInstance.GetBaseDictionary(selfManager.Language).Value, selfManager.RealName, CurrentManager.Id,
+                EmailTranslation emailTranslation = EmailTranslationFactory.Create(superManager.Id,
+                    SystemDictionary.GetInstance.GetBaseDictionary(selfManager.Language).Value, selfManager.RealName,
+                    CurrentManager.Id,
                     emailTheme,
                     translationContent, filePath);
                 EmailFollow emailFollow = EmailFollowFactory.Create(0,
                     SystemDictionary.GetInstance.GetBaseDictionary(originalLanguage).Value,
                     SystemDictionary.GetInstance.GetBaseDictionary(targetLanguage).Value);
-                string result=TranslationService.SaveTranslation(emailTranslation, emailFollow);
+                string result = TranslationService.SaveTranslation(emailTranslation, emailFollow);
                 if (result == ResponseCode.Ok)
                 {
                     return RedirectToAction("HasReadTranslationList");
@@ -70,9 +73,10 @@ namespace Business.Web.Controllers
             ViewBag.IntentionId = intentionId;
             ViewBag.Intentions = BaseService.GetIntentions();
             ViewBag.CurrentManager = CurrentManager;
-            return View(TranslationService.GetEmailTranslations(EmailStatusEnum.HasRead,Utils.CoreDefaultValue.False,
+            return View(TranslationService.GetEmailTranslations(EmailStatusEnum.HasRead, Utils.CoreDefaultValue.False,
                 CurrentManager.Id, intentionId, pageIndex, pageSize));
         }
+
         [HttpGet]
         public ActionResult UnReadTranslationList()
         {
@@ -134,7 +138,7 @@ namespace Business.Web.Controllers
                     TranslationService.MoveToIntentionCustom(long.Parse(translationId), intentionId);
                 }
             }
-            return Json(InfoTools.GetMsgInfo(ResponseCode.Ok),JsonRequestBehavior.AllowGet);
+            return Json(InfoTools.GetMsgInfo(ResponseCode.Ok), JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
