@@ -97,5 +97,41 @@ namespace Business.Serives
         {
             return emailTranslationRepository.GetById(translationId);
         }
+
+        public static string CreateEmailFollow(long translationId,string originalContent,string filePath)
+        {
+            EmailTranslation emailTranslation = emailTranslationRepository.GetById(translationId);
+            if (emailTranslation != null)
+            {
+                EmailFollow emailFollow = EmailFollowFactory.Create(translationId, originalContent,
+                    emailTranslation.OriginalLanguage,emailTranslation.TargetLanguage);
+                emailFollow.FollowId = emailTranslation.FollowId;
+                emailFollow.HandleManagerId = emailTranslation.HandlerManagerId;
+                emailTranslation.ReceiverStatus=EmailStatusEnum.UnRead;
+                emailTranslationRepository.Save(emailTranslation);
+                emailFollowRepository.Save(emailFollow);
+               return ResponseCode.Ok;
+            }
+            return ResponseCode.NotFoundData;
+        }
+
+        public static string ReplyTranslation(long followId,long translationId,string targetContent,Manager currentManager)
+        {
+            EmailFollow emailFollow = emailFollowRepository.GetById(followId);
+            EmailTranslation emailTranslation = emailTranslationRepository.GetById(translationId);
+            if (emailFollow != null)
+            {
+                emailFollow.TargetContent = targetContent;
+                emailFollow.HandleManagerId = currentManager.Id;
+                if (emailFollowRepository.GetEmailFollowsUnReadByTransId(translationId) ==0)
+                {
+                    emailTranslation.ReceiverStatus = EmailStatusEnum.HasRead;
+                }
+                emailTranslation.SenderStatus = EmailStatusEnum.UnRead;
+                emailFollowRepository.Save(emailFollow);
+                return ResponseCode.Ok;
+            }
+            return ResponseCode.NotFoundData;
+        }
     }
 }

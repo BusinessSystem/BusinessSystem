@@ -17,5 +17,16 @@ namespace Business.Nhibernate.Repository
                 return session.QueryOver<EmailFollow>().Where(m => m.EmailTransId == transId).List();
             }
         }
+
+        public int GetEmailFollowsUnReadByTransId(long transId)
+        {
+            using (var session = GetSession())
+            {
+                return
+                    session.QueryOver<EmailFollow>()
+                        .Where(m => m.EmailTransId == transId && (m.TargetContent == "" || m.TargetContent == null))
+                        .RowCount();
+            }
+        }
     }
 }

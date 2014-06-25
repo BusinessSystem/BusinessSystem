@@ -40,5 +40,16 @@ namespace Business.Core
                 TransTime = DateTime.Now
             };
         }
+        public static EmailFollow Create(long emailTransId, string originalContent, string originalLanguage,string targetLanguage)
+        {
+            return new EmailFollow()
+            {
+                EmailTransId = emailTransId,
+                OriginalContent = originalContent,
+                OriginalLanguage = originalLanguage,
+                TargetLanguage = targetLanguage,
+                TransTime = DateTime.Now
+            };
+        }
     }
 }

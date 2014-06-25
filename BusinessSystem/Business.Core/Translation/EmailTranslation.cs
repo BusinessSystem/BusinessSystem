@@ -31,6 +31,8 @@ namespace Business.Core
         public virtual string FilePath { get; set; }
         public virtual short IsDeleted { get; set; }
         public virtual int  FollowTimes { get; set; }
+        public virtual string OriginalLanguage { get; set; }
+        public virtual string TargetLanguage { get; set; }
     }
 
     /// <summary>

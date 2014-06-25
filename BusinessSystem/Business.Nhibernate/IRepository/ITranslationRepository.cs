@@ -10,6 +10,7 @@ namespace Business.Nhibernate.IRepository
     public interface IEmailFollowRepository : IRepository<EmailFollow>
     {
         IList<EmailFollow> GetEmailFollowsByTransId(long transId);
+        int GetEmailFollowsUnReadByTransId(long transId);
     }
 
     public interface IEmailTranslationRepository : IRepository<EmailTranslation>

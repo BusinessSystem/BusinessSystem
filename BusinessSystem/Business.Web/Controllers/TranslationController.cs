@@ -179,19 +179,36 @@ namespace Business.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult TranslationReply()
+        [ValidateInput(false)]
+        public ActionResult TranslationReply(string translationContent)
         {
             string filePath = string.Empty;
             if (Request.Files.Count > 0 && Request.Files[0].ContentLength > 0)
             {
                 HttpPostedFileBase file = Request.Files[0];
             }
-            
-            if (!string.IsNullOrEmpty(Request["emailfollowId"]))
+            long replyfollowId = 0;
+            if (!string.IsNullOrEmpty(Request["replyfollowId"]))
             {
-
+                long.TryParse(Request["replyfollowId"].ToString(), out replyfollowId);
             }
-            return null;
+            long translationId = 0;
+            if (!string.IsNullOrEmpty(Request["emailTranslationId"]))
+            {
+                long.TryParse(Request["emailTranslationId"].ToString(), out translationId);
+            }
+            string content = translationContent;
+
+
+            if (replyfollowId == 0)
+            {
+                TranslationService.CreateEmailFollow(translationId, content, filePath);
+            }
+            else
+            {
+                TranslationService.ReplyTranslation(replyfollowId, translationId, content, CurrentManager);
+            }
+            return Redirect("/Translation/EmailTranslationDetail/" + translationId);
         }
     }
 }

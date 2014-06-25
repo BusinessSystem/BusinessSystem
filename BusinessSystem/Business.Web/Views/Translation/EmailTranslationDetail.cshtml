@@ -14,14 +14,6 @@
                     <h4 class="lighter">邮件详细信息</h4>
                     <div class="widget-toolbar">
                         <label>
-                            <small class="green">
-                                <b></b>
-                            </small>
-                        
-                            <span onclick=" window.location.href = '/Manager/ManagerList' " class="btn btn-app btn-light btn-xs  no-border">
-                                用户管理
-                            </span>
-                       
                         </label>
                     </div> 
                 </div>
@@ -163,7 +155,7 @@
                                      }
                                      else
                                      {
-                                           <button id="btn_translation_add" class="btn btn-info" type="button">
+                                           <button id="btn_translation_reply" class="btn btn-info" type="button">
                                              <i class="icon-ok bigger-110"></i>
                                              转ETW国际翻译
                                          </button>
@@ -180,8 +172,6 @@
             </div>
         </div>
     </div>
-
-
     <script src="/assets/js/markdown/markdown.min.js"></script>
     <script src="/assets/js/markdown/bootstrap-markdown.min.js"></script>
     <script src="/assets/js/jquery.hotkeys.min.js"></script>
@@ -217,34 +207,25 @@
                 onchange: null,
                 thumbnail: false
             });
-           
-        });
 
+        });
+        $("#btn_translation_reply").click(function() {
+            $("#translationContent").html($('#editor2').html());
+            if ($("#translationContent").html().trim() == "") {
+                art.dialog({
+                    content: "邮件翻译内容为空",
+                    time: 2,
+                    lock: true,
+                    width: 200
+                });
+                return false;
+            }
+            $("#translation_reply_form").submit();
+        });
+        
         function showReplyTranlationForm(followId) {
             $("input[name=replyfollowId]").val(followId);
             $("#translation_reply_form").show();
-            $("#btn_translation_reply").click(function () {
-                $("#translationContent").html($('#editor2').html());
-                if ($("input[name=replyfollowId]").val().trim() == "") {
-                    art.dialog({
-                        content: "操作异常",
-                        time: 2,
-                        lock: true,
-                        width: 200
-                    });
-                    return false;
-                }
-                if ( $("#translationContent").html().trim() == "") {
-                    art.dialog({
-                        content: "邮件翻译内容为空",
-                        time: 2,
-                        lock: true,
-                        width: 200
-                    });
-                    return false;
-                }
-                $("#translation_reply_form").submit();
-            });
         }
     </script>
 
