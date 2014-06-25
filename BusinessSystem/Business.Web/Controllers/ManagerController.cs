@@ -134,7 +134,8 @@ namespace Business.Web.Controllers
         [HttpPost]
         public ActionResult ResetPassword(long id)
         {
-            ManageService.ResetPassword(id);
+            string ipString = Request.ServerVariables["REMOTE_ADDR "].ToString();
+            ManageService.ResetPassword(id,CurrentManager,ipString);
             return Json(InfoTools.GetMsgInfo(ResponseCode.Ok), JsonRequestBehavior.AllowGet);
         }
 
@@ -147,10 +148,17 @@ namespace Business.Web.Controllers
         [HttpPost]
         public ActionResult ChangePassword(string oldPassword, string newPassword, string confirmPassword)
         {
-            string responseCode = ManageService.ChangePassword(CurrentManager, oldPassword, newPassword, confirmPassword);
+            string ipString = Request.ServerVariables["REMOTE_ADDR "].ToString();
+            string responseCode = ManageService.ChangePassword(CurrentManager, oldPassword, newPassword, confirmPassword, ipString);
             CurrentManager.Password = string.Empty;
             CookieHelper.SaveManagerCookie(CurrentManager);
             return Json(InfoTools.GetMsgInfo(responseCode));
+        }
+
+        [HttpGet]
+        public ActionResult GetPwdChangedRecords()
+        {
+            return null;
         }
     }
 }

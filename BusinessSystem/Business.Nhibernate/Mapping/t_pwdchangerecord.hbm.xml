@@ -5,7 +5,8 @@
 			<column name="ID" sql-type="bigint" not-null="true" unique="true"/>
 			<generator class="native" />
 		</id>
-		<property name="ChangeUserName" />
+    <property name="ManagerId" />
+    <property name="ChangeUserName" />
 		<property name="OldPassword"/>
 		<property name="NewPassword"/>
 		<property name="ChangeIp"/>

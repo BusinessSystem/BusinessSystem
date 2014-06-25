@@ -16,7 +16,7 @@ namespace Business.Core
 
         public virtual string Product { get; set; }
 
-        public virtual string Language { get; set; }
+        public virtual long Language { get; set; }
 
         public virtual string Operator { get; set; }
 
@@ -37,4 +37,6 @@ namespace Business.Core
             };
         }
     }
+
+
 }

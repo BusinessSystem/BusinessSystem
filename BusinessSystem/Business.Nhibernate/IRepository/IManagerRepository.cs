@@ -28,11 +28,12 @@ namespace Business.Nhibernate.IRepository
 
     public interface IManagerProductRepository : IRepository<ManagerProduct>
     {
-        
+        IList<ManagerProduct> GetManagerProducts(long languageId, long managerId, string product,
+            int pageIndex, int pageSize);
     }
 
     public interface IPwdChangeRecordRepository : IRepository<PwdChangeRecord>
     {
-
+        IList<PwdChangeRecord> GetPwdChangeRecords(long managerId, int pageIndex, int pageSize);
     }
 }

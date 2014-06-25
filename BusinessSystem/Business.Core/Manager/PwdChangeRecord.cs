@@ -16,15 +16,17 @@ namespace Business.Core
         public virtual string NewPassword { get; set; }
         public virtual string ChangeIp { get; set; }
         public virtual string Operator { get; set; }
+        public virtual long ManagerId { get; set; }
         public virtual DateTime ChangeTime { get; set; }
     }
 
     public class PwdChangeRecordFactory
     {
-        public static PwdChangeRecord Create(string changeUserName,string oldPwd,string newPwd,string changeIp,string operat)
+        public static PwdChangeRecord Create(long managerId,string changeUserName,string oldPwd,string newPwd,string changeIp,string operat)
         {
             return new PwdChangeRecord()
             {
+                ManagerId = managerId,
                 ChangeUserName = changeUserName,
                 OldPassword = oldPwd,
                 NewPassword = newPwd,
