@@ -24,6 +24,8 @@ namespace Business.Nhibernate.IRepository
         Manager GetSuperManager();
 
         IList<Manager> GetChildManagers(long parentId);
+
+        IList<Manager> GetManagerTypeManagers(ManagerTypeEnum managerType);
     }
 
     public interface IManagerProductRepository : IRepository<ManagerProduct>

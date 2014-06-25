@@ -171,6 +171,52 @@ namespace Business.Web.Controllers
             return View(ManageService.GetPwdChangeRecords(CurrentManager.Id, pageIndex, pageSize));
         }
 
+        [HttpGet]
+        public ActionResult ManagerProductAdd()
+        {
+            IList<BaseDictionary> baseDictionaries=BaseService.GetBaseDictionaries(ValueTypeEnum.Language);
+            ViewBag.CommonManagers = ManageService.GetMmanagerTypeManagers(ManagerTypeEnum.Common);
+            return View(baseDictionaries);
+        }
+        [HttpPost]
+        public ActionResult ManagerProductAdd(long language,string productUrl,long managerId)
+        {
+            string result=ManageService.ManagerProductAdd(CurrentManager.Id, productUrl, language,
+                CurrentManager.RealName);
+            return Json(InfoTools.GetMsgInfo(result), JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public ActionResult ManagerProductEdit()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult ManagerProductEdit(long id, long language, string productUrl)
+        {
+            string result = ManageService.ManagerProductUpdate(id,CurrentManager.Id, productUrl, language,
+                CurrentManager.RealName);
+            return Json(InfoTools.GetMsgInfo(result), JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public ActionResult ManagerProductDelete(long id)
+        {
+            ManageService.ManagerProductDelete(id);
+            return Json(InfoTools.GetMsgInfo(ResponseCode.Ok), JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public ActionResult ManagerProductList()
+        {
+            return View();
+        }
+         
+
+
+
+
+
         private string GetIP()
         {
             string ip = string.Empty;

@@ -980,6 +980,8 @@
     <Content Include="Views\Translation\RecycledTranslationList.cshtml" />
     <Content Include="Views\Translation\EmailTranslationDetail.cshtml" />
     <Content Include="Views\Manager\PwdChangedRecordList.cshtml" />
+    <Content Include="Views\Manager\ManagerProductAdd.cshtml" />
+    <Content Include="Views\Manager\ManagerProductList.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup>

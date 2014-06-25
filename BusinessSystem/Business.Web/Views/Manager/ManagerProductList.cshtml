@@ -1,0 +1,251 @@
+﻿@{
+    ViewBag.Title = "<li><i class=\"\"></i><a href=\"/Manager/ManagerList\">服务中心</a></li><li class=\"active\">用户管理</li>";
+    Dictionary<ManagerTypeEnum, string> managerTypes = (Dictionary<ManagerTypeEnum, string>)ViewBag.ManagerTypes;
+}
+@using Business.Core
+@model Business.Core.PageModel<Manager>
+ 
+<div class="row-fluid">
+    <div class="span12">
+        <div class="widget-box">
+            <div class="widget-header widget-header-blue widget-header-flat">
+                <h4 class="lighter">用户列表</h4>
+                <div class="widget-toolbar">
+                    <label>
+                        <small class="green">
+                            <b></b>
+                        </small>
+
+                        <span onclick="window.location.href='/Manager/ManagerAdd'" class="btn btn-app btn-light btn-xs  no-border">
+                            添加
+                        </span>
+                    </label>
+                </div>
+            </div>
+            <div class="widget-body">
+                <div class="widget-header widget-toolbar-light  widget-box transparent" style="padding-left: 0px;">
+                    <div class="widget-toolbar float-none  no-border">
+                        <label class="col-sm-1 control-label text-right" for="form-field-select-1">账户类型: </label>
+                        <select name="managerType" class="form-control col-xs-6 col-sm-3 width-20" id="form-field-select-1">
+                          @if (managerTypes != null && managerTypes.Count != 0)
+                          {
+                              foreach (var managerType in managerTypes)
+                              {
+                                  if (ViewBag.CurrentManagerType == managerType.Key)
+                                  {
+                                      <option value="@((short) managerType.Key)" selected="true">@managerType.Value</option>
+                                  }
+                                  else
+                                  {
+                                      <option value="@((short) managerType.Key)">@managerType.Value</option>
+                                  }
+                              }
+                          }
+                        </select>
+                        <div class="space-4"></div>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table id="sample-table-1" class="table table-striped table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th class="center">
+                                    <label>
+                                        <span class="lbl">序号</span>
+                                    </label>
+                                </th>
+                                <th>用户名</th>
+                                <th>真实姓名</th>
+                                <th class="hidden-480">公司名称</th>
+                                <th>
+                                    语言
+                                </th>
+                                <th class="hidden-480">自动分配</th>
+
+                                <th></th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @if (Model != null &&Model.PageList!=null&& Model.PageList.Count != 0)
+                            {
+                                foreach (var item in Model.PageList)
+                                {
+                                    <tr id="data-item(@item.Id)">
+                                        <td class="center">
+                                            <label>
+                                                <input type="checkbox" class="ace" />
+                                                <span class="lbl"></span>
+                                            </label>
+                                        </td>
+
+                                        <td>
+                                            <a href="#">@item.UserName</a>
+                                        </td>
+                                        <td>@item.RealName</td>
+                                        <td class="hidden-480">@item.Company</td>
+                                        <td>@item.Language</td>
+                                        <td class="hidden-480">
+                                            @if (@item.IsAutoDistribute == Business.Utils.CoreDefaultValue.False)
+                                            {
+                                                <span>否</span>
+                                            }
+                                            else
+                                            {
+                                                <span>是</span>
+                                            }
+                                        </td>
+
+                                        <td >
+                                            <div class="visible-md visible-lg hidden-sm hidden-xs btn-group">
+                                                <button class="btn btn-xs btn-success" onclick=" window.location.href = '/Manager/ManagerDetail/@item.Id' ">
+                                                    <i class="icon-ok bigger-120"></i>查看
+                                                </button>
+
+                                                <button class="btn btn-xs btn-info" onclick=" window.location.href = '/Manager/ManagerEdit/@item.Id' ">
+                                                    <i class="icon-edit bigger-120"></i>编辑
+                                                </button>
+
+                                                <button class="btn btn-xs btn-danger" onclick="deleteManager('@item.Id')">
+                                                    <i class="icon-trash bigger-120"></i>删除
+                                                </button>
+
+                                                <button class="btn btn-xs btn-warning" onclick="resetPassword('@item.Id')">
+                                                    <i class="icon-flag bigger-120" ></i>重置密码
+                                                </button>
+                                            </div>
+
+                                            <div class="visible-xs visible-sm hidden-md hidden-lg">
+                                                <div class="inline position-relative">
+                                                    <button class="btn btn-minier btn-primary dropdown-toggle" data-toggle="dropdown">
+                                                        <i class="icon-cog icon-only bigger-110"></i>
+                                                    </button>
+
+                                                    <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
+                                                        <li>
+                                                            <a href="#" class="tooltip-info" data-rel="tooltip" title="View">
+                                                                <span class="blue">
+                                                                    <i class="icon-zoom-in bigger-120"></i>
+                                                                </span>
+                                                            </a>
+                                                        </li>
+
+                                                        <li>
+                                                            <a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
+                                                                <span class="green">
+                                                                    <i class="icon-edit bigger-120"></i>
+                                                                </span>
+                                                            </a>
+                                                        </li>
+
+                                                        <li>
+                                                            <a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
+                                                                <span class="red">
+                                                                    <i class="icon-trash bigger-120"></i>
+                                                                </span>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                    
+                    <div class="widget-header widget-toolbar-light  widget-box transparent" style="padding-left: 0px;">
+                        <div class="widget-toolbar float-none  no-border">
+                            <ul class="pagination bpagination" id="pagination2"></ul>
+                        </div>
+                    </div>
+                   
+                </div><!-- /.table-responsive -->
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(function() {
+        $("#form-field-select-1").change(function() {
+            window.location.href = "/Manager/ManagerList?managerType=" + $(this).val();
+        });
+        var totalCount = '@Model.TotalCount';
+        totalCount = parseInt(totalCount);
+        var visiblePages = '@Model.VisiblePages';
+        visiblePages = parseInt(visiblePages);
+        var currentPage = '@Model.CurrentPage';
+        currentPage = parseInt(currentPage);
+        var pageSize = 10;
+        var managerType =$("#form-field-select-1").val();
+        $.jqPaginator('#pagination2', {
+            totalCounts: totalCount,
+            visiblePages: visiblePages,
+            currentPage: currentPage,
+            pageSize:pageSize,
+            onPageChange: function(num, type) {
+                if (num == currentPage) {
+                     //每次初始化都会执行此处
+                } else {
+                    window.location.href = "/Manager/ManagerList?managerType=" + managerType + "&pageIndex=" + num + "&pageSize=" + pageSize;
+                }
+            }
+        });
+    });
+
+    function deleteManager(id) {
+        deleteItem(id);
+    }
+
+    function deleteItem(id) {
+        art.dialog({
+            icon: "question",
+            content: "确定删除该用户？",
+            ok: function() {
+                $.ajax({
+                    url: "/Manager/ManagerDelete",
+                    type: "post",
+                    datatype: "json",
+                    data: { id: id },
+                    success: function(response) {
+                        window.location.href = "/Manager/ManagerList";
+                    },
+                    error: function() {
+
+                    }
+
+                });
+            },
+            cancelVal: '关闭',
+            cancel: true,
+            lock: true
+        });
+    }
+
+    function resetPassword(id) {
+        art.dialog({
+            icon: "question",
+            content: "确定重置该用户密码？",
+            ok: function() {
+                $.ajax({
+                    url: "/Manager/ResetPassword",
+                    type: "post",
+                    datatype: "json",
+                    data: { id: id },
+                    success: function(response) {
+                        window.location.href = "/Manager/ManagerList";
+                    },
+                    error: function() {
+
+                    }
+                });
+            },
+            cancelVal: '关闭',
+            cancel: true,
+            lock: true
+        });
+    }
+</script>

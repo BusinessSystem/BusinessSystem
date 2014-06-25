@@ -78,5 +78,15 @@ namespace Business.Nhibernate.Repository
                         .Where(m => m.ParentId == parentId).List();
             }
         }
+
+        public IList<Manager> GetManagerTypeManagers(ManagerTypeEnum managerType)
+        {
+            using (var session = GetSession())
+            {
+                return
+                    session.QueryOver<Manager>()
+                        .Where(m => m.ManagerType == managerType).List();
+            }
+        }
     }
 }
