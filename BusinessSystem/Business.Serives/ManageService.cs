@@ -189,10 +189,13 @@ namespace Business.Serives
             return ResponseCode.Ok;
         }
 
-        public static IList<ManagerProduct> GetManagerProducts(long languageId, long managerId, string product,
+        public static PageModel<ManagerProduct> GetManagerProducts(long languageId, long managerId, string product,
             int pageIndex, int pageSize)
         {
-            return managerProductRepository.GetManagerProducts(languageId, managerId, product, pageIndex, pageSize);
+            int totalCount = 0;
+            IList<ManagerProduct> managerProducts = managerProductRepository.GetManagerProducts(languageId, managerId, product,
+                pageIndex, pageSize, out totalCount);
+            return new PageModel<ManagerProduct>(managerProducts, pageIndex, pageSize, totalCount);
         }
 
         public static string ManagerProductUpdate(long id,long managerId, string productUrl, long language, string operate)

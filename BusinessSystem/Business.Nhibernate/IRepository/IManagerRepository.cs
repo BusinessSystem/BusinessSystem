@@ -31,7 +31,7 @@ namespace Business.Nhibernate.IRepository
     public interface IManagerProductRepository : IRepository<ManagerProduct>
     {
         IList<ManagerProduct> GetManagerProducts(long languageId, long managerId, string product,
-            int pageIndex, int pageSize);
+            int pageIndex, int pageSize,out int totalCount);
     }
 
     public interface IPwdChangeRecordRepository : IRepository<PwdChangeRecord>

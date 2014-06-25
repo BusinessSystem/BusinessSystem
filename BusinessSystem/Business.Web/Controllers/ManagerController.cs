@@ -179,7 +179,7 @@ namespace Business.Web.Controllers
             return View(baseDictionaries);
         }
         [HttpPost]
-        public ActionResult ManagerProductAdd(long language,string productUrl,long managerId)
+        public ActionResult ManagerProductAdd(long language, string productUrl, long managerId)
         {
             string result=ManageService.ManagerProductAdd(CurrentManager.Id, productUrl, language,
                 CurrentManager.RealName);
@@ -192,7 +192,7 @@ namespace Business.Web.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult ManagerProductEdit(long id, long language, string productUrl)
+        public ActionResult ManagerProductEdit(long id, long language, string productUrl,long managerId)
         {
             string result = ManageService.ManagerProductUpdate(id,CurrentManager.Id, productUrl, language,
                 CurrentManager.RealName);
@@ -209,9 +209,33 @@ namespace Business.Web.Controllers
         [HttpGet]
         public ActionResult ManagerProductList()
         {
-            return View();
+            ViewBag.BaseDictionarys = BaseService.GetBaseDictionaries(ValueTypeEnum.Language);
+            ViewBag.CommonManagers = ManageService.GetMmanagerTypeManagers(ManagerTypeEnum.Common);
+            int pageIndex = 1;
+            int pageSize = 50;
+            if (!string.IsNullOrEmpty(Request["pageIndex"]))
+            {
+                int.TryParse(Request["pageIndex"].ToString(), out pageIndex);
+            }
+            if (!string.IsNullOrEmpty(Request["pageSize"]))
+            {
+                int.TryParse(Request["pageSize"].ToString(), out pageSize);
+            }
+            long managerId = 0;
+            if (!string.IsNullOrEmpty(Request["managerId"]))
+            {
+                long.TryParse(Request["managerId"].ToString(), out managerId);
+            }
+            long language = 0;
+            if (!string.IsNullOrEmpty(Request["language"]))
+            {
+                long.TryParse(Request["language"].ToString(), out language);
+            }
+            PageModel<ManagerProduct> managerProducts = ManageService.GetManagerProducts(language, managerId, "",
+                pageIndex, pageSize);
+            return View(managerProducts);
         }
-         
+
 
 
 

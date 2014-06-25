@@ -1,22 +1,23 @@
 ﻿@{
-    ViewBag.Title = "<li><i class=\"\"></i><a href=\"/Manager/ManagerList\">服务中心</a></li><li class=\"active\">用户管理</li>";
-    Dictionary<ManagerTypeEnum, string> managerTypes = (Dictionary<ManagerTypeEnum, string>)ViewBag.ManagerTypes;
+    ViewBag.Title = "<li><i class=\"\"></i><a href=\"/Manager/ManagerList\">服务中心</a></li><li class=\"active\">用户产品管理</li>";
+    IList<Business.Core.Manager> commonManagers = ViewBag.CommonManagers;
+    IList<Business.Core.BaseDictionary> baseDictionarys = ViewBag.BaseDictionarys;
 }
 @using Business.Core
-@model Business.Core.PageModel<Manager>
+@model Business.Core.PageModel<ManagerProduct>
  
 <div class="row-fluid">
     <div class="span12">
         <div class="widget-box">
             <div class="widget-header widget-header-blue widget-header-flat">
-                <h4 class="lighter">用户列表</h4>
+                <h4 class="lighter">用户用户产品列表</h4>
                 <div class="widget-toolbar">
                     <label>
                         <small class="green">
                             <b></b>
                         </small>
 
-                        <span onclick="window.location.href='/Manager/ManagerAdd'" class="btn btn-app btn-light btn-xs  no-border">
+                        <span onclick="window.location.href='/Manager/ManagerProductAdd'" class="btn btn-app btn-light btn-xs  no-border">
                             添加
                         </span>
                     </label>
@@ -27,20 +28,7 @@
                     <div class="widget-toolbar float-none  no-border">
                         <label class="col-sm-1 control-label text-right" for="form-field-select-1">账户类型: </label>
                         <select name="managerType" class="form-control col-xs-6 col-sm-3 width-20" id="form-field-select-1">
-                          @if (managerTypes != null && managerTypes.Count != 0)
-                          {
-                              foreach (var managerType in managerTypes)
-                              {
-                                  if (ViewBag.CurrentManagerType == managerType.Key)
-                                  {
-                                      <option value="@((short) managerType.Key)" selected="true">@managerType.Value</option>
-                                  }
-                                  else
-                                  {
-                                      <option value="@((short) managerType.Key)">@managerType.Value</option>
-                                  }
-                              }
-                          }
+                            
                         </select>
                         <div class="space-4"></div>
                     </div>
@@ -54,13 +42,14 @@
                                         <span class="lbl">序号</span>
                                     </label>
                                 </th>
-                                <th>用户名</th>
-                                <th>真实姓名</th>
-                                <th class="hidden-480">公司名称</th>
-                                <th>
-                                    语言
+                                <th>用户</th>
+                                <th>语言</th>
+                                <th class="hidden-480">
+                                    产品
                                 </th>
-                                <th class="hidden-480">自动分配</th>
+                                <th>
+                                    操作人
+                                </th>
 
                                 <th></th>
                             </tr>
@@ -69,33 +58,24 @@
                         <tbody>
                             @if (Model != null &&Model.PageList!=null&& Model.PageList.Count != 0)
                             {
+                                int index = 0;
                                 foreach (var item in Model.PageList)
                                 {
+                                    index++;
                                     <tr id="data-item(@item.Id)">
                                         <td class="center">
                                             <label>
-                                                <input type="checkbox" class="ace" />
-                                                <span class="lbl"></span>
+                                                <span class="lbl">@index</span>
                                             </label>
                                         </td>
 
                                         <td>
-                                            <a href="#">@item.UserName</a>
+                                            <a href="@item.ManagerId">@item.ManagerId</a>
                                         </td>
-                                        <td>@item.RealName</td>
-                                        <td class="hidden-480">@item.Company</td>
                                         <td>@item.Language</td>
-                                        <td class="hidden-480">
-                                            @if (@item.IsAutoDistribute == Business.Utils.CoreDefaultValue.False)
-                                            {
-                                                <span>否</span>
-                                            }
-                                            else
-                                            {
-                                                <span>是</span>
-                                            }
-                                        </td>
-
+                                        <td class="hidden-480">@item.Product</td>
+                                        <td>@item.Operator</td>
+                                       
                                         <td >
                                             <div class="visible-md visible-lg hidden-sm hidden-xs btn-group">
                                                 <button class="btn btn-xs btn-success" onclick=" window.location.href = '/Manager/ManagerDetail/@item.Id' ">
@@ -109,10 +89,7 @@
                                                 <button class="btn btn-xs btn-danger" onclick="deleteManager('@item.Id')">
                                                     <i class="icon-trash bigger-120"></i>删除
                                                 </button>
-
-                                                <button class="btn btn-xs btn-warning" onclick="resetPassword('@item.Id')">
-                                                    <i class="icon-flag bigger-120" ></i>重置密码
-                                                </button>
+                                                
                                             </div>
 
                                             <div class="visible-xs visible-sm hidden-md hidden-lg">
