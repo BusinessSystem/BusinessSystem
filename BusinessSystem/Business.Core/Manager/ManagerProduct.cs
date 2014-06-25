@@ -25,7 +25,7 @@ namespace Business.Core
 
     public class ManagerProductFactory
     {
-        public static ManagerProduct Create(long managerId,string product,string language,string operate)
+        public static ManagerProduct Create(long managerId,string product,long language,string operate)
         {
             return new ManagerProduct()
             {
