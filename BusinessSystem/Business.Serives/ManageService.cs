@@ -106,7 +106,7 @@ namespace Business.Serives
             Manager manager = managerRepository.GetById(id);
             if (manager != null)
             {
-                PwdChangeRecord pwdChangeRecord = PwdChangeRecordFactory.Create(currentManager.Id, manager.RealName, "",
+                PwdChangeRecord pwdChangeRecord = PwdChangeRecordFactory.Create(id, manager.RealName, "重置密码",
                     "123456", ipString, currentManager.RealName);
                 manager.Password = "123456";
                 manager.EncryptPassword();

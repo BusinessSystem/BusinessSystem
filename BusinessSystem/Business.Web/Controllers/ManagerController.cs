@@ -134,7 +134,7 @@ namespace Business.Web.Controllers
         [HttpPost]
         public ActionResult ResetPassword(long id)
         {
-            string ipString = Request.ServerVariables["REMOTE_ADDR "].ToString();
+            string ipString = GetIP();
             ManageService.ResetPassword(id,CurrentManager,ipString);
             return Json(InfoTools.GetMsgInfo(ResponseCode.Ok), JsonRequestBehavior.AllowGet);
         }
@@ -148,7 +148,7 @@ namespace Business.Web.Controllers
         [HttpPost]
         public ActionResult ChangePassword(string oldPassword, string newPassword, string confirmPassword)
         {
-            string ipString = Request.ServerVariables["REMOTE_ADDR "].ToString();
+            string ipString = GetIP();
             string responseCode = ManageService.ChangePassword(CurrentManager, oldPassword, newPassword, confirmPassword, ipString);
             CurrentManager.Password = string.Empty;
             CookieHelper.SaveManagerCookie(CurrentManager);
@@ -156,9 +156,29 @@ namespace Business.Web.Controllers
         }
 
         [HttpGet]
-        public ActionResult GetPwdChangedRecords()
+        public ActionResult PwdChangedRecordList()
         {
-            return null;
+            int pageIndex = 1;
+            int pageSize = 50;
+            if (!string.IsNullOrEmpty(Request["pageIndex"]))
+            {
+                int.TryParse(Request["pageIndex"].ToString(), out pageIndex);
+            }
+            if (!string.IsNullOrEmpty(Request["pageSize"]))
+            {
+                int.TryParse(Request["pageSize"].ToString(), out pageSize);
+            }
+            return View(ManageService.GetPwdChangeRecords(CurrentManager.Id, pageIndex, pageSize));
+        }
+
+        private string GetIP()
+        {
+            string ip = string.Empty;
+            if (!string.IsNullOrEmpty(System.Web.HttpContext.Current.Request.ServerVariables["HTTP_VIA"]))
+                ip = Convert.ToString(System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"]);
+            if (string.IsNullOrEmpty(ip))
+                ip = Convert.ToString(System.Web.HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"]);
+            return ip;
         }
     }
 }
