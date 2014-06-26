@@ -10,5 +10,13 @@ namespace Business.Nhibernate.Repository
 {
     public class EnquiryTransFollowRepository:Repository<EnquiryTransFollow>,IEnquiryTransFollowRepository
     {
+
+        public IList<EnquiryTransFollow> GetEnquiryTransFollowsByEnquiryId(long enquiryId)
+        {
+            using (var session = GetSession())
+            {
+                return session.QueryOver<EnquiryTransFollow>().Where(m => m.EnquiryId == enquiryId).List();
+            }
+        }
     }
 }

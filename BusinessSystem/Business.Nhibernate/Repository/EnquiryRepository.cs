@@ -10,9 +10,59 @@ namespace Business.Nhibernate.Repository
 {
     public class EnquiryRepository:Repository<Enquiry>,IEnquiryRepository
     {
-        public IList<Enquiry> GetEnquirysByStatus(long managerId,HandlerStatusEnum handlerStatus)
+        public IList<Enquiry> GetEnquirysByStatus(long managerId,long intentId,long useDefinedId,HandlerStatusEnum handlerStatus,int pageindex,int pageSize,out int totalCount)
         {
-            return null;
+            using (var session = GetSession())
+            {
+                var query = session.QueryOver<Enquiry>().Where(m => m.IsDeleted == Utils.CoreDefaultValue.False)
+                    .And(m => m.ReceiverId == managerId || m.HandlerId == managerId)
+                    .And(m => m.HandlerStatus == handlerStatus);
+                if (intentId != 0)
+                {
+                    query = query.And(m => m.IntentionId == intentId);
+                }
+                if (useDefinedId != 0)
+                {
+                    query = query.And(m => m.UserDefinedId == useDefinedId);
+                }
+                totalCount = query.RowCount();
+                return query.OrderBy(m => m.Id).Desc.Take(pageSize)
+                    .Skip((pageindex - 1)*pageSize)
+                    .List();
+            }
+        }
+
+        public IList<Enquiry> GetRecycledEnquirysByStatus(long managerId, long intentId, long useDefinedId,
+            int pageindex, int pageSize, out int totalCount)
+        {
+            using (var session = GetSession())
+            {
+                var query = session.QueryOver<Enquiry>().Where(m => m.IsDeleted == Utils.CoreDefaultValue.True)
+                    .And(m => m.ReceiverId == managerId || m.HandlerId == managerId);
+                if (intentId != 0)
+                {
+                    query = query.And(m => m.IntentionId == intentId);
+                }
+                if (useDefinedId != 0)
+                {
+                    query = query.And(m => m.UserDefinedId == useDefinedId);
+                }
+                totalCount = query.RowCount();
+                return query.OrderBy(m=>m.Id).Desc.Take(pageSize)
+                    .Skip((pageindex - 1)*pageSize)
+                    .List();
+            }
+        }
+
+
+        public int GetReadEnquiryCount(long managerId, HandlerStatusEnum handlerStatus)
+        {
+            using (var session = GetSession())
+            {
+                return session.QueryOver<Enquiry>().Where(m => m.IsDeleted == Utils.CoreDefaultValue.True)
+                    .And(m => m.HandlerStatus == handlerStatus)
+                    .And(m => m.ReceiverId == managerId || m.HandlerId == managerId).RowCount();
+            }
         }
     }
 }

@@ -32,7 +32,9 @@ namespace Business.Core
         public virtual HandlerStatusEnum HandlerStatus { get; set; }
         public virtual DateTime HandlerTime { get; set; }
         public virtual long UserDefinedId { get; set; }
+        public virtual long UserDefinedName { get; set; }
         public virtual long IntentionId { get; set; }
+        public virtual long IntentionName { get; set; }
         public virtual int FollowUpTimes { get; set; }
         public virtual short IsDeleted { get; set; }
     }
