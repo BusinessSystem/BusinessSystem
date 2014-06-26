@@ -26,6 +26,9 @@ namespace Business.Nhibernate.IRepository
 
 
         IList<EmailTranslation> GetUnReadEmailTranslationsByEnquiryId(ManagerTypeEnum managerType,long enquiryId, EmailStatusEnum emailStatus,
-            short isDeleted, long receiveId, long intentionId, int pageIndex, int pageSize, out int totalCount); 
+            short isDeleted, long receiveId, long intentionId, int pageIndex, int pageSize, out int totalCount);
+
+        IList<long> GetUnEmailEnquiryIds(long senderId);
+
     }
 }

@@ -52,7 +52,13 @@ namespace Business.Web.Controllers
          [HttpGet]
          public ActionResult UnReadEnquiryEmailList()
          {
-             return View();
+             PageModel<Enquiry> pageModel = EnquiryService.GetEnquiryPages(CurrentManager.Id, 0, 0,
+                HandlerStatusEnum.UnRead, 0, 10);
+             ViewBag.CurrentManager = CurrentManager;
+             ViewBag.Intentions = BaseService.GetIntentions(CurrentManager.ParentId != 0 ? CurrentManager.ParentId : CurrentManager.Id);
+             ViewBag.UserDefineds = BaseService.GetUserDefineds(CurrentManager.ParentId != 0 ? CurrentManager.ParentId : CurrentManager.Id);
+             ViewBag.ChildManagers = ManageService.GetChildManagers(CurrentManager.Id);
+             return View(pageModel);
          }
 
         [HttpGet]

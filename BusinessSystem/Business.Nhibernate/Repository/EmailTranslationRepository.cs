@@ -5,6 +5,7 @@ using System.Text;
 using Business.Core;
 using Business.Nhibernate.Base;
 using Business.Nhibernate.IRepository;
+using Remotion.Linq.Parsing.Structure.IntermediateModel;
 
 namespace Business.Nhibernate.Repository
 {
@@ -104,6 +105,20 @@ namespace Business.Nhibernate.Repository
                 }
                 totalCount = query.RowCount();
                 return query.Take(pageSize).Skip((pageIndex - 1)*pageSize).List();
+            }
+        }
+
+        public IList<long> GetUnEmailEnquiryIds(long senderId)
+        {
+            using (var session = GetSession())
+            {
+                return
+                    session.QueryOver<EmailTranslation>()
+                        .Where(
+                            m =>
+                                m.SenderStatus == EmailStatusEnum.UnRead && m.EnquiryId > 0 &&
+                                (m.SenderId == senderId || m.FollowId == senderId))
+                        .Select(m => m.EnquiryId).List<long>();
             }
         }
     }

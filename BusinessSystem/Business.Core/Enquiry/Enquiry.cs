@@ -38,6 +38,7 @@ namespace Business.Core
         public virtual string IntentionName { get; set; }
         public virtual int FollowUpTimes { get; set; }
         public virtual short IsDeleted { get; set; }
+        public virtual EmailStatusEnum EmailStatus { get; set; }
     }
 
     public enum HandlerStatusEnum : short

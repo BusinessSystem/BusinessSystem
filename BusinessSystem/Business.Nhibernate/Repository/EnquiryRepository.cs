@@ -65,6 +65,29 @@ namespace Business.Nhibernate.Repository
             }
         }
 
-      
+        public IList<Enquiry> GetEnquiriesById(long managerId, long intentId, long useDefinedId, int pageIndex, int pageSize, out int totalCount)
+        {
+            using (var session = GetSession())
+            {
+                var query =
+                    session.QueryOver<Enquiry>()
+                        .Where(
+                            m =>
+                                m.EmailStatus == EmailStatusEnum.UnRead &&
+                                (m.ReceiverId == managerId || m.HandlerId == managerId));
+                if (intentId != 0)
+                {
+                    query = query.And(m => m.IntentionId == intentId);
+                }
+                if (useDefinedId != 0)
+                {
+                    query = query.And(m => m.UserDefinedId == useDefinedId);
+                }
+                totalCount = query.RowCount();
+                return query.OrderBy(m => m.Id).Desc
+                    .Take(pageSize)
+                    .Skip((pageIndex - 1)*pageSize).List();
+            }
+        } 
     }
-}
+} 

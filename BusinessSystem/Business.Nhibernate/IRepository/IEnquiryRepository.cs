@@ -16,6 +16,9 @@ namespace Business.Nhibernate.IRepository
             int pageindex, int pageSize, out int totalCount);
 
         int GetReadEnquiryCount(long managerId, HandlerStatusEnum handlerStatus);
+
+        IList<Enquiry> GetEnquiriesById(long managerId, long intentId, long useDefinedId, int pageIndex, int pageSize,
+            out int totalCount);
     }
 
     public interface IEnquiryTransFollowRepository : IRepository<EnquiryTransFollow>

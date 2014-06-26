@@ -15,6 +15,8 @@ namespace Business.Serives
         private static IIntentionRepository intentionRepository = new IntentionRepository();
         private static IUserDefinedRepository userDefinedRepository = new UserDefinedRepository();
         private static IManagerRepository managerRepository = new ManagerRepository();
+        private static IEmailTranslationRepository emailTranslationRepository = new EmailTranslationRepository();
+
         public static IList<EnquiryTransFollow> GeEnquiryTransFollowsByEnquiryId(long enquiryId)
         {
             return enquiryTransFollowRepository.GetEnquiryTransFollowsByEnquiryId(enquiryId);
@@ -111,6 +113,10 @@ namespace Business.Serives
             return ResponseCode.Ok;
         }
 
-        
+        public PageModel<Enquiry> GetEnquiryUnReadEmailPages(long managerId, long intentId, long useDefinedId, int pageIndex, int pageSize)
+        {
+            return null;
+        }
+
     }
 }
