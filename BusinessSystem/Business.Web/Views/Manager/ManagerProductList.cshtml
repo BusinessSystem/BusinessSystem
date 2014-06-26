@@ -2,6 +2,8 @@
     ViewBag.Title = "<li><i class=\"\"></i><a href=\"/Manager/ManagerList\">服务中心</a></li><li class=\"active\">用户产品管理</li>";
     IList<Business.Core.Manager> commonManagers = ViewBag.CommonManagers;
     IList<Business.Core.BaseDictionary> baseDictionarys = ViewBag.BaseDictionarys;
+    long currentManagerId = ViewBag.CurrentManagerId;
+    long currentLanguageId = ViewBag.CurrentLanguageId;
 }
 @using Business.Core
 @model Business.Core.PageModel<ManagerProduct>
@@ -10,7 +12,7 @@
     <div class="span12">
         <div class="widget-box">
             <div class="widget-header widget-header-blue widget-header-flat">
-                <h4 class="lighter">用户用户产品列表</h4>
+                <h4 class="lighter">用户产品列表</h4>
                 <div class="widget-toolbar">
                     <label>
                         <small class="green">
@@ -26,10 +28,51 @@
             <div class="widget-body">
                 <div class="widget-header widget-toolbar-light  widget-box transparent" style="padding-left: 0px;">
                     <div class="widget-toolbar float-none  no-border">
-                        <label class="col-sm-1 control-label text-right" for="form-field-select-1">账户类型: </label>
-                        <select name="managerType" class="form-control col-xs-6 col-sm-3 width-20" id="form-field-select-1">
-                            
+                        <label class="col-sm-1 control-label text-right" for="form-field-select-1">用户: </label>
+                        <select name="managerId" class="form-control col-xs-3 col-sm-2 width-20 " id="form-field-select-1">
+                            <option value="0">==请选择==</option>
+                            @if (commonManagers != null && commonManagers.Count != 0)
+                            {
+                                foreach (var commonManager in commonManagers)
+                                {
+                                    if (currentManagerId == commonManager.Id)
+                                    {
+                                        <option value="@commonManager.Id" selected="true">@commonManager.RealName</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@commonManager.Id" >@commonManager.RealName</option>
+                                    }
+                                }
+                            }
                         </select>
+                        
+                         <label class="col-sm-1 control-label text-right" for="form-field-select-2">语言: </label>
+                        <select name="language" class="form-control col-xs-6 col-sm-2 width-20" id="form-field-select-2">
+                            <option value="0">==请选择==</option>
+                            @if (baseDictionarys != null && baseDictionarys.Count != 0)
+                            {
+                                foreach (var baseDictionary in baseDictionarys)
+                                {
+                                    if (currentLanguageId == baseDictionary.Id)
+                                    {
+                                        <option value="@baseDictionary.Id" selected="true">@baseDictionary.Value</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@baseDictionary.Id">@baseDictionary.Value</option>
+                                    }
+                                }
+                            }
+                        </select>
+                        
+                          <label class="col-sm-1 control-label text-right" for="form-field-select-1">产品: </label>
+                        
+                            <input id="form-field-1" name="product" placeholder="用户名" class="col-xs-10 col-sm-3  height-35" type="text">
+                        
+                          <span onclick="managerProductQuery()" class="btn btn-app btn-light btn-xs  no-border">
+                           查询
+                        </span>
                         <div class="space-4"></div>
                     </div>
                 </div>
@@ -56,7 +99,7 @@
                         </thead>
 
                         <tbody>
-                            @if (Model != null &&Model.PageList!=null&& Model.PageList.Count != 0)
+                            @if (Model != null && Model.PageList != null && Model.PageList.Count != 0)
                             {
                                 int index = 0;
                                 foreach (var item in Model.PageList)
@@ -70,23 +113,20 @@
                                         </td>
 
                                         <td>
-                                            <a href="@item.ManagerId">@item.ManagerId</a>
+                                          @item.ManagerId
                                         </td>
                                         <td>@item.Language</td>
-                                        <td class="hidden-480">@item.Product</td>
+                                        <td class="hidden-480"  title="@item.Product"> <a href="@item.Product">@item.Product</a></td>
                                         <td>@item.Operator</td>
                                        
                                         <td >
                                             <div class="visible-md visible-lg hidden-sm hidden-xs btn-group">
-                                                <button class="btn btn-xs btn-success" onclick=" window.location.href = '/Manager/ManagerDetail/@item.Id' ">
-                                                    <i class="icon-ok bigger-120"></i>查看
-                                                </button>
-
-                                                <button class="btn btn-xs btn-info" onclick=" window.location.href = '/Manager/ManagerEdit/@item.Id' ">
+                                                
+                                                <button class="btn btn-xs btn-info" onclick=" window.location.href = '/Manager/ManagerProductEdit/@item.Id' ">
                                                     <i class="icon-edit bigger-120"></i>编辑
                                                 </button>
 
-                                                <button class="btn btn-xs btn-danger" onclick="deleteManager('@item.Id')">
+                                                <button class="btn btn-xs btn-danger" onclick="deleteManagerProduct('@item.Id')">
                                                     <i class="icon-trash bigger-120"></i>删除
                                                 </button>
                                                 
@@ -146,10 +186,9 @@
 </div>
 
 <script type="text/javascript">
+    var currentManagerId = @(currentManagerId);
+    var currentLanguageId = @(currentLanguageId);
     $(function() {
-        $("#form-field-select-1").change(function() {
-            window.location.href = "/Manager/ManagerList?managerType=" + $(this).val();
-        });
         var totalCount = '@Model.TotalCount';
         totalCount = parseInt(totalCount);
         var visiblePages = '@Model.VisiblePages';
@@ -157,67 +196,46 @@
         var currentPage = '@Model.CurrentPage';
         currentPage = parseInt(currentPage);
         var pageSize = 10;
-        var managerType =$("#form-field-select-1").val();
+        var managerType = $("#form-field-select-1").val();
         $.jqPaginator('#pagination2', {
             totalCounts: totalCount,
             visiblePages: visiblePages,
             currentPage: currentPage,
-            pageSize:pageSize,
+            pageSize: pageSize,
             onPageChange: function(num, type) {
                 if (num == currentPage) {
-                     //每次初始化都会执行此处
+                    //每次初始化都会执行此处
                 } else {
-                    window.location.href = "/Manager/ManagerList?managerType=" + managerType + "&pageIndex=" + num + "&pageSize=" + pageSize;
+                    window.location.href = "/Manager/ManagerProductList?managerId=" + currentManagerId + "&language"+currentLanguageId+"&pageIndex=" + num + "&pageSize=" + pageSize;
                 }
             }
         });
     });
 
-    function deleteManager(id) {
-        deleteItem(id);
+    function managerProductQuery() {
+        var product = $("input[name]").val();
+        currentManagerId = $("select[name=managerId]").val();
+        currentLanguageId = $("select[name=language]").val();
+        window.location.href = "/Manager/ManagerProductList?managerId=" + currentManagerId + "&language=" + currentLanguageId+"&product="+product;
     }
 
-    function deleteItem(id) {
+    function deleteManagerProduct(id) {
         art.dialog({
             icon: "question",
-            content: "确定删除该用户？",
-            ok: function() {
+            content: "确定删除该用户产品？",
+            ok: function () {
                 $.ajax({
-                    url: "/Manager/ManagerDelete",
+                    url: "/Manager/ManagerProductDelete",
                     type: "post",
                     datatype: "json",
                     data: { id: id },
-                    success: function(response) {
-                        window.location.href = "/Manager/ManagerList";
+                    success: function (response) {
+                        window.location.href = "/Manager/ManagerProductList";
                     },
-                    error: function() {
+                    error: function () {
 
                     }
 
-                });
-            },
-            cancelVal: '关闭',
-            cancel: true,
-            lock: true
-        });
-    }
-
-    function resetPassword(id) {
-        art.dialog({
-            icon: "question",
-            content: "确定重置该用户密码？",
-            ok: function() {
-                $.ajax({
-                    url: "/Manager/ResetPassword",
-                    type: "post",
-                    datatype: "json",
-                    data: { id: id },
-                    success: function(response) {
-                        window.location.href = "/Manager/ManagerList";
-                    },
-                    error: function() {
-
-                    }
                 });
             },
             cancelVal: '关闭',

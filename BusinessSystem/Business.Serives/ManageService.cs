@@ -238,5 +238,11 @@ namespace Business.Serives
                  managerProductRepository.Delete(managerProduct);
             }
         }
+
+
+        public static ManagerProduct GetManagerProductById(long id)
+        {
+            return managerProductRepository.GetById(id);
+        } 
     }
 }

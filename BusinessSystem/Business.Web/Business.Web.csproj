@@ -982,6 +982,7 @@
     <Content Include="Views\Manager\PwdChangedRecordList.cshtml" />
     <Content Include="Views\Manager\ManagerProductAdd.cshtml" />
     <Content Include="Views\Manager\ManagerProductList.cshtml" />
+    <Content Include="Views\Manager\ManagerProductEdit.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup>

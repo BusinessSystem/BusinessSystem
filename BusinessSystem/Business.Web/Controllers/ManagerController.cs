@@ -181,20 +181,23 @@ namespace Business.Web.Controllers
         [HttpPost]
         public ActionResult ManagerProductAdd(long language, string productUrl, long managerId)
         {
-            string result=ManageService.ManagerProductAdd(CurrentManager.Id, productUrl, language,
+            string result = ManageService.ManagerProductAdd(managerId, productUrl, language,
                 CurrentManager.RealName);
             return Json(InfoTools.GetMsgInfo(result), JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
-        public ActionResult ManagerProductEdit()
+        public ActionResult ManagerProductEdit(long id)
         {
-            return View();
+            ViewBag.BaseDictionarys = BaseService.GetBaseDictionaries(ValueTypeEnum.Language);
+            ViewBag.CommonManagers = ManageService.GetMmanagerTypeManagers(ManagerTypeEnum.Common);
+            ManagerProduct managerProduct = ManageService.GetManagerProductById(id);
+            return View(managerProduct);
         }
         [HttpPost]
-        public ActionResult ManagerProductEdit(long id, long language, string productUrl,long managerId)
+        public ActionResult ManagerProductEdit(long managerproductId, long language, string productUrl, long managerId)
         {
-            string result = ManageService.ManagerProductUpdate(id,CurrentManager.Id, productUrl, language,
+            string result = ManageService.ManagerProductUpdate(managerproductId, managerId, productUrl, language,
                 CurrentManager.RealName);
             return Json(InfoTools.GetMsgInfo(result), JsonRequestBehavior.AllowGet);
         }
@@ -231,7 +234,10 @@ namespace Business.Web.Controllers
             {
                 long.TryParse(Request["language"].ToString(), out language);
             }
-            PageModel<ManagerProduct> managerProducts = ManageService.GetManagerProducts(language, managerId, "",
+            string product = Request["product"];
+            ViewBag.CurrentManagerId = managerId;
+            ViewBag.CurrentLanguageId = language;
+            PageModel<ManagerProduct> managerProducts = ManageService.GetManagerProducts(language, managerId, product,
                 pageIndex, pageSize);
             return View(managerProducts);
         }
