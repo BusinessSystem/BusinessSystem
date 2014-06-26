@@ -18,6 +18,8 @@ namespace Business.Core
         public virtual long CreatorId { get; set; }
 
         public virtual DateTime CreateTime { get; set; }
+
+        public virtual long ManagerId { get; set; }
     }
 
     public class UserDefinedFactory
@@ -27,13 +29,14 @@ namespace Business.Core
             return JsonConvert.DeserializeObject<UserDefined>(jsonData);
         }
 
-        public static UserDefined Create(string description, long createId)
+        public static UserDefined Create(string description, long createId, long mangerId)
         {
             return new UserDefined()
             {
                 Description = description,
                 CreatorId = createId,
-                CreateTime = DateTime.Now
+                CreateTime = DateTime.Now,
+                ManagerId = mangerId
             };
         }
     }

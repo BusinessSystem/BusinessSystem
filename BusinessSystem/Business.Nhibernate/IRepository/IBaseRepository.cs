@@ -9,12 +9,12 @@ namespace Business.Nhibernate.IRepository
 {
     public interface IIntentionRepository : IRepository<Intention>
     {
-        IList<Intention> GetAllIntentions();
+        IList<Intention> GetAllIntentions(long mainManagerId);
     }
 
     public interface IUserDefinedRepository : IRepository<UserDefined>
     {
-        IList<UserDefined> GetAllUserDefineds();
+        IList<UserDefined> GetAllUserDefineds(long mainManagerId);
     }
 
     public interface IVisitorRecordRepository : IRepository<VisitorRecord>

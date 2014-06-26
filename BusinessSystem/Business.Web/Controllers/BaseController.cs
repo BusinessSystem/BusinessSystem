@@ -19,7 +19,7 @@ namespace Business.Web.Controllers
         [HttpGet]
         public ActionResult IntentionList()
         {
-            return View(BaseService.GetIntentions());
+           return View(BaseService.GetIntentions(CurrentManager.ParentId != 0 ? CurrentManager.ParentId : CurrentManager.Id));
         }
 
         [HttpPost]
@@ -27,7 +27,7 @@ namespace Business.Web.Controllers
         {
             if (!string.IsNullOrEmpty(description))
             {
-                Intention intention = IntentionFactory.Create(description, 1234);
+                Intention intention = IntentionFactory.Create(description, CurrentManager.Id,CurrentManager.ParentId);
                 BaseService.SaveIntention(intention);
             }
             return RedirectToAction("IntentionList");
@@ -57,7 +57,7 @@ namespace Business.Web.Controllers
         [HttpGet]
         public ActionResult UserDefinedList()
         {
-            return View(BaseService.GetUserDefineds());
+            return View(BaseService.GetUserDefineds(CurrentManager.ParentId != 0 ? CurrentManager.ParentId : CurrentManager.Id));
         }
 
         [HttpPost]
@@ -65,7 +65,7 @@ namespace Business.Web.Controllers
         {
             if (!string.IsNullOrEmpty(description))
             {
-                UserDefined userDefined = UserDefinedFactory.Create(description, 1234);
+                UserDefined userDefined = UserDefinedFactory.Create(description, CurrentManager.Id, CurrentManager.ParentId);
                 BaseService.SaveUserDefined(userDefined);
             }
             return RedirectToAction("UserDefinedList");

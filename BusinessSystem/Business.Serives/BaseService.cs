@@ -35,9 +35,9 @@ namespace Business.Serives
              }
          }
 
-         public static IList<Intention> GetIntentions()
+         public static IList<Intention> GetIntentions(long mainManagerId)
          {
-             return intentionRepository.GetAllIntentions();
+             return intentionRepository.GetAllIntentions(mainManagerId);
          }
 
 
@@ -60,9 +60,9 @@ namespace Business.Serives
              }
          }
 
-         public static IList<UserDefined> GetUserDefineds()
+         public static IList<UserDefined> GetUserDefineds(long mainManagerId)
          {
-             return userDefinedRepository.GetAllUserDefineds();
+             return userDefinedRepository.GetAllUserDefineds(mainManagerId);
          }
 
          public static IList<BaseDictionary> GetBaseDictionaries(ValueTypeEnum valueType)

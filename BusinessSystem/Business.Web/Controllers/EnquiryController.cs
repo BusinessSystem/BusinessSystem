@@ -19,22 +19,34 @@ namespace Business.Web.Controllers
             PageModel<Enquiry> pageModel = EnquiryService.GetEnquiryPages(CurrentManager.Id, 0, 0,
                 HandlerStatusEnum.HasRead, 0, 10);
             ViewBag.CurrentManager = CurrentManager;
-            ViewBag.Intentions = BaseService.GetIntentions();
-            ViewBag.UserDefineds = BaseService.GetUserDefineds();
+            ViewBag.Intentions = BaseService.GetIntentions(CurrentManager.ParentId != 0 ? CurrentManager.ParentId : CurrentManager.Id);
+            ViewBag.UserDefineds = BaseService.GetUserDefineds(CurrentManager.ParentId != 0 ? CurrentManager.ParentId : CurrentManager.Id);
             ViewBag.ChildManagers = ManageService.GetChildManagers(CurrentManager.Id);
             return View(pageModel);
         }
 
-         [HttpGet]
+        [HttpGet]
         public ActionResult UnReadEnquiryList()
         {
-            return View();
+            PageModel<Enquiry> pageModel = EnquiryService.GetEnquiryPages(CurrentManager.Id, 0, 0,
+                HandlerStatusEnum.UnRead, 0, 10);
+            ViewBag.CurrentManager = CurrentManager;
+            ViewBag.Intentions = BaseService.GetIntentions(CurrentManager.ParentId != 0 ? CurrentManager.ParentId : CurrentManager.Id);
+            ViewBag.UserDefineds = BaseService.GetUserDefineds(CurrentManager.ParentId != 0 ? CurrentManager.ParentId : CurrentManager.Id);
+            ViewBag.ChildManagers = ManageService.GetChildManagers(CurrentManager.Id);
+            return View(pageModel);
         }
 
-         [HttpGet]
+        [HttpGet]
          public ActionResult RecycledEnquiryList()
          {
-             return View();
+             PageModel<Enquiry> pageModel = EnquiryService.GetEnquiryPages(CurrentManager.Id, 0, 0,
+               HandlerStatusEnum.UnRead, 0, 10);
+             ViewBag.CurrentManager = CurrentManager;
+             ViewBag.Intentions = BaseService.GetIntentions(CurrentManager.ParentId != 0 ? CurrentManager.ParentId : CurrentManager.Id);
+             ViewBag.UserDefineds = BaseService.GetUserDefineds(CurrentManager.ParentId != 0 ? CurrentManager.ParentId : CurrentManager.Id);
+             ViewBag.ChildManagers = ManageService.GetChildManagers(CurrentManager.Id);
+             return View(pageModel);
          }
 
          [HttpGet]

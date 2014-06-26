@@ -8,5 +8,6 @@
 		<property name="Description" length="200" />
 		<property name="CreatorId"/>
 		<property name="CreateTime"/>
+		<property name="ManagerId"/>
 	</class>
 </hibernate-mapping>

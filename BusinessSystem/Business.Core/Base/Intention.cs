@@ -18,17 +18,20 @@ namespace Business.Core
         public virtual long CreatorId { get; set; }
 
         public virtual DateTime  CreateTime { get; set; }
+
+        public virtual long ManagerId { get; set; }
     }
 
     public class IntentionFactory
     {
-        public static Intention Create(string description, long createorId)
+        public static Intention Create(string description, long createorId,long mangerId)
         {
             return new Intention()
             {
                 Description = description,
                 CreatorId = createorId,
-                CreateTime = DateTime.Now
+                CreateTime = DateTime.Now,
+                ManagerId = mangerId
             };
         }
 

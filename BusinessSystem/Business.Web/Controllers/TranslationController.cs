@@ -70,7 +70,7 @@ namespace Business.Web.Controllers
                 long.TryParse(Request["intentionId"].ToString(), out intentionId);
             }
             ViewBag.IntentionId = intentionId;
-            ViewBag.Intentions = BaseService.GetIntentions();
+            ViewBag.Intentions = BaseService.GetIntentions(CurrentManager.ParentId != 0 ? CurrentManager.ParentId : CurrentManager.Id);
             ViewBag.CurrentManager = CurrentManager;
             ViewBag.ChildManagers = ManageService.GetChildManagers(CurrentManager.Id);
             return
@@ -98,7 +98,7 @@ namespace Business.Web.Controllers
                 long.TryParse(Request["intentionId"].ToString(), out intentionId);
             }
             ViewBag.IntentionId = intentionId;
-            ViewBag.Intentions = BaseService.GetIntentions();
+            ViewBag.Intentions = BaseService.GetIntentions(CurrentManager.ParentId != 0 ? CurrentManager.ParentId : CurrentManager.Id);
             ViewBag.CurrentManager = CurrentManager;
             ViewBag.ChildManagers = ManageService.GetChildManagers(CurrentManager.Id);
             return

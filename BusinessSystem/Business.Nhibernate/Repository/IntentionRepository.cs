@@ -10,11 +10,11 @@ namespace Business.Nhibernate.Repository
 {
     public class IntentionRepository : Repository<Intention>, IIntentionRepository
     {
-        public IList<Intention> GetAllIntentions()
+        public IList<Intention> GetAllIntentions(long mainManagerId)
         {
             using (var session = GetSession())
             {
-                return session.QueryOver<Intention>().List();
+                return session.QueryOver<Intention>().Where(m=>m.ManagerId==mainManagerId).List();
             }
         }
     }

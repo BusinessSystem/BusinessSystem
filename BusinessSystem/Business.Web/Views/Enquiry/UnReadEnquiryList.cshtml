@@ -1,6 +1,7 @@
 ﻿@{
-    ViewBag.Title = "<li><i class=\"\"></i><a href=\"/Manager/ManagerList\">邮件翻译</a></li><li class=\"active\">未读邮件翻译</li>";
+    ViewBag.Title = "<li><i class=\"\"></i><a href=\"/Manager/ManagerList\">询盘中心</a></li><li class=\"active\">未读询盘</li>";
     IList<Intention> intentions = ViewBag.Intentions;
+    IList<UserDefined> userDefineds = ViewBag.UserDefineds;
     Manager currentManager = ViewBag.CurrentManager;
     IList<Manager> childManagers = ViewBag.ChildManagers;
 }
@@ -9,13 +10,13 @@
 @using Business.Core
 @using Business.Serives
 @using Business.Utils
-@model Business.Core.PageModel<Business.Core.EmailTranslation>
+@model Business.Core.PageModel<Business.Core.Enquiry>
  
 <div class="row-fluid">
     <div class="span12">
         <div class="widget-box">
             <div class="widget-header widget-header-blue widget-header-flat">
-                <h4 class="lighter">已读邮件翻译</h4>
+                <h4 class="lighter">已读询盘</h4>
                 <div class="widget-toolbar">
                 </div>
             </div>
@@ -82,7 +83,35 @@
                                 </li>
                             </ul>
                         </div>
-        
+
+                        <div class="btn-group margin-top-2">
+                            <button data-toggle="dropdown" class="btn btn-light width-120 dropdown-toggle margin-top-2 common-height">
+                                自定义
+                                <span class="icon-caret-down icon-on-right "></span>
+                            </button>
+
+                            <ul class="dropdown-menu dropdown-light pull-right width-120">
+                                <li>
+                                    <a href="/Base/UserDefinedList">添加自定义</a>
+                                </li>
+                                <li class="divider"></li>
+                                @if (userDefineds != null && userDefineds.Count != 0)
+                                {
+                                    foreach (var item in userDefineds)
+                                    {
+                                        <li >
+                                            <a href="/Translation/HasReadTranslationList?intentionId=@item.Id" data-value="@item.Id">@item.Description</a>
+                                        </li>
+                                    }
+                                }
+                                <li class="divider"></li>
+                                <li >
+                                    <a href="/Translation/HasReadTranslationList?intentionId=0">未识别</a>
+                                </li>
+                            </ul>
+                        </div>
+                        
+
        
                         <div class="btn-group margin-top-2">
                             <button data-toggle="dropdown" class="btn btn-light width-120 dropdown-toggle margin-top-2 common-height">
@@ -108,8 +137,26 @@
                         
                                     </ul>
                                 </li>
+                                
+                                <li role="presentation" class="ui-menu-item">
+                                    <a role="menuitem" tabindex="-1" class="ui-corner-all" id="ui-id-7" aria-haspopup="true" href="javascript:;"><span class="ui-menu-icon ui-icon ui-icon-carat-1-e"></span>自定义</a>
 
-                                <li role="presentation" class="ui-menu-item" onclik="backtomainer()">
+                                    <ul aria-expanded="false" aria-hidden="true" role="menu" style="display: none;" class="ui-menu ui-widget ui-widget-content ui-corner-all">
+                                        @if (userDefineds != null && userDefineds.Count != 0)
+                                        {
+                                            foreach (var item in userDefineds)
+                                            {
+                                                <li role="presentation" class="ui-menu-item"  onclick="moveTranslation('@item.Id')">
+                                                    <a role="menuitem" tabindex="-1" class="ui-corner-all" href="javascript:;" >@item.Description</a>
+                                                </li>
+                                            }
+                                        }
+                        
+                                    </ul>
+                                </li>
+
+
+                                 <li role="presentation" class="ui-menu-item" onclik="backtomainer()">
                                     <a role="menuitem" tabindex="-1" class="ui-corner-all" id="ui-id-8" href="javascript:;">返回总账号</a>
                                 </li>
 
@@ -131,44 +178,55 @@
                                         <span class="lbl">序号</span>
                                     </label>
                                 </th>
-                                <th>主题</th>
-                                <th>提交时间</th>
-                                <th class="hidden-480">语言</th>
+                                <th>客户预购的产品</th>
+                                <th>E-mail</th>
+                                <th class="hidden-480">收件时间</th>
                                 <th>
-                                    跟进次数
+                                    语言
                                 </th>
-                                <th class="hidden-480">意向状况</th>
+                                <th class="hidden-480">跟进次数</th>
 
-                                <th>处理人</th>
+                                <th>意向状况</th>
+                                <th>账户类型</th>
+                                
                             </tr>
                         </thead>
 
                         <tbody>
                             @if (Model != null &&Model.PageList!=null&& Model.PageList.Count != 0)
                             {
+                                int index = 0;
                                 foreach (var item in Model.PageList)
                                 {
+                                    index++;
                                     <tr id="data-item(@item.Id)">
                                         <td class="center">
                                             <label>
                                                 <input name="translationcheck" value="@item.Id" type="checkbox" class="ace" />
-                                                <span class="lbl"></span>
+                                                <span class="lbl">@index</span>
                                             </label>
                                         </td>
+
                                         <td>
-                                           <a href="/Translation/EmailTranslationDetail/@item.Id">@item.Theme</a>
+                                            <a href="@item.ProductUrl">@item.ProductUrl</a>
                                         </td>
-                                        <td>@item.SendTime</td>
+                                        <td>@item.PurchaserEmail</td>
                                         <td class="hidden-480">
-                                            @(item.LanguageName??"未识别")
+                                            @item.EnquiryTime
                                         </td>
-                                        <td>@item.FollowTimes</td>
+                                        <td>@item.VisitLanguage</td>
                                         <td class="hidden-480">
-                                            @item.IntentionDescription
+                                            @item.FollowUpTimes
                                         </td>
-                                         
                                         <td >
-                                           @currentManager.RealName
+                                            @item.PurchaserCountry
+                                        </td>
+                                        <td >
+                                            @item.IntentionName
+                                        </td>
+                                        
+                                         <td >
+                                            @item.HandlerName
                                         </td>
                                     </tr>
                                 }
@@ -205,9 +263,8 @@
         });
 
 
-
-        var currentIntentionId = '@ViewBag.IntentionId';
-        var totalCount = '@Model.TotalCount';
+        var currentIntentionId = "0";
+        var totalCount = "0";
         totalCount = parseInt(totalCount);
         var visiblePages = '@Model.VisiblePages';
         visiblePages = parseInt(visiblePages);
