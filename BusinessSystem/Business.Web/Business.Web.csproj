@@ -871,7 +871,6 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Enquiry\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
@@ -983,6 +982,10 @@
     <Content Include="Views\Manager\ManagerProductAdd.cshtml" />
     <Content Include="Views\Manager\ManagerProductList.cshtml" />
     <Content Include="Views\Manager\ManagerProductEdit.cshtml" />
+    <Content Include="Views\Enquiry\HasReadEnquiryList.cshtml" />
+    <Content Include="Views\Enquiry\UnReadEnquiryList.cshtml" />
+    <Content Include="Views\Enquiry\RecycledEnquiryList.cshtml" />
+    <Content Include="Views\Enquiry\UnReadEnquiryEmailList.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup>

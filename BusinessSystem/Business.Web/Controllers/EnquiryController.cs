@@ -11,10 +11,28 @@ namespace Business.Web.Controllers
         //
         // GET: /Enquiry/
 
-        public ActionResult Index()
+        [HttpGet]
+        public ActionResult HasReadEnquiryList()
         {
             return View();
         }
 
+         [HttpGet]
+        public ActionResult UnReadEnquiryList()
+        {
+            return View();
+        }
+
+         [HttpGet]
+         public ActionResult RecycledEnquiryList()
+         {
+             return View();
+         }
+
+         [HttpGet]
+         public ActionResult UnReadEnquiryEmailList()
+         {
+             return View();
+         }
     }
 }

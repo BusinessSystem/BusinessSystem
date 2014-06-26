@@ -7,7 +7,9 @@
 		</id>
 		<property name="IpString"/>
 		<property name="PurchaserEmail"/>
-		<property name="EnquiryContent"/>
+		<property name="EnquiryContent" type="String">
+      <column name="Content" sql-type="Text"/>
+    </property>
 		<property name="ProductUrl"/>
 		<property name="PurchaserUserName"/>
 		<property name="PurchaserCompany"/>

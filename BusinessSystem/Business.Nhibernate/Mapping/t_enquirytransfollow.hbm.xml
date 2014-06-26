@@ -6,10 +6,23 @@
 			<generator class="native" />
 		</id>
 		<property name="EnquiryId" />
-		<property name="OriginalContent"/>
-		<property name="TargetContent"/>
+		<property name="OriginalContent" type="String">
+      <column name="Content" sql-type="Text"/>
+    </property>
+		<property name="TargetContent" type="String">
+      <column name="Content" sql-type="Text"/>
+    </property>
 		<property name="OriginalLanguage"/>
 		<property name="TargetLanguage"/>
 		<property name="TransTime"/>
-	</class>
+
+    <property name="SenderStatus"/>
+    <property name="HandlerStatus"/>
+    <property name="SenderId"/>
+    <property name="SenderName"/>
+    <property name="HandlerId"/>
+    <property name="HandlerName"/>
+    <property name="HandlerTime"/>
+
+  </class>
 </hibernate-mapping>

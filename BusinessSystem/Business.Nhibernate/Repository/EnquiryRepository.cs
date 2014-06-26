@@ -10,5 +10,9 @@ namespace Business.Nhibernate.Repository
 {
     public class EnquiryRepository:Repository<Enquiry>,IEnquiryRepository
     {
+        public IList<Enquiry> GetEnquirysByStatus(long managerId,HandlerStatusEnum handlerStatus)
+        {
+            return null;
+        }
     }
 }
