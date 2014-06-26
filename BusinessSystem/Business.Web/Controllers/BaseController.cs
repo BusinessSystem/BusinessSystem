@@ -27,7 +27,7 @@ namespace Business.Web.Controllers
         {
             if (!string.IsNullOrEmpty(description))
             {
-                Intention intention = IntentionFactory.Create(description, CurrentManager.Id,CurrentManager.ParentId);
+                Intention intention = IntentionFactory.Create(description, CurrentManager.Id, CurrentManager.ParentId != 0 ? CurrentManager.ParentId : CurrentManager.Id);
                 BaseService.SaveIntention(intention);
             }
             return RedirectToAction("IntentionList");
@@ -65,7 +65,7 @@ namespace Business.Web.Controllers
         {
             if (!string.IsNullOrEmpty(description))
             {
-                UserDefined userDefined = UserDefinedFactory.Create(description, CurrentManager.Id, CurrentManager.ParentId);
+                UserDefined userDefined = UserDefinedFactory.Create(description, CurrentManager.Id, CurrentManager.ParentId != 0 ? CurrentManager.ParentId : CurrentManager.Id);
                 BaseService.SaveUserDefined(userDefined);
             }
             return RedirectToAction("UserDefinedList");
