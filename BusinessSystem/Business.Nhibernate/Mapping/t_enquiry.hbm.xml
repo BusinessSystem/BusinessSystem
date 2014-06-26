@@ -8,8 +8,8 @@
 		<property name="IpString"/>
 		<property name="PurchaserEmail"/>
 		<property name="EnquiryContent" type="String">
-      <column name="Content" sql-type="Text"/>
-    </property>
+			<column name="Content" sql-type="Text"/>
+		</property>
 		<property name="ProductUrl"/>
 		<property name="PurchaserUserName"/>
 		<property name="PurchaserCompany"/>
@@ -20,14 +20,14 @@
 		<property name="EnquiryTime"/>
 		<property name="ReceiverId"/>
 		<property name="IsIssuedChildManager"/>
-    <property name="HandlerId"/>
-    <property name="HandlerName"/>
+		<property name="HandlerId"/>
+		<property name="HandlerName"/>
 		<property name="HandlerStatus"/>
 		<property name="HandlerTime"/>
-    <property name="UserDefinedId"/>
-    <property name="UserDefinedName"/>
-    <property name="IntentionId"/>
-    <property name="IntentionName"/>
+		<property name="UserDefinedId"/>
+		<property name="UserDefinedName"/>
+		<property name="IntentionId"/>
+		<property name="IntentionName"/>
 		<property name="FollowUpTimes"/>
 		<property name="IsDeleted"/>
 	</class>

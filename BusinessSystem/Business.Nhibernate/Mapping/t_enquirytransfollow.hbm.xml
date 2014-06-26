@@ -7,22 +7,22 @@
 		</id>
 		<property name="EnquiryId" />
 		<property name="OriginalContent" type="String">
-      <column name="Content" sql-type="Text"/>
-    </property>
+			<column name="Content" sql-type="Text"/>
+		</property>
 		<property name="TargetContent" type="String">
-      <column name="Content" sql-type="Text"/>
-    </property>
+			<column name="Content" sql-type="Text"/>
+		</property>
 		<property name="OriginalLanguage"/>
 		<property name="TargetLanguage"/>
 		<property name="TransTime"/>
 
-    <property name="SenderStatus"/>
-    <property name="HandlerStatus"/>
-    <property name="SenderId"/>
-    <property name="SenderName"/>
-    <property name="HandlerId"/>
-    <property name="HandlerName"/>
-    <property name="HandlerTime"/>
+		<property name="SenderStatus"/>
+		<property name="HandlerStatus"/>
+		<property name="SenderId"/>
+		<property name="SenderName"/>
+		<property name="HandlerId"/>
+		<property name="HandlerName"/>
+		<property name="HandlerTime"/>
 
-  </class>
+	</class>
 </hibernate-mapping>

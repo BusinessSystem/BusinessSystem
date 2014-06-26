@@ -986,6 +986,7 @@
     <Content Include="Views\Enquiry\UnReadEnquiryList.cshtml" />
     <Content Include="Views\Enquiry\RecycledEnquiryList.cshtml" />
     <Content Include="Views\Enquiry\UnReadEnquiryEmailList.cshtml" />
+    <Content Include="Views\Enquiry\EnquiryDetail.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup>
