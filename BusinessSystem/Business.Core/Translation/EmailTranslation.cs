@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.Design;
 using System.Linq;
 using System.Text;
 
@@ -33,6 +34,8 @@ namespace Business.Core
         public virtual int  FollowTimes { get; set; }
         public virtual string OriginalLanguage { get; set; }
         public virtual string TargetLanguage { get; set; }
+        public virtual TranslationSourceEnum TranslationSource { get; set; }
+        public virtual long EnquiryId { get; set; }
     }
 
     /// <summary>
@@ -45,6 +48,14 @@ namespace Business.Core
 
     }
 
+    public enum TranslationSourceEnum : short
+    {
+        [Description("邮件翻译")]
+        EmailTranslation = 1,
+        [Description("询盘系统")]
+        EnquiryTranslation = 2,
+
+    }
     public class EmailTranslationFactory
     {
         public static EmailTranslation Create(long receiverId, long senderId, string theme, string content, string filepath)

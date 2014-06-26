@@ -29,12 +29,13 @@ namespace Business.Core
         public virtual long ReceiverId { get; set; }
         public virtual short IsIssuedChildManager { get; set; }
         public virtual long HandlerId { get; set; }
+        public virtual string  HandlerName { get; set; }
         public virtual HandlerStatusEnum HandlerStatus { get; set; }
         public virtual DateTime HandlerTime { get; set; }
         public virtual long UserDefinedId { get; set; }
-        public virtual long UserDefinedName { get; set; }
+        public virtual string UserDefinedName { get; set; }
         public virtual long IntentionId { get; set; }
-        public virtual long IntentionName { get; set; }
+        public virtual string IntentionName { get; set; }
         public virtual int FollowUpTimes { get; set; }
         public virtual short IsDeleted { get; set; }
     }

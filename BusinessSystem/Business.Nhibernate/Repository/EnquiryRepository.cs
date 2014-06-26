@@ -64,5 +64,7 @@ namespace Business.Nhibernate.Repository
                     .And(m => m.ReceiverId == managerId || m.HandlerId == managerId).RowCount();
             }
         }
+
+      
     }
 }

@@ -25,6 +25,8 @@
 		<property name="IsDeleted"  />
 		<property name="IntentionId"  />
 		<property name="FollowTimes"  />
-		<property name="IntentionDescription"  />
+    <property name="IntentionDescription"  />
+    <property name="TranslationSource"  />
+    <property name="EnquiryId"  />
 	</class>
 </hibernate-mapping>
