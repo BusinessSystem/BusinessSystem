@@ -14,6 +14,7 @@ namespace Business.Serives
         private static IManagerRepository managerRepository = new ManagerRepository();
         private static IPwdChangeRecordRepository pwdChangeRecordRepository = new PwdChangeRecordRepository();
         private static IManagerProductRepository managerProductRepository = new ManagerProductRepository();
+        private static IManagerMainSiteRepository managerMainSiteRepository = new ManagerMainSiteRepository();
 
         public static PageModel<Manager> GetManagerPages(ManagerTypeEnum managerType, int pageIndex, int pageSize,
             long parentId)
@@ -190,6 +191,7 @@ namespace Business.Serives
             return ResponseCode.Ok;
         }
 
+        [Obsolete]
         public static PageModel<ManagerProduct> GetManagerProducts(long languageId, long managerId, string product,
             int pageIndex, int pageSize)
         {
@@ -245,6 +247,56 @@ namespace Business.Serives
         public static ManagerProduct GetManagerProductById(long id)
         {
             return managerProductRepository.GetById(id);
-        } 
+        }
+
+        //TODO: 提示消息不完整
+        public static string MainSiteSave(ManagerMainSite mainSite)
+        {
+            if (!string.IsNullOrEmpty(mainSite.SiteUrl))
+            {
+                return ResponseCode.NotFoundData;
+            }
+            if (!string.IsNullOrEmpty(mainSite.SiteName))
+            {
+                return ResponseCode.NotFoundData;
+            }
+            managerMainSiteRepository.Save(mainSite);
+            return ResponseCode.Ok;
+        }
+
+        public static ManagerMainSite GetManagerMainSiteById(long id)
+        {
+            return managerMainSiteRepository.GetById(id);
+        }
+
+        public static IList<ManagerMainSite> GetManagerMainSitesByManagerId(long managerId)
+        {
+            return managerMainSiteRepository.GetManagerMainSitesByManagerId(managerId);
+        }
+
+        public static void MainSiteDelete(long id)
+        {
+            ManagerMainSite managerMainSite = managerMainSiteRepository.GetById(id);
+            if (managerMainSite != null)
+            {
+                managerMainSiteRepository.Delete(managerMainSite);
+            }
+        }
+
+        public static PageModel<ManagerMainSite> GetManagerMainSitePages(long managerId,long languageId,string siteUrl,int pageIndex,int pageSize)
+        {
+            int totalCount = 0;
+            IList<ManagerMainSite> managerMainSites = managerMainSiteRepository.GetManagerMainSitePages(
+                managerId, languageId, siteUrl, pageIndex, pageSize, out totalCount);
+            return new PageModel<ManagerMainSite>(managerMainSites, pageIndex, pageSize, totalCount);
+        }
+
+        public static PageModel<ManagerProduct> GetManagerProducts(long mainSiteId, int pageIndex, int pageSize)
+        {
+            int totalCount = 0;
+            IList<ManagerProduct> managerProducts = managerProductRepository.GetManagerProducts(mainSiteId, pageIndex,
+                pageSize, out totalCount);
+            return new PageModel<ManagerProduct>(managerProducts, pageIndex, pageSize, totalCount);
+        }
     }
 }

@@ -259,6 +259,21 @@ namespace Business.Web.Controllers
             return View(baseDictionaries);
         }
 
+        [HttpPost]
+        public ActionResult ManagerMainSiteAdd(string siteName, long language, string siteUrl, long managerId)
+        {
+            Manager manager = ManageService.GetManagerById(managerId);
+            BaseDictionary baseDictionary = BaseService.GetDictionaryById(language);
+            if (manager != null && baseDictionary != null)
+            {
+                ManagerMainSite managerMainSite = ManagerMainSiteFactory.Create(manager.Id, manager.RealName, siteName,
+                    siteUrl, baseDictionary.Id, baseDictionary.Value);
+                string result = ManageService.MainSiteSave(managerMainSite);
+                return Json(InfoTools.GetMsgInfo(result));
+            }
+            return Json(InfoTools.GetMsgInfo(ResponseCode.Ok));
+        }
+
         [HttpGet]
         public ActionResult ManagerMainSiteList()
         {

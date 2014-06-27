@@ -35,5 +35,17 @@ namespace Business.Nhibernate.Repository
                 //return query.Take(pageSize).Skip((pageIndex - 1)*pageSize).List();
             }
         }
+
+
+
+        public IList<ManagerProduct> GetManagerProducts(long mainSiteId, int pageIndex, int pageSize, out int totalCount)
+        {
+            using (var session = GetSession())
+            {
+                var query = session.QueryOver<ManagerProduct>().Where(m => m.ManagerMainSiteId == mainSiteId);
+                totalCount = query.RowCount();
+                return query.Take(pageSize).Skip((pageIndex - 1)*pageSize).List();
+            }
+        }
     }
 }

@@ -14,14 +14,14 @@
                             <b></b>
                         </small>
 
-                        <span onclick="window.location.href='/Manager/ManagerProductList'" class="btn btn-app btn-light btn-xs  no-border">
+                        <span onclick="window.location.href='/Manager/ManagerMainSiteList'" class="btn btn-app btn-light btn-xs  no-border">
                             返回
                         </span>
                     </label>
                 </div>
             </div>
             <div class="widget-body">
-                <form class="form-horizontal" id="manager_add_form" enctype="multipart/form-data"   role="form">
+                <form class="form-horizontal" id="managerSite_add_form" enctype="multipart/form-data"   role="form">
                       <div class="space-4"></div>
                     <div class="form-group">
                        <label class="col-sm-3 control-label no-padding-right" for="form-field-select-1">用户: </label>
@@ -95,7 +95,7 @@
                  
                     <div class="clearfix form-actions">
                         <div class="col-md-offset-3 col-md-9">
-                            <button id="btn_managerProduct_add" class="btn btn-info" type="button">
+                            <button id="btn_managersite_add" class="btn btn-info" type="button">
                                 <i class="icon-ok bigger-110"></i>
                                  提交
                             </button>
@@ -115,13 +115,13 @@
 
 <script type="text/javascript">
     $(function () {
-        $("#btn_managerProduct_add").click(function () {
+        $("#btn_managersite_add").click(function () {
             if (formValidate()) {
                 $.ajax({
                     type: "POST",
                     dataType: "json",
-                    url: "/Manager/ManagerProductAdd",
-                    data: $('#manager_add_form').serialize(),
+                    url: "/Manager/ManagerMainSiteAdd",
+                    data: $('#managerSite_add_form').serialize(),
                     success: function (response) {
                         art.dialog({
                             content: response.Description,
@@ -129,7 +129,7 @@
                             lock: true,
                             close: function () {
                                 if (response.Code == 0) {
-                                    window.location.href = "/Manager/ManagerProductList";
+                                    window.location.href = "/Manager/ManagerMainSiteList";
                                 }
                             }
                         });
@@ -146,10 +146,17 @@
             }
         });
         function formValidate() {
-            var productUrl = $("input[name=productUrl]").val().trim();
-            if (productUrl == "") {
+            var siteName = $("input[name=siteName]").val().trim();
+            if (siteName == "") {
                 art.dialog({
-                    content: "产品为空", time: 2, width: 200, lock: true
+                    content: "网站名称为空", time: 2, width: 200, lock: true
+                });
+                return false;
+            }
+            var siteUrl = $("input[name=siteUrl]").val().trim();
+            if (siteUrl == "") {
+                art.dialog({
+                    content: "网站地址为空", time: 2, width: 200, lock: true
                 });
                 return false;
             }
