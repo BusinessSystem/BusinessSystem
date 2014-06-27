@@ -1,0 +1,160 @@
+﻿@{
+    ViewBag.Title = "<li><i class=\"\"></i><a href=\"/Manager/ManagerList\">服务中心</a></li><li class=\"active\">编辑用户主站</li>";
+    IList<Business.Core.Manager> commonManagers = ViewBag.CommonManagers;
+}
+@model  IList<Business.Core.BaseDictionary>
+<div class="row-fluid">
+    <div class="span12">
+        <div class="widget-box">
+            <div class="widget-header widget-header-blue widget-header-flat">
+                <h4 class="lighter">添加用户主站</h4>
+                <div class="widget-toolbar">
+                    <label>
+                        <small class="green">
+                            <b></b>
+                        </small>
+
+                        <span onclick="window.location.href='/Manager/ManagerProductList'" class="btn btn-app btn-light btn-xs  no-border">
+                            返回
+                        </span>
+                    </label>
+                </div>
+            </div>
+            <div class="widget-body">
+                <form class="form-horizontal" id="manager_add_form" enctype="multipart/form-data"   role="form">
+                      <div class="space-4"></div>
+                    <div class="form-group">
+                       <label class="col-sm-3 control-label no-padding-right" for="form-field-select-1">用户: </label>
+
+                        <div class="col-sm-9">
+                            <select name="managerId" class="form-control col-xs-8 col-sm-4 width-30" id="form-field-select-1">
+                                    @if (commonManagers != null && commonManagers.Count != 0)
+                                    {
+                                        foreach (var item in commonManagers)
+                                        {
+                                            <option value="@(item.Id)">@item.RealName</option>
+                                        }
+                                    }
+                            </select>
+                            <span class="help-inline col-xs-12 col-sm-7">
+                                <span class="middle red">*</span>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="space-4"></div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right" for="form-field-2">网站名称: </label>
+
+                        <div class="col-sm-9">
+                            <input id="form-field-2" name="siteName" placeholder="网站名称" class="col-xs-10 col-sm-9" type="text">
+                            <span class="help-inline col-xs-12 col-sm-2">
+                                <span class="middle red">*</span>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="space-4"></div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right" for="form-field-2">网站地址: </label>
+
+                        <div class="col-sm-9">
+                            <input id="form-field-2" name="siteUrl" placeholder="网站地址" class="col-xs-10 col-sm-9" type="text">
+                            <span class="help-inline col-xs-12 col-sm-2">
+                                <span class="middle red">*</span>
+                            </span>
+                        </div>
+                    </div>
+                    
+                 
+
+                    <div class="space-4"></div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right" for="form-field-select-1">网站语言: </label>
+
+                        <div class="col-sm-9">
+                            <select name="language" class="form-control col-xs-8 col-sm-4 width-30" id="form-field-select-1">
+                                    @if (Model != null &&  Model.Count != 0)
+                                    {
+                                        foreach (var item in Model)
+                                        {
+                                            <option value="@(item.Id)">@item.Value</option>
+                                        }
+                                    }
+                            </select>
+                            <span class="help-inline col-xs-12 col-sm-7">
+                                <span class="middle red">*</span>
+                            </span>
+                        </div>
+                    </div>
+                    
+                   
+                 
+                    <div class="clearfix form-actions">
+                        <div class="col-md-offset-3 col-md-9">
+                            <button id="btn_managerProduct_add" class="btn btn-info" type="button">
+                                <i class="icon-ok bigger-110"></i>
+                                 提交
+                            </button>
+                             
+                            <button class="btn" type="reset">
+                                <i class="icon-undo bigger-110"></i>
+                                重置
+                            </button>
+                            <span class="middle">（红色为必填项）</span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        $("#btn_managerProduct_add").click(function () {
+            if (formValidate()) {
+                $.ajax({
+                    type: "POST",
+                    dataType: "json",
+                    url: "/Manager/ManagerProductAdd",
+                    data: $('#manager_add_form').serialize(),
+                    success: function (response) {
+                        art.dialog({
+                            content: response.Description,
+                            time: 3,
+                            lock: true,
+                            close: function () {
+                                if (response.Code == 0) {
+                                    window.location.href = "/Manager/ManagerProductList";
+                                }
+                            }
+                        });
+
+                    },
+                    error: function (data) {
+                        art.dialog({
+                            content: "error:" + data.responseText,
+                            time: 2,
+                            lock: true
+                        });
+                    }
+                });
+            }
+        });
+        function formValidate() {
+            var productUrl = $("input[name=productUrl]").val().trim();
+            if (productUrl == "") {
+                art.dialog({
+                    content: "产品为空", time: 2, width: 200, lock: true
+                });
+                return false;
+            }
+            return true;
+        }
+    });
+
+</script>

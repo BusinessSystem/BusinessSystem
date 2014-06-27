@@ -987,6 +987,10 @@
     <Content Include="Views\Enquiry\RecycledEnquiryList.cshtml" />
     <Content Include="Views\Enquiry\UnReadEnquiryEmailList.cshtml" />
     <Content Include="Views\Enquiry\EnquiryDetail.cshtml" />
+    <Content Include="Views\Manager\ManagerMainSiteAdd.cshtml" />
+    <Content Include="Views\Manager\ManagerMainSiteEdit.cshtml" />
+    <Content Include="Views\Manager\ManagerMainSiteList.cshtml" />
+    <Content Include="Views\Manager\CommonManagerMainSiteList.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup>

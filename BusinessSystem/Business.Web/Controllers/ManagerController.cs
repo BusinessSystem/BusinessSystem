@@ -243,8 +243,34 @@ namespace Business.Web.Controllers
         }
 
 
+        [HttpGet]
+        public ActionResult ManagerMainSiteAdd()
+        {
+            IList<BaseDictionary> baseDictionaries = BaseService.GetBaseDictionaries(ValueTypeEnum.Language);
+            ViewBag.CommonManagers = ManageService.GetMmanagerTypeManagers(ManagerTypeEnum.Common);
+            return View(baseDictionaries);
+        }
+
+        [HttpGet]
+        public ActionResult ManagerMainSiteEdit()
+        {
+            IList<BaseDictionary> baseDictionaries = BaseService.GetBaseDictionaries(ValueTypeEnum.Language);
+            ViewBag.CommonManagers = ManageService.GetMmanagerTypeManagers(ManagerTypeEnum.Common);
+            return View(baseDictionaries);
+        }
+
+        [HttpGet]
+        public ActionResult ManagerMainSiteList()
+        {
+            return View();
+        }
 
 
+        [HttpGet]
+        public ActionResult CommonManagerMainSiteList()
+        {
+            return View();
+        }
 
 
         private string GetIP()

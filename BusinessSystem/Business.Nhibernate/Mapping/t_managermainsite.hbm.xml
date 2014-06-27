@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
-	<class name="Business.Core.ManagerProduct, Business.Core" table="t_managerproduct">
+	<class name="Business.Core.ManagerMainSite, Business.Core" table="t_managermainsite">
 		<id name="Id" type="Int64" unsaved-value="0">
 			<column name="ID" sql-type="bigint" not-null="true" unique="true"/>
 			<generator class="native" />
 		</id>
-		<property name="ManagerMainSiteId" />
-		<property name="ProductUrl"/>
-    <property name="ProductName"/>
-    <property name="ProductDescription"/>
+		<property name="ManagerId" />
+		<property name="ManagerName"/>
+    <property name="SiteName"/>
+    <property name="SiteUrl"/>
+    <property name="LanguageName"/>
+    <property name="LanguageId"/>
 		<property name="Operator"/>
 		<property name="OperateTime"/>
 	</class>

@@ -22,7 +22,7 @@ namespace Business.Core
 
         public virtual long LanguageId { get; set; }
 
-        public virtual DateTime CreateTime { get; set; }
+        public virtual DateTime OperateTime { get; set; }
 
         public virtual string Operator { get; set; }
        
@@ -42,7 +42,7 @@ namespace Business.Core
                 SiteUrl = siteUrl,
                 LanguageName = languageName,
                 LanguageId = languageId,
-                CreateTime = DateTime.Now
+                OperateTime = DateTime.Now
             };
         }
     }
