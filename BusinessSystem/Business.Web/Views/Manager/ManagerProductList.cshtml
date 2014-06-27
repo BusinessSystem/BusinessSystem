@@ -1,246 +1,192 @@
 ﻿@{
     ViewBag.Title = "<li><i class=\"\"></i><a href=\"/Manager/ManagerList\">服务中心</a></li><li class=\"active\">用户产品管理</li>";
-    IList<Business.Core.Manager> commonManagers = ViewBag.CommonManagers;
-    IList<Business.Core.BaseDictionary> baseDictionarys = ViewBag.BaseDictionarys;
-    long currentManagerId = ViewBag.CurrentManagerId;
-    long currentLanguageId = ViewBag.CurrentLanguageId;
 }
 @using Business.Core
 @model Business.Core.PageModel<ManagerProduct>
- 
-<div class="row-fluid">
-    <div class="span12">
-        <div class="widget-box">
-            <div class="widget-header widget-header-blue widget-header-flat">
-                <h4 class="lighter">用户产品列表</h4>
-                <div class="widget-toolbar">
-                    <label>
-                        <small class="green">
-                            <b></b>
-                        </small>
+ @if (Model != null)
+ {
+     <div class="row-fluid">
+         <div class="span12">
+             <div class="widget-box">
+                 <div class="widget-header widget-header-blue widget-header-flat">
+                     <h4 class="lighter">用户产品列表</h4>
+                     <div class="widget-toolbar">
+                         <label>
+                             <small class="green">
+                                 <b></b>
+                             </small>
 
-                        <span onclick="window.location.href='/Manager/ManagerProductAdd'" class="btn btn-app btn-light btn-xs  no-border">
-                            添加
-                        </span>
-                    </label>
-                </div>
-            </div>
-            <div class="widget-body">
-                <div class="widget-header widget-toolbar-light  widget-box transparent" style="padding-left: 0px;">
-                    <div class="widget-toolbar float-none  no-border">
-                        <label class="col-sm-1 control-label text-right" for="form-field-select-1">用户: </label>
-                        <select name="managerId" class="form-control col-xs-3 col-sm-2 width-20 " id="form-field-select-1">
-                            <option value="0">==请选择==</option>
-                            @if (commonManagers != null && commonManagers.Count != 0)
-                            {
-                                foreach (var commonManager in commonManagers)
-                                {
-                                    if (currentManagerId == commonManager.Id)
-                                    {
-                                        <option value="@commonManager.Id" selected="true">@commonManager.RealName</option>
-                                    }
-                                    else
-                                    {
-                                        <option value="@commonManager.Id" >@commonManager.RealName</option>
-                                    }
-                                }
-                            }
-                        </select>
-                        
-                         <label class="col-sm-1 control-label text-right" for="form-field-select-2">语言: </label>
-                        <select name="language" class="form-control col-xs-6 col-sm-2 width-20" id="form-field-select-2">
-                            <option value="0">==请选择==</option>
-                            @if (baseDictionarys != null && baseDictionarys.Count != 0)
-                            {
-                                foreach (var baseDictionary in baseDictionarys)
-                                {
-                                    if (currentLanguageId == baseDictionary.Id)
-                                    {
-                                        <option value="@baseDictionary.Id" selected="true">@baseDictionary.Value</option>
-                                    }
-                                    else
-                                    {
-                                        <option value="@baseDictionary.Id">@baseDictionary.Value</option>
-                                    }
-                                }
-                            }
-                        </select>
-                        
-                          <label class="col-sm-1 control-label text-right" for="form-field-select-1">产品: </label>
-                        
-                            <input id="form-field-1" name="product" placeholder="用户名" class="col-xs-10 col-sm-3  height-35" type="text">
-                        
-                          <span onclick="managerProductQuery()" class="btn btn-app btn-light btn-xs  no-border">
-                           查询
-                        </span>
-                        <div class="space-4"></div>
-                    </div>
-                </div>
-                <div class="table-responsive">
-                    <table id="sample-table-1" class="table table-striped table-bordered table-hover">
-                        <thead>
-                            <tr>
-                                <th class="center">
-                                    <label>
-                                        <span class="lbl">序号</span>
-                                    </label>
-                                </th>
-                                <th>用户</th>
-                                <th>语言</th>
-                                <th class="hidden-480">
-                                    产品
-                                </th>
-                                <th>
-                                    操作人
-                                </th>
+                             <span onclick=" window.location.href = '/Manager/ManagerProductAdd' " class="btn btn-app btn-light btn-xs  no-border">
+                                 添加
+                             </span>
+                         </label>
+                     </div>
+                 </div>
+                 <div class="widget-body">
+                     <input name="managerMainSiteId" value="@ViewBag.managerMainSiteId" type="hidden" />
+                     <div class="table-responsive">
+                         <table id="sample-table-1" class="table table-striped table-bordered table-hover">
+                             <thead>
+                                 <tr>
+                                     <th class="center">
+                                         <label>
+                                             <span class="lbl">序号</span>
+                                         </label>
+                                     </th>
+                                     <th>产品名称</th>
+                                     <th>产品地址</th>
+                                     <th class="hidden-480">
+                                         产品描述
+                                     </th>
+                                     <th>
+                                         操作人
+                                     </th>
+                                     <th></th>
+                                 </tr>
+                             </thead>
 
-                                <th></th>
-                            </tr>
-                        </thead>
+                             <tbody>
+                                 @if (Model != null && Model.PageList != null && Model.PageList.Count != 0)
+                                 {
+                                     int index = 0;
+                                     foreach (var item in Model.PageList)
+                                     {
+                                         index++;
+                                         <tr id="data-item(@item.Id)">
+                                             <td class="center">
+                                                 <label>
+                                                     <span class="lbl">@index</span>
+                                                 </label>
+                                             </td>
 
-                        <tbody>
-                            @if (Model != null && Model.PageList != null && Model.PageList.Count != 0)
-                            {
-                                int index = 0;
-                                foreach (var item in Model.PageList)
-                                {
-                                    index++;
-                                    <tr id="data-item(@item.Id)">
-                                        <td class="center">
-                                            <label>
-                                                <span class="lbl">@index</span>
-                                            </label>
-                                        </td>
-
-                                        <td>
-                                          @item.ManagerId
-                                        </td>
-                                        <td>@item.Language</td>
-                                        <td class="hidden-480"  title="@item.Product"> <a href="@item.Product">@item.Product</a></td>
-                                        <td>@item.Operator</td>
+                                             <td>
+                                                 @item.ProductName
+                                             </td>
+                                             <td>@item.ProductUrl</td>
+                                             <td class="hidden-480"  title="@item.ProductDescription"> <a href="@item.ProductDescription">@item.ProductDescription</a></td>
+                                             <td>@item.Operator</td>
                                        
-                                        <td >
-                                            <div class="visible-md visible-lg hidden-sm hidden-xs btn-group">
+                                             <td >
+                                                 <div class="visible-md visible-lg hidden-sm hidden-xs btn-group">
                                                 
-                                                <button class="btn btn-xs btn-info" onclick=" window.location.href = '/Manager/ManagerProductEdit/@item.Id' ">
-                                                    <i class="icon-edit bigger-120"></i>编辑
-                                                </button>
+                                                     <button class="btn btn-xs btn-info" onclick=" window.location.href = '/Manager/ManagerProductEdit/@item.Id' ">
+                                                         <i class="icon-edit bigger-120"></i>编辑
+                                                     </button>
 
-                                                <button class="btn btn-xs btn-danger" onclick="deleteManagerProduct('@item.Id')">
-                                                    <i class="icon-trash bigger-120"></i>删除
-                                                </button>
+                                                     <button class="btn btn-xs btn-danger" onclick=" deleteManagerProduct('@item.Id') ">
+                                                         <i class="icon-trash bigger-120"></i>删除
+                                                     </button>
                                                 
-                                            </div>
+                                                 </div>
 
-                                            <div class="visible-xs visible-sm hidden-md hidden-lg">
-                                                <div class="inline position-relative">
-                                                    <button class="btn btn-minier btn-primary dropdown-toggle" data-toggle="dropdown">
-                                                        <i class="icon-cog icon-only bigger-110"></i>
-                                                    </button>
+                                                 <div class="visible-xs visible-sm hidden-md hidden-lg">
+                                                     <div class="inline position-relative">
+                                                         <button class="btn btn-minier btn-primary dropdown-toggle" data-toggle="dropdown">
+                                                             <i class="icon-cog icon-only bigger-110"></i>
+                                                         </button>
 
-                                                    <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
-                                                        <li>
-                                                            <a href="#" class="tooltip-info" data-rel="tooltip" title="View">
-                                                                <span class="blue">
-                                                                    <i class="icon-zoom-in bigger-120"></i>
-                                                                </span>
-                                                            </a>
-                                                        </li>
+                                                         <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
+                                                             <li>
+                                                                 <a href="#" class="tooltip-info" data-rel="tooltip" title="View">
+                                                                     <span class="blue">
+                                                                         <i class="icon-zoom-in bigger-120"></i>
+                                                                     </span>
+                                                                 </a>
+                                                             </li>
 
-                                                        <li>
-                                                            <a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
-                                                                <span class="green">
-                                                                    <i class="icon-edit bigger-120"></i>
-                                                                </span>
-                                                            </a>
-                                                        </li>
+                                                             <li>
+                                                                 <a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
+                                                                     <span class="green">
+                                                                         <i class="icon-edit bigger-120"></i>
+                                                                     </span>
+                                                                 </a>
+                                                             </li>
 
-                                                        <li>
-                                                            <a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
-                                                                <span class="red">
-                                                                    <i class="icon-trash bigger-120"></i>
-                                                                </span>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                }
-                            }
-                        </tbody>
-                    </table>
+                                                             <li>
+                                                                 <a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
+                                                                     <span class="red">
+                                                                         <i class="icon-trash bigger-120"></i>
+                                                                     </span>
+                                                                 </a>
+                                                             </li>
+                                                         </ul>
+                                                     </div>
+                                                 </div>
+                                             </td>
+                                         </tr>
+                                     }
+                                 }
+                             </tbody>
+                         </table>
                     
-                    <div class="widget-header widget-toolbar-light  widget-box transparent" style="padding-left: 0px;">
-                        <div class="widget-toolbar float-none  no-border">
-                            <ul class="pagination bpagination" id="pagination2"></ul>
-                        </div>
-                    </div>
+                         <div class="widget-header widget-toolbar-light  widget-box transparent" style="padding-left: 0px;">
+                             <div class="widget-toolbar float-none  no-border">
+                                 <ul class="pagination bpagination" id="pagination2"></ul>
+                             </div>
+                         </div>
                    
-                </div><!-- /.table-responsive -->
+                     </div><!-- /.table-responsive -->
 
-            </div>
-        </div>
-    </div>
-</div>
+                 </div>
+             </div>
+         </div>
+     </div>
 
-<script type="text/javascript">
-    var currentManagerId = @(currentManagerId);
-    var currentLanguageId = @(currentLanguageId);
-    $(function() {
-        var totalCount = '@Model.TotalCount';
-        totalCount = parseInt(totalCount);
-        var visiblePages = '@Model.VisiblePages';
-        visiblePages = parseInt(visiblePages);
-        var currentPage = '@Model.CurrentPage';
-        currentPage = parseInt(currentPage);
-        var pageSize = 10;
-        var managerType = $("#form-field-select-1").val();
-        $.jqPaginator('#pagination2', {
-            totalCounts: totalCount,
-            visiblePages: visiblePages,
-            currentPage: currentPage,
-            pageSize: pageSize,
-            onPageChange: function(num, type) {
-                if (num == currentPage) {
-                    //每次初始化都会执行此处
-                } else {
-                    window.location.href = "/Manager/ManagerProductList?managerId=" + currentManagerId + "&language"+currentLanguageId+"&pageIndex=" + num + "&pageSize=" + pageSize;
-                }
-            }
-        });
-    });
+     <script type="text/javascript">
+         $(function() {
+             var totalCount = '@Model.TotalCount';
+             totalCount = parseInt(totalCount);
+             var visiblePages = '@Model.VisiblePages';
+             visiblePages = parseInt(visiblePages);
+             var currentPage = '@Model.CurrentPage';
+             currentPage = parseInt(currentPage);
+             var pageSize = 10;
+             var managerMainSiteId = $("input[name=managerMainSiteId]").val();
+             $.jqPaginator('#pagination2', {
+                 totalCounts: totalCount,
+                 visiblePages: visiblePages,
+                 currentPage: currentPage,
+                 pageSize: pageSize,
+                 onPageChange: function(num, type) {
+                     if (num == currentPage) {
+                         //每次初始化都会执行此处
+                     } else {
+                         window.location.href = "/Manager/ManagerProductList?mainSiteId=" + managerMainSiteId + "&pageIndex=" + num + "&pageSize=" + pageSize;
+                     }
+                 }
+             });
+         });
 
-    function managerProductQuery() {
-        var product = $("input[name]").val();
-        currentManagerId = $("select[name=managerId]").val();
-        currentLanguageId = $("select[name=language]").val();
-        window.location.href = "/Manager/ManagerProductList?managerId=" + currentManagerId + "&language=" + currentLanguageId+"&product="+product;
-    }
+         function managerProductQuery() {
+             var product = $("input[name]").val();
+             currentManagerId = $("select[name=managerId]").val();
+             currentLanguageId = $("select[name=language]").val();
+             window.location.href = "/Manager/ManagerProductList?managerId=" + currentManagerId + "&language=" + currentLanguageId + "&product=" + product;
+         }
 
-    function deleteManagerProduct(id) {
-        art.dialog({
-            icon: "question",
-            content: "确定删除该用户产品？",
-            ok: function () {
-                $.ajax({
-                    url: "/Manager/ManagerProductDelete",
-                    type: "post",
-                    datatype: "json",
-                    data: { id: id },
-                    success: function (response) {
-                        window.location.href = "/Manager/ManagerProductList";
-                    },
-                    error: function () {
+         function deleteManagerProduct(id) {
+             art.dialog({
+                 icon: "question",
+                 content: "确定删除该用户产品？",
+                 ok: function() {
+                     $.ajax({
+                         url: "/Manager/ManagerProductDelete",
+                         type: "post",
+                         datatype: "json",
+                         data: { id: id },
+                         success: function(response) {
+                             window.location.href = "/Manager/ManagerProductList";
+                         },
+                         error: function() {
 
-                    }
+                         }
 
-                });
-            },
-            cancelVal: '关闭',
-            cancel: true,
-            lock: true
-        });
-    }
-</script>
+                     });
+                 },
+                 cancelVal: '关闭',
+                 cancel: true,
+                 lock: true
+             });
+         }
+     </script>
+ }

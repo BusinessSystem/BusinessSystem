@@ -212,10 +212,18 @@ namespace Business.Web.Controllers
         [HttpGet]
         public ActionResult ManagerProductList()
         {
-            ViewBag.BaseDictionarys = BaseService.GetBaseDictionaries(ValueTypeEnum.Language);
-            ViewBag.CommonManagers = ManageService.GetMmanagerTypeManagers(ManagerTypeEnum.Common);
+            long mainSiteId = 0;
+            if (!string.IsNullOrEmpty(Request["mainSiteId"]))
+            {
+                long.TryParse(Request["mainSiteId"].ToString(), out mainSiteId);
+            }
+            if (mainSiteId == 0)
+            {
+                return null;
+            }
+            ViewBag.managerMainSiteId = mainSiteId;
             int pageIndex = 1;
-            int pageSize = 50;
+            int pageSize = 10;
             if (!string.IsNullOrEmpty(Request["pageIndex"]))
             {
                 int.TryParse(Request["pageIndex"].ToString(), out pageIndex);
@@ -224,21 +232,7 @@ namespace Business.Web.Controllers
             {
                 int.TryParse(Request["pageSize"].ToString(), out pageSize);
             }
-            long managerId = 0;
-            if (!string.IsNullOrEmpty(Request["managerId"]))
-            {
-                long.TryParse(Request["managerId"].ToString(), out managerId);
-            }
-            long language = 0;
-            if (!string.IsNullOrEmpty(Request["language"]))
-            {
-                long.TryParse(Request["language"].ToString(), out language);
-            }
-            string product = Request["product"];
-            ViewBag.CurrentManagerId = managerId;
-            ViewBag.CurrentLanguageId = language;
-            PageModel<ManagerProduct> managerProducts = ManageService.GetManagerProducts(language, managerId, product,
-                pageIndex, pageSize);
+            PageModel<ManagerProduct> managerProducts = ManageService.GetManagerProducts(mainSiteId,pageIndex, pageSize);
             return View(managerProducts);
         }
 

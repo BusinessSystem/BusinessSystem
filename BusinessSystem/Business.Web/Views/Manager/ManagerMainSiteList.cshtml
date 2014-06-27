@@ -198,8 +198,8 @@
 </div>
 
 <script type="text/javascript">
-    var currentManagerId = @(currentManagerId);
-    var currentLanguageId = @(currentLanguageId);
+     
+    
     $(function() {
         var totalCount = '@Model.TotalCount';
         totalCount = parseInt(totalCount);
@@ -208,7 +208,7 @@
         var currentPage = '@Model.CurrentPage';
         currentPage = parseInt(currentPage);
         var pageSize = 10;
-        var managerType = $("#form-field-select-1").val();
+       //  var mainSiteId = ￥（）;
         $.jqPaginator('#pagination2', {
             totalCounts: totalCount,
             visiblePages: visiblePages,
@@ -218,7 +218,7 @@
                 if (num == currentPage) {
                     //每次初始化都会执行此处
                 } else {
-                    window.location.href = "/Manager/ManagerMainSiteList?managerId=" + currentManagerId + "&language="+currentLanguageId+"&pageIndex=" + num + "&pageSize=" + pageSize;
+                    window.location.href = "/Manager/ManagerMainSiteList?mainSiteId=" + currentManagerId + "&language="+currentLanguageId+"&pageIndex=" + num + "&pageSize=" + pageSize;
                 }
             }
         });
