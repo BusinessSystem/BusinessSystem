@@ -68,6 +68,8 @@
     <Compile Include="Repository\EmailTranslationRepository.cs" />
     <Compile Include="Repository\EnquiryRepository.cs" />
     <Compile Include="Repository\EnquiryTransFollowRepository.cs" />
+    <Compile Include="IRepository\IManagerMainSiteRepository.cs" />
+    <Compile Include="Repository\ManagerMainSiteRepository.cs" />
     <Compile Include="Repository\ManagerProductRepository.cs" />
     <Compile Include="Repository\ManagerRepository.cs" />
     <Compile Include="Repository\PwdChangeRecordRepository.cs" />

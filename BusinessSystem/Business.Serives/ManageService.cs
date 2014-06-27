@@ -184,7 +184,8 @@ namespace Business.Serives
             {
                 return ResponseCode.NotFoundData;
             }
-            ManagerProduct managerProduct = ManagerProductFactory.Create(managerId, productUrl, language, operate);
+            //TODO:此处需要修改
+            ManagerProduct managerProduct = new ManagerProduct();//ManagerProductFactory.Create(managerId, productUrl, language, operate);
             managerProductRepository.Save(managerProduct);
             return ResponseCode.Ok;
         }
@@ -221,10 +222,11 @@ namespace Business.Serives
             {
                 return ResponseCode.NotFoundData;
             }
-            managerProduct.ManagerId = managerId;
-            managerProduct.Operator = operate;
-            managerProduct.Language = language;
-            managerProduct.Product = productUrl;
+            //TODO:此处需要修改
+            //managerProduct.ManagerId = managerId;
+            //managerProduct.Operator = operate;
+            //managerProduct.Language = language;
+            //managerProduct.Product = productUrl;
             managerProductRepository.Save(managerProduct);
             return ResponseCode.Ok;
         }
