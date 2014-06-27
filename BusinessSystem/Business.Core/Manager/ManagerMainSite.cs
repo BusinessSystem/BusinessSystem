@@ -32,7 +32,7 @@ namespace Business.Core
     public class ManagerMainSiteFactory
     {
         public static ManagerMainSite Create(long managerId, string managerName, string siteName, string siteUrl,
-            long languageId, string languageName)
+            long languageId, string languageName,string operate)
         {
             return new ManagerMainSite()
             {
@@ -42,7 +42,8 @@ namespace Business.Core
                 SiteUrl = siteUrl,
                 LanguageName = languageName,
                 LanguageId = languageId,
-                OperateTime = DateTime.Now
+                OperateTime = DateTime.Now,
+                Operator = operate
             };
         }
     }

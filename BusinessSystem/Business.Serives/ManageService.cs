@@ -255,11 +255,11 @@ namespace Business.Serives
         //TODO: 提示消息不完整
         public static string MainSiteSave(ManagerMainSite mainSite)
         {
-            if (!string.IsNullOrEmpty(mainSite.SiteUrl))
+            if (string.IsNullOrEmpty(mainSite.SiteUrl))
             {
                 return ResponseCode.NotFoundData;
             }
-            if (!string.IsNullOrEmpty(mainSite.SiteName))
+            if (string.IsNullOrEmpty(mainSite.SiteName))
             {
                 return ResponseCode.NotFoundData;
             }
@@ -267,6 +267,7 @@ namespace Business.Serives
             return ResponseCode.Ok;
         }
 
+ 
         public static ManagerMainSite GetManagerMainSiteById(long id)
         {
             return managerMainSiteRepository.GetById(id);

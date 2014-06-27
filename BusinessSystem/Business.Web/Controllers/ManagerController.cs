@@ -252,11 +252,35 @@ namespace Business.Web.Controllers
         }
 
         [HttpGet]
-        public ActionResult ManagerMainSiteEdit()
+        public ActionResult ManagerMainSiteEdit(long id)
         {
-            IList<BaseDictionary> baseDictionaries = BaseService.GetBaseDictionaries(ValueTypeEnum.Language);
+            ViewBag.BaseDictionaries = BaseService.GetBaseDictionaries(ValueTypeEnum.Language);
             ViewBag.CommonManagers = ManageService.GetMmanagerTypeManagers(ManagerTypeEnum.Common);
-            return View(baseDictionaries);
+             ManagerMainSite managerMainSite = ManageService.GetManagerMainSiteById(id);
+             return View(managerMainSite);
+        }
+
+        [HttpPost]
+        public ActionResult ManagerMainSiteEdit(long mainSiteId, string siteName, long language, string siteUrl,
+            long managerId)
+        {
+            ManagerMainSite managerMainSite = ManageService.GetManagerMainSiteById(mainSiteId);
+            if (managerMainSite != null)
+            {
+                managerMainSite.SiteName = siteName;
+                managerMainSite.SiteUrl = siteUrl;
+                BaseDictionary baseDictionary = BaseService.GetDictionaryById(language);
+                Manager manager = ManageService.GetManagerById(managerId);
+                if (baseDictionary == null || manager == null)
+                {
+                    return Json(InfoTools.GetMsgInfo(ResponseCode.NotFoundData));
+                }
+                managerMainSite.LanguageId = language;
+                managerMainSite.LanguageName = baseDictionary.Value;
+                managerMainSite.ManagerName = manager.RealName;
+                managerMainSite.ManagerId = managerId;
+            }
+            return Json(InfoTools.GetMsgInfo(ResponseCode.NotFoundData));
         }
 
         [HttpPost]
@@ -267,7 +291,7 @@ namespace Business.Web.Controllers
             if (manager != null && baseDictionary != null)
             {
                 ManagerMainSite managerMainSite = ManagerMainSiteFactory.Create(manager.Id, manager.RealName, siteName,
-                    siteUrl, baseDictionary.Id, baseDictionary.Value);
+                    siteUrl, baseDictionary.Id, baseDictionary.Value,CurrentManager.RealName);
                 string result = ManageService.MainSiteSave(managerMainSite);
                 return Json(InfoTools.GetMsgInfo(result));
             }
@@ -298,6 +322,8 @@ namespace Business.Web.Controllers
                 long.TryParse(Request["language"].ToString(), out language);
             }
             string siteUrl = Request["siteUrl"];
+            ViewBag.CurrentManagerId = managerId;
+            ViewBag.CurrentLanguageId = language;
             ViewBag.BaseDictionarys = BaseService.GetBaseDictionaries(ValueTypeEnum.Language);
             ViewBag.CommonManagers = ManageService.GetMmanagerTypeManagers(ManagerTypeEnum.Common);
             PageModel<ManagerMainSite> pageModel = ManageService.GetManagerMainSitePages(managerId, language, siteUrl,

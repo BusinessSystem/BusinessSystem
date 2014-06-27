@@ -66,9 +66,9 @@
                             }
                         </select>
                         
-                          <label class="col-sm-1 control-label text-right" for="form-field-select-1">产品: </label>
+                          <label class="col-sm-1 control-label text-right" for="form-field-select-1">网站地址: </label>
                         
-                            <input id="form-field-1" name="product" placeholder="用户名" class="col-xs-10 col-sm-3  height-35" type="text">
+                            <input id="form-field-1" name="siteUrl" placeholder="网站地址" class="col-xs-10 col-sm-3  height-35" type="text">
                         
                           <span onclick="managerProductQuery()" class="btn btn-app btn-light btn-xs  no-border">
                            查询
@@ -120,13 +120,13 @@
                                           @item.SiteName
                                         </td>
                                         <td>@item.SiteUrl</td>
-                                        <td class="hidden-480"   > <a href="@item.LanguageName">@item.LanguageName</a></td>
+                                        <td class="hidden-480"> <a href="@item.LanguageName">@item.LanguageName</a></td>
                                         <td>@item.Operator</td>
                                        
                                         <td >
                                             <div class="visible-md visible-lg hidden-sm hidden-xs btn-group">
                                                 
-                                                <button class="btn btn-xs btn-info" onclick=" window.location.href = '/Manager/ManagerProductEdit/@item.Id' ">
+                                                <button class="btn btn-xs btn-info" onclick=" window.location.href = '/Manager/ManagerMainSiteEdit/@item.Id' ">
                                                     <i class="icon-edit bigger-120"></i>编辑
                                                 </button>
 
@@ -210,17 +210,17 @@
                 if (num == currentPage) {
                     //每次初始化都会执行此处
                 } else {
-                    window.location.href = "/Manager/ManagerProductList?managerId=" + currentManagerId + "&language"+currentLanguageId+"&pageIndex=" + num + "&pageSize=" + pageSize;
+                    window.location.href = "/Manager/ManagerMainSiteList?managerId=" + currentManagerId + "&language="+currentLanguageId+"&pageIndex=" + num + "&pageSize=" + pageSize;
                 }
             }
         });
     });
 
     function managerProductQuery() {
-        var product = $("input[name]").val();
+        var siteUrl = $("input[name=siteUrl]").val();
         currentManagerId = $("select[name=managerId]").val();
         currentLanguageId = $("select[name=language]").val();
-        window.location.href = "/Manager/ManagerProductList?managerId=" + currentManagerId + "&language=" + currentLanguageId+"&product="+product;
+        window.location.href = "/Manager/ManagerMainSiteList?managerId=" + currentManagerId + "&language="+currentLanguageId +"&siteUrl="+siteUrl;
     }
 
     function deleteManagerProduct(id) {
