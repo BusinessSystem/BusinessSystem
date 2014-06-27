@@ -277,14 +277,43 @@ namespace Business.Web.Controllers
         [HttpGet]
         public ActionResult ManagerMainSiteList()
         {
-            return View();
+            int pageIndex = 1;
+            int pageSize = 50;
+            if (!string.IsNullOrEmpty(Request["pageIndex"]))
+            {
+                int.TryParse(Request["pageIndex"].ToString(), out pageIndex);
+            }
+            if (!string.IsNullOrEmpty(Request["pageSize"]))
+            {
+                int.TryParse(Request["pageSize"].ToString(), out pageSize);
+            }
+            long managerId = 0;
+            if (!string.IsNullOrEmpty(Request["managerId"]))
+            {
+                long.TryParse(Request["managerId"].ToString(), out managerId);
+            }
+            long language = 0;
+            if (!string.IsNullOrEmpty(Request["language"]))
+            {
+                long.TryParse(Request["language"].ToString(), out language);
+            }
+            string siteUrl = Request["siteUrl"];
+            ViewBag.BaseDictionarys = BaseService.GetBaseDictionaries(ValueTypeEnum.Language);
+            ViewBag.CommonManagers = ManageService.GetMmanagerTypeManagers(ManagerTypeEnum.Common);
+            PageModel<ManagerMainSite> pageModel = ManageService.GetManagerMainSitePages(managerId, language, siteUrl,
+                pageIndex, pageSize);
+            return View(pageModel);
         }
 
 
         [HttpGet]
         public ActionResult CommonManagerMainSiteList()
         {
-            return View();
+            IList<ManagerMainSite> managerMainSites =
+                ManageService.GetManagerMainSitesByManagerId(CurrentManager.ParentId == 0
+                    ? CurrentManager.Id
+                    : CurrentManager.ParentId);
+            return View(managerMainSites);
         }
 
 
