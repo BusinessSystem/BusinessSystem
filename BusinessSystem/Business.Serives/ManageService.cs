@@ -167,7 +167,7 @@ namespace Business.Serives
             return pwdChangeRecordRepository.GetPwdChangeRecords(managerId, pageIndex, pageSize);
         }
 
-        public static string ManagerProductAdd(long managerId,string productUrl,long language,string operate)
+        public static string ManagerProductAdd(long managerId, string productUrl, long language, string operate)
         {
             if (managerId == 0)
             {
@@ -177,7 +177,7 @@ namespace Business.Serives
             {
                 return ResponseCode.NotFoundData;
             }
-            if (language==0)
+            if (language == 0)
             {
                 return ResponseCode.NotFoundData;
             }
@@ -186,7 +186,8 @@ namespace Business.Serives
                 return ResponseCode.NotFoundData;
             }
             //TODO:此处需要修改
-            ManagerProduct managerProduct = new ManagerProduct();//ManagerProductFactory.Create(managerId, productUrl, language, operate);
+            ManagerProduct managerProduct = new ManagerProduct();
+                //ManagerProductFactory.Create(managerId, productUrl, language, operate);
             managerProductRepository.Save(managerProduct);
             return ResponseCode.Ok;
         }
@@ -196,12 +197,14 @@ namespace Business.Serives
             int pageIndex, int pageSize)
         {
             int totalCount = 0;
-            IList<ManagerProduct> managerProducts = managerProductRepository.GetManagerProducts(languageId, managerId, product,
+            IList<ManagerProduct> managerProducts = managerProductRepository.GetManagerProducts(languageId, managerId,
+                product,
                 pageIndex, pageSize, out totalCount);
             return new PageModel<ManagerProduct>(managerProducts, pageIndex, pageSize, totalCount);
         }
 
-        public static string ManagerProductUpdate(long id,long managerId, string productUrl, long language, string operate)
+        public static string ManagerProductUpdate(long id, long managerId, string productUrl, long language,
+            string operate)
         {
             if (managerId == 0)
             {
@@ -211,7 +214,7 @@ namespace Business.Serives
             {
                 return ResponseCode.NotFoundData;
             }
-            if ( language==0)
+            if (language == 0)
             {
                 return ResponseCode.NotFoundData;
             }
@@ -239,7 +242,7 @@ namespace Business.Serives
             ManagerProduct managerProduct = managerProductRepository.GetById(id);
             if (managerProduct != null)
             {
-                 managerProductRepository.Delete(managerProduct);
+                managerProductRepository.Delete(managerProduct);
             }
         }
 
@@ -283,7 +286,8 @@ namespace Business.Serives
             }
         }
 
-        public static PageModel<ManagerMainSite> GetManagerMainSitePages(long managerId,long languageId,string siteUrl,int pageIndex,int pageSize)
+        public static PageModel<ManagerMainSite> GetManagerMainSitePages(long managerId, long languageId, string siteUrl,
+            int pageIndex, int pageSize)
         {
             int totalCount = 0;
             IList<ManagerMainSite> managerMainSites = managerMainSiteRepository.GetManagerMainSitePages(
@@ -298,5 +302,6 @@ namespace Business.Serives
                 pageSize, out totalCount);
             return new PageModel<ManagerProduct>(managerProducts, pageIndex, pageSize, totalCount);
         }
+
     }
 }
