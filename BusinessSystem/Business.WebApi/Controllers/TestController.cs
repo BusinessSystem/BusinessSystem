@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using MvcApplication1.Models;
+using System.Web;
 
 namespace MvcApplication1.Controllers
 {
@@ -14,16 +15,32 @@ namespace MvcApplication1.Controllers
         public HttpResponseMessage SaveData(TestQuery query)
         {
             string host_ip = Request.GetClientIpAddress();
-            //string host_url = Request.RequestUri.Host;
+            string email = query.email;
+            string content = query.content;
+            string productName = query.productName ;
+            string yourName = query.yourName ;
+            string company = query.company ;
+            string tel = query.tel;
+            string msn = query.msn ;
+            string language = query.language ;//访问语言
+            string recievedId = query.recievedId ;//接受者
             List<string> retList = new List<string>();
             retList.Add(host_ip);
-            retList.Add(query.Url);
-            retList.Add(query.Language);
+            retList.Add(email);
+            retList.Add(content);
+            retList.Add(productName);
+            retList.Add(yourName);
+            retList.Add(company);
+            retList.Add(tel);
+            retList.Add(msn);
+            retList.Add(language);
+            retList.Add(recievedId);
             var returnObj = new ResultObject<List<string>>();
             returnObj.ReturnData = retList;
             returnObj.Status = ServerStatus.SaveSuccess;
             return Request.CreateResponse<ResultObject<List<string>>>(HttpStatusCode.OK, returnObj);
         }
+
     }
 
 
@@ -46,29 +63,29 @@ namespace MvcApplication1.Controllers
             }
 
             // Self-hosting. Needs reference to System.ServiceModel.dll. 
-            if (request.Properties.ContainsKey(RemoteEndpointMessage))
-            {
-                dynamic remoteEndpoint = request.Properties[RemoteEndpointMessage];
-                if (remoteEndpoint != null)
-                {
-                    return remoteEndpoint.Address;
-                }
-            }
+            //if (request.Properties.ContainsKey(RemoteEndpointMessage))
+            //{
+            //    dynamic remoteEndpoint = request.Properties[RemoteEndpointMessage];
+            //    if (remoteEndpoint != null)
+            //    {
+            //        return remoteEndpoint.Address;
+            //    }
+            //}
 
-            // Self-hosting using Owin. Needs reference to Microsoft.Owin.dll. 
-            if (request.Properties.ContainsKey(OwinContext))
-            {
-                dynamic owinContext = request.Properties[OwinContext];
-                if (owinContext != null)
-                {
-                    return owinContext.Request.RemoteIpAddress;
-                }
-            }
+            //// Self-hosting using Owin. Needs reference to Microsoft.Owin.dll. 
+            //if (request.Properties.ContainsKey(OwinContext))
+            //{
+            //    dynamic owinContext = request.Properties[OwinContext];
+            //    if (owinContext != null)
+            //    {
+            //        return owinContext.Request.RemoteIpAddress;
+            //    }
+            //}
 
-            return null;
+            return "未知ip";
         }
     }
 
 
-    
+
 }
