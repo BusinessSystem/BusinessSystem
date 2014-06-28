@@ -167,9 +167,9 @@ namespace Business.Serives
             return pwdChangeRecordRepository.GetPwdChangeRecords(managerId, pageIndex, pageSize);
         }
 
-        public static string ManagerProductAdd(long managerId, string productUrl, long language, string operate)
+        public static string ManagerProductAdd(long mainSiteId, string productUrl, string productName,string productDescription, string operate)
         {
-            if (managerId == 0)
+            if (mainSiteId == 0)
             {
                 return ResponseCode.NotFoundData;
             }
@@ -177,7 +177,7 @@ namespace Business.Serives
             {
                 return ResponseCode.NotFoundData;
             }
-            if (language == 0)
+            if (string.IsNullOrEmpty(productName))
             {
                 return ResponseCode.NotFoundData;
             }
@@ -187,7 +187,7 @@ namespace Business.Serives
             }
             //TODO:此处需要修改
             ManagerProduct managerProduct = new ManagerProduct();
-                //ManagerProductFactory.Create(managerId, productUrl, language, operate);
+                ManagerProductFactory.Create(mainSiteId, productName, productUrl,productDescription, operate);
             managerProductRepository.Save(managerProduct);
             return ResponseCode.Ok;
         }

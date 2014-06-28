@@ -172,16 +172,17 @@ namespace Business.Web.Controllers
         }
 
         [HttpGet]
-        public ActionResult ManagerProductAdd()
+        public ActionResult ManagerProductAdd(long id)
         {
-            IList<BaseDictionary> baseDictionaries=BaseService.GetBaseDictionaries(ValueTypeEnum.Language);
-            ViewBag.CommonManagers = ManageService.GetMmanagerTypeManagers(ManagerTypeEnum.Common);
-            return View(baseDictionaries);
+            ManagerMainSite managerMainSite = ManageService.GetManagerMainSiteById(id);
+            return View(managerMainSite);
         }
+
         [HttpPost]
-        public ActionResult ManagerProductAdd(long language, string productUrl, long managerId)
+        public ActionResult ManagerProductAdd(long mainSiteId, string productUrl, string productName,
+            string productDescription)
         {
-            string result = ManageService.ManagerProductAdd(managerId, productUrl, language,
+            string result = ManageService.ManagerProductAdd(mainSiteId, productUrl, productName, productDescription,
                 CurrentManager.RealName);
             return Json(InfoTools.GetMsgInfo(result), JsonRequestBehavior.AllowGet);
         }
