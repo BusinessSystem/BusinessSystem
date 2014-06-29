@@ -5,6 +5,7 @@ using System.Text;
 using Business.Core;
 using Business.Nhibernate.Base;
 using Business.Nhibernate.IRepository;
+using NHibernate.Criterion;
 
 namespace Business.Nhibernate.Repository
 {
@@ -45,6 +46,14 @@ namespace Business.Nhibernate.Repository
                 var query = session.QueryOver<ManagerProduct>().Where(m => m.ManagerMainSiteId == mainSiteId);
                 totalCount = query.RowCount();
                 return query.Take(pageSize).Skip((pageIndex - 1)*pageSize).List();
+            }
+        }
+
+        public ManagerProduct GetManagerProductByUrl(string productUrl)
+        {
+            using (var session = GetSession())
+            {
+               return session.QueryOver<ManagerProduct>().Where(m => m.ProductUrl == productUrl).Take(1).SingleOrDefault();
             }
         }
     }

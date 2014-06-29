@@ -185,7 +185,7 @@
                                     语言
                                 </th>
                                 <th class="hidden-480">跟进次数</th>
-
+                                 <th>国家</th>
                                 <th>意向状况</th>
                                 <th>账户类型</th>
                                 
@@ -207,8 +207,8 @@
                                             </label>
                                         </td>
 
-                                        <td>
-                                            <a href="@item.ProductUrl">@item.ProductUrl</a>
+                                        <td  title="@item.ProductUrl">
+                                            <a href="/Enquiry/EnquiryDetail/@item.Id" title="@item.ProductUrl">@item.ProductUrl.Substring(0,20)</a>
                                         </td>
                                         <td>@item.PurchaserEmail</td>
                                         <td class="hidden-480">
@@ -219,13 +219,14 @@
                                             @item.FollowUpTimes
                                         </td>
                                         <td >
-                                            @item.PurchaserCountry
-                                        </td>
+                                            @item.PurchaserCountry 
+                                        </td> 
+                                        
                                         <td >
                                             @item.IntentionName
                                         </td>
                                         
-                                         <td >
+                                        <td >
                                             @item.HandlerName
                                         </td>
                                     </tr>
@@ -348,5 +349,9 @@
 
     function IssueToChildManager(id) {
         alert(id);
+    }
+
+    function enquiryDetail(id) {
+        alert("sfdwe");
     }
 </script>

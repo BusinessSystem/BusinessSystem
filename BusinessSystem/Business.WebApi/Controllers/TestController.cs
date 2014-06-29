@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using Business.Serives;
 using MvcApplication1.Models;
 using System.Web;
 
@@ -24,6 +25,7 @@ namespace MvcApplication1.Controllers
             string msn = query.msn ;
             string language = query.language ;//访问语言
             string recievedId = query.recievedId ;//接受者
+            EnquiryService.EnquirySave(host_ip, email, content, productName, yourName, company, tel, msn);
             List<string> retList = new List<string>();
             retList.Add(host_ip);
             retList.Add(email);

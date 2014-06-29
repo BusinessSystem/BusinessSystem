@@ -37,7 +37,20 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Iesi.Collections, Version=1.0.1.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Iesi.Collections.3.2.0.1001\lib\Net35\Iesi.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="MySql.Data">
+      <HintPath>..\packages\MySql.Data.6.8.3\lib\net40\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate, Version=3.3.1.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <HintPath>..\packages\NHibernate.3.3.3.4001\lib\Net35\NHibernate.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
@@ -370,6 +383,16 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Htmls\intaca_russian\products\img\hydraulic vibration impact plate\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Business.Core\Business.Core.csproj">
+      <Project>{B23304C7-FED0-44B1-B2FF-4878E18CE03C}</Project>
+      <Name>Business.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Business.Serives\Business.Service.csproj">
+      <Project>{411656FE-EB8A-4357-A843-2BD12B1A77CD}</Project>
+      <Name>Business.Service</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

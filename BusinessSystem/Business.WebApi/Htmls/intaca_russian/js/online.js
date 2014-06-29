@@ -76,6 +76,6 @@ function play()
 			e.style.borderWhite=1;
 			e.style.borderColor="#CCCCCC";
 			e.style.borderStyle="solid";
-			e.style.backgroundColor="transparent"
-		}
+	    e.style.backgroundColor = "transparent";
+	}
 		

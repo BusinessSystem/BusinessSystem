@@ -35,6 +35,8 @@ namespace Business.Nhibernate.IRepository
 
         IList<ManagerProduct> GetManagerProducts(long mainSiteId,
             int pageIndex, int pageSize, out int totalCount);
+
+        ManagerProduct GetManagerProductByUrl(string productUrl);
     }
 
     public interface IPwdChangeRecordRepository : IRepository<PwdChangeRecord>

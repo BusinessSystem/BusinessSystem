@@ -52,8 +52,8 @@ namespace Business.Core
     public class EnquiryFactory
     {
         public static Enquiry Create(string ipString, string purchaserEmail, string enquiryContent,
-           string productUrl, string purchaserUserName, string purchaserCompany, string purchaserTel,
-           string purchaserMsn, string visitLanguage, string purchaserCountry, long receiverId)
+            string productUrl, string purchaserUserName, string purchaserCompany, string purchaserTel,
+            string purchaserMsn, string visitLanguage, string purchaserCountry, long receiverId)
         {
             return new Enquiry()
             {
@@ -72,8 +72,8 @@ namespace Business.Core
                 IsIssuedChildManager = Utils.CoreDefaultValue.False,
                 HandlerStatus = HandlerStatusEnum.UnRead,
                 HandlerTime = Utils.CoreDefaultValue.MinTime,
-                FollowUpTimes = 0,
-                IsDeleted = Utils.CoreDefaultValue.True,
+                FollowUpTimes = 1,
+                IsDeleted = Utils.CoreDefaultValue.False,
             };
         }
     }

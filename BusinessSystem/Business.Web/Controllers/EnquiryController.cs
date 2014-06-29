@@ -29,7 +29,7 @@ namespace Business.Web.Controllers
         public ActionResult UnReadEnquiryList()
         {
             PageModel<Enquiry> pageModel = EnquiryService.GetEnquiryPages(CurrentManager.Id, 0, 0,
-                HandlerStatusEnum.UnRead, 0, 10);
+                HandlerStatusEnum.UnRead, 1, 10);
             ViewBag.CurrentManager = CurrentManager;
             ViewBag.Intentions = BaseService.GetIntentions(CurrentManager.ParentId != 0 ? CurrentManager.ParentId : CurrentManager.Id);
             ViewBag.UserDefineds = BaseService.GetUserDefineds(CurrentManager.ParentId != 0 ? CurrentManager.ParentId : CurrentManager.Id);

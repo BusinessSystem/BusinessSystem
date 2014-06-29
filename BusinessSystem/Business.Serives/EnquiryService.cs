@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Text;
 using Business.Core;
 using Business.Nhibernate.IRepository;
 using Business.Nhibernate.Repository;
+using Business.Utils;
 
 namespace Business.Serives
 {
@@ -16,7 +18,8 @@ namespace Business.Serives
         private static IUserDefinedRepository userDefinedRepository = new UserDefinedRepository();
         private static IManagerRepository managerRepository = new ManagerRepository();
         private static IEmailTranslationRepository emailTranslationRepository = new EmailTranslationRepository();
-
+        private static IManagerProductRepository managerProductRepository = new ManagerProductRepository();
+        private static IManagerMainSiteRepository managerMainSiteRepository=new ManagerMainSiteRepository();
         public static IList<EnquiryTransFollow> GeEnquiryTransFollowsByEnquiryId(long enquiryId)
         {
             return enquiryTransFollowRepository.GetEnquiryTransFollowsByEnquiryId(enquiryId);
@@ -45,7 +48,7 @@ namespace Business.Serives
             return enquiryRepository.GetReadEnquiryCount(managerId, handlerStatus);
         }
 
-        public void MoveEnquiryToIntention(long enquiryId, long intentionId)
+        public static void MoveEnquiryToIntention(long enquiryId, long intentionId)
         {
             Enquiry enquiry = enquiryRepository.GetById(enquiryId);
             if (enquiry != null)
@@ -62,7 +65,7 @@ namespace Business.Serives
             }
         }
 
-        public void MoveEnquiryToUseDefine(long enquiryId, long useDefineId)
+        public static void MoveEnquiryToUseDefine(long enquiryId, long useDefineId)
         {
             Enquiry enquiry = enquiryRepository.GetById(enquiryId);
             if (enquiry != null)
@@ -79,7 +82,7 @@ namespace Business.Serives
             }
         }
 
-        public string DeleteEnquiryById(long enquiryId)
+        public static string DeleteEnquiryById(long enquiryId)
         {
             Enquiry enquiry = enquiryRepository.GetById(enquiryId);
             if (enquiry != null)
@@ -91,7 +94,7 @@ namespace Business.Serives
             return ResponseCode.NotFoundData;
         }
 
-        public string IssueEnquiryToChild(long childManagerId, long enquiryId)
+        public static string IssueEnquiryToChild(long childManagerId, long enquiryId)
         {
             Enquiry enquiry = enquiryRepository.GetById(enquiryId);
             if (enquiry == null)
@@ -108,14 +111,70 @@ namespace Business.Serives
             return ResponseCode.Ok;
         }
 
-        public string ReplyEnquiryTransFollow()
+        public static string ReplyEnquiryTransFollow()
         {
             return ResponseCode.Ok;
         }
 
-        public PageModel<Enquiry> GetEnquiryUnReadEmailPages(long managerId, long intentId, long useDefinedId, int pageIndex, int pageSize)
+        public static PageModel<Enquiry> GetEnquiryUnReadEmailPages(long managerId, long intentId, long useDefinedId, int pageIndex, int pageSize)
         {
             return null;
+        }
+
+
+        public static void EnquirySave(string ipString, string email, string content, string productName,
+            string yourName, string company, string tel, string msn)
+        {
+            if (string.IsNullOrWhiteSpace(productName))
+            {
+                return;
+            }
+            if (string.IsNullOrWhiteSpace(content))
+            {
+                return;
+            }
+            if (string.IsNullOrWhiteSpace(email))
+            {
+                return;
+            }
+            if (string.IsNullOrWhiteSpace(tel))
+            {
+                return;
+            }
+            if (string.IsNullOrWhiteSpace(yourName))
+            {
+                return;
+            }
+            if (string.IsNullOrWhiteSpace(company))
+            {
+
+            }
+            if (string.IsNullOrWhiteSpace(msn))
+            {
+                return;
+            }
+            if (!CheckTools.IsValidEmail(email))
+            {
+               // return;
+            }
+            if (!CheckTools.IsAllNumber(tel))
+            {
+                //return;
+            }
+           // //ManagerProduct managerProduct = managerProductRepository.GetManagerProductByUrl(productName);
+           // if (managerProduct == null)
+           // {
+           //    // return;
+           // }
+           //// ManagerMainSite managerMainSite = managerMainSiteRepository.GetById(managerProduct.Id);
+           // if (managerMainSite == null)
+           // {
+           //     //;
+           // }
+
+            Enquiry enquiry = EnquiryFactory.Create(ipString, email, content, productName, yourName, company, tel, msn,
+                "英语", "", 2);
+            enquiryRepository.Save(enquiry);
         }
 
     }
