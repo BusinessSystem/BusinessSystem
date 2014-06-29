@@ -121,7 +121,21 @@ namespace Business.Serives
             return null;
         }
 
+        public static Enquiry GetEnquiryById(long enquiryId)
+        {
+            return enquiryRepository.GetById(enquiryId);
+        }
 
+        public static void ChangeEnquiryStatus(Manager currentManager,Enquiry enquiry)
+        {
+            if (enquiry.ReceiverId == currentManager.Id)
+            {
+                 enquiry.HandlerStatus= HandlerStatusEnum.HasRead;
+                 enquiryRepository.Save(enquiry);
+            }
+        }
+
+        //:TODO 询盘写入数据
         public static void EnquirySave(string ipString, string email, string content, string productName,
             string yourName, string company, string tel, string msn)
         {
@@ -176,6 +190,8 @@ namespace Business.Serives
                 "英语", "", 2);
             enquiryRepository.Save(enquiry);
         }
+
+
 
     }
 }

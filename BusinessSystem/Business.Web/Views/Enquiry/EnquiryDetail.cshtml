@@ -1,17 +1,14 @@
 ﻿@{
     ViewBag.Title = "<li><i class=\"\"></i><a href=\"/Enquiry/UnReadEnquiryList\">询盘中心</a></li><li class=\"active\">询盘详细信息</li>";
-    Manager currentManager = ViewBag.CurrentManager;
 }
-@using Business.Core
-@using NHibernate.AdoNet
-@model Business.Web.PageModel.PageTranslationFollow
-@if (Model != null &&Model.EmailTranslationModel!=null && Model.EmailFollows!=null&&Model.EmailFollows.Count!=0)
+@model Business.Web.PageModel.PageEnquiry
+@if (Model != null &&Model.Enquiry!=null)
 {
     <div class="row-fluid">
         <div class="span12">
             <div class="widget-box  no-border">
                 <div class="widget-header widget-header-blue widget-header-flat">
-                    <h4 class="lighter">邮件详细信息</h4>
+                    <h4 class="lighter">询盘详细信息</h4>
                     <div class="widget-toolbar">
                         <label>
                         </label>
@@ -21,34 +18,89 @@
                     <div class="space-4"></div>
                     <div class="profile-user-info profile-user-info-striped">
                         <div class="profile-info-row">
-                            <div class="profile-info-name"> 主题： </div>
+                            <div class="profile-info-name"> 客户预购产品： </div>
 
                             <div class="profile-info-value">
-                                <span class="editable editable-click" id="username">@Model.EmailTranslationModel.Theme </span>
+                                <span class="editable editable-click" id="username">@Model.Enquiry.ProductUrl &nbsp;</span>
                             </div>
                         </div>
 
                         <div class="profile-info-row">
-                            <div class="profile-info-name"> 时间： </div>
+                            <div class="profile-info-name"> 客户EMAIL： </div>
 
                             <div class="profile-info-value">
-                                <span class="editable editable-click" id="username">@Model.EmailTranslationModel.SendTime </span>
+                                <span class="editable editable-click" id="username">@Model.Enquiry.PurchaserEmail &nbsp; </span>
                             </div>
                         </div>
 
                         <div class="profile-info-row">
-                            <div class="profile-info-name"> 语言： </div>
+                            <div class="profile-info-name"> 客户姓名: </div>
 
                             <div class="profile-info-value">
-                                <span class="editable editable-click" id="age"> @Model.EmailTranslationModel.LanguageName</span>
+                                <span class="editable editable-click" id="age"> @Model.Enquiry.PurchaserUserName &nbsp;</span>
+                            </div>
+                        </div>
+                        <div class="profile-info-row">
+                            <div class="profile-info-name"> 客户电话: </div>
+
+                            <div class="profile-info-value">
+                                <span class="editable editable-click" id="age"> @Model.Enquiry.PurchaserTel &nbsp;</span>
+                            </div>
+                        </div>
+                        <div class="profile-info-row">
+                            <div class="profile-info-name"> 客户公司名称: </div>
+
+                            <div class="profile-info-value">
+                                <span class="editable editable-click" id="age"> @Model.Enquiry.PurchaserCompany &nbsp;</span>
+                            </div>
+                        </div>
+                        <div class="profile-info-row">
+                            <div class="profile-info-name"> 客户MSN/SKYPE: </div>
+
+                            <div class="profile-info-value">
+                                <span class="editable editable-click" id="age"> @Model.Enquiry.PurchaserMsn &nbsp;</span>
+                            </div>
+                        </div>
+                        
+                        
+                        <div class="profile-info-row">
+                            <div class="profile-info-name"> 客户地址: </div>
+
+                            <div class="profile-info-value">
+                                <span class="editable editable-click" id="age"> @Model.Enquiry.PurchaserCountry &nbsp;</span>
+                            </div>
+                        </div>
+                        
+                        <div class="profile-info-row">
+                            <div class="profile-info-name"> 询盘发送时间: </div>
+
+                            <div class="profile-info-value">
+                                <span class="editable editable-click" id="age"> @Model.Enquiry.EnquiryTime &nbsp;</span>
+                            </div>
+                        </div>
+                        
+                        <div class="profile-info-row">
+                            <div class="profile-info-name"> 询盘来源页面: </div>
+
+                            <div class="profile-info-value">
+                                <span class="editable editable-click" id="age"> @Model.Enquiry.ProductUrl  &nbsp;</span>
+                            </div>
+                        </div>
+                        
+                        
+                        <div class="profile-info-row">
+                            <div class="profile-info-name"> 使用语言: </div>
+
+                            <div class="profile-info-value">
+                                <span class="editable editable-click" id="age"> @Model.Enquiry.VisitLanguage &nbsp;</span>
                             </div>
                         </div>
 
                         <div class="profile-info-row">
                             <div class="profile-info-name"> 询盘内容： </div>
                             <div class="profile-info-value">
-                                <span class="editable " id="signup">
-                                    @(new MvcHtmlString(Model.EmailTranslationModel.Content))
+                                <span class="editable " id="signup"> &nbsp;
+                                    @(new MvcHtmlString(Model.Enquiry.EnquiryContent))
                                 </span>
                             </div>
                         </div>
@@ -56,48 +108,45 @@
                     @{
                         int index = 0;
                     }
-                    @foreach (var item in Model.EmailFollows)
+                    @if (Model.EnquiryTransFollows != null && Model.EnquiryTransFollows.Count != 0)
                     {
-                        index = index + 1;
-                        <div class="space-4"></div>
-                        <div class="profile-user-info profile-user-info-striped">
+                        foreach (var item in Model.EnquiryTransFollows)
+                        {
+                            index = index + 1;
+                            <div class="space-4"></div>
+                            <div class="profile-user-info profile-user-info-striped">
 
-                            <div class="profile-info-row">
-                                <table  class="translationfoor">
-                                    <tr>
-                                        <td rowspan="4" class="lefrtr">@(index)F</td>
-                                        <td class="rightheader">原文:</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="rightcontent">@(new MvcHtmlString(item.OriginalContent)) &nbsp;</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="rightheader">译文:
-                                        @if (currentManager.ManagerType == ManagerTypeEnum.Super && string.IsNullOrEmpty(item.TargetContent))
-                                        {
-                                            <button class="btn btn-app btn-light btn-xs btn-small" onclick=" showReplyTranlationForm('@item.Id') ">
-                                                翻译
-                                            </button>
-                                        }
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="rightcontent">
-                                            @if (string.IsNullOrEmpty(item.TargetContent))
-                                            {
-                                                item.TargetContent = "&nbsp;<br/><br/><br/><br/>";
-                                            }
-                                            @(new MvcHtmlString(item.TargetContent))
+                                <div class="profile-info-row">
+                                    <table  class="translationfoor">
+                                        <tr>
+                                            <td rowspan="4" class="lefrtr">@(index)F</td>
+                                            <td class="rightheader">原文:</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="rightcontent">@(new MvcHtmlString(item.OriginalContent)) &nbsp;</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="rightheader">译文:
+                                       
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="rightcontent">
+                                                @if (string.IsNullOrEmpty(item.TargetContent))
+                                                {
+                                                    item.TargetContent = "&nbsp;<br/><br/><br/><br/>";
+                                                }
+                                                @(new MvcHtmlString(item.TargetContent))
                                             
-                                        </td>
-                                    </tr>
-                                </table>
+                                            </td>
+                                        </tr>
+                                    </table>
                            
-                            </div>
+                                </div>
                 
-                        </div>
+                            </div>
+                        }
                     }
-                  
                     <div class="space-4"></div>
                 
 
@@ -106,13 +155,9 @@
 
                             string display = string.Empty;
                         }
-                        @if (currentManager.ManagerType == ManagerTypeEnum.Super)
-                        {
-                              display = "display-none";
-                        }
                         <form class="form-horizontal margin-20 @(display)" id="translation_reply_form" method="post" action="/Translation/TranslationReply" enctype="multipart/form-data"   role="form">
                             <input type="hidden" name="replyfollowId" />
-                            <input type="hidden" name="emailTranslationId" value="@Model.EmailTranslationModel.Id" />
+                            <input type="hidden" name="emailTranslationId" value="0" />
                             <div class="form-group">
                                 <div class="col-sm-10">
                                     <div class="widget-box">
@@ -146,20 +191,12 @@
              
                             <div class="clearfix form-actions">
                                 <div class="col-md-offset-1 col-md-9">
-                                     @if (currentManager.ManagerType == ManagerTypeEnum.Super)
-                                     {
-                                         <button id="btn_translation_reply" class="btn btn-info" type="button">
-                                             <i class="icon-ok bigger-110"></i>
-                                              提交翻译
-                                         </button>
-                                     }
-                                     else
-                                     {
+                                      
                                            <button id="btn_translation_reply" class="btn btn-info" type="button">
                                              <i class="icon-ok bigger-110"></i>
                                              转ETW国际翻译
                                          </button>
-                                     }
+                                      
                                 </div>
                             </div>
                         </form>

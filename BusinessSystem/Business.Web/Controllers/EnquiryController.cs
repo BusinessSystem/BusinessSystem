@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Business.Core;
 using Business.Serives;
+using Business.Web.PageModel;
 
 namespace Business.Web.Controllers
 {
@@ -62,9 +63,13 @@ namespace Business.Web.Controllers
          }
 
         [HttpGet]
-        public ActionResult EnquiryDetail()
+        public ActionResult EnquiryDetail(long id)
         {
-            return View();
+            Enquiry enquiry = EnquiryService.GetEnquiryById(id);
+            EnquiryService.ChangeEnquiryStatus(CurrentManager,enquiry);
+            PageEnquiry pageEnquiry = new PageEnquiry();
+            pageEnquiry.Enquiry = enquiry;
+            return View(pageEnquiry);
         }
     }
 }
