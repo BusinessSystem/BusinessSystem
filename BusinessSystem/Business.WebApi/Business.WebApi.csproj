@@ -60,6 +60,7 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Abstractions" />
@@ -138,13 +139,27 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Htmls\LoginForm.aspx.cs">
+      <DependentUpon>LoginForm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Htmls\LoginForm.aspx.designer.cs">
+      <DependentUpon>LoginForm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Htmls\YZM.ashx.cs">
+      <DependentUpon>YZM.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LoginQuery.cs" />
     <Compile Include="Models\ResultObject.cs" />
     <Compile Include="Models\ServerStatus.cs" />
+    <Compile Include="Models\SessionableControllerHandler.cs" />
+    <Compile Include="Models\SessionStateRouteHandler.cs" />
     <Compile Include="Models\TestQuery.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -339,7 +354,22 @@
     <Content Include="Htmls\intaca_russian\products\img\hydraulic power units\Hp18-30-40.jpg" />
     <Content Include="Htmls\intaca_russian\products\img\hydraulic power units\hydraulic-power-pack.jpg" />
     <Content Include="Htmls\intaca_russian\products\img\hydraulic power units\IMG_3580-.jpg" />
+    <Content Include="Htmls\LoginForm.aspx" />
     <Content Include="Htmls\Test.htm" />
+    <Content Include="Images\content-bg.gif" />
+    <Content Include="Images\icon-demo.gif" />
+    <Content Include="Images\icon-login-seaver.gif" />
+    <Content Include="Images\login-buttom-gb1.gif" />
+    <Content Include="Images\login-content-bg.gif" />
+    <Content Include="Images\login-top-bg.gif" />
+    <Content Include="Images\login-wel.gif" />
+    <Content Include="Images\login_bg.jpg" />
+    <Content Include="Images\logo.gif" />
+    <Content Include="Images\menu_bg.gif" />
+    <Content Include="Images\right_smbg.jpg" />
+    <Content Include="Images\Submit_bg.gif" />
+    <Content Include="Images\top-right.gif" />
+    <Content Include="Images\top_bt.jpg" />
     <Content Include="Scripts\jquery-1.7.1-vsdoc.js" />
     <Content Include="Scripts\jquery-1.7.1.js" />
     <Content Include="Scripts\jquery-1.7.1.min.js" />
@@ -347,6 +377,7 @@
     <Content Include="Scripts\jquery.purebox.js" />
     <Content Include="Styles\purebox-facebook.css" />
     <Content Include="Styles\purebox-metro.css" />
+    <Content Include="Styles\skin2.css" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -380,6 +411,7 @@
     <None Include="Htmls\intaca_russian\products\img\Hydraulic impact hammer\Thumbs.db" />
     <None Include="Htmls\intaca_russian\products\img\Hydraulic Impact Wrench\Thumbs.db" />
     <None Include="Htmls\intaca_russian\products\img\hydraulic power units\Thumbs.db" />
+    <Content Include="Htmls\YZM.ashx" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Htmls\intaca_russian\products\img\hydraulic vibration impact plate\" />

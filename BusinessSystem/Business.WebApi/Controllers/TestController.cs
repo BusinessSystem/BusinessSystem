@@ -5,10 +5,10 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using Business.Serives;
-using MvcApplication1.Models;
+using Business.WebApi.Models;
 using System.Web;
 
-namespace MvcApplication1.Controllers
+namespace Business.WebApi.Controllers
 {
     public class TestController : ApiController
     {
