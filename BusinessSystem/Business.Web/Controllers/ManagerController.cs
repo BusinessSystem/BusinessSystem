@@ -76,7 +76,7 @@ namespace Business.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult ManagerEdit(long id,string userName, string password, string realName,
+        public ActionResult ManagerEdit(long id,string userName,  string realName,
             string company, int language,ManagerTypeEnum managerType)
         {
             short isAutoDistribute = Utils.CoreDefaultValue.False;
@@ -89,7 +89,6 @@ namespace Business.Web.Controllers
             if (manager != null)
             {
                 manager.UserName = userName;
-                manager.Password = password;
                 manager.RealName = realName;
                 manager.Company = company;
                 manager.Language = language;

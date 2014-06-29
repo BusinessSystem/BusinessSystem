@@ -22,7 +22,8 @@
                     </div>
                 </div>
                 <div class="widget-body">
-                    <form class="form-horizontal" id="manager_add_form" enctype="multipart/form-data"   role="form">
+                    <form class="form-horizontal" id="manager_edit_form" enctype="multipart/form-data" role="form">
+                        <input type="hidden" value="@Model.ManagerBase.Id" name="id" />
                         <div class="space-4"></div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label no-padding-right" for="form-field-1">用户名: </label>
@@ -142,7 +143,7 @@
 
                         <div class="clearfix form-actions">
                             <div class="col-md-offset-3 col-md-9">
-                                <button id="btn_manager_add" class="btn btn-info" type="button">
+                                <button id="btn_manager_edit" class="btn btn-info" type="button">
                                     <i class="icon-ok bigger-110"></i>
                                     提交
                                 </button>
@@ -161,14 +162,30 @@
     </div>
 
     <script type="text/javascript">
+        function formValidate() {
+            var userName = $("input[name=userName]").val().trim();
+             
+            if (userName == "") {
+                art.dialog({
+                    content: "用户名不能为空",
+                    time: 2,
+                    width: 200,
+                    lock: true
+                });
+                return false;
+            }
+             
+            return true;
+        }
+
         $(function() {
-            $("#btn_manager_add").click(function() {
+            $("#btn_manager_edit").click(function () {
                 if (formValidate()) {
                     $.ajax({
                         type: "POST",
                         dataType: "json",
-                        url: "/Manager/ManagerAdd",
-                        data: $('#manager_add_form').serialize(),
+                        url: "/Manager/ManagerEdit",
+                        data: $('#manager_edit_form').serialize(),
                         success: function(response) {
                             art.dialog({
                                 content: response.Description,
@@ -193,24 +210,6 @@
                 }
             });
 
-            function formValidate() {
-                var userName = $("input[name=userName]").val().trim();
-                var password = $("input[name=password]").val().trim();
-                if (userName == "") {
-                    art.dialog({
-                        content: "用户名不能为空",
-                        time: 2,
-                        width: 200,
-                        lock: true
-                    });
-                    return false;
-                }
-                if (password == "") {
-                    art.dialog({ content: "密码不能为空", width: 200, time: 2, lock: true });
-                    return false;
-                }
-                return true;
-            }
         });
 
     </script>
