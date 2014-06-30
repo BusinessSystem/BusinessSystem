@@ -167,7 +167,8 @@ namespace Business.Serives
             return pwdChangeRecordRepository.GetPwdChangeRecords(managerId, pageIndex, pageSize);
         }
 
-        public static string ManagerProductAdd(long mainSiteId, string productUrl, string productName,string productDescription, string operate)
+        public static string ManagerProductAdd(long mainSiteId, string productUrl, string productName,
+            string productDescription, string operate)
         {
             if (mainSiteId == 0)
             {
@@ -186,8 +187,8 @@ namespace Business.Serives
                 return ResponseCode.NotFoundData;
             }
             //TODO:此处需要修改
-            ManagerProduct managerProduct = new ManagerProduct();
-                ManagerProductFactory.Create(mainSiteId, productName, productUrl,productDescription, operate);
+            ManagerProduct managerProduct = ManagerProductFactory.Create(mainSiteId, productName, productUrl,
+                productDescription, operate);
             managerProductRepository.Save(managerProduct);
             return ResponseCode.Ok;
         }
@@ -203,10 +204,13 @@ namespace Business.Serives
             return new PageModel<ManagerProduct>(managerProducts, pageIndex, pageSize, totalCount);
         }
 
-        public static string ManagerProductUpdate(long id, long managerId, string productUrl, long language,
-            string operate)
+        public static string ManagerProductUpdate( long managerproductId, long mainSiteId, string productUrl, string productName,string productDescription,string operate)
         {
-            if (managerId == 0)
+            if (managerproductId == 0)
+            {
+                return ResponseCode.NotFoundData;
+            }
+            if (mainSiteId == 0)
             {
                 return ResponseCode.NotFoundData;
             }
@@ -214,24 +218,25 @@ namespace Business.Serives
             {
                 return ResponseCode.NotFoundData;
             }
-            if (language == 0)
+            if (string.IsNullOrEmpty(productName))
             {
                 return ResponseCode.NotFoundData;
             }
-            if (string.IsNullOrEmpty(operate))
-            {
-                return ResponseCode.NotFoundData;
-            }
-            ManagerProduct managerProduct = managerProductRepository.GetById(id);
+      
+            ManagerProduct managerProduct = managerProductRepository.GetById(managerproductId);
             if (managerProduct == null)
             {
                 return ResponseCode.NotFoundData;
             }
-            //TODO:此处需要修改
-            //managerProduct.ManagerId = managerId;
-            //managerProduct.Operator = operate;
-            //managerProduct.Language = language;
-            //managerProduct.Product = productUrl;
+            if (managerProduct.ManagerMainSiteId != mainSiteId)
+            {
+                 return ResponseCode.NotFoundData;
+            }
+            managerProduct.ProductName= productName;
+            managerProduct.ProductName = productName;
+            managerProduct.ProductDescription = productDescription;
+            managerProduct.Operator = operate;
+            managerProduct.OperateTime = DateTime.Now;
             managerProductRepository.Save(managerProduct);
             return ResponseCode.Ok;
         }

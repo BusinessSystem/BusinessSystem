@@ -189,16 +189,22 @@ namespace Business.Web.Controllers
         [HttpGet]
         public ActionResult ManagerProductEdit(long id)
         {
-            ViewBag.BaseDictionarys = BaseService.GetBaseDictionaries(ValueTypeEnum.Language);
-            ViewBag.CommonManagers = ManageService.GetMmanagerTypeManagers(ManagerTypeEnum.Common);
             ManagerProduct managerProduct = ManageService.GetManagerProductById(id);
+            ViewBag.ManagerMainSite = null;
+            if (managerProduct != null)
+            {
+                ManagerMainSite managerMainSite = ManageService.GetManagerMainSiteById(managerProduct.ManagerMainSiteId);
+                ViewBag.ManagerMainSite = managerMainSite;
+            }
             return View(managerProduct);
         }
+
         [HttpPost]
-        public ActionResult ManagerProductEdit(long managerproductId, long language, string productUrl, long managerId)
+        public ActionResult ManagerProductEdit(long managerproductId, long mainSiteId, string productUrl,
+            string productName, string productDescription)
         {
-            string result = ManageService.ManagerProductUpdate(managerproductId, managerId, productUrl, language,
-                CurrentManager.RealName);
+            string result = ManageService.ManagerProductUpdate(managerproductId, mainSiteId, productUrl, productName,
+                productDescription, CurrentManager.RealName);
             return Json(InfoTools.GetMsgInfo(result), JsonRequestBehavior.AllowGet);
         }
 

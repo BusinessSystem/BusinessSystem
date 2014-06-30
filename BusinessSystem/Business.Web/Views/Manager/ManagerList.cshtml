@@ -85,7 +85,10 @@
                                         </td>
                                         <td>@item.RealName</td>
                                         <td class="hidden-480">@item.Company</td>
-                                        @{ var temp = BaseService.GetDictionaryById(item.Language);}
+                                        @{
+                                            //TODO:此处需要优化
+                                            var temp = BaseService.GetDictionaryById(item.Language);
+                                        }
                                         <td>@(temp ==null? "未设置":temp.Value)</td>
                                         <td class="hidden-480">
                                             @if (@item.IsAutoDistribute == Business.Utils.CoreDefaultValue.False)

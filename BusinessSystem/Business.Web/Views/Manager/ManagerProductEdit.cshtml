@@ -1,53 +1,62 @@
 ﻿@{
     ViewBag.Title = "<li><i class=\"\"></i><a href=\"/Manager/ManagerList\">服务中心</a></li><li class=\"active\">添加用户</li>";
-    IList<Business.Core.Manager> commonManagers = ViewBag.CommonManagers;
-    IList<Business.Core.BaseDictionary> baseDictionarys = ViewBag.BaseDictionarys; 
-    }
-@model   Business.Core.ManagerProduct
-
-@if (Model != null)
+    ManagerMainSite managerMainSite = ViewBag.ManagerMainSite;
+}
+@using Business.Core
+@model  Business.Core.ManagerProduct
+@if (Model != null && managerMainSite!=null)
 {
     <div class="row-fluid">
         <div class="span12">
             <div class="widget-box">
                 <div class="widget-header widget-header-blue widget-header-flat">
-                    <h4 class="lighter">添加用户</h4>
+                    <h4 class="lighter">添加用产品</h4>
                     <div class="widget-toolbar">
                         <label>
                             <small class="green">
                                 <b></b>
                             </small>
-
-                            <span onclick=" window.location.href = '/Manager/ManagerProductList' " class="btn btn-app btn-light btn-xs  no-border">
-                                返回
+                            <span onclick=" window.location.href = '/Manager/ManagerProductList?mainSiteId=@managerMainSite.Id' " class="btn btn-app btn-light btn-xs  no-border">返回
                             </span>
                         </label>
-                    </div>
+                    </div> 
                 </div>
                 <div class="widget-body">
-                    <form class="form-horizontal" id="manager_edit_form" enctype="multipart/form-data"   role="form">
-                        <input type="hidden" name="managerproductId" value="@Model.Id"/>
+                    <form class="form-horizontal" id="managerproduct_edit_form" enctype="multipart/form-data"   role="form">
                         <div class="space-4"></div>
+                        <input type="hidden" value="@managerMainSite.Id" name="mainSiteId"  />
+                        <input type="hidden" value="@Model.Id" name="managerproductId"  />
                         <div class="form-group">
                             <label class="col-sm-3 control-label no-padding-right" for="form-field-select-1">用户: </label>
 
                             <div class="col-sm-9">
-                                <select name="managerId" class="form-control col-xs-8 col-sm-4 width-30" id="form-field-select-1">
-                                    @if (commonManagers != null && commonManagers.Count != 0)
-                                    {
-                                        foreach (var item in commonManagers)
-                                        {
-                                            if (item.Id == Model.ManagerId)
-                                            {
-                                                <option value="@(item.Id)" selected="true">@item.RealName</option>
-                                            }
-                                            else
-                                            {
-                                              <option value="@(item.Id)">@item.RealName</option>   
-                                            }
-                                        }
-                                    }
-                                </select>
+                                <input id="form-field-select-1" disabled="true"  value="@managerMainSite.ManagerName" placeholder="用户" class="col-xs-10 col-sm-5 disabled" type="text">
+                                <span class="help-inline col-xs-12 col-sm-7">
+                                    <span class="middle red">*</span>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="space-4"></div>
+                    
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right" for="form-field-select-2">主站地址: </label>
+
+                            <div class="col-sm-9">
+                                <input id="form-field-select-2" disabled="true" value="@managerMainSite.SiteUrl"  placeholder="主站地址" class="col-xs-10 col-sm-5 disabled" type="text">
+                                <span class="help-inline col-xs-12 col-sm-7">
+                                    <span class="middle red">*</span>
+                                </span>
+                            </div>
+                        </div>
+                    
+                        <div class="space-4"></div>
+                    
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right" for="form-field-select-3">语言: </label>
+
+                            <div class="col-sm-9">
+                                <input id="form-field-select-3" disabled="true"  value="@managerMainSite.LanguageName" placeholder="语言" class="col-xs-10 col-sm-5 disabled" type="text">
                                 <span class="help-inline col-xs-12 col-sm-7">
                                     <span class="middle red">*</span>
                                 </span>
@@ -57,10 +66,10 @@
                         <div class="space-4"></div>
 
                         <div class="form-group">
-                            <label class="col-sm-3 control-label no-padding-right" for="form-field-2">产品: </label>
+                            <label class="col-sm-3 control-label no-padding-right" for="form-field-2">产品名称: </label>
 
                             <div class="col-sm-9">
-                                <input id="form-field-2" name="productUrl"  value="@Model.Product" placeholder="产品" class="col-xs-10 col-sm-9" type="text">
+                                <input id="form-field-2" name="productName" value="@Model.ProductName" placeholder="产品名称" class="col-xs-10 col-sm-9" type="text">
                                 <span class="help-inline col-xs-12 col-sm-2">
                                     <span class="middle red">*</span>
                                 </span>
@@ -70,32 +79,29 @@
                         <div class="space-4"></div>
 
                         <div class="form-group">
-                            <label class="col-sm-3 control-label no-padding-right" for="form-field-select-1">语言: </label>
+                            <label class="col-sm-3 control-label no-padding-right" for="form-field-2">产品地址: </label>
 
                             <div class="col-sm-9">
-                                <select name="language" class="form-control col-xs-8 col-sm-4 width-30" id="form-field-select-1">
-                                    @if (baseDictionarys != null && baseDictionarys.Count != 0)
-                                    {
-                                        foreach (var item in baseDictionarys)
-                                        {
-                                            if (item.Id==Model.Language)
-                                            {
-                                                <option value="@(item.Id)" selected="true">@item.Value</option>
-                                            }
-                                            else
-                                            {
-                                                <option value="@(item.Id)">@item.Value</option>
-                                            }
-                                        }
-                                    }
-                                </select>
-                                <span class="help-inline col-xs-12 col-sm-7">
+                                <input id="form-field-2"  name="productUrl" value="@Model.ProductUrl" placeholder="产品地址" class="col-xs-10 col-sm-9" type="text">
+                                <span class="help-inline col-xs-12 col-sm-2">
                                     <span class="middle red">*</span>
                                 </span>
                             </div>
                         </div>
                     
-                   
+                        <div class="space-4"></div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right" for="form-field-2">产品描述: </label>
+
+                            <div class="col-sm-9">
+                                <input id="form-field-2" name="productDescription" value="@Model.ProductDescription" placeholder="产品描述" class="col-xs-10 col-sm-9" type="text">
+                                <span class="help-inline col-xs-12 col-sm-2">
+                                    <span class="middle red"></span>
+                                </span>
+                            </div>
+                        </div>
+ 
                  
                         <div class="clearfix form-actions">
                             <div class="col-md-offset-3 col-md-9">
@@ -118,20 +124,20 @@
     </div>
 
     <script type="text/javascript">
-        $(function() {
+        $(function () {
             $("#btn_managerProduct_edit").click(function () {
                 if (formValidate()) {
                     $.ajax({
                         type: "POST",
                         dataType: "json",
                         url: "/Manager/ManagerProductEdit",
-                        data: $('#manager_edit_form').serialize(),
-                        success: function(response) {
+                        data: $('#managerproduct_edit_form').serialize(),
+                        success: function (response) {
                             art.dialog({
                                 content: response.Description,
                                 time: 3,
                                 lock: true,
-                                close: function() {
+                                close: function () {
                                     if (response.Code == 0) {
                                         window.location.href = "/Manager/ManagerProductList";
                                     }
@@ -139,7 +145,7 @@
                             });
 
                         },
-                        error: function(data) {
+                        error: function (data) {
                             art.dialog({
                                 content: "error:" + data.responseText,
                                 time: 2,
@@ -151,10 +157,20 @@
             });
 
             function formValidate() {
+                var productName = $("input[name=productName]").val().trim();
+                if (productName == "") {
+                    art.dialog({
+                        content: "产品名称为空",
+                        time: 2,
+                        width: 200,
+                        lock: true
+                    });
+                    return false;
+                }
                 var productUrl = $("input[name=productUrl]").val().trim();
                 if (productUrl == "") {
                     art.dialog({
-                        content: "产品为空",
+                        content: "产品地址为空",
                         time: 2,
                         width: 200,
                         lock: true

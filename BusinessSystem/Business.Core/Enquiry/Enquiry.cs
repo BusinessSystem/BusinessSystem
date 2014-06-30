@@ -53,7 +53,7 @@ namespace Business.Core
     {
         public static Enquiry Create(string ipString, string purchaserEmail, string enquiryContent,
             string productUrl, string purchaserUserName, string purchaserCompany, string purchaserTel,
-            string purchaserMsn, string visitLanguage, string purchaserCountry, long receiverId)
+            string purchaserMsn, string visitLanguage, string purchaserCountry, long receiverId,string receiverName)
         {
             return new Enquiry()
             {
@@ -74,6 +74,8 @@ namespace Business.Core
                 HandlerTime = Utils.CoreDefaultValue.MinTime,
                 FollowUpTimes = 1,
                 IsDeleted = Utils.CoreDefaultValue.False,
+                HandlerId = receiverId,
+                HandlerName = receiverName
             };
         }
     }

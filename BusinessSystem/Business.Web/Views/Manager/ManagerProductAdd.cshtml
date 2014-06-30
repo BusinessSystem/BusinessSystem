@@ -1,6 +1,6 @@
 ﻿@{
     ViewBag.Title = "<li><i class=\"\"></i><a href=\"/Manager/ManagerList\">服务中心</a></li><li class=\"active\">添加用户</li>";
-    }
+}
 @model  Business.Core.ManagerMainSite
 @if (Model != null)
 {
@@ -14,7 +14,7 @@
                             <small class="green">
                                 <b></b>
                             </small>
-                            <span onclick=" window.location.href = '/Manager/ManagerProductList' " class="btn btn-app btn-light btn-xs  no-border">返回
+                            <span onclick=" window.location.href = '/Manager/ManagerProductList?mainSiteId=@Model.Id' " class="btn btn-app btn-light btn-xs  no-border">返回
                             </span>
                         </label>
                     </div> 
@@ -79,7 +79,7 @@
                             <label class="col-sm-3 control-label no-padding-right" for="form-field-2">产品地址: </label>
 
                             <div class="col-sm-9">
-                                <input id="form-field-2"   placeholder="产品地址" class="col-xs-10 col-sm-9" type="text">
+                                <input id="form-field-2"  name="productUrl" placeholder="产品地址" class="col-xs-10 col-sm-9" type="text">
                                 <span class="help-inline col-xs-12 col-sm-2">
                                     <span class="middle red">*</span>
                                 </span>
@@ -122,7 +122,7 @@
 
     <script type="text/javascript">
         $(function() {
-            $("#btn_managerProduct_add").click(function() {
+            $("#btn_managerProduct_add").click(function () {
                 if (formValidate()) {
                     $.ajax({
                         type: "POST",

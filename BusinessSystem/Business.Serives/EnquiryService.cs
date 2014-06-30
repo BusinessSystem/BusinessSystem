@@ -19,7 +19,8 @@ namespace Business.Serives
         private static IManagerRepository managerRepository = new ManagerRepository();
         private static IEmailTranslationRepository emailTranslationRepository = new EmailTranslationRepository();
         private static IManagerProductRepository managerProductRepository = new ManagerProductRepository();
-        private static IManagerMainSiteRepository managerMainSiteRepository=new ManagerMainSiteRepository();
+        private static IManagerMainSiteRepository managerMainSiteRepository = new ManagerMainSiteRepository();
+
         public static IList<EnquiryTransFollow> GeEnquiryTransFollowsByEnquiryId(long enquiryId)
         {
             return enquiryTransFollowRepository.GetEnquiryTransFollowsByEnquiryId(enquiryId);
@@ -61,7 +62,8 @@ namespace Business.Serives
                     enquiry.IntentionId = intention.Id;
                     enquiry.IntentionName = intention.Description;
                 }
-                enquiryRepository.Save(enquiry);;
+                enquiryRepository.Save(enquiry);
+                ;
             }
         }
 
@@ -116,7 +118,8 @@ namespace Business.Serives
             return ResponseCode.Ok;
         }
 
-        public static PageModel<Enquiry> GetEnquiryUnReadEmailPages(long managerId, long intentId, long useDefinedId, int pageIndex, int pageSize)
+        public static PageModel<Enquiry> GetEnquiryUnReadEmailPages(long managerId, long intentId, long useDefinedId,
+            int pageIndex, int pageSize)
         {
             return null;
         }
@@ -126,12 +129,12 @@ namespace Business.Serives
             return enquiryRepository.GetById(enquiryId);
         }
 
-        public static void ChangeEnquiryStatus(Manager currentManager,Enquiry enquiry)
+        public static void ChangeEnquiryStatus(Manager currentManager, Enquiry enquiry)
         {
             if (enquiry.ReceiverId == currentManager.Id)
             {
-                 enquiry.HandlerStatus= HandlerStatusEnum.HasRead;
-                 enquiryRepository.Save(enquiry);
+                enquiry.HandlerStatus = HandlerStatusEnum.HasRead;
+                enquiryRepository.Save(enquiry);
             }
         }
 
@@ -169,29 +172,26 @@ namespace Business.Serives
             }
             if (!CheckTools.IsValidEmail(email))
             {
-               // return;
+                return;
             }
             if (!CheckTools.IsAllNumber(tel))
             {
-                //return;
+                return;
             }
-           // //ManagerProduct managerProduct = managerProductRepository.GetManagerProductByUrl(productName);
-           // if (managerProduct == null)
-           // {
-           //    // return;
-           // }
-           //// ManagerMainSite managerMainSite = managerMainSiteRepository.GetById(managerProduct.Id);
-           // if (managerMainSite == null)
-           // {
-           //     //;
-           // }
+            ManagerProduct managerProduct = managerProductRepository.GetManagerProductByUrl(productName);
+            if (managerProduct == null)
+            {
+                return;
+            }
+            ManagerMainSite managerMainSite = managerMainSiteRepository.GetById(managerProduct.Id);
+            if (managerMainSite == null)
+            {
+                return;
+            }
 
             Enquiry enquiry = EnquiryFactory.Create(ipString, email, content, productName, yourName, company, tel, msn,
-                "英语", "", 2);
+                managerMainSite.LanguageName, "未知", managerMainSite.ManagerId, managerMainSite.ManagerName);
             enquiryRepository.Save(enquiry);
         }
-
-
-
     }
 }
