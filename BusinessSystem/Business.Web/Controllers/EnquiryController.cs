@@ -100,5 +100,20 @@ namespace Business.Web.Controllers
             }
             return Json(InfoTools.GetMsgInfo(ResponseCode.Ok));
         }
+
+        [HttpPost]
+        public ActionResult IssueEnquiryToChildManager(string enquiryIds, long managerId)
+        {
+            if (!string.IsNullOrEmpty(enquiryIds))
+            {
+                string[] enquiryIdArray = enquiryIds.Split(',');
+                foreach (var enquiryId in enquiryIdArray)
+                {
+                    EnquiryService.IssueEnquiryToChild(managerId, long.Parse(enquiryId));
+                }
+            }
+            return Json(InfoTools.GetMsgInfo(ResponseCode.Ok));
+        }
+
     }
 }

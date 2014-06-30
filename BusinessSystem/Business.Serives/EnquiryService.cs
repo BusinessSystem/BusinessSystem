@@ -110,6 +110,7 @@ namespace Business.Serives
             }
             enquiry.HandlerId = childManager.Id;
             enquiry.HandlerName = childManager.RealName;
+            enquiryRepository.Save(enquiry);
             return ResponseCode.Ok;
         }
 
