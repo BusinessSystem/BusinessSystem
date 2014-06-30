@@ -3,6 +3,7 @@
     Dictionary<ManagerTypeEnum, string> managerTypes = (Dictionary<ManagerTypeEnum, string>)ViewBag.ManagerTypes;
 }
 @using Business.Core
+@using Business.Serives
 @model Business.Core.PageModel<Manager>
  
 <div class="row-fluid">
@@ -84,7 +85,8 @@
                                         </td>
                                         <td>@item.RealName</td>
                                         <td class="hidden-480">@item.Company</td>
-                                        <td>@item.Language</td>
+                                        @{ var temp = BaseService.GetDictionaryById(item.Language);}
+                                        <td>@(temp ==null? "未设置":temp.Value)</td>
                                         <td class="hidden-480">
                                             @if (@item.IsAutoDistribute == Business.Utils.CoreDefaultValue.False)
                                             {
