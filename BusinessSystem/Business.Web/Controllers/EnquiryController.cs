@@ -115,5 +115,37 @@ namespace Business.Web.Controllers
             return Json(InfoTools.GetMsgInfo(ResponseCode.Ok));
         }
 
+        [HttpPost]
+        public ActionResult IssueEnquiryToParentManager(string enquiryIds)
+        {
+            if (!string.IsNullOrEmpty(enquiryIds))
+            {
+                long managerId = CurrentManager.ParentId;
+                if (managerId == 0)
+                {
+                    managerId = CurrentManager.Id;
+                }
+                string[] enquiryIdArray = enquiryIds.Split(',');
+                foreach (var enquiryId in enquiryIdArray)
+                {
+                    EnquiryService.IssueEnquiryToChild(managerId, long.Parse(enquiryId));
+                }
+            }
+            return Json(InfoTools.GetMsgInfo(ResponseCode.Ok),JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public ActionResult EnquiryDelete(string enquiryIds)
+        {
+            if (!string.IsNullOrEmpty(enquiryIds))
+            {
+                string[] enquiryIdArray = enquiryIds.Split(',');
+                foreach (var enquiryId in enquiryIdArray)
+                {
+                    EnquiryService.DeleteEnquiryById(long.Parse(enquiryId),CurrentManager);
+                }
+            }
+            return Json(InfoTools.GetMsgInfo(ResponseCode.Ok), JsonRequestBehavior.AllowGet);
+        }
     }
 }

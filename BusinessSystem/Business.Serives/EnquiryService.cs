@@ -84,14 +84,17 @@ namespace Business.Serives
             }
         }
 
-        public static string DeleteEnquiryById(long enquiryId)
+        public static string DeleteEnquiryById(long enquiryId,Manager currentManager)
         {
             Enquiry enquiry = enquiryRepository.GetById(enquiryId);
-            if (enquiry != null)
+            if (currentManager.Id == enquiry.ReceiverId || currentManager.Id == enquiry.HandlerId)
             {
-                enquiry.IsDeleted = Utils.CoreDefaultValue.True;
-                enquiryRepository.Save(enquiry);
-                return ResponseCode.Ok;
+                if (enquiry != null)
+                {
+                    enquiry.IsDeleted = Utils.CoreDefaultValue.True;
+                    enquiryRepository.Save(enquiry);
+                    return ResponseCode.Ok;
+                }
             }
             return ResponseCode.NotFoundData;
         }

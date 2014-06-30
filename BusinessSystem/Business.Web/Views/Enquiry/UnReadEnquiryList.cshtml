@@ -27,7 +27,7 @@
                         <span class="btn btn-app btn-light btn-xs  no-border">
                             <input type="checkbox"  class="checkalltranslation"/>全选
                         </span>
-                        <span class="btn btn-app btn-light btn-xs" onclick="deletetranslation()">
+                        <span class="btn btn-app btn-light btn-xs" onclick="deleteEnquiry()">
                             删除
                         </span>
      
@@ -262,7 +262,7 @@
                         <span class="btn btn-app btn-light btn-xs  no-border">
                             <input type="checkbox"  class="checkalltranslation"/>全选
                         </span>
-                        <span class="btn btn-app btn-light btn-xs " onclick="deletetranslation()">
+                        <span class="btn btn-app btn-light btn-xs " onclick="deleteEnquiry()">
                             删除
                         </span>
                          <ul class="pagination bpagination" id="pagination2"></ul>
@@ -330,18 +330,18 @@
     }
 
     function backtomainer() {
-        var transSelected = [];
-        $("input[name='translationcheck']:checked").each(function () {
-            transSelected.push($(this).val());
+        var enquirySelected = [];
+        $("input[name='qneuirycheck']:checked").each(function () {
+            enquirySelected.push($(this).val());
         });
-        var translationIds = transSelected.join(",");
+        var enquiryIds = enquirySelected.join(",");
         $.ajax({
-            url: "/Translation/BackToMainAccount",
+            url: "/Enquiry/IssueEnquiryToParentManager",
             type: "post",
             datatype: "json",
-            data: { translationIds: translationIds },
+            data: { enquiryIds: enquiryIds },
             success: function (response) {
-                window.location.href = "/Translation/HasReadTranslationList";
+                window.location.href = "/Enquiry/UnReadEnquiryList";
             },
             error: function () {
 
@@ -349,19 +349,19 @@
         });
     }
 
-    function deletetranslation() {
-        var transSelected = [];
-        $("input[name='translationcheck']:checked").each(function () {
-            transSelected.push($(this).val());
+    function deleteEnquiry() {
+        var enquirySelected = [];
+        $("input[name='qneuirycheck']:checked").each(function () {
+            enquirySelected.push($(this).val());
         });
-        var translationIds = transSelected.join(",");
+        var enquiryIds = enquirySelected.join(",");
         $.ajax({
             url: "/Enquiry/EnquiryDelete",
             type: "post",
             datatype: "json",
-            data: { translationIds: translationIds },
+            data: { enquiryIds: enquiryIds },
             success: function (response) {
-                window.location.href = "/Translation/HasReadTranslationList?";
+                window.location.href = "/Enquiry/UnReadEnquiryList";
             },
             error: function () {
 
