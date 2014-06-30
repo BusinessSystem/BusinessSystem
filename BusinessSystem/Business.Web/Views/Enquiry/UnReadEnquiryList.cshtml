@@ -146,7 +146,7 @@
                                         {
                                             foreach (var item in userDefineds)
                                             {
-                                                <li role="presentation" class="ui-menu-item"  onclick="moveTranslation('@item.Id')">
+                                                <li role="presentation" class="ui-menu-item"  onclick="moveUserdeined('@item.Id')">
                                                     <a role="menuitem" tabindex="-1" class="ui-corner-all" href="javascript:;" >@item.Description</a>
                                                 </li>
                                             }
@@ -202,7 +202,7 @@
                                     <tr id="data-item(@item.Id)">
                                         <td class="center">
                                             <label>
-                                                <input name="translationcheck" value="@item.Id" type="checkbox" class="ace" />
+                                                <input name="qneuirycheck" value="@item.Id" type="checkbox" class="ace" />
                                                 <span class="lbl">@index</span>
                                             </label>
                                         </td>
@@ -252,20 +252,20 @@
 </div>
 
 <script type="text/javascript">
-    $(function () {
+    $(function() {
         $("#menu").menu();
-        $(".checkalltranslation").click(function () {
+        $(".checkalltranslation").click(function() {
             var checkeds = $(this).is(':checked');
             if (checkeds) {
-                $("input[name='translationcheck']").attr("checked", this.checked);
+                $("input[name='qneuirycheck']").attr("checked", this.checked);
             } else {
-                $("input[name='translationcheck']").attr("checked", this.checked);
+                $("input[name='qneuirycheck']").attr("checked", this.checked);
             }
         });
 
 
         var currentIntentionId = "0";
-        var totalCount ='@Model.TotalCount';
+        var totalCount = '@Model.TotalCount';
         totalCount = parseInt(totalCount);
         var visiblePages = '@Model.VisiblePages';
         visiblePages = parseInt(visiblePages);
@@ -288,18 +288,19 @@
     });
 
     function moveTranslation(intentionId) {
-        var transSelected = [];
-        $("input[name='translationcheck']:checked").each(function () {
-            transSelected.push($(this).val());
+        var enquirySelected = [];
+        $("input[name='qneuirycheck']:checked").each(function () {
+            enquirySelected.push($(this).val());
         });
-        var translationIds = transSelected.join(",");
+        var enquirySelectedIds = enquirySelected.join(",");
         $.ajax({
-            url: "/Translation/MoveTransToIntention",
+            url: "/Enquiry/MoveEnquiryToIntention",
             type: "post",
             datatype: "json",
-            data: { translationIds: translationIds, intentionId: intentionId },
+            data: { enquiryIds: enquirySelectedIds, intentionId: intentionId },
             success: function (response) {
-                window.location.href = "/Translation/HasReadTranslationList?";
+                alert(response.Code);
+                window.location.href = "/Enquiry/UnReadEnquiryList";
             },
             error: function () {
 
@@ -334,7 +335,7 @@
         });
         var translationIds = transSelected.join(",");
         $.ajax({
-            url: "/Translation/TranslationDelete",
+            url: "/Enquiry/EnquiryDelete",
             type: "post",
             datatype: "json",
             data: { translationIds: translationIds },
@@ -347,6 +348,25 @@
         });
     }
 
+    function moveUserdeined(userdefined) {
+        var enquirySelected = [];
+        $("input[name='qneuirycheck']:checked").each(function () {
+            enquirySelected.push($(this).val());
+        });
+        var enquirySelectedIds = enquirySelected.join(",");
+        $.ajax({
+            url: "/Enquiry/MoveEnquiryToUserDefined",
+            type: "post",
+            datatype: "json",
+            data: { enquiryIds: enquirySelectedIds, userDefinedId: userdefined },
+            success: function(response) {
+                window.location.href = "/Enquiry/UnReadEnquiryList";
+            },
+            error: function() {
+
+            }
+        });
+    }
     function IssueToChildManager(id) {
         alert(id);
     }

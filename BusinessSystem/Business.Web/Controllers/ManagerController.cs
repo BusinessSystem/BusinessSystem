@@ -110,12 +110,7 @@ namespace Business.Web.Controllers
             {
                 isAutoDistribute = Utils.CoreDefaultValue.True;
             }
-            long parentId = CurrentManager.ParentId;
-            if (CurrentManager.ParentId == 0)
-            {
-                parentId = CurrentManager.Id;
-            }
-
+            long parentId = CurrentManager.Id;
             Manager manager = ManagerFactory.Create(userName, password, parentId, managerType, realName, company,
                 isAutoDistribute, language, CurrentManager.UserName);
             manager.EncryptPassword();

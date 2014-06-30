@@ -77,8 +77,8 @@ namespace Business.Serives
                 UserDefined userDefined = userDefinedRepository.GetById(useDefineId);
                 if (userDefined != null)
                 {
-                    enquiry.IntentionId = userDefined.Id;
-                    enquiry.IntentionName = userDefined.Description;
+                    enquiry.UserDefinedId = userDefined.Id;
+                    enquiry.UserDefinedName = userDefined.Description;
                 }
                 enquiryRepository.Save(enquiry);
             }
@@ -183,7 +183,7 @@ namespace Business.Serives
             {
                 return;
             }
-            ManagerMainSite managerMainSite = managerMainSiteRepository.GetById(managerProduct.Id);
+            ManagerMainSite managerMainSite = managerMainSiteRepository.GetById(managerProduct.ManagerMainSiteId);
             if (managerMainSite == null)
             {
                 return;

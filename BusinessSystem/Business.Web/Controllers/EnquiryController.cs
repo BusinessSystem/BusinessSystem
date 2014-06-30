@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Business.Core;
 using Business.Serives;
+using Business.Utils.Info;
 using Business.Web.PageModel;
 
 namespace Business.Web.Controllers
@@ -70,6 +71,34 @@ namespace Business.Web.Controllers
             PageEnquiry pageEnquiry = new PageEnquiry();
             pageEnquiry.Enquiry = enquiry;
             return View(pageEnquiry);
+        }
+
+        [HttpPost]
+        public ActionResult MoveEnquiryToIntention(string enquiryIds, long intentionId)
+        {
+            if (!string.IsNullOrEmpty(enquiryIds))
+            {
+                string[] enquiryIdArray = enquiryIds.Split(',');
+                foreach (var enquiryId in enquiryIdArray)
+                {
+                    EnquiryService.MoveEnquiryToIntention(long.Parse(enquiryId), intentionId);
+                }
+            }
+            return Json(InfoTools.GetMsgInfo(ResponseCode.Ok));
+        }
+
+        [HttpPost]
+        public ActionResult MoveEnquiryToUserDefined(string enquiryIds, long userDefinedId)
+        {
+            if (!string.IsNullOrEmpty(enquiryIds))
+            {
+                string[] enquiryIdArray = enquiryIds.Split(',');
+                foreach (var enquiryId in enquiryIdArray)
+                {
+                    EnquiryService.MoveEnquiryToUseDefine(long.Parse(enquiryId), userDefinedId);
+                }
+            }
+            return Json(InfoTools.GetMsgInfo(ResponseCode.Ok));
         }
     }
 }

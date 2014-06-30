@@ -62,7 +62,7 @@
                                     语言
                                 </th>
                                 <th class="hidden-480">自动分配</th>
-
+                                <th class="hidden-480">账号类型</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -90,6 +90,7 @@
                                             var temp = BaseService.GetDictionaryById(item.Language);
                                         }
                                         <td>@(temp ==null? "未设置":temp.Value)</td>
+                                       
                                         <td class="hidden-480">
                                             @if (@item.IsAutoDistribute == Business.Utils.CoreDefaultValue.False)
                                             {
@@ -100,7 +101,7 @@
                                                 <span>是</span>
                                             }
                                         </td>
-
+                                          <td>@(item.ParentId==0?"主账号":"子账号")</td>
                                         <td >
                                             <div class="visible-md visible-lg hidden-sm hidden-xs btn-group">
                                                 <button class="btn btn-xs btn-success" onclick=" window.location.href = '/Manager/ManagerDetail/@item.Id' ">

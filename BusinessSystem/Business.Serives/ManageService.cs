@@ -85,10 +85,16 @@ namespace Business.Serives
             {
                 return ResponseCode.Managaer.SuperChildNoPermission;
             }
+            if (currentManager.ManagerType == ManagerTypeEnum.Super && manager.ManagerType == ManagerTypeEnum.Common &&
+                manager.Id == 0)
+            {
+                manager.ParentId = 0;
+            }
             if (managerRepository.IsExist(manager))
             {
                 return ResponseCode.Managaer.UserNameHasExist;
             }
+            
             managerRepository.Save(manager);
             return ResponseCode.Ok;
         }
