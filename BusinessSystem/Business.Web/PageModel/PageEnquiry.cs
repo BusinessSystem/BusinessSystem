@@ -10,6 +10,11 @@ namespace Business.Web.PageModel
     {
         public Enquiry Enquiry { get; set; }
         public EmailTranslation EmailTranslation { get; set; }
-        public IList<EnquiryTransFollow> EnquiryTransFollows { get; set; }
+        public IList<EmailFollow> EnquiryTransFollows { get; set; }
+
+        public PageEnquiry()
+        {
+            EnquiryTransFollows = new List<EmailFollow>();
+        }
     }
 }

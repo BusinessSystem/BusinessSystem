@@ -25,10 +25,12 @@ namespace Business.Nhibernate.IRepository
         bool HasEnquiryEmailTranslation(long enquiryId);
 
 
-        IList<EmailTranslation> GetUnReadEmailTranslationsByEnquiryId(ManagerTypeEnum managerType,long enquiryId, EmailStatusEnum emailStatus,
+        IList<EmailTranslation> GetUnReadEmailTranslationsByEnquiryId(ManagerTypeEnum managerType, long enquiryId,
+            EmailStatusEnum emailStatus,
             short isDeleted, long receiveId, long intentionId, int pageIndex, int pageSize, out int totalCount);
 
         IList<long> GetUnEmailEnquiryIds(long senderId);
 
+        EmailTranslation GeEmailTranslationByEnquiryId(long enquiryId);
     }
 }

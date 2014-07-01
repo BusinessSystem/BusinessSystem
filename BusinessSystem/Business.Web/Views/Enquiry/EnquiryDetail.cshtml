@@ -152,7 +152,15 @@
 
                     <div class="profile-user-info profile-user-info-striped">
                         <form class="form-horizontal margin-20" id="enquiryEmail_form" method="post" action="/Enquiry/SendEnquiryEmail" enctype="multipart/form-data"   role="form">
-                            <input type="hidden" name="emailTranslationId" value="@Model.EmailTranslation.Id" />
+                            @if (@Model.EmailTranslation != null)
+                            {
+                                <input type="hidden" name="emailTranslationId" value="@Model.EmailTranslation.Id" />
+                            }
+                            else
+                            {
+                                <input type="hidden" name="emailTranslationId" value="0" />
+                            }
+                           
                             <input type="hidden" name="enquiryId" value="@Model.Enquiry.Id" />
                             <div class="form-group">
                                 <div class="col-sm-10">
@@ -188,10 +196,10 @@
                             <div class="clearfix form-actions">
                                 <div class="col-md-offset-1 col-md-9">
                                       
-                                           <button id="btn_translation_reply" class="btn btn-info" type="button">
-                                             <i class="icon-ok bigger-110"></i>
-                                             转ETW国际翻译
-                                         </button>
+                                    <button id="btn_translation_reply" class="btn btn-info" type="button">
+                                        <i class="icon-ok bigger-110"></i>
+                                        转ETW国际翻译
+                                    </button>
                                       
                                 </div>
                             </div>
@@ -241,19 +249,19 @@
                 thumbnail: false
             });
 
-        });
-        $("#btn_translation_reply").click(function() {
-            $("#emailContent").html($('#editor2').html());
-            if ($("#emailContent").html().trim() == "") {
-                art.dialog({
-                    content: "邮件翻译内容为空",
-                    time: 2,
-                    lock: true,
-                    width: 200
-                });
-                return false;
-            }
-            $("#enquiryEmail_form").submit();
+            $("#btn_translation_reply").click(function() {
+                $("#emailContent").html($('#editor2').html());
+                if ($("#emailContent").html().trim() == "") {
+                    art.dialog({
+                        content: "邮件翻译内容为空",
+                        time: 2,
+                        lock: true,
+                        width: 200
+                    });
+                    return false;
+                }
+                $("#enquiryEmail_form").submit();
+            });
         });
     </script>
 

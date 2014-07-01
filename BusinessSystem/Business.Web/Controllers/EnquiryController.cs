@@ -187,12 +187,19 @@ namespace Business.Web.Controllers
         {
             Enquiry enquiry = EnquiryService.GetEnquiryById(id);
             EnquiryService.ChangeEnquiryStatus(CurrentManager,enquiry);
+            EmailTranslation emailTranslation = TranslationService.GeEmailTranslationByEnquiryId(id);
             PageEnquiry pageEnquiry = new PageEnquiry();
             pageEnquiry.Enquiry = enquiry;
+            pageEnquiry.EmailTranslation = emailTranslation;
+            if (emailTranslation != null)
+            {
+                pageEnquiry.EnquiryTransFollows = TranslationService.GetEmailFollows(emailTranslation.Id);
+            }
             return View(pageEnquiry);
         }
 
         [HttpPost]
+        [ValidateInput(false)]
         public ActionResult SendEnquiryEmail(long enquiryId, string emailContent, long emailTranslationId)
         {
             string filePath = string.Empty;
@@ -203,13 +210,22 @@ namespace Business.Web.Controllers
             if (enquiryId != 0)
             {
 
-                Manager superManager = ManageService.GetSuperManager();
-                Enquiry enquiry = EnquiryService.GetEnquiryById(enquiryId);
-                EmailTranslation emailTranslation = EmailTranslationFactory.Create(superManager.Id,
-                    enquiry.VisitLanguage, CurrentManager.RealName, CurrentManager.Id, "用户询盘", emailContent, filePath);
-                EmailFollow emailFollow = EmailFollowFactory.Create(0, emailContent, enquiry.VisitLanguage,
-                    enquiry.VisitLanguage);
-                string result = TranslationService.SaveTranslation(emailTranslation, emailFollow);
+                if (emailTranslationId != 0)
+                {
+                    TranslationService.CreateEmailFollow(emailTranslationId, emailContent, filePath);
+                }
+                else
+                {
+                    Manager superManager = ManageService.GetSuperManager();
+                    Enquiry enquiry = EnquiryService.GetEnquiryById(enquiryId);
+                    EmailTranslation emailTranslation = EmailTranslationFactory.Create(superManager.Id,
+                        enquiry.VisitLanguage, CurrentManager.RealName, CurrentManager.Id, "用户询盘", emailContent,
+                        filePath);
+                    emailTranslation.EnquiryId = enquiryId;
+                    EmailFollow emailFollow = EmailFollowFactory.Create(0, emailContent, enquiry.VisitLanguage,
+                        enquiry.VisitLanguage);
+                    string result = TranslationService.SaveTranslation(emailTranslation, emailFollow);
+                }
             }
             return Redirect("/Enquiry/EnquiryDetail/" + enquiryId);
         }

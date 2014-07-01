@@ -20,6 +20,7 @@ namespace Business.Serives
         private static IEmailTranslationRepository emailTranslationRepository = new EmailTranslationRepository();
         private static IManagerProductRepository managerProductRepository = new ManagerProductRepository();
         private static IManagerMainSiteRepository managerMainSiteRepository = new ManagerMainSiteRepository();
+      
 
         public static IList<EnquiryTransFollow> GeEnquiryTransFollowsByEnquiryId(long enquiryId)
         {

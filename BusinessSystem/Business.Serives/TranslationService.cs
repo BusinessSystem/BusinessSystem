@@ -133,5 +133,10 @@ namespace Business.Serives
             }
             return ResponseCode.NotFoundData;
         }
+
+        public static  EmailTranslation GeEmailTranslationByEnquiryId(long enquiryId)
+        {
+            return emailTranslationRepository.GeEmailTranslationByEnquiryId(enquiryId);
+        }
     }
 }

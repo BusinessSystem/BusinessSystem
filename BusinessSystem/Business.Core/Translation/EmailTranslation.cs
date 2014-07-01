@@ -75,7 +75,9 @@ namespace Business.Core
                 IsDeleted = Utils.CoreDefaultValue.False
             };
         }
-        public static EmailTranslation Create(long receiverId, string language,string senderName, long senderId, string theme, string content, string filepath)
+
+        public static EmailTranslation Create(long receiverId, string language, string senderName, long senderId,
+            string theme, string content, string filepath)
         {
             return new EmailTranslation()
             {

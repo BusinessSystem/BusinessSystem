@@ -121,5 +121,19 @@ namespace Business.Nhibernate.Repository
                         .Select(m => m.EnquiryId).List<long>();
             }
         }
+
+
+        public EmailTranslation GeEmailTranslationByEnquiryId(long enquiryId)
+        {
+            using (var session = GetSession())
+            {
+                if (enquiryId == 0)
+                {
+                    return null;
+                }
+                return
+                    session.QueryOver<EmailTranslation>().Where(m => m.EnquiryId == enquiryId).Take(1).SingleOrDefault();
+            }
+        }
     }
 }
