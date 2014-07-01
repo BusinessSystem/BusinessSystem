@@ -151,13 +151,9 @@
                 
 
                     <div class="profile-user-info profile-user-info-striped">
-                        @{
-
-                            string display = string.Empty;
-                        }
-                        <form class="form-horizontal margin-20 @(display)" id="translation_reply_form" method="post" action="/Translation/TranslationReply" enctype="multipart/form-data"   role="form">
-                            <input type="hidden" name="replyfollowId" />
-                            <input type="hidden" name="emailTranslationId" value="0" />
+                        <form class="form-horizontal margin-20" id="enquiryEmail_form" method="post" action="/Enquiry/SendEnquiryEmail" enctype="multipart/form-data"   role="form">
+                            <input type="hidden" name="emailTranslationId" value="@Model.EmailTranslation.Id" />
+                            <input type="hidden" name="enquiryId" value="@Model.Enquiry.Id" />
                             <div class="form-group">
                                 <div class="col-sm-10">
                                     <div class="widget-box">
@@ -168,7 +164,7 @@
                                                 </a>
                                             </div>
                                         </div>
-                                        <textarea name="translationContent" class="hidden" id="translationContent"></textarea>
+                                        <textarea name="emailContent" class="hidden" id="emailContent"></textarea>
                                         <div class="widget-body">
                                             <div class="widget-main no-padding">
                                                 <div class="wysiwyg-editor" id="editor2"></div>
@@ -214,9 +210,9 @@
     <script src="/assets/js/jquery.hotkeys.min.js"></script>
     <script src="/assets/js/bootstrap-wysiwyg.min.js"></script>
     <script type="text/javascript">
-        $(function () {
+        $(function() {
             $('#editor2').css({ 'height': '200px' }).ace_wysiwyg({
-                toolbar_place: function (toolbar) {
+                toolbar_place: function(toolbar) {
                     var obj = $(this).closest('.widget-box').find('.widget-header').prepend(toolbar).children(0).addClass('inline');
                     $(this).closest('.widget-box').find(".widget-toolbar").remove();
                     return obj;
@@ -246,9 +242,9 @@
             });
 
         });
-        $("#btn_translation_reply").click(function () {
-            $("#translationContent").html($('#editor2').html());
-            if ($("#translationContent").html().trim() == "") {
+        $("#btn_translation_reply").click(function() {
+            $("#emailContent").html($('#editor2').html());
+            if ($("#emailContent").html().trim() == "") {
                 art.dialog({
                     content: "邮件翻译内容为空",
                     time: 2,
@@ -257,13 +253,8 @@
                 });
                 return false;
             }
-            $("#translation_reply_form").submit();
+            $("#enquiryEmail_form").submit();
         });
-
-        function showReplyTranlationForm(followId) {
-            $("input[name=replyfollowId]").val(followId);
-            $("#translation_reply_form").show();
-        }
     </script>
 
 }

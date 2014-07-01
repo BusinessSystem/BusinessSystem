@@ -89,11 +89,7 @@
 													<div class="space"></div>
 
 													<div class="clearfix">
-														<label class="inline">
-															<input name="remember" title="两周内自动登录" type="checkbox" class="ace" />
-															<span class="lbl">记住我</span>
-														</label>
-
+														 
 														<button type="button" id="btn_login" class="width-35 pull-right btn btn-sm btn-primary">
 															<i class="icon-key"></i>
 															登录
@@ -151,7 +147,7 @@
     		        $("#btn_login").click(function() {
     		            var userName = $("input[name=userName]").val().trim();
     		            var password = $("input[name=password]").val().trim();
-    		            var remember = $("input[name=remember]").is(':checked');
+    		            var remember =false;
     		            if (userName != "" && password != "") {
     		                $.ajax({
     		                    url: "/Handler/Login",

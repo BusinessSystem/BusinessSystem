@@ -12,8 +12,7 @@ namespace Business.Web.Controllers
 {
     public class EnquiryController : AdminBaseController
     {
-        //
-        // GET: /Enquiry/
+         
 
         [HttpGet]
         public ActionResult HasReadEnquiryList()
@@ -191,6 +190,28 @@ namespace Business.Web.Controllers
             PageEnquiry pageEnquiry = new PageEnquiry();
             pageEnquiry.Enquiry = enquiry;
             return View(pageEnquiry);
+        }
+
+        [HttpPost]
+        public ActionResult SendEnquiryEmail(long enquiryId, string emailContent, long emailTranslationId)
+        {
+            string filePath = string.Empty;
+            if (Request.Files.Count > 0 && Request.Files[0].ContentLength > 0)
+            {
+                HttpPostedFileBase file = Request.Files[0];
+            }
+            if (enquiryId != 0)
+            {
+
+                Manager superManager = ManageService.GetSuperManager();
+                Enquiry enquiry = EnquiryService.GetEnquiryById(enquiryId);
+                EmailTranslation emailTranslation = EmailTranslationFactory.Create(superManager.Id,
+                    enquiry.VisitLanguage, CurrentManager.RealName, CurrentManager.Id, "用户询盘", emailContent, filePath);
+                EmailFollow emailFollow = EmailFollowFactory.Create(0, emailContent, enquiry.VisitLanguage,
+                    enquiry.VisitLanguage);
+                string result = TranslationService.SaveTranslation(emailTranslation, emailFollow);
+            }
+            return Redirect("/Enquiry/EnquiryDetail/" + enquiryId);
         }
 
         [HttpPost]
