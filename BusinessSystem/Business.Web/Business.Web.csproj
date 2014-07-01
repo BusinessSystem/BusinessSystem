@@ -992,6 +992,7 @@
     <Content Include="Views\Manager\ManagerMainSiteEdit.cshtml" />
     <Content Include="Views\Manager\ManagerMainSiteList.cshtml" />
     <Content Include="Views\Manager\CommonManagerMainSiteList.cshtml" />
+    <Content Include="Views\Shared\_NavSuperList.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup>
