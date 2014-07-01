@@ -13,14 +13,14 @@ namespace Business.Web.Controllers
     {
         
         [ChildActionOnly]
-        [OutputCache(Duration = 300)] 
+         
         public ActionResult _Navbar()
         {
             return PartialView(CurrentManager);
         }
 
         [ChildActionOnly]
-        [OutputCache(Duration = 300)]
+        
         public ActionResult _NavList()
         {
             ViewBag.CurrentUrl = System.Web.HttpContext.Current.Request.RawUrl;

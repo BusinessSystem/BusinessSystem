@@ -123,10 +123,15 @@ namespace Business.Serives
             return ResponseCode.Ok;
         }
 
-        public static PageModel<Enquiry> GetEnquiryUnReadEmailPages(long managerId, long intentId, long useDefinedId,
-            int pageIndex, int pageSize)
+        public static PageModel<Enquiry> GetEnquiryUnReadEmailPages(long managerId, long languageId, long intentId,
+            long useDefinedId,
+            EmailStatusEnum emailStatus, int pageindex, int pageSize)
         {
-            return null;
+            int totalCount = 0;
+            IList<Enquiry> enquiries = enquiryRepository.GetUnReadEmailEnquirys(managerId, languageId, intentId,
+                useDefinedId,
+                emailStatus, pageindex, pageSize, out totalCount);
+            return new PageModel<Enquiry>(enquiries, pageindex, pageSize, totalCount);
         }
 
         public static Enquiry GetEnquiryById(long enquiryId)

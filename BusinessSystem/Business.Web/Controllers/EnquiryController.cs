@@ -173,8 +173,8 @@ namespace Business.Web.Controllers
              {
                  long.TryParse(Request["userDefinedId"].ToString(), out userDefinedId);
              }
-             PageModel<Enquiry> pageModel = EnquiryService.GetEnquiryPages(CurrentManager.Id, languageId, intentionId, userDefinedId,
-                 HandlerStatusEnum.UnRead, pageIndex, pageSize);
+             PageModel<Enquiry> pageModel = EnquiryService.GetEnquiryUnReadEmailPages(CurrentManager.Id, languageId, intentionId, userDefinedId,
+                 EmailStatusEnum.UnRead, pageIndex, pageSize);
              ViewBag.CurrentManager = CurrentManager;
              ViewBag.Intentions = BaseService.GetIntentions(CurrentManager.ParentId != 0 ? CurrentManager.ParentId : CurrentManager.Id);
              ViewBag.UserDefineds = BaseService.GetUserDefineds(CurrentManager.ParentId != 0 ? CurrentManager.ParentId : CurrentManager.Id);

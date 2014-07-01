@@ -92,6 +92,32 @@ namespace Business.Nhibernate.Repository
                     .Take(pageSize)
                     .Skip((pageIndex - 1)*pageSize).List();
             }
-        } 
+        }
+
+        public IList<Enquiry> GetUnReadEmailEnquirys(long managerId, long languageId, long intentId, long useDefinedId, EmailStatusEnum emailStatus,int pageindex, int pageSize, out int totalCount)
+        {
+            using (var session = GetSession())
+            {
+                var query = session.QueryOver<Enquiry>().Where(m => m.IsDeleted == Utils.CoreDefaultValue.False)
+                    .And(m => m.ReceiverId == managerId || m.HandlerId == managerId)
+                    .And(m => m.EmailStatus == emailStatus);
+                if (languageId != 0)
+                {
+                    //query=query.And(m=>m)
+                }
+                if (intentId != 0)
+                {
+                    query = query.And(m => m.IntentionId == intentId);
+                }
+                if (useDefinedId != 0)
+                {
+                    query = query.And(m => m.UserDefinedId == useDefinedId);
+                }
+                totalCount = query.RowCount();
+                return query.OrderBy(m => m.Id).Desc.Take(pageSize)
+                    .Skip((pageindex - 1)*pageSize)
+                    .List();
+            }
+        }
     }
 } 

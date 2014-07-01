@@ -314,7 +314,7 @@
                 if (num == currentPage) {
                     //每次初始化都会执行此处
                 } else {
-                    window.location.href = "/Enquiry/UnReadEnquiryList?intentionId=" + currentIntentionId + "&languageId=" + currentLanguageId + "&userDefinedId=" + currentUserdefinedId + "&pageSize=" + pageSize;
+                    window.location.href = "/Enquiry/UnReadEnquiryList?intentionId=" + currentIntentionId + "&languageId=" + currentLanguageId + "&userDefinedId=" + currentUserdefinedId + "&pageIndex="+num+"&pageSize=" + pageSize;
                 }
             }
         });
