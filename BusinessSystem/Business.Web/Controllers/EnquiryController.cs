@@ -18,8 +18,34 @@ namespace Business.Web.Controllers
         [HttpGet]
         public ActionResult HasReadEnquiryList()
         {
-            PageModel<Enquiry> pageModel = EnquiryService.GetEnquiryPages(CurrentManager.Id, 0, 0,
-                HandlerStatusEnum.HasRead, 0, 10);
+            int pageIndex = 1;
+            int pageSize = 10;
+            if (!string.IsNullOrEmpty(Request["pageIndex"]))
+            {
+                int.TryParse(Request["pageIndex"].ToString(), out pageIndex);
+            }
+            if (!string.IsNullOrEmpty(Request["pageSize"]))
+            {
+                int.TryParse(Request["pageSize"].ToString(), out pageSize);
+            }
+            long intentionId = 0;
+            if (!string.IsNullOrEmpty(Request["intentionId"]))
+            {
+                long.TryParse(Request["intentionId"].ToString(), out intentionId);
+            }
+            long languageId = 0;
+            if (!string.IsNullOrEmpty(Request["languageId"]))
+            {
+                long.TryParse(Request["languageId"].ToString(), out languageId);
+            }
+            long userDefinedId = 0;
+            if (!string.IsNullOrEmpty(Request["userDefinedId"]))
+            {
+                long.TryParse(Request["userDefinedId"].ToString(), out userDefinedId);
+            }
+
+            PageModel<Enquiry> pageModel = EnquiryService.GetEnquiryPages(CurrentManager.Id, languageId, intentionId, userDefinedId,
+                HandlerStatusEnum.HasRead, pageIndex, pageSize);
             ViewBag.CurrentManager = CurrentManager;
             ViewBag.Intentions = BaseService.GetIntentions(CurrentManager.ParentId != 0 ? CurrentManager.ParentId : CurrentManager.Id);
             ViewBag.UserDefineds = BaseService.GetUserDefineds(CurrentManager.ParentId != 0 ? CurrentManager.ParentId : CurrentManager.Id);
@@ -30,20 +56,80 @@ namespace Business.Web.Controllers
         [HttpGet]
         public ActionResult UnReadEnquiryList()
         {
-            PageModel<Enquiry> pageModel = EnquiryService.GetEnquiryPages(CurrentManager.Id, 0, 0,
-                HandlerStatusEnum.UnRead, 1, 10);
+            int pageIndex = 1;
+            int pageSize = 10;
+            if (!string.IsNullOrEmpty(Request["pageIndex"]))
+            {
+                int.TryParse(Request["pageIndex"].ToString(), out pageIndex);
+            }
+            if (!string.IsNullOrEmpty(Request["pageSize"]))
+            {
+                int.TryParse(Request["pageSize"].ToString(), out pageSize);
+            }
+            long intentionId = 0;
+            if (!string.IsNullOrEmpty(Request["intentionId"]))
+            {
+                long.TryParse(Request["intentionId"].ToString(), out intentionId);
+            }
+            long languageId = 0;
+            if (!string.IsNullOrEmpty(Request["languageId"]))
+            {
+                long.TryParse(Request["languageId"].ToString(), out languageId);
+            }
+            long userDefinedId = 0;
+            if (!string.IsNullOrEmpty(Request["userDefinedId"]))
+            {
+                long.TryParse(Request["userDefinedId"].ToString(), out userDefinedId);
+            }
+
+            PageModel<Enquiry> pageModel = EnquiryService.GetEnquiryPages(CurrentManager.Id, languageId,intentionId, userDefinedId,
+                HandlerStatusEnum.UnRead, pageIndex, pageSize);
             ViewBag.CurrentManager = CurrentManager;
             ViewBag.Intentions = BaseService.GetIntentions(CurrentManager.ParentId != 0 ? CurrentManager.ParentId : CurrentManager.Id);
             ViewBag.UserDefineds = BaseService.GetUserDefineds(CurrentManager.ParentId != 0 ? CurrentManager.ParentId : CurrentManager.Id);
             ViewBag.ChildManagers = ManageService.GetChildManagers(CurrentManager.Id);
+            ViewBag.Languages =
+                ManageService.GetManagerMainSitesByManagerId(CurrentManager.ParentId == 0
+                    ? CurrentManager.Id
+                    : CurrentManager.ParentId);
+
+            ViewBag.CurrentIntentionId = intentionId;
+            ViewBag.CurrentUserdefinedId = userDefinedId;
+            ViewBag.CurrentLanguageId = languageId;
+
             return View(pageModel);
         }
 
         [HttpGet]
          public ActionResult RecycledEnquiryList()
          {
-             PageModel<Enquiry> pageModel = EnquiryService.GetEnquiryPages(CurrentManager.Id, 0, 0,
-               HandlerStatusEnum.UnRead, 0, 10);
+             int pageIndex = 1;
+            int pageSize = 10;
+            if (!string.IsNullOrEmpty(Request["pageIndex"]))
+            {
+                int.TryParse(Request["pageIndex"].ToString(), out pageIndex);
+            }
+            if (!string.IsNullOrEmpty(Request["pageSize"]))
+            {
+                int.TryParse(Request["pageSize"].ToString(), out pageSize);
+            }
+            long intentionId = 0;
+            if (!string.IsNullOrEmpty(Request["intentionId"]))
+            {
+                long.TryParse(Request["intentionId"].ToString(), out intentionId);
+            }
+            long languageId = 0;
+            if (!string.IsNullOrEmpty(Request["languageId"]))
+            {
+                long.TryParse(Request["languageId"].ToString(), out languageId);
+            }
+            long userDefinedId = 0;
+            if (!string.IsNullOrEmpty(Request["userDefinedId"]))
+            {
+                long.TryParse(Request["userDefinedId"].ToString(), out userDefinedId);
+            }
+
+             PageModel<Enquiry> pageModel = EnquiryService.GetRecycledEnquiryPages(CurrentManager.Id,languageId,intentionId,userDefinedId,pageIndex,pageSize);
              ViewBag.CurrentManager = CurrentManager;
              ViewBag.Intentions = BaseService.GetIntentions(CurrentManager.ParentId != 0 ? CurrentManager.ParentId : CurrentManager.Id);
              ViewBag.UserDefineds = BaseService.GetUserDefineds(CurrentManager.ParentId != 0 ? CurrentManager.ParentId : CurrentManager.Id);
@@ -54,8 +140,33 @@ namespace Business.Web.Controllers
          [HttpGet]
          public ActionResult UnReadEnquiryEmailList()
          {
-             PageModel<Enquiry> pageModel = EnquiryService.GetEnquiryPages(CurrentManager.Id, 0, 0,
-                HandlerStatusEnum.UnRead, 0, 10);
+             int pageIndex = 1;
+             int pageSize = 10;
+             if (!string.IsNullOrEmpty(Request["pageIndex"]))
+             {
+                 int.TryParse(Request["pageIndex"].ToString(), out pageIndex);
+             }
+             if (!string.IsNullOrEmpty(Request["pageSize"]))
+             {
+                 int.TryParse(Request["pageSize"].ToString(), out pageSize);
+             }
+             long intentionId = 0;
+             if (!string.IsNullOrEmpty(Request["intentionId"]))
+             {
+                 long.TryParse(Request["intentionId"].ToString(), out intentionId);
+             }
+             long languageId = 0;
+             if (!string.IsNullOrEmpty(Request["languageId"]))
+             {
+                 long.TryParse(Request["languageId"].ToString(), out languageId);
+             }
+             long userDefinedId = 0;
+             if (!string.IsNullOrEmpty(Request["userDefinedId"]))
+             {
+                 long.TryParse(Request["userDefinedId"].ToString(), out userDefinedId);
+             }
+             PageModel<Enquiry> pageModel = EnquiryService.GetEnquiryPages(CurrentManager.Id, languageId, intentionId, userDefinedId,
+                 HandlerStatusEnum.UnRead, pageIndex, pageSize);
              ViewBag.CurrentManager = CurrentManager;
              ViewBag.Intentions = BaseService.GetIntentions(CurrentManager.ParentId != 0 ? CurrentManager.ParentId : CurrentManager.Id);
              ViewBag.UserDefineds = BaseService.GetUserDefineds(CurrentManager.ParentId != 0 ? CurrentManager.ParentId : CurrentManager.Id);

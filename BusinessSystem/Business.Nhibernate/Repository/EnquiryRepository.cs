@@ -10,13 +10,17 @@ namespace Business.Nhibernate.Repository
 {
     public class EnquiryRepository:Repository<Enquiry>,IEnquiryRepository
     {
-        public IList<Enquiry> GetEnquirysByStatus(long managerId,long intentId,long useDefinedId,HandlerStatusEnum handlerStatus,int pageindex,int pageSize,out int totalCount)
+        public IList<Enquiry> GetEnquirysByStatus(long managerId, long languageId, long intentId, long useDefinedId, HandlerStatusEnum handlerStatus, int pageindex, int pageSize, out int totalCount)
         {
             using (var session = GetSession())
             {
                 var query = session.QueryOver<Enquiry>().Where(m => m.IsDeleted == Utils.CoreDefaultValue.False)
                     .And(m => m.ReceiverId == managerId || m.HandlerId == managerId)
                     .And(m => m.HandlerStatus == handlerStatus);
+                if (languageId != 0)
+                {
+                     //query=query.And(m=>m)
+                }
                 if (intentId != 0)
                 {
                     query = query.And(m => m.IntentionId == intentId);
@@ -32,7 +36,7 @@ namespace Business.Nhibernate.Repository
             }
         }
 
-        public IList<Enquiry> GetRecycledEnquirysByStatus(long managerId, long intentId, long useDefinedId,
+        public IList<Enquiry> GetRecycledEnquirysByStatus(long managerId,long languageId, long intentId, long useDefinedId,
             int pageindex, int pageSize, out int totalCount)
         {
             using (var session = GetSession())

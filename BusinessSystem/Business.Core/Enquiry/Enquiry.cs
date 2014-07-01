@@ -39,6 +39,7 @@ namespace Business.Core
         public virtual int FollowUpTimes { get; set; }
         public virtual short IsDeleted { get; set; }
         public virtual EmailStatusEnum EmailStatus { get; set; }
+        public virtual long LanguageId { get; set; }
     }
 
     public enum HandlerStatusEnum : short
@@ -53,7 +54,7 @@ namespace Business.Core
     {
         public static Enquiry Create(string ipString, string purchaserEmail, string enquiryContent,
             string productUrl, string purchaserUserName, string purchaserCompany, string purchaserTel,
-            string purchaserMsn, string visitLanguage, string purchaserCountry, long receiverId,string receiverName)
+            string purchaserMsn, string visitLanguage,long languageId, string purchaserCountry, long receiverId,string receiverName)
         {
             return new Enquiry()
             {
@@ -75,7 +76,8 @@ namespace Business.Core
                 FollowUpTimes = 1,
                 IsDeleted = Utils.CoreDefaultValue.False,
                 HandlerId = receiverId,
-                HandlerName = receiverName
+                HandlerName = receiverName,
+                LanguageId = languageId
             };
         }
     }

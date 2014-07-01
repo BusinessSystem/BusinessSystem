@@ -29,6 +29,7 @@
 		<property name="IntentionId"/>
 		<property name="IntentionName"/>
 		<property name="FollowUpTimes"/>
-		<property name="IsDeleted"/>
+    <property name="IsDeleted"/>
+    <property name="LanguageId"/>
 	</class>
 </hibernate-mapping>
