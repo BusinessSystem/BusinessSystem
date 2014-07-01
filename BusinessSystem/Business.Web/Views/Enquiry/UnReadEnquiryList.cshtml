@@ -288,7 +288,7 @@
     currentIntentionId = parseInt(currentIntentionId);
     currentLanguageId = parseInt(currentLanguageId);
     currentUserdefinedId = parseInt(currentUserdefinedId);
-    var pageSize = 2;
+    var pageSize =10;
     $(function() {
         $("#menu").menu();
         $(".checkalltranslation").click(function() {
@@ -371,7 +371,7 @@
             type: "post",
             datatype: "json",
             data: { enquiryIds: enquiryIds },
-            success: function(response) {
+            success: function (response) {
                 window.location.href = "/Enquiry/UnReadEnquiryList?intentionId=" + currentIntentionId + "&languageId=" + currentLanguageId + "&userDefinedId=" + currentUserdefinedId + "&pageSize=" + pageSize;
             },
             error: function() {

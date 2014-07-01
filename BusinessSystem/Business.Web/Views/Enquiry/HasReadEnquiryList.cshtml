@@ -4,6 +4,10 @@
     IList<UserDefined> userDefineds = ViewBag.UserDefineds;
     Manager currentManager = ViewBag.CurrentManager;
     IList<Manager> childManagers = ViewBag.ChildManagers;
+    IList<ManagerMainSite> languages = ViewBag.Languages;
+    long currentLanguageId = ViewBag.CurrentLanguageId;
+    long currentIntentionId = ViewBag.CurrentIntentionId;
+    long currentUserDefinedId = ViewBag.CurrentUserdefinedId;
 }
 
 @using System.Web.UI.WebControls
@@ -27,34 +31,37 @@
                         <span class="btn btn-app btn-light btn-xs  no-border">
                             <input type="checkbox"  class="checkalltranslation"/>全选
                         </span>
-                        <span class="btn btn-app btn-light btn-xs" onclick="deletetranslation()">
+                        <span class="btn btn-app btn-light btn-xs" onclick="deleteEnquiry()">
                             删除
                         </span>
      
      
-                         @if (currentManager.ManagerType == ManagerTypeEnum.Super)
-                         {
+                      
                              <div class="btn-group margin-top-2">
                                  <button data-toggle="dropdown" class="btn btn-light width-120 dropdown-toggle margin-top-2 common-height">
-                                     分配给
+                                     语言
                                      <span class="icon-caret-down icon-on-right "></span>
                                  </button>
 
                                  <ul class="dropdown-menu dropdown-light pull-right width-120">
                                  
-                                     @if (childManagers != null && childManagers.Count != 0)
+                                     @if (languages != null && languages.Count != 0)
                                      {
-                                         foreach (var childManager in childManagers)
+                                         foreach (var language in languages)
                                          {
                                              <li >
-                                                 <a href="javascript:;"  onclick=" IssueToChildManager('@childManager.Id') ">@childManager.RealName</a>
+                                                 <a href=" /Enquiry/HasReadEnquiryList?intentionId=@currentIntentionId&languageId=@language.LanguageId&userDefinedId=@currentUserDefinedId">@language.LanguageName</a>
                                              </li>
                                          }
                                      }
-                                 
+                                     <li class="divider"></li>
+                                     <li >
+                                        <li >
+                                                 <a href=" /Enquiry/HasReadEnquiryList?intentionId=@currentIntentionId&userDefinedId=@currentUserDefinedId">未识别</a>
+                                     </li>
                                  </ul>
                              </div>
-                         }
+                         
                         
 
                         <div class="btn-group margin-top-2">
@@ -73,13 +80,13 @@
                                     foreach (var item in intentions)
                                     {
                                         <li >
-                                            <a href="/Translation/HasReadTranslationList?intentionId=@item.Id" data-value="@item.Id">@item.Description</a>
+                                          <a href="/Enquiry/HasReadEnquiryList?intentionId=@item.Id&languageId=@currentLanguageId&userDefinedId=@currentUserDefinedId">@item.Description</a>
                                         </li>
                                     }
                                 }
                                 <li class="divider"></li>
                                 <li >
-                                    <a href="/Translation/HasReadTranslationList?intentionId=0">未识别</a>
+                                    <a href="/Enquiry/HasReadEnquiryList?languageId=currentLanguageId&userDefinedId=@currentUserDefinedId">未识别</a>
                                 </li>
                             </ul>
                         </div>
@@ -100,13 +107,14 @@
                                     foreach (var item in userDefineds)
                                     {
                                         <li >
-                                            <a href="/Translation/HasReadTranslationList?intentionId=@item.Id" data-value="@item.Id">@item.Description</a>
+                                           <a href="/Enquiry/HasReadEnquiryList?intentionId=@currentIntentionId&languageId=@currentLanguageId&userDefinedId=@item.Id">@item.Description</a>
                                         </li>
+                                       
                                     }
                                 }
                                 <li class="divider"></li>
                                 <li >
-                                    <a href="/Translation/HasReadTranslationList?intentionId=0">未识别</a>
+                                         <a href="/Enquiry/HasReadEnquiryList?intentionId=@currentIntentionId&languageId=@currentLanguageId">未识别</a>
                                 </li>
                             </ul>
                         </div>
@@ -119,9 +127,9 @@
                                 <span class="icon-caret-down icon-on-right "></span>
                             </button>
         
-                             <ul  aria-activedescendant="ui-id-8" tabindex="0" role="menu" class="display-none dropdown-menu dropdown-light ui-menu ui-widget width-120 ui-widget-content ui-corner-all" id="menu">
+                            <ul  aria-activedescendant="ui-id-8" tabindex="0" role="menu" class="display-none dropdown-menu dropdown-light ui-menu ui-widget width-120 ui-widget-content ui-corner-all" id="menu">
                 
-                                 <li role="presentation" class="ui-menu-item">
+                                <li role="presentation" class="ui-menu-item">
                                     <a role="menuitem" tabindex="-1" class="ui-corner-all" id="ui-id-7" aria-haspopup="true" href="javascript:;"><span class="ui-menu-icon ui-icon ui-icon-carat-1-e"></span>意向客户</a>
 
                                     <ul aria-expanded="false" aria-hidden="true" role="menu" style="display: none;" class="ui-menu ui-widget ui-widget-content ui-corner-all">
@@ -146,7 +154,7 @@
                                         {
                                             foreach (var item in userDefineds)
                                             {
-                                                <li role="presentation" class="ui-menu-item"  onclick="moveTranslation('@item.Id')">
+                                                <li role="presentation" class="ui-menu-item"  onclick="moveUserdeined('@item.Id')">
                                                     <a role="menuitem" tabindex="-1" class="ui-corner-all" href="javascript:;" >@item.Description</a>
                                                 </li>
                                             }
@@ -156,13 +164,35 @@
                                 </li>
 
 
-                                 <li role="presentation" class="ui-menu-item" onclik="backtomainer()">
+                                <li role="presentation" class="ui-menu-item"  onclick="backtomainer()">
                                     <a role="menuitem" tabindex="-1" class="ui-corner-all" id="ui-id-8" href="javascript:;">返回总账号</a>
                                 </li>
 
                    
                             </ul>
 
+                        </div>
+                        
+                       
+                         <div class="btn-group margin-top-2">
+                            <button data-toggle="dropdown" class="btn btn-light width-120 dropdown-toggle margin-top-2 common-height">
+                                分配到
+                                <span class="icon-caret-down icon-on-right "></span>
+                            </button>
+
+                            <ul class="dropdown-menu dropdown-light pull-right width-120">
+                                
+                                @if (childManagers != null && childManagers.Count != 0)
+                                {
+                                    foreach (var item in childManagers)
+                                    {
+                                        <li onclick="issueEnquiryToManager('@item.Id')">
+                                            <a href="javascript:;" >@item.RealName</a>
+                                        </li>
+                                    }
+                                }
+                                
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -202,7 +232,7 @@
                                     <tr id="data-item(@item.Id)">
                                         <td class="center">
                                             <label>
-                                                <input name="translationcheck" value="@item.Id" type="checkbox" class="ace" />
+                                                <input name="qneuirycheck" value="@item.Id" type="checkbox" class="ace" />
                                                 <span class="lbl">@index</span>
                                             </label>
                                         </td>
@@ -240,7 +270,7 @@
                         <span class="btn btn-app btn-light btn-xs  no-border">
                             <input type="checkbox"  class="checkalltranslation"/>全选
                         </span>
-                        <span class="btn btn-app btn-light btn-xs " onclick="deletetranslation()">
+                        <span class="btn btn-app btn-light btn-xs " onclick="deleteEnquiry()">
                             删除
                         </span>
                          <ul class="pagination bpagination" id="pagination2"></ul>
@@ -252,26 +282,29 @@
 </div>
 
 <script type="text/javascript">
+    var currentIntentionId = '@currentIntentionId';
+    var currentLanguageId = '@currentLanguageId';
+    var currentUserdefinedId = '@currentUserDefinedId';
+    currentIntentionId = parseInt(currentIntentionId);
+    currentLanguageId = parseInt(currentLanguageId);
+    currentUserdefinedId = parseInt(currentUserdefinedId);
+    var pageSize = 10;
     $(function () {
         $("#menu").menu();
         $(".checkalltranslation").click(function () {
             var checkeds = $(this).is(':checked');
             if (checkeds) {
-                $("input[name='translationcheck']").attr("checked", this.checked);
+                $("input[name='qneuirycheck']").attr("checked", this.checked);
             } else {
-                $("input[name='translationcheck']").attr("checked", this.checked);
+                $("input[name='qneuirycheck']").attr("checked", this.checked);
             }
         });
-
-
-        var currentIntentionId = "0";
         var totalCount = '@Model.TotalCount';
         totalCount = parseInt(totalCount);
         var visiblePages = '@Model.VisiblePages';
         visiblePages = parseInt(visiblePages);
         var currentPage = '@Model.CurrentPage';
         currentPage = parseInt(currentPage);
-        var pageSize = 10;
         $.jqPaginator('#pagination2', {
             totalCounts: totalCount,
             visiblePages: visiblePages,
@@ -281,25 +314,25 @@
                 if (num == currentPage) {
                     //每次初始化都会执行此处
                 } else {
-                    window.location.href = "/Translation/HasReadTranslationList?intentionId=" + currentIntentionId + "&pageIndex=" + num + "&pageSize=" + pageSize;
+                    window.location.href = "/Enquiry/HasReadEnquiryList?intentionId=" + currentIntentionId + "&languageId=" + currentLanguageId + "&userDefinedId=" + currentUserdefinedId + "&pageSize=" + pageSize;
                 }
             }
         });
     });
 
     function moveTranslation(intentionId) {
-        var transSelected = [];
-        $("input[name='translationcheck']:checked").each(function () {
-            transSelected.push($(this).val());
+        var enquirySelected = [];
+        $("input[name='qneuirycheck']:checked").each(function () {
+            enquirySelected.push($(this).val());
         });
-        var translationIds = transSelected.join(",");
+        var enquirySelectedIds = enquirySelected.join(",");
         $.ajax({
-            url: "/Translation/MoveTransToIntention",
+            url: "/Enquiry/MoveEnquiryToIntention",
             type: "post",
             datatype: "json",
-            data: { translationIds: translationIds, intentionId: intentionId },
+            data: { enquiryIds: enquirySelectedIds, intentionId: intentionId },
             success: function (response) {
-                window.location.href = "/Translation/HasReadTranslationList?";
+                window.location.href = "/Enquiry/HasReadEnquiryList?intentionId=" + currentIntentionId + "&languageId=" + currentLanguageId + "&userDefinedId=" + currentUserdefinedId + "&pageSize=" + pageSize;
             },
             error: function () {
 
@@ -308,18 +341,18 @@
     }
 
     function backtomainer() {
-        var transSelected = [];
-        $("input[name='translationcheck']:checked").each(function () {
-            transSelected.push($(this).val());
+        var enquirySelected = [];
+        $("input[name='qneuirycheck']:checked").each(function () {
+            enquirySelected.push($(this).val());
         });
-        var translationIds = transSelected.join(",");
+        var enquiryIds = enquirySelected.join(",");
         $.ajax({
-            url: "/Translation/BackToMainAccount",
+            url: "/Enquiry/IssueEnquiryToParentManager",
             type: "post",
             datatype: "json",
-            data: { translationIds: translationIds },
+            data: { enquiryIds: enquiryIds },
             success: function (response) {
-                window.location.href = "/Translation/HasReadTranslationList";
+                window.location.href = "/Enquiry/HasReadEnquiryList?intentionId=" + currentIntentionId + "&languageId=" + currentLanguageId + "&userDefinedId=" + currentUserdefinedId + "&pageSize=" + pageSize;
             },
             error: function () {
 
@@ -327,19 +360,19 @@
         });
     }
 
-    function deletetranslation() {
-        var transSelected = [];
-        $("input[name='translationcheck']:checked").each(function () {
-            transSelected.push($(this).val());
+    function deleteEnquiry() {
+        var enquirySelected = [];
+        $("input[name='qneuirycheck']:checked").each(function () {
+            enquirySelected.push($(this).val());
         });
-        var translationIds = transSelected.join(",");
+        var enquiryIds = enquirySelected.join(",");
         $.ajax({
-            url: "/Translation/TranslationDelete",
+            url: "/Enquiry/EnquiryDelete",
             type: "post",
             datatype: "json",
-            data: { translationIds: translationIds },
+            data: { enquiryIds: enquiryIds },
             success: function (response) {
-                window.location.href = "/Translation/HasReadTranslationList?";
+                window.location.href = "/Enquiry/HasReadEnquiryList?intentionId=" + currentIntentionId + "&languageId=" + currentLanguageId + "&userDefinedId=" + currentUserdefinedId + "&pageSize=" + pageSize;
             },
             error: function () {
 
@@ -347,11 +380,43 @@
         });
     }
 
-    function IssueToChildManager(id) {
-        alert(id);
+    function moveUserdeined(userdefined) {
+        var enquirySelected = [];
+        $("input[name='qneuirycheck']:checked").each(function () {
+            enquirySelected.push($(this).val());
+        });
+        var enquirySelectedIds = enquirySelected.join(",");
+        $.ajax({
+            url: "/Enquiry/MoveEnquiryToUserDefined",
+            type: "post",
+            datatype: "json",
+            data: { enquiryIds: enquirySelectedIds, userDefinedId: userdefined },
+            success: function (response) {
+                window.location.href = "/Enquiry/HasReadEnquiryList?intentionId=" + currentIntentionId + "&languageId=" + currentLanguageId + "&userDefinedId=" + currentUserdefinedId + "&pageSize=" + pageSize;
+            },
+            error: function () {
+
+            }
+        });
     }
 
-    function enquiryDetail(id) {
-        alert("sfdwe");
+    function issueEnquiryToManager(managerId) {
+        var enquirySelected = [];
+        $("input[name='qneuirycheck']:checked").each(function () {
+            enquirySelected.push($(this).val());
+        });
+        var enquirySelectedIds = enquirySelected.join(",");
+        $.ajax({
+            url: "/Enquiry/IssueEnquiryToChildManager",
+            type: "post",
+            datatype: "json",
+            data: { enquiryIds: enquirySelectedIds, managerId: managerId },
+            success: function (response) {
+                window.location.href = "/Enquiry/HasReadEnquiryList?intentionId=" + currentIntentionId + "&languageId=" + currentLanguageId + "&userDefinedId=" + currentUserdefinedId + "&pageSize=" + pageSize;
+            },
+            error: function () {
+
+            }
+        });
     }
 </script>
