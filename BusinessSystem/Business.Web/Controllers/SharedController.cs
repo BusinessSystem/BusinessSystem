@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.UI;
 using Business.Core;
+using Business.Serives;
 
 namespace Business.Web.Controllers
 {
@@ -17,15 +18,20 @@ namespace Business.Web.Controllers
         {
             return PartialView(CurrentManager);
         }
+
         [ChildActionOnly]
-        [OutputCache(Duration = 300)]  
+        [OutputCache(Duration = 300)]
         public ActionResult _NavList()
         {
             ViewBag.CurrentUrl = System.Web.HttpContext.Current.Request.RawUrl;
+
+
             if (CurrentManager.ManagerType == ManagerTypeEnum.Super)
             {
                 return PartialView("~/Views/Shared/_NavSuperList.cshtml");
             }
+            int unReadEnquiryCount = EnquiryService.GetReadEnquiryCount(CurrentManager.Id, HandlerStatusEnum.UnRead);
+            ViewBag.UnReadEnquiryCount = unReadEnquiryCount;
             return PartialView();
         }
     }
