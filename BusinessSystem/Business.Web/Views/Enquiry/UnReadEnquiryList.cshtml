@@ -240,7 +240,12 @@
                                         <td  title="@item.ProductUrl">
                                             <a href="/Enquiry/EnquiryDetail/@item.Id" title="@item.ProductUrl">@item.ProductUrl.Substring(0,20)</a>
                                         </td>
-                                        <td>@item.PurchaserEmail</td>
+                                        <td>@item.PurchaserEmail
+                                            @if (item.EnquiryTimes > 1)
+                                            {
+                                                @:(@item.EnquiryTimes)
+                                            }
+                                           </td>
                                         <td class="hidden-480">
                                             @item.EnquiryTime
                                         </td>

@@ -32,5 +32,6 @@
 		<property name="IsDeleted"/>
     <property name="LanguageId"/>
     <property name="EmailStatus"/>
+    <property name="EnquiryTimes"/>
 	</class>
 </hibernate-mapping>

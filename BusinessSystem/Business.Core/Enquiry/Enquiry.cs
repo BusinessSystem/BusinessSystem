@@ -40,6 +40,7 @@ namespace Business.Core
         public virtual short IsDeleted { get; set; }
         public virtual EmailStatusEnum EmailStatus { get; set; }
         public virtual long LanguageId { get; set; }
+        public virtual int EnquiryTimes { get; set; }
     }
 
     public enum HandlerStatusEnum : short
