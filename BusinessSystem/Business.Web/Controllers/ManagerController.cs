@@ -37,6 +37,7 @@ namespace Business.Web.Controllers
                 managerType = (ManagerTypeEnum) short.Parse(Request["managerType"].ToString());
             }
             ViewBag.CurrentManagerType = managerType;
+            ViewBag.CurrentManager = CurrentManager;
             PageModel<Manager> pageModel = ManageService.GetManagerPages(managerType, pageIndex, pageSize, CurrentManager.ParentId);
             return View(pageModel);
         }

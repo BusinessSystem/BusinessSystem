@@ -1,4 +1,5 @@
-﻿@model Business.Core.Manager
+﻿@using Business.Core
+@model Business.Core.Manager
     
 <div class="navbar-header pull-right" role="navigation">
     <ul class="nav ace-nav">
@@ -18,13 +19,16 @@
             </a>
 
             <ul class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
-                <li>
-                    <a href="/Base/DictionaryList">
-                        <i class="icon-book"></i>
-                        基础数据
-                    </a>
-                </li>
-                 <li class="divider"></li>
+                 @if (Model.ManagerType == ManagerTypeEnum.Super)
+                 {
+                     <li>
+                         <a href="/Base/DictionaryList">
+                             <i class="icon-book"></i>
+                             基础数据
+                         </a>
+                     </li>
+                     <li class="divider"></li>
+                 }
                 <li>
                     <a href="/Manager/ChangePassword">
                         <i class="icon-cog"></i>
