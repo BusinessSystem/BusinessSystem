@@ -30,6 +30,7 @@
 		<property name="IntentionName"/>
 		<property name="FollowUpTimes"/>
 		<property name="IsDeleted"/>
-		<property name="LanguageId"/>
+    <property name="LanguageId"/>
+    <property name="EmailStatus"/>
 	</class>
 </hibernate-mapping>

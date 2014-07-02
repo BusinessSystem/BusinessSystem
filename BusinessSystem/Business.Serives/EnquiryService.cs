@@ -50,6 +50,11 @@ namespace Business.Serives
             return enquiryRepository.GetReadEnquiryCount(managerId, handlerStatus);
         }
 
+        public static int GetUnReadEmailEnquiryCount(long managerId, EmailStatusEnum emailStatus)
+        {
+            return enquiryRepository.GetUnReadEmailEnquiryCount(managerId, emailStatus);
+        }
+
         public static void MoveEnquiryToIntention(long enquiryId, long intentionId)
         {
             Enquiry enquiry = enquiryRepository.GetById(enquiryId);

@@ -77,7 +77,8 @@ namespace Business.Core
                 IsDeleted = Utils.CoreDefaultValue.False,
                 HandlerId = receiverId,
                 HandlerName = receiverName,
-                LanguageId = languageId
+                LanguageId = languageId,
+                EmailStatus = EmailStatusEnum.HasRead
             };
         }
     }

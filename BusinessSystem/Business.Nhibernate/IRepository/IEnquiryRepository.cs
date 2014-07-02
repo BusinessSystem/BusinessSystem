@@ -22,6 +22,8 @@ namespace Business.Nhibernate.IRepository
 
         IList<Enquiry> GetUnReadEmailEnquirys(long managerId, long languageId, long intentId, long useDefinedId,
             EmailStatusEnum emailStatus, int pageindex, int pageSize, out int totalCount);
+
+        int GetUnReadEmailEnquiryCount(long managerId, EmailStatusEnum emailStatus);
     }
 
     public interface IEnquiryTransFollowRepository : IRepository<EnquiryTransFollow>

@@ -21,7 +21,7 @@
                     未读询盘
                     @if (ViewBag.UnReadEnquiryCount != null &&ViewBag.UnReadEnquiryCount!=0)
                     {
-                         @ViewBag.UnReadEnquiryCount;
+                         @:(@ViewBag.UnReadEnquiryCount)
                     }
                 </a>
             </li>
@@ -30,6 +30,11 @@
                 <a href="/Enquiry/UnReadEnquiryEmailList">
                     <i class="icon-double-angle-right"></i>
                     未读翻译
+                    @if (ViewBag.UnReadEmailEnquiryCount != null && ViewBag.UnReadEmailEnquiryCount != 0)
+                    {
+                         @:(@ViewBag.UnReadEmailEnquiryCount)
+                    }
+                    
                 </a>
             </li>
 

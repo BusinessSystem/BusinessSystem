@@ -31,7 +31,10 @@ namespace Business.Web.Controllers
                 return PartialView("~/Views/Shared/_NavSuperList.cshtml");
             }
             int unReadEnquiryCount = EnquiryService.GetReadEnquiryCount(CurrentManager.Id, HandlerStatusEnum.UnRead);
+            int unReadEmailEnquiryCount = EnquiryService.GetUnReadEmailEnquiryCount(CurrentManager.Id,
+                EmailStatusEnum.UnRead);
             ViewBag.UnReadEnquiryCount = unReadEnquiryCount;
+            ViewBag.UnReadEmailEnquiryCount = unReadEmailEnquiryCount;
             return PartialView();
         }
     }

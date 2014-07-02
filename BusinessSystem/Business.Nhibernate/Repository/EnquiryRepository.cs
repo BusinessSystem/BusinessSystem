@@ -63,11 +63,22 @@ namespace Business.Nhibernate.Repository
         {
             using (var session = GetSession())
             {
-                return session.QueryOver<Enquiry>().Where(m => m.IsDeleted == Utils.CoreDefaultValue.True)
+                return session.QueryOver<Enquiry>().Where(m => m.IsDeleted == Utils.CoreDefaultValue.False)
                     .And(m => m.HandlerStatus == handlerStatus)
                     .And(m => m.ReceiverId == managerId || m.HandlerId == managerId).RowCount();
             }
         }
+
+        public int GetUnReadEmailEnquiryCount(long managerId, EmailStatusEnum  emailStatus)
+        {
+            using (var session = GetSession())
+            {
+                return session.QueryOver<Enquiry>().Where(m => m.IsDeleted == Utils.CoreDefaultValue.False)
+                    .And(m => m.EmailStatus == emailStatus)
+                    .And(m => m.ReceiverId == managerId || m.HandlerId == managerId).RowCount();
+            }
+        }
+
 
         public IList<Enquiry> GetEnquiriesById(long managerId, long intentId, long useDefinedId, int pageIndex, int pageSize, out int totalCount)
         {
