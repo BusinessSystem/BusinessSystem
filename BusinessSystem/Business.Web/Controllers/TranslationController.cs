@@ -172,9 +172,11 @@ namespace Business.Web.Controllers
         public ActionResult EmailTranslationDetail(long id)
         {
             ViewBag.CurrentManager = CurrentManager;
+            EmailTranslation emailTranslation = TranslationService.GeEmailTranslationById(id);
             PageTranslationFollow translationFollow =
-                new PageTranslationFollow(TranslationService.GeEmailTranslationById(id),
+                new PageTranslationFollow(emailTranslation,
                     TranslationService.GetEmailFollows(id));
+            TranslationService.ChangeEmailTranslationStatus(emailTranslation);
             return View(translationFollow);
         }
 

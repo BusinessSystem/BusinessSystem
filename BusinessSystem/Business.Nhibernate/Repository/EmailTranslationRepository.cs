@@ -50,6 +50,10 @@ namespace Business.Nhibernate.Repository
                 }
                 if (managerType == ManagerTypeEnum.Common)
                 {
+                    if (emailStatus == EmailStatusEnum.UnRead)
+                    {
+                        query = query.And(m => m.EnquiryId > 0);
+                    }
                     query =
                         query.And(
                             m =>

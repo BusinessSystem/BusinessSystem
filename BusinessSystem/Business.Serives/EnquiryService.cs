@@ -146,7 +146,7 @@ namespace Business.Serives
 
         public static void ChangeEnquiryStatus(Manager currentManager, Enquiry enquiry)
         {
-            if (enquiry.ReceiverId == currentManager.Id)
+            if (enquiry.HandlerId == currentManager.Id)
             {
                 enquiry.HandlerStatus = HandlerStatusEnum.HasRead;
                 enquiryRepository.Save(enquiry);
@@ -205,7 +205,9 @@ namespace Business.Serives
             }
 
             Enquiry enquiry = EnquiryFactory.Create(ipString, email, content, productName, yourName, company, tel, msn,
-                managerMainSite.LanguageName,managerMainSite.LanguageId, "未知", managerMainSite.ManagerId, managerMainSite.ManagerName);
+                managerMainSite.LanguageName, managerMainSite.LanguageId, "未知", managerMainSite.ManagerId,
+                managerMainSite.ManagerName);
+            enquiry.EnquiryTimes = enquiryRepository.GetEnquiryTimesByEmail(email) + 1;
             enquiryRepository.Save(enquiry);
         }
     }

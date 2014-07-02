@@ -15,6 +15,7 @@ namespace Business.Serives
         private static IEmailTranslationRepository emailTranslationRepository = new EmailTranslationRepository();
         private static IIntentionRepository intentionRepository = new IntentionRepository();
         private static IManagerRepository managerRepository = new ManagerRepository();
+        private static IEnquiryRepository enquiryRepository = new EnquiryRepository();
 
         public static string SaveTranslation(EmailTranslation emailTranslation, EmailFollow emailFollow)
         {
@@ -123,12 +124,19 @@ namespace Business.Serives
             {
                 emailFollow.TargetContent = targetContent;
                 emailFollow.HandleManagerId = currentManager.Id;
-                if (emailFollowRepository.GetEmailFollowsUnReadByTransId(translationId) ==0)
-                {
-                    emailTranslation.ReceiverStatus = EmailStatusEnum.HasRead;
-                }
+                emailTranslation.ReceiverStatus = EmailStatusEnum.HasRead;
                 emailTranslation.SenderStatus = EmailStatusEnum.UnRead;
+                emailTranslationRepository.Save(emailTranslation);
                 emailFollowRepository.Save(emailFollow);
+                if (emailTranslation.EnquiryId > 0)
+                {
+                    Enquiry enquiry = enquiryRepository.GetById(emailTranslation.EnquiryId);
+                    if (enquiry != null)
+                    {
+                        enquiry.EmailStatus = EmailStatusEnum.UnRead;
+                        enquiryRepository.Save(enquiry);
+                    }
+                }
                 return ResponseCode.Ok;
             }
             return ResponseCode.NotFoundData;
@@ -137,6 +145,24 @@ namespace Business.Serives
         public static  EmailTranslation GeEmailTranslationByEnquiryId(long enquiryId)
         {
             return emailTranslationRepository.GeEmailTranslationByEnquiryId(enquiryId);
+        }
+
+        public static void ChangeEmailTranslationStatus(EmailTranslation emailTranslation)
+        {
+            if (emailTranslation != null && (emailTranslation.ReceiverStatus == EmailStatusEnum.UnRead))
+            {
+                emailTranslation.ReceiverStatus = EmailStatusEnum.HasRead;
+                emailTranslationRepository.Save(emailTranslation);
+                if (emailTranslation.EnquiryId > 0)
+                {
+                    Enquiry enquiry = enquiryRepository.GetById(emailTranslation.EnquiryId);
+                    if (enquiry != null)
+                    {
+                        enquiry.EmailStatus = EmailStatusEnum.HasRead;
+                        enquiryRepository.Save(enquiry);
+                    }
+                }
+            }
         }
     }
 }

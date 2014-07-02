@@ -24,6 +24,8 @@ namespace Business.Nhibernate.IRepository
             EmailStatusEnum emailStatus, int pageindex, int pageSize, out int totalCount);
 
         int GetUnReadEmailEnquiryCount(long managerId, EmailStatusEnum emailStatus);
+       
+        int GetEnquiryTimesByEmail(string email);
     }
 
     public interface IEnquiryTransFollowRepository : IRepository<EnquiryTransFollow>

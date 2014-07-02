@@ -130,5 +130,18 @@ namespace Business.Nhibernate.Repository
                     .List();
             }
         }
+
+
+        public int GetEnquiryTimesByEmail(string email)
+        {
+            if (string.IsNullOrEmpty(email))
+            {
+                return 0;
+            }
+            using (var session = GetSession())
+            {
+                return session.QueryOver<Enquiry>().Where(m => m.PurchaserEmail == email).RowCount();
+            }
+        }
     }
 } 
