@@ -142,17 +142,25 @@
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="Controllers\WebSiteAnalysisController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Htmls\LoginForm.aspx.cs">
+    <Compile Include="Htmls\CommonForm\LoginForm.aspx.cs">
       <DependentUpon>LoginForm.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Htmls\LoginForm.aspx.designer.cs">
+    <Compile Include="Htmls\CommonForm\LoginForm.aspx.designer.cs">
       <DependentUpon>LoginForm.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Htmls\YZM.ashx.cs">
+    <Compile Include="Htmls\CommonForm\WebSiteAnalysis.aspx.cs">
+      <DependentUpon>WebSiteAnalysis.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Htmls\CommonForm\WebSiteAnalysis.aspx.designer.cs">
+      <DependentUpon>WebSiteAnalysis.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Htmls\CommonForm\YZM.ashx.cs">
       <DependentUpon>YZM.ashx</DependentUpon>
     </Compile>
     <Compile Include="Models\LoginQuery.cs" />
@@ -161,6 +169,8 @@
     <Compile Include="Models\SessionableControllerHandler.cs" />
     <Compile Include="Models\SessionStateRouteHandler.cs" />
     <Compile Include="Models\TestQuery.cs" />
+    <Compile Include="Models\WebSiteAnalysisInfo.cs" />
+    <Compile Include="Models\WebSiteAnalysisQuery.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -220,6 +230,7 @@
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Htmls\CommonForm\WebSiteAnalysis.aspx" />
     <Content Include="Htmls\demo.htm" />
     <Content Include="Htmls\intaca_russian\about.html" />
     <Content Include="Htmls\intaca_russian\contact.html" />
@@ -354,11 +365,12 @@
     <Content Include="Htmls\intaca_russian\products\img\hydraulic power units\Hp18-30-40.jpg" />
     <Content Include="Htmls\intaca_russian\products\img\hydraulic power units\hydraulic-power-pack.jpg" />
     <Content Include="Htmls\intaca_russian\products\img\hydraulic power units\IMG_3580-.jpg" />
-    <Content Include="Htmls\LoginForm.aspx" />
+    <Content Include="Htmls\CommonForm\LoginForm.aspx" />
     <Content Include="Htmls\Test.htm" />
     <Content Include="Images\content-bg.gif" />
     <Content Include="Images\icon-demo.gif" />
     <Content Include="Images\icon-login-seaver.gif" />
+    <Content Include="Images\loading01.gif" />
     <Content Include="Images\login-buttom-gb1.gif" />
     <Content Include="Images\login-content-bg.gif" />
     <Content Include="Images\login-top-bg.gif" />
@@ -375,9 +387,13 @@
     <Content Include="Scripts\jquery-1.7.1.min.js" />
     <Content Include="Scripts\jquery.js" />
     <Content Include="Scripts\jquery.purebox.js" />
+    <Content Include="Scripts\jquery.tmpl.js" />
+    <Content Include="Scripts\jquery.tmplPlus.js" />
+    <Content Include="Scripts\PagerOrder.js" />
     <Content Include="Styles\purebox-facebook.css" />
     <Content Include="Styles\purebox-metro.css" />
     <Content Include="Styles\skin2.css" />
+    <Content Include="Styles\WebSiteStyle.css" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -411,7 +427,7 @@
     <None Include="Htmls\intaca_russian\products\img\Hydraulic impact hammer\Thumbs.db" />
     <None Include="Htmls\intaca_russian\products\img\Hydraulic Impact Wrench\Thumbs.db" />
     <None Include="Htmls\intaca_russian\products\img\hydraulic power units\Thumbs.db" />
-    <Content Include="Htmls\YZM.ashx" />
+    <Content Include="Htmls\CommonForm\YZM.ashx" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Htmls\intaca_russian\products\img\hydraulic vibration impact plate\" />
