@@ -1,215 +1,223 @@
-﻿<ul class="nav nav-list">
-    <li>
-        <a href="/Manager/Index">
-            <i class="icon-dashboard"></i>
-            <span class="menu-text"> 控制台 </span>
-        </a>
-    </li>
+﻿@model Business.Core.Manager
+@if (Model != null)
+{
+    <ul class="nav nav-list">
+        <li>
+            <a href="/Manager/Index">
+                <i class="icon-dashboard"></i>
+                <span class="menu-text"> 控制台 </span>
+            </a>
+        </li>
      
-    <li   class="active">
-        <a href="#" class="dropdown-toggle">
-            <i class="icon-desktop"></i>
-            <span class="menu-text"> 询盘中心 </span>
+        <li   class="active">
+            <a href="#" class="dropdown-toggle">
+                <i class="icon-desktop"></i>
+                <span class="menu-text"> 询盘中心 </span>
 
-            <b class="arrow icon-angle-down"></b>
-        </a>
+                <b class="arrow icon-angle-down"></b>
+            </a>
 
-        <ul class="submenu">
-            <li>
-                <a href="/Enquiry/UnReadEnquiryList">
-                    <i class="icon-double-angle-right"></i>
-                    未读询盘
-                    @if (ViewBag.UnReadEnquiryCount != null &&ViewBag.UnReadEnquiryCount!=0)
-                    {
-                         @:(@ViewBag.UnReadEnquiryCount)
-                    }
-                </a>
-            </li>
+            <ul class="submenu">
+                <li>
+                    <a href="/Enquiry/UnReadEnquiryList">
+                        <i class="icon-double-angle-right"></i>
+                        未读询盘
+                        @if (ViewBag.UnReadEnquiryCount != null && ViewBag.UnReadEnquiryCount != 0)
+                        {
+                            @:(@ViewBag.UnReadEnquiryCount)
+                        }
+                    </a>
+                </li>
 
-            <li>
-                <a href="/Enquiry/UnReadEnquiryEmailList">
-                    <i class="icon-double-angle-right"></i>
-                    未读翻译
-                    @if (ViewBag.UnReadEmailEnquiryCount != null && ViewBag.UnReadEmailEnquiryCount != 0)
-                    {
-                         @:(@ViewBag.UnReadEmailEnquiryCount)
-                    }
+                <li>
+                    <a href="/Enquiry/UnReadEnquiryEmailList">
+                        <i class="icon-double-angle-right"></i>
+                        未读翻译
+                        @if (ViewBag.UnReadEmailEnquiryCount != null && ViewBag.UnReadEmailEnquiryCount != 0)
+                        {
+                            @:(@ViewBag.UnReadEmailEnquiryCount)
+                        }
                     
-                </a>
-            </li>
+                    </a>
+                </li>
 
-            <li>
-                <a href="/Enquiry/HasReadEnquiryList">
-                    <i class="icon-double-angle-right"></i>
-                    已读询盘 
-                </a>
-            </li>
+                <li>
+                    <a href="/Enquiry/HasReadEnquiryList">
+                        <i class="icon-double-angle-right"></i>
+                        已读询盘 
+                    </a>
+                </li>
 
-            <li>
-                <a href="/Enquiry/RecycledEnquiryList">
-                    <i class="icon-double-angle-right"></i>
-                    回收站
-                </a>
-            </li>
-        </ul>
-    </li>
+                <li>
+                    <a href="/Enquiry/RecycledEnquiryList">
+                        <i class="icon-double-angle-right"></i>
+                        回收站
+                    </a>
+                </li>
+            </ul>
+        </li>
 
-    <li>
-        <a href="/Translation/UnReadTranslationList" class="dropdown-toggle">
-            <i class="icon-list"></i>
-            <span class="menu-text">邮件翻译</span>
+        <li>
+            <a href="/Translation/UnReadTranslationList" class="dropdown-toggle">
+                <i class="icon-list"></i>
+                <span class="menu-text">邮件翻译</span>
 
-            <b class="arrow icon-angle-down"></b>
-        </a>
+                <b class="arrow icon-angle-down"></b>
+            </a>
 
-        <ul class="submenu">
-            <li>
-                <a href="/Translation/UnReadTranslationList">
-                    <i class="icon-double-angle-right"></i>
-                    未读邮件翻译
-                </a>
-            </li>
+            <ul class="submenu">
+                <li>
+                    <a href="/Translation/UnReadTranslationList">
+                        <i class="icon-double-angle-right"></i>
+                        未读邮件翻译
+                    </a>
+                </li>
 
-            <li>
-                <a href="/Translation/HasReadTranslationList">
-                    <i class="icon-double-angle-right"></i>
-                    已读邮件翻译
-                </a>
-            </li>
-            <li>
-                <a href="/Translation/EmailTranslationAdd">
-                    <i class="icon-double-angle-right"></i>
-                    添加邮件翻译
-                </a>
-            </li>
-            <li>
-                <a href="/Translation/RecycledTranslationList">
-                    <i class="icon-double-angle-right"></i>
-                    回收站
-                </a>
-            </li>
-        </ul>
-    </li>
+                <li>
+                    <a href="/Translation/HasReadTranslationList">
+                        <i class="icon-double-angle-right"></i>
+                        已读邮件翻译
+                    </a>
+                </li>
+                <li>
+                    <a href="/Translation/EmailTranslationAdd">
+                        <i class="icon-double-angle-right"></i>
+                        添加邮件翻译
+                    </a>
+                </li>
+                <li>
+                    <a href="/Translation/RecycledTranslationList">
+                        <i class="icon-double-angle-right"></i>
+                        回收站
+                    </a>
+                </li>
+            </ul>
+        </li>
 
-    <li>
-        <a href="/Manager/ManagerList" class="dropdown-toggle">
-            <i class="icon-edit"></i>
-            <span class="menu-text"> 服务中心 </span>
+        <li>
+            <a href="/Manager/ManagerList" class="dropdown-toggle">
+                <i class="icon-edit"></i>
+                <span class="menu-text"> 服务中心 </span>
 
-            <b class="arrow icon-angle-down"></b>
-        </a>
+                <b class="arrow icon-angle-down"></b>
+            </a>
 
-        <ul class="submenu">
+            <ul class="submenu">
            
-            <li>
-                <a href="/Manager/ManagerList" target="_self">
-                    <i class="icon-double-angle-right"></i>
-                    子账号管理
-                </a>
-            </li>
-           
-            <li>
-                <a href="/Manager/ChangePassword">
-                    <i class="icon-double-angle-right"></i>
-                    修改密码
-                </a>
-            </li>
+             @if (Model.ParentId == 0)
+             {
+                 <li>
+                     <a href="/Manager/ManagerList" target="_self">
+                         <i class="icon-double-angle-right"></i>
+                         子账号管理
+                     </a>
+                 </li>
 
-            <li>
-                <a href="/Manager/PwdChangedRecordList">
-                    <i class="icon-double-angle-right"></i>
-                    密码修改记录
-                </a>
-            </li>
+             }
+                <li>
+                    <a href="/Manager/ChangePassword">
+                        <i class="icon-double-angle-right"></i>
+                        修改密码
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/Manager/PwdChangedRecordList">
+                        <i class="icon-double-angle-right"></i>
+                        密码修改记录
+                    </a>
+                </li>
 
 		            
-        </ul>
-    </li>
+            </ul>
+        </li>
 
-    <li>
-        <a href="widgets.html">
-            <i class="icon-list-alt"></i>
-            <span class="menu-text"> 站体分析 </span>
-        </a>
-    </li>
-    <li>
-        <a href="widgets.html">
-            <i class="icon-list-alt"></i>
-            <span class="menu-text"> 市场拓展 </span>
-        </a>
-    </li>
+        <li>
+            <a href="widgets.html">
+                <i class="icon-list-alt"></i>
+                <span class="menu-text"> 站体分析 </span>
+            </a>
+        </li>
+        <li>
+            <a href="widgets.html">
+                <i class="icon-list-alt"></i>
+                <span class="menu-text"> 市场拓展 </span>
+            </a>
+        </li>
 		  
 
-    <li>
-        <a href="gallery.html">
-            <i class="icon-picture"></i>
-            <span class="menu-text"> 询盘处理手册</span>
-        </a>
-    </li>
+        <li>
+            <a href="gallery.html">
+                <i class="icon-picture"></i>
+                <span class="menu-text"> 询盘处理手册</span>
+            </a>
+        </li>
 
-    <li>
-        <a href="#" class="dropdown-toggle">
-            <i class="icon-tag"></i>
-            <span class="menu-text">工具</span>
+        <li>
+            <a href="#" class="dropdown-toggle">
+                <i class="icon-tag"></i>
+                <span class="menu-text">工具</span>
 
-            <b class="arrow icon-angle-down"></b>
-        </a>
+                <b class="arrow icon-angle-down"></b>
+            </a>
 
-        <ul class="submenu">
-            <li>
-                <a href="profile.html">
-                    <i class="icon-double-angle-right"></i>
-                    计数器
-                </a>
-            </li>
+            <ul class="submenu">
+                <li>
+                    <a href="profile.html">
+                        <i class="icon-double-angle-right"></i>
+                        计数器
+                    </a>
+                </li>
 
-            <li>
-                <a href="inbox.html">
-                    <i class="icon-double-angle-right"></i>
-                    在线翻译
-                </a>
-            </li>
+                <li>
+                    <a href="inbox.html">
+                        <i class="icon-double-angle-right"></i>
+                        在线翻译
+                    </a>
+                </li>
 
-            <li>
-                <a href="pricing.html">
-                    <i class="icon-double-angle-right"></i>
-                    汇率牌价
-                </a>
-            </li>
-            <li>
-                <a href="timeline.html">
-                    <i class="icon-double-angle-right"></i>
-                    HS码查询
-                </a>
-            </li>
+                <li>
+                    <a href="pricing.html">
+                        <i class="icon-double-angle-right"></i>
+                        汇率牌价
+                    </a>
+                </li>
+                <li>
+                    <a href="timeline.html">
+                        <i class="icon-double-angle-right"></i>
+                        HS码查询
+                    </a>
+                </li>
 		           
-        </ul>
-    </li>
-    <li>
-        <a href="widgets.html">
-            <i class="icon-list-alt"></i>
-            <span class="menu-text"> ETW国际导读 </span>
-        </a>
-    </li>
-    <li>
-        <a href="/Handler/LoginOut">
-            <i class="icon-list-alt"></i>
-            <span class="menu-text"> 退出系统 </span>
-        </a>
-    </li>
-</ul><!-- /.nav-list -->
+            </ul>
+        </li>
+        <li>
+            <a href="widgets.html">
+                <i class="icon-list-alt"></i>
+                <span class="menu-text"> ETW国际导读 </span>
+            </a>
+        </li>
+        <li>
+            <a href="/Handler/LoginOut">
+                <i class="icon-list-alt"></i>
+                <span class="menu-text"> 退出系统 </span>
+            </a>
+        </li>
+    </ul>
+    <!-- /.nav-list -->
 
-<script type="text/javascript">
-    $(function () {
-        var controller = '@ViewContext.RouteData.Route.GetRouteData(this.Context).Values["controller"].ToString()';
-        var action = '@ViewContext.RouteData.Route.GetRouteData(this.Context).Values["action"].ToString()';
-        var val = "/"+controller+"/"+action;
-        $(".nav-list").find("li").removeClass("active");
-        $(".nav-list").find("a").each(function() {
-            if ($(this).attr("href").toString()== val) {
-                $(this).parent().addClass("active");
-                $(this).parent().parent().parent().addClass("active");
-            }
+    <script type="text/javascript">
+        $(function() {
+            var controller = '@ViewContext.RouteData.Route.GetRouteData(this.Context).Values["controller"].ToString()';
+            var action = '@ViewContext.RouteData.Route.GetRouteData(this.Context).Values["action"].ToString()';
+            var val = "/" + controller + "/" + action;
+            $(".nav-list").find("li").removeClass("active");
+            $(".nav-list").find("a").each(function() {
+                if ($(this).attr("href").toString() == val) {
+                    $(this).parent().addClass("active");
+                    $(this).parent().parent().parent().addClass("active");
+                }
+            });
         });
-    });
-</script>
+    </script>
+}

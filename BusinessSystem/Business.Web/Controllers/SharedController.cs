@@ -27,14 +27,14 @@ namespace Business.Web.Controllers
 
             if (CurrentManager.ManagerType == ManagerTypeEnum.Super)
             {
-                return PartialView("~/Views/Shared/_NavSuperList.cshtml");
+                return PartialView("~/Views/Shared/_NavSuperList.cshtml",CurrentManager);
             }
             int unReadEnquiryCount = EnquiryService.GetReadEnquiryCount(CurrentManager.Id, HandlerStatusEnum.UnRead);
             int unReadEmailEnquiryCount = EnquiryService.GetUnReadEmailEnquiryCount(CurrentManager.Id,
                 EmailStatusEnum.UnRead);
             ViewBag.UnReadEnquiryCount = unReadEnquiryCount;
             ViewBag.UnReadEmailEnquiryCount = unReadEmailEnquiryCount;
-            return PartialView();
+            return PartialView(CurrentManager);
         }
     }
 }
