@@ -25,10 +25,10 @@ namespace Business.WebApi.Controllers
                 //检验用户名正确与否
                 if (true)
                 {
-                    //Session.Add("userid", ul.id);
-                    //Session.Add("username", ul.user_name);
+                    //进行验证
 
-                    //设置验证成功
+                    //设置验证成功,保存用户名到session中
+                    HttpContext.Current.Session["LoginAccount"] = "lingwu@163.com";
                     returnObj.Status = ServerStatus.Success;
                 }
                 else
