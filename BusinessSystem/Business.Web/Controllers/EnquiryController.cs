@@ -104,7 +104,6 @@ namespace Business.Web.Controllers
             ViewBag.CurrentIntentionId = intentionId;
             ViewBag.CurrentUserdefinedId = userDefinedId;
             ViewBag.CurrentLanguageId = languageId;
-
             return View(pageModel);
         }
 
@@ -179,6 +178,13 @@ namespace Business.Web.Controllers
              ViewBag.Intentions = BaseService.GetIntentions(CurrentManager.ParentId != 0 ? CurrentManager.ParentId : CurrentManager.Id);
              ViewBag.UserDefineds = BaseService.GetUserDefineds(CurrentManager.ParentId != 0 ? CurrentManager.ParentId : CurrentManager.Id);
              ViewBag.ChildManagers = ManageService.GetChildManagers(CurrentManager.Id);
+             ViewBag.Languages =
+               ManageService.GetManagerMainSitesByManagerId(CurrentManager.ParentId == 0
+                   ? CurrentManager.Id
+                   : CurrentManager.ParentId);
+             ViewBag.CurrentIntentionId = intentionId;
+             ViewBag.CurrentUserdefinedId = userDefinedId;
+             ViewBag.CurrentLanguageId = languageId;
              return View(pageModel);
          }
 
