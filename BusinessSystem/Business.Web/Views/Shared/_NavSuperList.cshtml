@@ -5,7 +5,53 @@
             <span class="menu-text"> 控制台 </span>
         </a>
     </li>
-     
+     <li   class="active">
+            <a href="#" class="dropdown-toggle">
+                <i class="icon-desktop"></i>
+                <span class="menu-text"> 询盘中心 </span>
+
+                <b class="arrow icon-angle-down"></b>
+            </a>
+
+            <ul class="submenu">
+                <li>
+                    <a href="/Enquiry/UnReadEnquiryList">
+                        <i class="icon-double-angle-right"></i>
+                        未读询盘
+                        @if (ViewBag.UnReadEnquiryCount != null && ViewBag.UnReadEnquiryCount != 0)
+                        {
+                            @:(@ViewBag.UnReadEnquiryCount)
+                        }
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/Enquiry/UnReadEnquiryEmailList">
+                        <i class="icon-double-angle-right"></i>
+                        未读翻译
+                        @if (ViewBag.UnReadEmailEnquiryCount != null && ViewBag.UnReadEmailEnquiryCount != 0)
+                        {
+                            @:(@ViewBag.UnReadEmailEnquiryCount)
+                        }
+                    
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/Enquiry/HasReadEnquiryList">
+                        <i class="icon-double-angle-right"></i>
+                        已读询盘 
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/Enquiry/RecycledEnquiryList">
+                        <i class="icon-double-angle-right"></i>
+                        回收站
+                    </a>
+                </li>
+            </ul>
+        </li>
      
 
     <li>
@@ -20,7 +66,11 @@
             <li>
                 <a href="/Translation/UnReadTranslationList">
                     <i class="icon-double-angle-right"></i>
-                    未读邮件翻译
+                    未读邮件翻译 @if (ViewBag.UnReadEmailEnquiryCount != null && ViewBag.UnReadEmailEnquiryCount != 0)
+                        {
+                            @:(@ViewBag.UnReadEmailEnquiryCount)
+                        }
+                    
                 </a>
             </li>
 

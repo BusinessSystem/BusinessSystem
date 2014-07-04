@@ -164,5 +164,11 @@ namespace Business.Serives
                 }
             }
         }
+
+        public static int GetEmailTranslationsCount(ManagerTypeEnum managerType, EmailStatusEnum emailStatus,
+            long managerId)
+        {
+           return  emailTranslationRepository.GetEmailTranslationsCount(managerType, emailStatus, managerId);
+        }
     }
 }

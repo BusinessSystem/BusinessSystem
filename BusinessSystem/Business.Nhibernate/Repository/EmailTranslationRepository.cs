@@ -33,6 +33,35 @@ namespace Business.Nhibernate.Repository
             }
         }
 
+        public int GetEmailTranslationsCount(ManagerTypeEnum managerType, EmailStatusEnum emailStatus,long managerId)
+        {
+            using (var session = GetSession())
+            {
+                var query = session.QueryOver<EmailTranslation>();
+                query = query.Where(m => m.IsDeleted == Utils.CoreDefaultValue.False);
+
+                if (managerType == ManagerTypeEnum.Common)
+                {
+                    if (emailStatus == EmailStatusEnum.UnRead)
+                    {
+                        query = query.And(m => m.EnquiryId < 0);
+                    }
+                    query =
+                        query.And(
+                            m => m.SenderStatus == emailStatus && (m.SenderId == managerId || m.FollowId == managerId));
+                }
+                if (managerType == ManagerTypeEnum.Super)
+                {
+                    query =
+                        query.And(
+                            m =>
+                                m.ReceiverStatus == emailStatus &&
+                                (m.HandlerManagerId == managerId || m.ReceiverId == managerId));
+                }
+                return query.RowCount();
+            }
+        }
+
         public IList<EmailTranslation> GetEmailTranslations(ManagerTypeEnum managerType, EmailStatusEnum emailStatus, short isDeleted, long receiveId, long intentionId, int pageIndex, int pageSize, out int totalCount)
         {
             using (var session = GetSession())

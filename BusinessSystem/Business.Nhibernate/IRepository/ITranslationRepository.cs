@@ -32,5 +32,7 @@ namespace Business.Nhibernate.IRepository
         IList<long> GetUnEmailEnquiryIds(long senderId);
 
         EmailTranslation GeEmailTranslationByEnquiryId(long enquiryId);
+
+        int GetEmailTranslationsCount(ManagerTypeEnum managerType, EmailStatusEnum emailStatus, long managerId);
     }
 }
