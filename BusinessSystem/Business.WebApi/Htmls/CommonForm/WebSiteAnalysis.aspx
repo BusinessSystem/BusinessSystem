@@ -31,30 +31,62 @@
     <form id="form1" runat="server">
     <!--查询数据-->
     <script type="text/javascript">
+        //获取传过来的参数
+        function getLanguage() {
+            var urlInfo = window.location.href; //获取当前页面的url  
+            var intLen = urlInfo.length; //获取url的长度  
+            var offset = urlInfo.indexOf("="); //设置参数字符串开始的位置(因为这里只有1个参数)
+            var strKeyValue = urlInfo.substr(offset + 1, intLen); //取出参数字符串 这里会获得类似“俄语”这样的字符串
+
+            return decodeURI(strKeyValue);
+        }
+
+        //点击查询按钮查询
         function queryDetail() {
             var v_ip = $("#txt_ip").val().trim();
             var orderByValue = $("#orderValue").val().trim();
             var orderByDesc = $("#orderDesc").val().trim();
-            var dataParas = '{ "VIp": "' + v_ip + '", "OrderByValue": "' + orderByValue + '", "OrderByDesc": "' + orderByDesc + '"}';
-//            $.post("/api/WebSiteAnalysis/GetInfoListByIp", eval('(' + dataParas + ')'), function (data) {
-//                if (data != null && data.Status.Code == 200) {
-//                    var list = data.ReturnData;
-//                    alert(list);
-//                    $('#mytmple').tmpl(list[0]).appendTo('#visitor_list_tbody');
-//                    $('#visitor_list_tmpl').tmpl(list).appendTo('#visitor_list_tbody');
-//                } else {
-//                    alert("获取发送短信数据失败!");
-//                }
+            var language = $("#sl_type").val();
+            if (language.trim().length == 0) {
+                alert("必须选择一种国际类型!");
+                $("#sl_type").focus();
+                return;
+            }
+            var dataParas = '{ "VIp": "' + v_ip + '", "OrderByValue": "' + orderByValue + '", "OrderByDesc": "' + orderByDesc + '", "Language":"'+language+'"}';
 
-//            }, "json");
             //分页
             $("#pager").JPager("page", 10, 1, { action: { url: "/api/WebSiteAnalysis/GetInfoListByIp", data: dataParas} }, "visitor_list_tbody", "visitor_list_tmpl", "", "", "divMsg");
         }
 
+        //初始化下拉框
+        function init() {
+            var languageType = getLanguage();
+            var dataParas = '{}';
+            $.get("/api/WebSiteAnalysis/GetLanguageTypeList", eval('(' + dataParas + ')'), function (data) {
+                if (data != null && data.Status.Code == 200) {
+                    var list = data.ReturnData;
+                    var len = list.length;
+                    var options = "<option value=\"\"></option>";
+                    for (var i = 0; i < len; i++) {
+                        if (languageType == list[i].toString()) {
+                            var tmp = "<option value=\"" + list[i].toString() + "\" selected=\"selected\">" + list[i].toString() + "</option>";
+                        } else {
+                            var tmp = "<option value=\"" + list[i].toString() + "\">" + list[i].toString() + "</option>";
+                        }
+                        options += tmp;
+                    }
+                    $(options).prependTo("#sl_type");
+                    queryDetail();
+                } else {
+                    alert("获取发送短信数据失败!");
+                }
+
+            }, "json");
+        }
 
         $(function () {
             //初始化查询
-            queryDetail();
+            init();
 
             //排序
             //initOrder("VTime", queryDetail, "orderValue", "orderDesc");
@@ -93,7 +125,7 @@
                     <td style="width: 15%" class="blove">国际市场选择
                     </td>
                     <td style="width: 35%; text-align: left" class="whiteBG" colspan="3">
-                        <select id="sl_type">
+                        <select id="sl_type" style="width:160px;">
                         </select>
                     </td>
                     <td style="width: 15%" class="blove">

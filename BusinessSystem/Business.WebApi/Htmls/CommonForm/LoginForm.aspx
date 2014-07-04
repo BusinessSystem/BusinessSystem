@@ -24,6 +24,14 @@
                 alert("验证码不能为空");
                 return false;
             }
+
+            var urlInfo = window.location.href; //获取当前页面的url  
+            var intLen = urlInfo.length; //获取url的长度  
+            var offset = urlInfo.indexOf("="); //设置参数字符串开始的位置(因为这里只有1个参数)
+            var strKeyValue = urlInfo.substr(offset+1, intLen); //取出参数字符串 这里会获得类似“俄语”这样的字符串
+
+            var languageType = decodeURI(strKeyValue);
+
             $.ajax({
                 type: "post",
                 contentType: "application/json",
@@ -31,7 +39,7 @@
                 data: "{ username: '" + username + "', userpwd: '" + password + "', valiad:'" + valiad + "' }",
                 dataType: "json",
                 success: function (result) {
-                    window.location.href = 'WebSiteAnalysis.aspx';
+                    window.location.href = "WebSiteAnalysis.aspx?languageType="+encodeURI(languageType);//继续把语言传送给站体分析页
                     if (data != null && data.Status.Code == 200) {
                         alert("success!");
                         

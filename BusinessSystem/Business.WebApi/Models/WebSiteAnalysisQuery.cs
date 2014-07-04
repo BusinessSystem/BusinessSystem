@@ -12,6 +12,10 @@ namespace Business.WebApi.Models
         /// </summary>
         public string VIp{ get; set; }
         /// <summary>
+        /// 网站语言类型
+        /// </summary>
+        public string Language { get; set; }
+        /// <summary>
         /// 排序的字段
         /// </summary>
         public string OrderByValue{get;set;}

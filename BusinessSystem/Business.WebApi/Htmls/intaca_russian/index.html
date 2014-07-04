@@ -249,7 +249,12 @@ type=text/javascript></SCRIPT>
         </div>
 </div>
 </div>
-<div class="bottom"><div class="box"><a href="http://localhost:3978/Htmls/intaca_russian/">Главная</a> | <a href="../CommonForm/LoginForm.aspx">О нас</a> | <a href="http://localhost:3978/Htmls/intaca_russian/products/product.html">Продукция</a> | <a href="http://localhost:3978/Htmls/intaca_russian/contact.html">новости</a>| <a href="http://localhost:3978/Htmls/intaca_russian/contact.html">Контактная</a> </div><p style="margin-top:5px;"><script src="http://s11.cnzz.com/stat.php?id=4565595&web_id=4565595&show=pic" language="JavaScript"></script>
+<script type="text/javascript">
+    function enURI(str) {
+        window.location.href = "../CommonForm/LoginForm.aspx?languageType=" + encodeURI(str);  
+    }
+</script>
+<div class="bottom"><div class="box"><a href="http://localhost:3978/Htmls/intaca_russian/">Главная</a> | <a  onclick="enURI('俄语')">О нас</a> | <a href="http://localhost:3978/Htmls/intaca_russian/products/product.html">Продукция</a> | <a href="http://localhost:3978/Htmls/intaca_russian/contact.html">новости</a>| <a href="http://localhost:3978/Htmls/intaca_russian/contact.html">Контактная</a> </div><p style="margin-top:5px;"><script src="http://s11.cnzz.com/stat.php?id=4565595&web_id=4565595&show=pic" language="JavaScript"></script>
 </p></div>
 
 </body>
