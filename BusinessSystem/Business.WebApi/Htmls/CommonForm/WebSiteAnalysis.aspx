@@ -4,7 +4,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title></title>
+    <title>站体分析</title>
     <link href="../../Styles/WebSiteStyle.css" rel="stylesheet" type="text/css" />
     <script src="../../Scripts/jquery-1.7.1.js" type="text/javascript"></script>
     <script src="../../Scripts/PagerOrder.js" type="text/javascript"></script>
@@ -43,6 +43,8 @@
 
         //点击查询按钮查询
         function queryDetail() {
+            //先给标题赋值
+            $("#sp_type").html($("#sl_type option:selected").val());
             var v_ip = $("#txt_ip").val().trim();
             var orderByValue = $("#orderValue").val().trim();
             var orderByDesc = $("#orderDesc").val().trim();
@@ -76,6 +78,18 @@
                         options += tmp;
                     }
                     $(options).prependTo("#sl_type");
+
+                    //给标题赋值
+                    $("#sp_type").html(getLanguage());
+
+                    //给下拉框绑定事件
+//                    $("#sl_type").change(function () {
+//                        //先给标题赋值
+//                        $("#sp_type").html($("#sl_type option:selected").val());
+//                        //清空信息列表
+//                        //$("#visitor_list_tbody").empty();
+//                    });
+
                     queryDetail();
                 } else {
                     alert("获取发送短信数据失败!");
@@ -117,7 +131,7 @@
         <div>
             <div style="text-align:center;">
                 <h1>
-                    您现在进入的是<span style="color: Red;">英语</span>客户群体市场分析页面</h1>
+                    您现在进入的是<span style="color: Red;" id="sp_type"></span>客户群体市场分析页面</h1>
             </div>
             <table id="tb_search" style="text-align: center; width: 100%;" cellpadding="0" cellspacing="1"
                 class="blove2">
