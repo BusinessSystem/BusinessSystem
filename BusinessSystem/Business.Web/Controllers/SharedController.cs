@@ -30,8 +30,6 @@ namespace Business.Web.Controllers
             {
                 return PartialView("~/Views/Shared/_NavSuperList.cshtml", CurrentManager);
             }
-
-
             int unReadEnquiryCount = TranslationService.GetEmailTranslationsCount(CurrentManager.ManagerType,
                 EmailStatusEnum.UnRead, CurrentManager.Id);
             ViewBag.UnReadEnquiryCount = unReadEnquiryCount;
