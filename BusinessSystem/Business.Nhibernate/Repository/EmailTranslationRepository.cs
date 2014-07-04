@@ -44,7 +44,7 @@ namespace Business.Nhibernate.Repository
                 {
                     if (emailStatus == EmailStatusEnum.UnRead)
                     {
-                        query = query.And(m => m.EnquiryId < 0);
+                        query = query.And(m => m.EnquiryId <1);
                     }
                     query =
                         query.And(
@@ -81,7 +81,7 @@ namespace Business.Nhibernate.Repository
                 {
                     if (emailStatus == EmailStatusEnum.UnRead)
                     {
-                        query = query.And(m => m.EnquiryId > 0);
+                        query = query.And(m => m.EnquiryId <1);
                     }
                     query =
                         query.And(

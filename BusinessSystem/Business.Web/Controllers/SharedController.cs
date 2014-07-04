@@ -23,9 +23,9 @@ namespace Business.Web.Controllers
         public ActionResult _NavList()
         {
             ViewBag.CurrentUrl = System.Web.HttpContext.Current.Request.RawUrl;
-            int unReadEmailEnquiryCount = EnquiryService.GetUnReadEmailEnquiryCount(CurrentManager.Id,
-                EmailStatusEnum.UnRead);
-            ViewBag.UnReadEmailEnquiryCount = unReadEmailEnquiryCount;
+            int unReadTranslationCount = TranslationService.GetEmailTranslationsCount(CurrentManager.ManagerType,
+                 EmailStatusEnum.UnRead, CurrentManager.Id);
+            ViewBag.UnReadEnquiryCount = unReadTranslationCount;
             if (CurrentManager.ManagerType == ManagerTypeEnum.Super)
             {
                 return PartialView("~/Views/Shared/_NavSuperList.cshtml", CurrentManager);
@@ -33,6 +33,9 @@ namespace Business.Web.Controllers
             int unReadEnquiryCount = TranslationService.GetEmailTranslationsCount(CurrentManager.ManagerType,
                 EmailStatusEnum.UnRead, CurrentManager.Id);
             ViewBag.UnReadEnquiryCount = unReadEnquiryCount;
+            int unReadEmailEnquiryCount = EnquiryService.GetUnReadEmailEnquiryCount(CurrentManager.Id,
+               EmailStatusEnum.UnRead);
+            ViewBag.UnReadEmailEnquiryCount = unReadEmailEnquiryCount;
             return PartialView(CurrentManager);
         }
     }

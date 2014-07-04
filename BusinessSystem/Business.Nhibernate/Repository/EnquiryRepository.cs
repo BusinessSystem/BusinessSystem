@@ -114,7 +114,7 @@ namespace Business.Nhibernate.Repository
                     .And(m => m.EmailStatus == emailStatus);
                 if (languageId != 0)
                 {
-                    //query=query.And(m=>m)
+                    query = query.And(m => m.LanguageId == languageId);
                 }
                 if (intentId != 0)
                 {
