@@ -31,7 +31,7 @@
                         </span>
      
      
-                         @if (currentManager.ManagerType == ManagerTypeEnum.Super)
+                         @if (currentManager.ManagerType == ManagerTypeEnum.Super && currentManager.ParentId==0)
                          {
                              <div class="btn-group margin-top-2">
                                  <button data-toggle="dropdown" class="btn btn-light width-120 dropdown-toggle margin-top-2 common-height">
@@ -46,7 +46,7 @@
                                          foreach (var childManager in childManagers)
                                          {
                                              <li >
-                                                 <a href="javascript:;"  onclick=" IssueToChildManager('@childManager.Id') ">@childManager.RealName</a>
+                                                 <a href="javascript:;"  onclick="IssueToChildManager('@childManager.Id') ">@childManager.RealName</a>
                                              </li>
                                          }
                                      }
@@ -108,11 +108,12 @@
                         
                                     </ul>
                                 </li>
-
-                                <li role="presentation" class="ui-menu-item" onclik="backtomainer()">
-                                    <a role="menuitem" tabindex="-1" class="ui-corner-all" id="ui-id-8" href="javascript:;">返回总账号</a>
-                                </li>
-
+                                @if (currentManager.ParentId!= 0)
+                                {
+                                    <li role="presentation" class="ui-menu-item" onclick=" backtomainer() ">
+                                        <a role="menuitem" tabindex="-1" class="ui-corner-all" id="ui-id-8" href="javascript:;">返回总账号</a>
+                                    </li>
+                                }
                    
                             </ul>
 
@@ -168,7 +169,7 @@
                                         </td>
                                          
                                         <td >
-                                           @currentManager.RealName
+                                           @item.HandlerManagerName
                                         </td>
                                     </tr>
                                 }
@@ -223,7 +224,7 @@
                 if (num == currentPage) {
                     //每次初始化都会执行此处
                 } else {
-                    window.location.href = "/Translation/HasReadTranslationList?intentionId=" + currentIntentionId + "&pageIndex=" + num + "&pageSize=" + pageSize;
+                    window.location.href = "/Translation/UnReadTranslationList?intentionId=" + currentIntentionId + "&pageIndex=" + num + "&pageSize=" + pageSize;
                 }
             }
         });
@@ -241,7 +242,7 @@
             datatype: "json",
             data: { translationIds: translationIds, intentionId: intentionId },
             success: function (response) {
-                window.location.href = "/Translation/HasReadTranslationList?";
+                window.location.href = "/Translation/UnReadTranslationList?";
             },
             error: function () {
 
@@ -261,7 +262,7 @@
             datatype: "json",
             data: { translationIds: translationIds },
             success: function (response) {
-                window.location.href = "/Translation/HasReadTranslationList";
+                window.location.href = "/Translation/UnReadTranslationList";
             },
             error: function () {
 
@@ -281,7 +282,7 @@
             datatype: "json",
             data: { translationIds: translationIds },
             success: function (response) {
-                window.location.href = "/Translation/HasReadTranslationList?";
+                window.location.href = "/Translation/UnReadTranslationList?";
             },
             error: function () {
 
@@ -290,6 +291,22 @@
     }
 
     function IssueToChildManager(id) {
-        alert(id);
+        var transSelected = [];
+        $("input[name='translationcheck']:checked").each(function () {
+            transSelected.push($(this).val());
+        });
+        var translationIds = transSelected.join(",");
+        $.ajax({
+            url: "/Translation/IssueToChildManager",
+            type: "post",
+            datatype: "json",
+            data: { translationIds: translationIds, managerId: id },
+            success: function (response) {
+                window.location.href = "/Translation/UnReadTranslationList";
+            },
+            error: function () {
+
+            }
+        });
     }
 </script>

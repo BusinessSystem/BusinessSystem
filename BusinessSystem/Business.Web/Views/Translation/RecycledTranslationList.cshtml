@@ -99,9 +99,9 @@
 </div>
 
 <script type="text/javascript">
-    $(function () {
-        
-        $(".checkalltranslation").click(function () {
+    $(function() {
+
+        $(".checkalltranslation").click(function() {
             var checkeds = $(this).is(':checked');
             if (checkeds) {
                 $("input[name='translationcheck']").attr("checked", this.checked);
@@ -110,9 +110,6 @@
             }
         });
 
-
-
-        var currentIntentionId = '@ViewBag.IntentionId';
         var totalCount = '@Model.TotalCount';
         totalCount = parseInt(totalCount);
         var visiblePages = '@Model.VisiblePages';
@@ -125,77 +122,34 @@
             visiblePages: visiblePages,
             currentPage: currentPage,
             pageSize: pageSize,
-            onPageChange: function (num, type) {
+            onPageChange: function(num, type) {
                 if (num == currentPage) {
                     //每次初始化都会执行此处
                 } else {
-                    window.location.href = "/Translation/HasReadTranslationList?intentionId=" + currentIntentionId + "&pageIndex=" + num + "&pageSize=" + pageSize;
+                    window.location.href = "/Translation/RecycledTranslationList?pageIndex=" + num + "&pageSize=" + pageSize;
                 }
             }
         });
     });
 
-    function moveTranslation(intentionId) {
-        var transSelected = [];
-        $("input[name='translationcheck']:checked").each(function () {
-            transSelected.push($(this).val());
-        });
-        var translationIds = transSelected.join(",");
-        $.ajax({
-            url: "/Translation/MoveTransToIntention",
-            type: "post",
-            datatype: "json",
-            data: { translationIds: translationIds, intentionId: intentionId },
-            success: function (response) {
-                window.location.href = "/Translation/HasReadTranslationList?";
-            },
-            error: function () {
-
-            }
-        });
-    }
-
-    function backtomainer() {
-        var transSelected = [];
-        $("input[name='translationcheck']:checked").each(function () {
-            transSelected.push($(this).val());
-        });
-        var translationIds = transSelected.join(",");
-        $.ajax({
-            url: "/Translation/BackToMainAccount",
-            type: "post",
-            datatype: "json",
-            data: { translationIds: translationIds },
-            success: function (response) {
-                window.location.href = "/Translation/HasReadTranslationList";
-            },
-            error: function () {
-
-            }
-        });
-    }
 
     function deletetranslation() {
         var transSelected = [];
-        $("input[name='translationcheck']:checked").each(function () {
+        $("input[name='translationcheck']:checked").each(function() {
             transSelected.push($(this).val());
         });
         var translationIds = transSelected.join(",");
         $.ajax({
-            url: "/Translation/TranslationDelete",
+            url: "/Translation/RecoveryEmailTranlations",
             type: "post",
             datatype: "json",
             data: { translationIds: translationIds },
-            success: function (response) {
-                window.location.href = "/Translation/HasReadTranslationList?";
+            success: function(response) {
+                window.location.href = "/Translation/RecycledTranslationList?";
             },
-            error: function () {
+            error: function() {
 
             }
         });
-    }
-
-    function IssueToChildManager(id) {
-        alert(id);
     }
 </script>

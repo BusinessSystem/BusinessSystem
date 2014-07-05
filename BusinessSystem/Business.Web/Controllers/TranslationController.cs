@@ -148,7 +148,7 @@ namespace Business.Web.Controllers
                 string[] translationArray = translationIds.Split(',');
                 foreach (var translationId in translationArray)
                 {
-                    TranslationService.BackTranslationToMain(long.Parse(translationId), CurrentManager.ParentId);
+                    TranslationService.BackTranslationToMain(long.Parse(translationId), CurrentManager);
                 }
             }
             return Json(InfoTools.GetMsgInfo(ResponseCode.Ok), JsonRequestBehavior.AllowGet);
@@ -211,6 +211,34 @@ namespace Business.Web.Controllers
                 TranslationService.ReplyTranslation(replyfollowId, translationId, content, CurrentManager);
             }
             return Redirect("/Translation/EmailTranslationDetail/" + translationId);
+        }
+       
+        [HttpPost]
+        public ActionResult IssueToChildManager(string translationIds,long managerId)
+        {
+            if (!string.IsNullOrEmpty(translationIds) && managerId != 0)
+            {
+                string[] translationArrays = translationIds.Split(',');
+                foreach (var translationId in translationArrays)
+                {
+                    TranslationService.IssueEmailToChildManager(long.Parse(translationId), managerId);
+                }
+            }
+            return Json(InfoTools.GetMsgInfo(ResponseCode.Ok));
+        }
+
+        [HttpPost]
+        public ActionResult RecoveryEmailTranlations(string translationIds)
+        {
+            if (!string.IsNullOrEmpty(translationIds))
+            {
+                string[] translationArrays = translationIds.Split(',');
+                foreach (var translationId in translationArrays)
+                {
+                    TranslationService.RecoveryEmailTranlations(long.Parse(translationId));
+                }
+            }
+            return Json(InfoTools.GetMsgInfo(ResponseCode.Ok));
         }
     }
 }

@@ -29,7 +29,7 @@ namespace Business.Nhibernate.Repository
                     ;
                 }
                 totalCount = query.RowCount();
-                return query.Take(pageSize).Skip((pageIndex - 1)*pageSize).List();
+                return query.OrderBy(m=>m.Id).Desc.Take(pageSize).Skip((pageIndex - 1)*pageSize).List();
             }
         }
 
@@ -94,7 +94,7 @@ namespace Business.Nhibernate.Repository
                     query = query.And(m => m.IntentionId == intentionId);
                 }
                 totalCount = query.RowCount();
-                return query.Take(pageSize).Skip((pageIndex - 1) * pageSize).List();
+                return query.OrderBy(m=>m.Id).Desc.Take(pageSize).Skip((pageIndex - 1) * pageSize).List();
             }
         }
 
@@ -137,7 +137,7 @@ namespace Business.Nhibernate.Repository
                     query = query.And(m => m.IntentionId == intentionId);
                 }
                 totalCount = query.RowCount();
-                return query.Take(pageSize).Skip((pageIndex - 1)*pageSize).List();
+                return query.OrderBy(m=>m.Id).Desc.Take(pageSize).Skip((pageIndex - 1)*pageSize).List();
             }
         }
 

@@ -66,13 +66,26 @@ namespace Business.Serives
         /// <summary>
         ///返回给总账号 
         /// </summary>
-        public static void BackTranslationToMain(long translationId, long parentId)
+        public static void BackTranslationToMain(long translationId, Manager currentManager)
         {
+            if (currentManager.ParentId == 0)
+            {
+                return;
+            }
             EmailTranslation emailTranslation = emailTranslationRepository.GetById(translationId);
-            Manager mainManager = managerRepository.GetById(parentId);
-            emailTranslation.FollowId = parentId;
-            emailTranslation.FollowName = mainManager.RealName;
-            emailTranslation.FollowTimes = 2;
+            Manager mainManager = managerRepository.GetById(currentManager.ParentId);
+            if (currentManager.ManagerType == ManagerTypeEnum.Super)
+            {
+                emailTranslation.HandlerManagerId = mainManager.Id;
+                emailTranslation.HandlerManagerName = mainManager.RealName;
+
+            }
+            if (currentManager.ManagerType == ManagerTypeEnum.Common)
+            {
+                emailTranslation.FollowId = mainManager.Id;
+                emailTranslation.FollowName = mainManager.RealName;
+            }
+
             emailTranslationRepository.Save(emailTranslation);
         }
 
@@ -169,6 +182,28 @@ namespace Business.Serives
             long managerId)
         {
            return  emailTranslationRepository.GetEmailTranslationsCount(managerType, emailStatus, managerId);
+        }
+
+        public static void IssueEmailToChildManager(long translationId,long managerId)
+        {
+            EmailTranslation emailTranslation = emailTranslationRepository.GetById(translationId);
+            Manager childManager = managerRepository.GetById(managerId);
+            if (emailTranslation != null && childManager != null)
+            {
+                emailTranslation.HandlerManagerId = managerId;
+                emailTranslation.HandlerManagerName = childManager.RealName;
+                emailTranslationRepository.Save(emailTranslation);
+            }
+        }
+
+        public static void RecoveryEmailTranlations(long translationId)
+        {
+            EmailTranslation emailTranslation = emailTranslationRepository.GetById(translationId);
+            if (emailTranslation != null)
+            {
+                emailTranslation.IsDeleted = Utils.CoreDefaultValue.False;
+                emailTranslationRepository.Save(emailTranslation);
+            }
         }
     }
 }

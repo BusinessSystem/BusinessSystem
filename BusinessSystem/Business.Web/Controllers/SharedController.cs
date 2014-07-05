@@ -25,13 +25,12 @@ namespace Business.Web.Controllers
             ViewBag.CurrentUrl = System.Web.HttpContext.Current.Request.RawUrl;
             int unReadTranslationCount = TranslationService.GetEmailTranslationsCount(CurrentManager.ManagerType,
                  EmailStatusEnum.UnRead, CurrentManager.Id);
-            ViewBag.UnReadEnquiryCount = unReadTranslationCount;
+            ViewBag.UnReadTranslationCount = unReadTranslationCount;
             if (CurrentManager.ManagerType == ManagerTypeEnum.Super)
             {
                 return PartialView("~/Views/Shared/_NavSuperList.cshtml", CurrentManager);
             }
-            int unReadEnquiryCount = TranslationService.GetEmailTranslationsCount(CurrentManager.ManagerType,
-                EmailStatusEnum.UnRead, CurrentManager.Id);
+            int unReadEnquiryCount = EnquiryService.GetReadEnquiryCount(CurrentManager.Id,HandlerStatusEnum.UnRead);
             ViewBag.UnReadEnquiryCount = unReadEnquiryCount;
             int unReadEmailEnquiryCount = EnquiryService.GetUnReadEmailEnquiryCount(CurrentManager.Id,
                EmailStatusEnum.UnRead);
