@@ -15,13 +15,13 @@
                          
                         @if (Model.Enquiry.IsDeleted == Business.Utils.CoreDefaultValue.True)
                         {
-                            <span class="btn btn-app btn-light btn-xs" onclick="recoverytranslation('@Model.EmailTranslationModel.Id')">
+                            <span class="btn btn-app btn-light btn-xs" onclick="recoveryEnquiry('@Model.Enquiry.Id')">
                                 恢复
                             </span>
                         }
                         else
                         {
-                            <span class="btn btn-app btn-light btn-xs" onclick="deletetranslation('@Model.EmailTranslationModel.Id') ">
+                            <span class="btn btn-app btn-light btn-xs" onclick="deleteEnquiry('@Model.Enquiry.Id') ">
                                 删除
                             </span>
                         }
@@ -42,7 +42,7 @@
                                         {
                                             foreach (var item in intentions)
                                             {
-                                                <li role="presentation" class="ui-menu-item"  onclick="moveTranslation('@item.Id','@Model.EmailTranslationModel.Id')">
+                                                <li role="presentation" class="ui-menu-item"  onclick="moveTranslation('@item.Id','@Model.Enquiry.Id')">
                                                     <a role="menuitem" tabindex="-1" class="ui-corner-all" href="javascript:;" >@item.Description</a>
                                                 </li>
                                             }
@@ -70,7 +70,7 @@
 
                                 @if (currentManager.ParentId != 0)
                                 {
-                                    <li role="presentation" class="ui-menu-item" onclik="backtomainer('@Model.EmailTranslationModel.Id')">
+                                    <li role="presentation" class="ui-menu-item" onclik="backtomainer('@Model.Enquiry.Id')">
                                         <a role="menuitem" tabindex="-1" class="ui-corner-all" id="ui-id-8" href="javascript:;">返回总账号</a>
                                     </li>
                                 }
@@ -329,6 +329,84 @@
                 $("#enquiryEmail_form").submit();
             });
         });
+
+
+        function moveTranslation(intentionId, enquiryId) {
+            $.ajax({
+                url: "/Enquiry/MoveEnquiryToIntention",
+                type: "post",
+                datatype: "json",
+                data: { enquiryIds: enquiryId, intentionId: intentionId },
+                success: function (response) {
+                    window.reload();
+                },
+                error: function () {
+
+                }
+            });
+        }
+
+        function moveUserdeined(userDefinedId, enquiryId) {
+            $.ajax({
+                url: "/Enquiry/MoveEnquiryToUserDefined",
+                type: "post",
+                datatype: "json",
+                data: { enquiryIds: enquiryId, userDefinedId: userDefinedId },
+                success: function (response) {
+                    window.reload();
+                },
+                error: function () {
+
+                }
+            });
+        }
+
+
+        function backtomainer(enquiryId) {
+            $.ajax({
+                url: "/Enquiry/IssueEnquiryToParentManager",
+                type: "post",
+                datatype: "json",
+                data: { enquiryIds: enquiryId },
+                success: function (response) {
+                    window.reload();
+                },
+                error: function () {
+
+                }
+            });
+        }
+
+        function recoveryEnquiry(enquiryId) {
+            $.ajax({
+                url: "/Enquiry/RecoveryEnquiry",
+                type: "post",
+                datatype: "json",
+                data: { enquiryIds: enquiryId },
+                success: function (response) {
+                    window.reload();
+                },
+                error: function () {
+
+                }
+            });
+        }
+
+        function deleteEnquiry(enquiryId) {
+         
+            $.ajax({
+                url: "/Enquiry/EnquiryDelete",
+                type: "post",
+                datatype: "json",
+                data: { enquiryIds: enquiryId },
+                success: function (response) {
+                    window.reload();
+                },
+                error: function () {
+
+                }
+            });
+        }
     </script>
 
 }

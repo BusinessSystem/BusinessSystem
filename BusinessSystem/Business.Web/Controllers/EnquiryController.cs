@@ -313,5 +313,19 @@ namespace Business.Web.Controllers
             }
             return Json(InfoTools.GetMsgInfo(ResponseCode.Ok), JsonRequestBehavior.AllowGet);
         }
+
+        [HttpPost]
+        public ActionResult RecoveryEnquiry(string enquiryIds)
+        {
+            if (!string.IsNullOrEmpty(enquiryIds))
+            {
+                string[] enquiryIdArray = enquiryIds.Split(',');
+                foreach (var enquiryId in enquiryIdArray)
+                {
+                    EnquiryService.RecoveryEnquiry(long.Parse(enquiryId), CurrentManager);
+                }
+            }
+            return Json(InfoTools.GetMsgInfo(ResponseCode.Ok), JsonRequestBehavior.AllowGet);
+        }
     }
 }

@@ -239,8 +239,8 @@
                         <span class="btn btn-app btn-light btn-xs  no-border">
                             <input type="checkbox"  class="checkalltranslation"/>全选
                         </span>
-                        <span class="btn btn-app btn-light btn-xs " onclick="deletetranslation()">
-                            删除
+                        <span class="btn btn-app btn-light btn-xs " onclick="recoveryEnquiry()">
+                            恢复
                         </span>
                          <ul class="pagination bpagination" id="pagination2"></ul>
                     </div>
@@ -251,9 +251,9 @@
 </div>
 
 <script type="text/javascript">
-    $(function () {
+    $(function() {
         $("#menu").menu();
-        $(".checkalltranslation").click(function () {
+        $(".checkalltranslation").click(function() {
             var checkeds = $(this).is(':checked');
             if (checkeds) {
                 $("input[name='translationcheck']").attr("checked", this.checked);
@@ -276,77 +276,34 @@
             visiblePages: visiblePages,
             currentPage: currentPage,
             pageSize: pageSize,
-            onPageChange: function (num, type) {
+            onPageChange: function(num, type) {
                 if (num == currentPage) {
                     //每次初始化都会执行此处
                 } else {
-                    window.location.href = "/Translation/HasReadTranslationList?intentionId=" + currentIntentionId + "&pageIndex=" + num + "&pageSize=" + pageSize;
+                    window.location.href = "/Enquiry/RecycledEnquiryList?pageIndex=" + num + "&pageSize=" + pageSize;
                 }
             }
         });
     });
 
-    function moveTranslation(intentionId) {
-        var transSelected = [];
-        $("input[name='translationcheck']:checked").each(function () {
-            transSelected.push($(this).val());
-        });
-        var translationIds = transSelected.join(",");
-        $.ajax({
-            url: "/Translation/MoveTransToIntention",
-            type: "post",
-            datatype: "json",
-            data: { translationIds: translationIds, intentionId: intentionId },
-            success: function (response) {
-                window.location.href = "/Translation/HasReadTranslationList?";
-            },
-            error: function () {
-
-            }
-        });
-    }
-
-    function backtomainer() {
-        var transSelected = [];
-        $("input[name='translationcheck']:checked").each(function () {
-            transSelected.push($(this).val());
-        });
-        var translationIds = transSelected.join(",");
-        $.ajax({
-            url: "/Translation/BackToMainAccount",
-            type: "post",
-            datatype: "json",
-            data: { translationIds: translationIds },
-            success: function (response) {
-                window.location.href = "/Translation/HasReadTranslationList";
-            },
-            error: function () {
-
-            }
-        });
-    }
 
     function recoveryEnquiry() {
         var transSelected = [];
-        $("input[name='translationcheck']:checked").each(function () {
+        $("input[name='translationcheck']:checked").each(function() {
             transSelected.push($(this).val());
         });
         var translationIds = transSelected.join(",");
         $.ajax({
-            url: "/Translation/TranslationDelete",
+            url: "/Enquiry/RecoveryEnquiry",
             type: "post",
             datatype: "json",
-            data: { translationIds: translationIds },
-            success: function (response) {
-                window.location.href = "/Translation/HasReadTranslationList?";
+            data: { enquiryIds: translationIds },
+            success: function(response) {
+                window.reload();
             },
-            error: function () {
-
+            error: function() {
+                window.location.href = "/Enquiry/RecycledEnquiryList";
             }
         });
-    }
-
-    function IssueToChildManager(id) {
-        alert(id);
     }
 </script>

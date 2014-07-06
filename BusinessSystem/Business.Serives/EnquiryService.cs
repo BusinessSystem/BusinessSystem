@@ -89,7 +89,7 @@ namespace Business.Serives
                 enquiryRepository.Save(enquiry);
             }
         }
-
+        
         public static string DeleteEnquiryById(long enquiryId,Manager currentManager)
         {
             Enquiry enquiry = enquiryRepository.GetById(enquiryId);
@@ -98,6 +98,21 @@ namespace Business.Serives
                 if (enquiry != null)
                 {
                     enquiry.IsDeleted = Utils.CoreDefaultValue.True;
+                    enquiryRepository.Save(enquiry);
+                    return ResponseCode.Ok;
+                }
+            }
+            return ResponseCode.NotFoundData;
+        }
+
+        public static string RecoveryEnquiry(long enquiryId, Manager currentManager)
+        {
+            Enquiry enquiry = enquiryRepository.GetById(enquiryId);
+            if (currentManager.Id == enquiry.ReceiverId || currentManager.Id == enquiry.HandlerId)
+            {
+                if (enquiry != null)
+                {
+                    enquiry.IsDeleted = Utils.CoreDefaultValue.False;
                     enquiryRepository.Save(enquiry);
                     return ResponseCode.Ok;
                 }
