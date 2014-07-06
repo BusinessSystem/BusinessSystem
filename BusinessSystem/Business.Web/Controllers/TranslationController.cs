@@ -172,6 +172,7 @@ namespace Business.Web.Controllers
         public ActionResult EmailTranslationDetail(long id)
         {
             ViewBag.CurrentManager = CurrentManager;
+            ViewBag.Intentions = BaseService.GetIntentions(CurrentManager.ParentId != 0 ? CurrentManager.ParentId : CurrentManager.Id);
             EmailTranslation emailTranslation = TranslationService.GeEmailTranslationById(id);
             PageTranslationFollow translationFollow =
                 new PageTranslationFollow(emailTranslation,

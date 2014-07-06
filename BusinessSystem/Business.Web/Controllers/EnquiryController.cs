@@ -201,6 +201,9 @@ namespace Business.Web.Controllers
             {
                 pageEnquiry.EnquiryTransFollows = TranslationService.GetEmailFollows(emailTranslation.Id);
             }
+            ViewBag.CurrentManager = CurrentManager;
+            ViewBag.Intentions = BaseService.GetIntentions(CurrentManager.ParentId != 0 ? CurrentManager.ParentId : CurrentManager.Id);
+            ViewBag.UserDefineds = BaseService.GetUserDefineds(CurrentManager.ParentId != 0 ? CurrentManager.ParentId : CurrentManager.Id);
             return View(pageEnquiry);
         }
 

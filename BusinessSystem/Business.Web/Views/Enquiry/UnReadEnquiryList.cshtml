@@ -162,12 +162,12 @@
                         
                                     </ul>
                                 </li>
-
-
-                                <li role="presentation" class="ui-menu-item"  onclick="backtomainer()">
-                                    <a role="menuitem" tabindex="-1" class="ui-corner-all" id="ui-id-8" href="javascript:;">返回总账号</a>
-                                </li>
-
+                                @if (currentManager.ParentId != 0)
+                                {
+                                    <li role="presentation" class="ui-menu-item"  onclick=" backtomainer() ">
+                                        <a role="menuitem" tabindex="-1" class="ui-corner-all" id="ui-id-8" href="javascript:;">返回总账号</a>
+                                    </li>
+                                }
                    
                             </ul>
 

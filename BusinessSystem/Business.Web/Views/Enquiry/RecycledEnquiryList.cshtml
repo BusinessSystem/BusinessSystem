@@ -27,8 +27,8 @@
                         <span class="btn btn-app btn-light btn-xs  no-border">
                             <input type="checkbox"  class="checkalltranslation"/>全选
                         </span>
-                        <span class="btn btn-app btn-light btn-xs" onclick="deletetranslation()">
-                            删除
+                        <span class="btn btn-app btn-light btn-xs" onclick="recoveryEnquiry()">
+                            恢复
                         </span>
      
      
@@ -326,7 +326,7 @@
         });
     }
 
-    function deletetranslation() {
+    function recoveryEnquiry() {
         var transSelected = [];
         $("input[name='translationcheck']:checked").each(function () {
             transSelected.push($(this).val());
