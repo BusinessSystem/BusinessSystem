@@ -27,11 +27,11 @@ namespace Business.Serives
             return enquiryTransFollowRepository.GetEnquiryTransFollowsByEnquiryId(enquiryId);
         }
 
-        public static PageModel<Enquiry> GetEnquiryPages(long managerId,long languageId, long intentId, long useDefinedId,
+        public static PageModel<Enquiry> GetEnquiryPages(string email,long managerId,long languageId, long intentId, long useDefinedId,
             HandlerStatusEnum handlerStatus, int pageindex, int pageSize)
         {
             int totalCount = 0;
-            IList<Enquiry> enquiries = enquiryRepository.GetEnquirysByStatus(managerId, languageId,intentId, useDefinedId,
+            IList<Enquiry> enquiries = enquiryRepository.GetEnquirysByStatus(email,managerId, languageId, intentId, useDefinedId,
                 handlerStatus, pageindex, pageSize, out totalCount);
             return new PageModel<Enquiry>(enquiries, pageindex, pageSize, totalCount);
         }

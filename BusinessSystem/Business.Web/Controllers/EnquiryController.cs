@@ -42,8 +42,12 @@ namespace Business.Web.Controllers
             {
                 long.TryParse(Request["userDefinedId"].ToString(), out userDefinedId);
             }
-
-            PageModel<Enquiry> pageModel = EnquiryService.GetEnquiryPages(CurrentManager.Id, languageId, intentionId, userDefinedId,
+            string email = string.Empty;
+            if (!string.IsNullOrEmpty(Request["email"]))
+            {
+                email = Request["email"];
+            }
+            PageModel<Enquiry> pageModel = EnquiryService.GetEnquiryPages(email,CurrentManager.Id, languageId, intentionId, userDefinedId,
                 HandlerStatusEnum.HasRead, pageIndex, pageSize);
             ViewBag.CurrentManager = CurrentManager;
             ViewBag.Intentions = BaseService.GetIntentions(CurrentManager.ParentId != 0 ? CurrentManager.ParentId : CurrentManager.Id);
@@ -57,7 +61,7 @@ namespace Business.Web.Controllers
             ViewBag.CurrentIntentionId = intentionId;
             ViewBag.CurrentUserdefinedId = userDefinedId;
             ViewBag.CurrentLanguageId = languageId;
-
+            ViewBag.CurrentEmail = email;
             return View(pageModel);
         }
 
@@ -89,8 +93,12 @@ namespace Business.Web.Controllers
             {
                 long.TryParse(Request["userDefinedId"].ToString(), out userDefinedId);
             }
-
-            PageModel<Enquiry> pageModel = EnquiryService.GetEnquiryPages(CurrentManager.Id, languageId,intentionId, userDefinedId,
+            string email = string.Empty;
+            if (!string.IsNullOrEmpty(Request["email"]))
+            {
+                email = Request["email"];
+            }
+            PageModel<Enquiry> pageModel = EnquiryService.GetEnquiryPages(email,CurrentManager.Id, languageId,intentionId, userDefinedId,
                 HandlerStatusEnum.UnRead, pageIndex, pageSize);
             ViewBag.CurrentManager = CurrentManager;
             ViewBag.Intentions = BaseService.GetIntentions(CurrentManager.ParentId != 0 ? CurrentManager.ParentId : CurrentManager.Id);
@@ -104,6 +112,7 @@ namespace Business.Web.Controllers
             ViewBag.CurrentIntentionId = intentionId;
             ViewBag.CurrentUserdefinedId = userDefinedId;
             ViewBag.CurrentLanguageId = languageId;
+            ViewBag.CurrentEmail = email;
             return View(pageModel);
         }
 

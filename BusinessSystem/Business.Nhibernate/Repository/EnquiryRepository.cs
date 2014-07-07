@@ -10,16 +10,20 @@ namespace Business.Nhibernate.Repository
 {
     public class EnquiryRepository:Repository<Enquiry>,IEnquiryRepository
     {
-        public IList<Enquiry> GetEnquirysByStatus(long managerId, long languageId, long intentId, long useDefinedId, HandlerStatusEnum handlerStatus, int pageindex, int pageSize, out int totalCount)
+        public IList<Enquiry> GetEnquirysByStatus(string email,long managerId, long languageId, long intentId, long useDefinedId, HandlerStatusEnum handlerStatus, int pageindex, int pageSize, out int totalCount)
         {
             using (var session = GetSession())
             {
                 var query = session.QueryOver<Enquiry>().Where(m => m.IsDeleted == Utils.CoreDefaultValue.False)
                     .And(m => m.ReceiverId == managerId || m.HandlerId == managerId)
                     .And(m => m.HandlerStatus == handlerStatus);
+                if (!string.IsNullOrEmpty(email))
+                {
+                    query = query.And(m => m.PurchaserEmail == email);
+                }
                 if (languageId != 0)
                 {
-                     //query=query.And(m=>m)
+                    query = query.And(m => m.LanguageId == languageId);
                 }
                 if (intentId != 0)
                 {

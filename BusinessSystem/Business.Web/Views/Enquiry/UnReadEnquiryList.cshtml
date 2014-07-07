@@ -8,6 +8,7 @@
     long currentLanguageId = ViewBag.CurrentLanguageId;
     long currentIntentionId = ViewBag.CurrentIntentionId;
     long currentUserDefinedId = ViewBag.CurrentUserdefinedId;
+    string currentEmail = ViewBag.CurrentEmail;
 }
 
 @using System.Web.UI.WebControls
@@ -29,7 +30,7 @@
                             <div class="widget-toolbar float-none  no-border">
                                 <label class="col-sm-1 control-label text-right" for="form-field-email">访客邮箱: </label>
                         
-                                <input id="form-field-email" name="siteUrl" placeholder="访客邮箱" class="col-xs-10 col-sm-3  height-35" type="text">
+                                <input id="form-field-email" name="email" placeholder="访客邮箱" value="@currentEmail" class="col-xs-10 col-sm-3  height-35" type="text">
                         
                                 <span onclick="enquiryQuery()" class="btn btn-app btn-light btn-xs  no-border">
                                     查询
@@ -60,14 +61,14 @@
                                                foreach (var language in languages)
                                                {
                                                    <li >
-                                                       <a href=" /Enquiry/UnReadEnquiryList?intentionId=@currentIntentionId&languageId=@language.LanguageId&userDefinedId=@currentUserDefinedId">@language.LanguageName</a>
+                                                       <a href=" /Enquiry/UnReadEnquiryList?email=@currentEmail&intentionId=@currentIntentionId&languageId=@language.LanguageId&userDefinedId=@currentUserDefinedId">@language.LanguageName</a>
                                                    </li>
                                                }
                                            }
                                            <li class="divider"></li>
                                            <li >
                                            <li >
-                                               <a href=" /Enquiry/UnReadEnquiryList?intentionId=@currentIntentionId&userDefinedId=@currentUserDefinedId">未识别</a>
+                                               <a href=" /Enquiry/UnReadEnquiryList?email=@currentEmail&intentionId=@currentIntentionId&userDefinedId=@currentUserDefinedId">未识别</a>
                                            </li>
                                        </ul>
                                    </div>
@@ -90,13 +91,13 @@
                                                foreach (var item in intentions)
                                                {
                                                    <li >
-                                                       <a href="/Enquiry/UnReadEnquiryList?intentionId=@item.Id&languageId=@currentLanguageId&userDefinedId=@currentUserDefinedId">@item.Description</a>
+                                                       <a href="/Enquiry/UnReadEnquiryList?email=@currentEmail&intentionId=@item.Id&languageId=@currentLanguageId&userDefinedId=@currentUserDefinedId">@item.Description</a>
                                                    </li>
                                                }
                                            }
                                            <li class="divider"></li>
                                            <li >
-                                               <a href="/Enquiry/UnReadEnquiryList?languageId=currentLanguageId&userDefinedId=@currentUserDefinedId">未识别</a>
+                                               <a href="/Enquiry/UnReadEnquiryList?email=@currentEmail&languageId=@currentLanguageId&userDefinedId=@currentUserDefinedId">未识别</a>
                                            </li>
                                        </ul>
                                    </div>
@@ -117,14 +118,14 @@
                                                foreach (var item in userDefineds)
                                                {
                                                    <li >
-                                                       <a href="/Enquiry/UnReadEnquiryList?intentionId=@currentIntentionId&languageId=@currentLanguageId&userDefinedId=@item.Id">@item.Description</a>
+                                                       <a href="/Enquiry/UnReadEnquiryList?email=@currentEmail&intentionId=@currentIntentionId&languageId=@currentLanguageId&userDefinedId=@item.Id">@item.Description</a>
                                                    </li>
                                        
                                                }
                                            }
                                            <li class="divider"></li>
                                            <li >
-                                               <a href="/Enquiry/UnReadEnquiryList?intentionId=@currentIntentionId&languageId=@currentLanguageId">未识别</a>
+                                               <a href="/Enquiry/UnReadEnquiryList?email=@currentEmail&intentionId=@currentIntentionId&languageId=@currentLanguageId">未识别</a>
                                            </li>
                                        </ul>
                                    </div>
@@ -303,6 +304,7 @@
     currentIntentionId = parseInt(currentIntentionId);
     currentLanguageId = parseInt(currentLanguageId);
     currentUserdefinedId = parseInt(currentUserdefinedId);
+    var currentEmail = '@currentEmail';
     var pageSize =10;
     $(function() {
         $("#menu").menu();
@@ -329,7 +331,7 @@
                 if (num == currentPage) {
                     //每次初始化都会执行此处
                 } else {
-                    window.location.href = "/Enquiry/UnReadEnquiryList?intentionId=" + currentIntentionId + "&languageId=" + currentLanguageId + "&userDefinedId=" + currentUserdefinedId + "&pageIndex="+num+"&pageSize=" + pageSize;
+                    window.location.href = "/Enquiry/UnReadEnquiryList?email=" + currentEmail + "&intentionId=" + currentIntentionId + "&languageId=" + currentLanguageId + "&userDefinedId=" + currentUserdefinedId + "&pageIndex=" + num + "&pageSize=" + pageSize;
                 }
             }
         });
@@ -347,7 +349,7 @@
             datatype: "json",
             data: { enquiryIds: enquirySelectedIds, intentionId: intentionId },
             success: function(response) {
-                window.location.href = "/Enquiry/UnReadEnquiryList?intentionId=" + currentIntentionId + "&languageId=" + currentLanguageId + "&userDefinedId=" + currentUserdefinedId + "&pageSize=" + pageSize;
+                window.location.href = "/Enquiry/UnReadEnquiryList?email=" + currentEmail + "&intentionId=" + currentIntentionId + "&languageId=" + currentLanguageId + "&userDefinedId=" + currentUserdefinedId + "&pageSize=" + pageSize;
             },
             error: function() {
 
@@ -367,7 +369,7 @@
             datatype: "json",
             data: { enquiryIds: enquiryIds },
             success: function(response) {
-                window.location.href = "/Enquiry/UnReadEnquiryList?intentionId=" + currentIntentionId + "&languageId=" + currentLanguageId + "&userDefinedId=" + currentUserdefinedId + "&pageSize=" + pageSize;
+                window.location.href = "/Enquiry/UnReadEnquiryList?email=" + currentEmail + "&intentionId=" + currentIntentionId + "&languageId=" + currentLanguageId + "&userDefinedId=" + currentUserdefinedId + "&pageSize=" + pageSize;
             },
             error: function() {
 
@@ -386,8 +388,8 @@
             type: "post",
             datatype: "json",
             data: { enquiryIds: enquiryIds },
-            success: function (response) {
-                window.location.href = "/Enquiry/UnReadEnquiryList?intentionId=" + currentIntentionId + "&languageId=" + currentLanguageId + "&userDefinedId=" + currentUserdefinedId + "&pageSize=" + pageSize;
+            success: function(response) {
+                window.location.href = "/Enquiry/UnReadEnquiryList?email=" + currentEmail + "&intentionId=" + currentIntentionId + "&languageId=" + currentLanguageId + "&userDefinedId=" + currentUserdefinedId + "&pageSize=" + pageSize;
             },
             error: function() {
 
@@ -407,7 +409,7 @@
             datatype: "json",
             data: { enquiryIds: enquirySelectedIds, userDefinedId: userdefined },
             success: function(response) {
-                window.location.href = "/Enquiry/UnReadEnquiryList?intentionId=" + currentIntentionId + "&languageId=" + currentLanguageId + "&userDefinedId=" + currentUserdefinedId + "&pageSize=" + pageSize;
+                window.location.href = "/Enquiry/UnReadEnquiryList?email=" + currentEmail + "&intentionId=" + currentIntentionId + "&languageId=" + currentLanguageId + "&userDefinedId=" + currentUserdefinedId + "&pageSize=" + pageSize;
             },
             error: function() {
 
@@ -427,11 +429,18 @@
             datatype: "json",
             data: { enquiryIds: enquirySelectedIds, managerId: managerId },
             success: function(response) {
-                window.location.href = "/Enquiry/UnReadEnquiryList?intentionId=" + currentIntentionId + "&languageId=" + currentLanguageId + "&userDefinedId=" + currentUserdefinedId + "&pageSize=" + pageSize;
+                window.location.href = "/Enquiry/UnReadEnquiryList?email=" + currentEmail + "&intentionId=" + currentIntentionId + "&languageId=" + currentLanguageId + "&userDefinedId=" + currentUserdefinedId + "&pageSize=" + pageSize;
             },
             error: function() {
 
             }
         });
+    }
+
+    function enquiryQuery() {
+        var email = $("input[name=email]").val().trim();
+        if (email != "") {
+            window.location.href = "/Enquiry/UnReadEnquiryList?email=" + email + "&intentionId=" + currentIntentionId + "&languageId=" + currentLanguageId + "&userDefinedId=" + currentUserdefinedId + "&pageIndex=1&pageSize=" + pageSize;
+        }
     }
 </script>
