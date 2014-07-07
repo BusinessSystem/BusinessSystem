@@ -279,7 +279,7 @@
                 datatype: "json",
                 data: { translationIds: transId, intentionId: intentionId },
                 success: function (response) {
-                    window.reload();
+                    window.location.href = "/Translation/EmailTranslationDetail/" + transId;
                 },
                 error: function () {
 
@@ -300,7 +300,7 @@
                 datatype: "json",
                 data: { translationIds: transId },
                 success: function (response) {
-                    window.reload();
+                    window.location.href = "/Translation/EmailTranslationDetail/" + transId;
                 },
                 error: function () {
 
@@ -315,7 +315,6 @@
                 datatype: "json",
                 data: { translationIds: transId },
                 success: function (response) {
-
                     window.location.href = "/Translation/EmailTranslationDetail/"+transId;
                 },
                 error: function () {
