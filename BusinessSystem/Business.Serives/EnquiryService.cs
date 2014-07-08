@@ -105,6 +105,23 @@ namespace Business.Serives
             return ResponseCode.NotFoundData;
         }
 
+        /// <summary>
+        /// 系统管理员看到的用户的询盘
+        /// </summary>
+        /// <param name="email"></param>
+        /// <param name="languageId"></param>
+        /// <param name="pageindex"></param>
+        /// <param name="pageSize"></param>
+        /// <returns></returns>
+        public static PageModel<Enquiry> GetEnquirysBySuperManager(string email, long languageId, int pageindex, int pageSize)
+        {
+            int totalCount = 0;
+            IList<Enquiry> enquiries = enquiryRepository.GetEnquirysBySuperManager(email, languageId, pageindex,
+                pageSize, out totalCount);
+            PageModel<Enquiry> pageModel = new PageModel<Enquiry>(enquiries, pageindex, pageSize, totalCount);
+            return pageModel;
+        }
+
         public static string RecoveryEnquiry(long enquiryId, Manager currentManager)
         {
             Enquiry enquiry = enquiryRepository.GetById(enquiryId);

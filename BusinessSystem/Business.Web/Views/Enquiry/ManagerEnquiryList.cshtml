@@ -1,0 +1,188 @@
+﻿@{
+    ViewBag.Title = "<li><i class=\"\"></i><a href=\"/Enquiry/ManagerEnquiryList\">询盘中心</a></li><li class=\"active\">用户询盘</li>";
+    IList<ManagerMainSite> languages = ViewBag.Languages;
+    long currentLanguageId = ViewBag.CurrentLanguageId;
+    string currentEmail = ViewBag.CurrentEmail;
+}
+
+@using System.Web.UI.WebControls
+@using Business.Core
+@using Business.Serives
+@using Business.Utils
+@model Business.Core.PageModel<Business.Core.Enquiry>
+ 
+<div class="row-fluid">
+    <div class="span12">
+        <div class="widget-box">
+            <div class="widget-header widget-header-blue widget-header-flat">
+                <h4 class="lighter">用户询盘</h4>
+                <div class="widget-toolbar">
+                </div>
+            </div>
+            <div class="widget-body">
+                <div class="widget-header widget-toolbar-light  widget-box transparent" style="padding-left: 0px;">
+                    <div class="widget-toolbar float-none  no-border ke-inline-block">
+                        <label class="col-sm-1 control-label text-right" for="form-field-email">访客邮箱: </label>
+                        
+                        <input id="form-field-email" name="email" placeholder="访客邮箱" value="@currentEmail" class="col-xs-10 col-sm-3  height-35" type="text">
+                        
+                        <span onclick="enquiryQuery()" class="btn btn-app btn-light btn-xs  no-border">
+                            查询
+                        </span>
+                    </div>
+                         
+                    <div class="widget-toolbar float-none  no-border">
+                        <div class="btn-group margin-top-2">
+                            <button data-toggle="dropdown" class="btn btn-light width-120 dropdown-toggle margin-top-2 common-height">
+                                语言
+                                <span class="icon-caret-down icon-on-right "></span>
+                            </button>
+
+                            <ul class="dropdown-menu dropdown-light pull-right width-120">
+                                 
+                                @if (languages != null && languages.Count != 0)
+                                {
+                                    foreach (var language in languages)
+                                    {
+                                        <li >
+                                            <a href="/Enquiry/ManagerEnquiryList?email=@currentEmail&languageId=@language.LanguageId">@language.LanguageName</a>
+                                        </li>
+                                    }
+                                }
+                                <li class="divider"></li>
+                                <li >
+                                <li >
+                                    <a href="/Enquiry/ManagerEnquiryList?email=@currentEmail">未识别</a>
+                                </li>
+                            </ul>
+                        </div>
+                           
+                    </div>
+ 
+                </div>
+
+                           <div class="table-responsive">
+                               <table id="sample-table-1" class="table table-striped table-bordered table-hover">
+                                   <thead>
+                                       <tr>
+                                           <th class="center">
+                                               <label>
+                                                   <span class="lbl">序号</span>
+                                               </label>
+                                           </th>
+                                           <th>客户预购的产品</th>
+                                           <th>E-mail</th>
+                                           <th class="hidden-480">收件时间</th>
+                                           <th>
+                                               语言
+                                           </th>
+                                           <th class="hidden-480">跟进次数</th>
+                                           <th>国家</th>
+                                           <th>意向状况</th>
+                                           <th>账户类型</th>
+                                
+                                       </tr>
+                                   </thead>
+
+                                   <tbody>
+                                       @if (Model != null &&Model.PageList!=null&& Model.PageList.Count != 0)
+                                       {
+                                           int index = 0;
+                                           foreach (var item in Model.PageList)
+                                           {
+                                               index++;
+                                               <tr id="data-item(@item.Id)">
+                                                   <td class="center">
+                                                       <label>
+                                                           <span class="lbl">@index</span>
+                                                       </label>
+                                                   </td>
+
+                                                   <td  title="@item.ProductUrl">
+                                                       <a href="/Enquiry/EnquiryDetail/@item.Id" title="@item.ProductUrl">@item.ProductUrl.Substring(0,20)</a>
+                                                   </td>
+                                                   <td>@item.PurchaserEmail
+                                                       @if (item.EnquiryTimes > 1)
+                                                       {
+                                                           @:(@item.EnquiryTimes)
+                                                       }
+                                                   </td>
+                                                   <td class="hidden-480">
+                                                       @item.EnquiryTime
+                                                   </td>
+                                                   <td>@item.VisitLanguage</td>
+                                                   <td class="hidden-480">
+                                                       @item.FollowUpTimes
+                                                   </td>
+                                                   <td >
+                                                       @item.PurchaserCountry 
+                                                   </td> 
+                                        
+                                                   <td >
+                                                       @item.IntentionName
+                                                   </td>
+                                        
+                                                   <td >
+                                                       @item.HandlerName
+                                                   </td>
+                                               </tr>
+                                           }
+                                       }
+                                   </tbody>
+                               </table>
+                           </div><!-- /.table-responsive -->
+                          <div class="widget-header widget-toolbar-light  widget-box transparent margin-top-2" style="padding-left: 0px;">
+                               <div class="widget-toolbar float-none  no-border">
+                                  <ul class="pagination bpagination" id="pagination2"></ul>
+                               </div>
+                           </div>
+                       </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+   
+    var currentLanguageId = '@currentLanguageId';
+    currentLanguageId = parseInt(currentLanguageId); 
+    var currentEmail = '@currentEmail';
+    var pageSize = 10;
+    $(function () {
+        $("#menu").menu();
+        $(".checkalltranslation").click(function () {
+            var checkeds = $(this).is(':checked');
+            if (checkeds) {
+                $("input[name='qneuirycheck']").attr("checked", this.checked);
+            } else {
+                $("input[name='qneuirycheck']").attr("checked", this.checked);
+            }
+        });
+        var totalCount = '@Model.TotalCount';
+        totalCount = parseInt(totalCount);
+        var visiblePages = '@Model.VisiblePages';
+        visiblePages = parseInt(visiblePages);
+        var currentPage = '@Model.CurrentPage';
+        currentPage = parseInt(currentPage);
+        $.jqPaginator('#pagination2', {
+            totalCounts: totalCount,
+            visiblePages: visiblePages,
+            currentPage: currentPage,
+            pageSize: pageSize,
+            onPageChange: function (num, type) {
+                if (num == currentPage) {
+                    //每次初始化都会执行此处
+                } else {
+                    window.location.href = "/Enquiry/ManagerEnquiryList?email=" + currentEmail + "&languageId=" + currentLanguageId + "&pageIndex=" + num + "&pageSize=" + pageSize;
+                }
+            }
+        });
+    });
+         
+
+    function enquiryQuery() {
+        var email = $("input[name=email]").val().trim();
+        if (email != "") {
+            window.location.href = "/Enquiry/ManagerEnquiryList?email=" + email + "&languageId=" + currentLanguageId + "&pageIndex=1&pageSize=" + pageSize;
+        }
+    }
+</script>

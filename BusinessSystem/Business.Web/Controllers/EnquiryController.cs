@@ -12,6 +12,39 @@ namespace Business.Web.Controllers
 {
     public class EnquiryController : AdminBaseController
     {
+        [HttpGet]
+        public ActionResult ManagerEnquiryList()
+        {
+            int pageIndex = 1;
+            int pageSize = 10;
+            if (!string.IsNullOrEmpty(Request["pageIndex"]))
+            {
+                int.TryParse(Request["pageIndex"].ToString(), out pageIndex);
+            }
+            if (!string.IsNullOrEmpty(Request["pageSize"]))
+            {
+                int.TryParse(Request["pageSize"].ToString(), out pageSize);
+            }
+            string email = string.Empty;
+            if (!string.IsNullOrEmpty(Request["email"]))
+            {
+                email = Request["email"];
+            }
+            long languageId = 0;
+            if (!string.IsNullOrEmpty(Request["languageId"]))
+            {
+                long.TryParse(Request["languageId"].ToString(), out languageId);
+            }
+            PageModel<Enquiry> pageModel = EnquiryService.GetEnquirysBySuperManager(email,  languageId, pageIndex, pageSize);
+            ViewBag.CurrentManager = CurrentManager;
+            ViewBag.Languages =
+                ManageService.GetManagerMainSitesByManagerId(CurrentManager.ParentId == 0
+                    ? CurrentManager.Id
+                    : CurrentManager.ParentId);
+            ViewBag.CurrentLanguageId = languageId;
+            ViewBag.CurrentEmail = email;
+            return View(pageModel);
+        }
          
 
         [HttpGet]
@@ -336,5 +369,6 @@ namespace Business.Web.Controllers
             }
             return Json(InfoTools.GetMsgInfo(ResponseCode.Ok), JsonRequestBehavior.AllowGet);
         }
+
     }
 }

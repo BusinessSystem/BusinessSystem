@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Web;
 using System.Web.Mvc;
 using Business.Core;
@@ -339,6 +340,14 @@ namespace Business.Web.Controllers
         }
 
 
+
+        [HttpGet]
+        public ActionResult LoginRecord()
+        {
+            return View();
+        }
+
+
         private string GetIP()
         {
             string ip = string.Empty;
@@ -347,6 +356,26 @@ namespace Business.Web.Controllers
             if (string.IsNullOrEmpty(ip))
                 ip = Convert.ToString(System.Web.HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"]);
             return ip;
+        }
+    }
+
+    public static class HttpRequestMessageExtensions
+    {
+        private const string HttpContext = "MS_HttpContext";
+        private const string RemoteEndpointMessage = "System.ServiceModel.Channels.RemoteEndpointMessageProperty";
+        private const string OwinContext = "MS_OwinContext";
+
+        public static string GetClientIpAddress(this HttpRequestMessage request)
+        {
+            if (request.Properties.ContainsKey(HttpContext))
+            {
+                dynamic ctx = request.Properties[HttpContext];
+                if (ctx != null)
+                {
+                    return ctx.Request.UserHostAddress;
+                }
+            }
+           return "未知ip";
         }
     }
 }

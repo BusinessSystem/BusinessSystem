@@ -10,6 +10,26 @@ namespace Business.Nhibernate.Repository
 {
     public class EnquiryRepository:Repository<Enquiry>,IEnquiryRepository
     {
+        public IList<Enquiry> GetEnquirysBySuperManager(string email,  long languageId,  int pageindex, int pageSize, out int totalCount)
+        {
+            using (var session = GetSession())
+            {
+                var query = session.QueryOver<Enquiry>().Where(m => m.IsDeleted == Utils.CoreDefaultValue.False);
+                if (!string.IsNullOrEmpty(email))
+                {
+                    query = query.And(m => m.PurchaserEmail == email);
+                }
+                if (languageId != 0)
+                {
+                    query = query.And(m => m.LanguageId == languageId);
+                }
+               
+                totalCount = query.RowCount();
+                return query.OrderBy(m => m.Id).Desc.Take(pageSize)
+                    .Skip((pageindex - 1) * pageSize)
+                    .List();
+            }
+        }
         public IList<Enquiry> GetEnquirysByStatus(string email,long managerId, long languageId, long intentId, long useDefinedId, HandlerStatusEnum handlerStatus, int pageindex, int pageSize, out int totalCount)
         {
             using (var session = GetSession())
