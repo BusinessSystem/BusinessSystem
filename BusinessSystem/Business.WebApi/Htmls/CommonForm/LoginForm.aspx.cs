@@ -9,9 +9,14 @@ namespace Business.WebApi.Htmls
 {
     public partial class LoginForm : System.Web.UI.Page
     {
+        protected string language = "";
         protected void Page_Load(object sender, EventArgs e)
         {
-            Session["code"] = "";      
+            Session["code"] = "";
+            if (!IsPostBack)
+            {
+                language = Server.UrlDecode(Request["languageType"]);
+            }
         }
     }
 }

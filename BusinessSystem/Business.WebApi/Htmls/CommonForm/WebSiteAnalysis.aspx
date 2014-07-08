@@ -70,7 +70,7 @@
                     var len = list.length;
                     var options = "<option value=\"\"></option>";
                     for (var i = 0; i < len; i++) {
-                        if (languageType == list[i].toString()) {
+                        if (languageType== list[i].toString()) {
                             var tmp = "<option value=\"" + list[i].toString() + "\" selected=\"selected\">" + list[i].toString() + "</option>";
                         } else {
                             var tmp = "<option value=\"" + list[i].toString() + "\">" + list[i].toString() + "</option>";
@@ -118,7 +118,7 @@
     <script id="visitor_list_tmpl" type="text/x-jquery-tmpl">
     <tr onmouseover="Mouseover(this)" onmouseout="Mouseout(this)" style="white-space: nowrap;">
         <td style="text-align: center">${VIp}</td>
-        <td style="text-align: center">${ProductName}</td>
+        <td style="text-align: center"><a href='${ProductName}'>${ProductName}</a></td>
         <td style="text-align: center">${VCountry}</td>
         <td style="text-align: center">${VTime}</td>
     </tr>

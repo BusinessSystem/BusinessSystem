@@ -9,7 +9,7 @@
             alert(cur_url);
             var dataParas = '{"Url": "' + cur_url + '", "Language": "英语" }';
 
-            $.post("/api/Test/SaveData", eval('(' + dataParas + ')'), function (data) {
+            $.post("/api/EnquirySave/SaveData", eval('(' + dataParas + ')'), function (data) {
 
                 if (data != null && data.Status.Code == 200) {
                     var list = data.ReturnData;

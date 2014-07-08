@@ -30,7 +30,7 @@
 
         var para = '{ "email": "' + txt_email + '","content": "' + txt_content + '","productName": "' + txt_productName + '","yourName": "' + txt_yourName + '","company": "' + txt_company + '","tel": "' + txt_tel + '","msn": "' + txt_msn + '","language": "' + txt_language + '","recievedId": "' + recievedId + '" }';
 
-        $.post("/api/Test/SaveData", eval('(' + para + ')'), function (data) {
+        $.post("/api/EnquirySave/SaveData", eval('(' + para + ')'), function (data) {
 
             if (data != null && data.Status.Code == 200) {
 

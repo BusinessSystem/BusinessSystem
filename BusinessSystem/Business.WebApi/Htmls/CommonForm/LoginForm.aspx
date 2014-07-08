@@ -8,6 +8,7 @@
     <link href="../../Styles/skin2.css" rel="stylesheet" type="text/css" />
     <script src="../../Scripts/jquery-1.7.1.min.js" type="text/javascript"></script>
     <script type="text/javascript">
+        var languageType = '<%=language%>';
         function LoginClick() {
             var username = $("#username").val().trim();
             var password = $("#password").val().trim();
@@ -25,12 +26,11 @@
                 return false;
             }
 
-            var urlInfo = window.location.href; //获取当前页面的url  
-            var intLen = urlInfo.length; //获取url的长度  
-            var offset = urlInfo.indexOf("="); //设置参数字符串开始的位置(因为这里只有1个参数)
-            var strKeyValue = urlInfo.substr(offset+1, intLen); //取出参数字符串 这里会获得类似“俄语”这样的字符串
-
-            var languageType = decodeURI(strKeyValue);
+//            var urlInfo = window.location.href; //获取当前页面的url  
+//            var intLen = urlInfo.length; //获取url的长度  
+//            var offset = urlInfo.indexOf("="); //设置参数字符串开始的位置(因为这里只有1个参数)
+//            var strKeyValue = urlInfo.substr(offset+1, intLen); //取出参数字符串 这里会获得类似“俄语”这样的字符串
+//            var languageType = decodeURI(strKeyValue);
 
             $.ajax({
                 type: "post",
@@ -38,11 +38,10 @@
                 url: "/api/Login/CheckLogin",
                 data: "{ username: '" + username + "', userpwd: '" + password + "', valiad:'" + valiad + "' }",
                 dataType: "json",
-                success: function (result) {
-                    window.location.href = "WebSiteAnalysis.aspx?languageType="+encodeURI(languageType);//继续把语言传送给站体分析页
-                    if (data != null && data.Status.Code == 200) {
-                        alert("success!");
-                        
+                success: function (data) {
+                    if (data!=null&&data.Status.Code == 200) {
+                        window.location.href = "WebSiteAnalysis.aspx?languageType=" + encodeURI(languageType); //继续把语言传送给站体分析页
+
                     } else {
                         alert("账号不存在或者密码错误或验证码错误");
                         return false;
@@ -68,6 +67,7 @@
 </head>
 <body>
     <form id="form1" runat="server">
+    <asp:HiddenField ID="hdf" runat="server" Value="" />
     <div>
         <table style="width:100%; height:166; border-width:0px; margin-left:-12px; margin-right:-14px; margin-top:-15px; margin-bottom:-13px;" cellpadding="0" cellspacing="0">
             <tr>

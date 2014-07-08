@@ -9,10 +9,12 @@ namespace Business.WebApi.Htmls.CommonForm
 {
     public partial class WebSiteAnalysis : System.Web.UI.Page
     {
+        protected string languageType = "";
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
+                languageType = Server.UrlDecode(Request["languageType"]);
                 if (Session["LoginAccount"] ==null || String.IsNullOrWhiteSpace(Session["LoginAccount"].ToString()))
                 {
                     Response.Redirect("LoginForm.aspx");

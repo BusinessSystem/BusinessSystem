@@ -37,6 +37,11 @@ namespace Business.WebApi.Controllers
                 }
 
             }
+            else
+            {
+                //returnObj.Status = ServerStatus.Success;//(测试用，正式应该注释，下面解开注释)
+                returnObj.Status = ServerStatus.SearchFailed;
+            }
             
             
             returnObj.ReturnData = retList;
