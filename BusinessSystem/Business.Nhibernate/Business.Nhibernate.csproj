@@ -130,7 +130,7 @@
     <EmbeddedResource Include="Mapping\t_managermainsite.hbm.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Mapping\t_loginrecord.xml" />
+    <EmbeddedResource Include="Mapping\t_loginrecord.hbm.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
