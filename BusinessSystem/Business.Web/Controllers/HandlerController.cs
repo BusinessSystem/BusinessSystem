@@ -27,7 +27,8 @@ namespace Business.Web.Controllers
             string result = ManageService.Login(userName, password,out manager);
             if (result == ResponseCode.Ok)
             {
-                CookieHelper.SaveManagerCookie(manager,remember);
+                ManageService.SaveLoginRecord(LoginRecordFactory.Create(userName, GetIp()));
+                CookieHelper.SaveManagerCookie(manager, remember);
             }
             return Json(InfoTools.GetMsgInfo(result));
         }
@@ -39,6 +40,15 @@ namespace Business.Web.Controllers
             return RedirectToAction("Login");
         }
 
+        private string GetIp()
+        {
+            string ip = string.Empty;
+            if (!string.IsNullOrEmpty(System.Web.HttpContext.Current.Request.ServerVariables["HTTP_VIA"]))
+                ip = Convert.ToString(System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"]);
+            if (string.IsNullOrEmpty(ip))
+                ip = Convert.ToString(System.Web.HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"]);
+            return ip;
+        }
 
     }
 }

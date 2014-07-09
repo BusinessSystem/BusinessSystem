@@ -52,6 +52,7 @@
     <Compile Include="Base\VisitorRecord.cs" />
     <Compile Include="Enquiry\Enquiry.cs" />
     <Compile Include="Enquiry\EnquiryTransFollow.cs" />
+    <Compile Include="Manager\LoginRecord.cs" />
     <Compile Include="Manager\ManagerMainSite.cs" />
     <Compile Include="Manager\ManagerProduct.cs" />
     <Compile Include="Manager\PwdChangeRecord.cs" />

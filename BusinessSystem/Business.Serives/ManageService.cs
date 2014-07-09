@@ -11,11 +11,11 @@ namespace Business.Serives
 {
     public class ManageService
     {
-        private static IManagerRepository managerRepository = new ManagerRepository();
-        private static IPwdChangeRecordRepository pwdChangeRecordRepository = new PwdChangeRecordRepository();
-        private static IManagerProductRepository managerProductRepository = new ManagerProductRepository();
-        private static IManagerMainSiteRepository managerMainSiteRepository = new ManagerMainSiteRepository();
-
+        private static readonly IManagerRepository managerRepository = new ManagerRepository();
+        private static readonly IPwdChangeRecordRepository pwdChangeRecordRepository = new PwdChangeRecordRepository();
+        private static readonly IManagerProductRepository managerProductRepository = new ManagerProductRepository();
+        private static readonly IManagerMainSiteRepository managerMainSiteRepository = new ManagerMainSiteRepository();
+        private static readonly ILoginRecordRepository loginRecordRepository = new LoginRecordRepository();
         public static PageModel<Manager> GetManagerPages(ManagerTypeEnum managerType, int pageIndex, int pageSize,
             long parentId)
         {
@@ -314,6 +314,19 @@ namespace Business.Serives
                 pageSize, out totalCount);
             return new PageModel<ManagerProduct>(managerProducts, pageIndex, pageSize, totalCount);
         }
+
+        public static void SaveLoginRecord(LoginRecord loginRecord)
+        {
+            loginRecordRepository.Save(loginRecord);
+        }
+
+        public static PageModel<LoginRecord> GetLoginRecords(string loginUser, int pageIndex, int pageSize)
+        {
+            int totalCount = 0;
+            IList<LoginRecord> loginRecords = loginRecordRepository.GetLoginRecords(loginUser, pageIndex, pageSize,
+                out totalCount);
+            return new PageModel<LoginRecord>(loginRecords,pageIndex,pageSize,totalCount);
+        } 
 
     }
 }

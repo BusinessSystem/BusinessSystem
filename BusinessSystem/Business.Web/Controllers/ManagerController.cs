@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI.WebControls;
 using Business.Core;
 using Business.Serives;
 using Business.Utils;
@@ -344,7 +345,19 @@ namespace Business.Web.Controllers
         [HttpGet]
         public ActionResult LoginRecord()
         {
-            return View();
+            int pageIndex = 1;
+            int pageSize = 50;
+            if (!string.IsNullOrEmpty(Request["pageIndex"]))
+            {
+                int.TryParse(Request["pageIndex"].ToString(), out pageIndex);
+            }
+            if (!string.IsNullOrEmpty(Request["pageSize"]))
+            {
+                int.TryParse(Request["pageSize"].ToString(), out pageSize);
+            }
+            string loginUser = Request["loginUser"];
+            ViewBag.CurrentLoginUser = loginUser;
+            return View(ManageService.GetLoginRecords(loginUser,pageIndex,pageSize));
         }
 
 

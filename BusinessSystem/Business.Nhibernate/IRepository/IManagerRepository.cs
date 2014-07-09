@@ -43,4 +43,9 @@ namespace Business.Nhibernate.IRepository
     {
         IList<PwdChangeRecord> GetPwdChangeRecords(long managerId, int pageIndex, int pageSize);
     }
+
+    public interface ILoginRecordRepository : IRepository<LoginRecord>
+    {
+        IList<LoginRecord> GetLoginRecords(string loginUser, int pageIndex, int pageSize,out int totalCount);
+    }
 }
