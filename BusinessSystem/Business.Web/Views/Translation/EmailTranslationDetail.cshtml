@@ -114,10 +114,15 @@
                                 <table  class="translationfoor">
                                     <tr>
                                         <td rowspan="4" class="lefrtr">@(index)F</td>
-                                        <td class="rightheader">原文:</td>
+                                        <td class="rightheader">原文: </td>
                                     </tr>
                                     <tr>
-                                        <td class="rightcontent">@(new MvcHtmlString(item.OriginalContent)) &nbsp;</td>
+                                        <td class="rightcontent">@(new MvcHtmlString(item.OriginalContent)) &nbsp;
+                                        @if (!string.IsNullOrEmpty(item.OriginalFilePath))
+                                        {
+                                            <div><label><a href="/Translation/DownLoadFile?filepath=@item.OriginalFilePath">附件：@item.OriginalFilePath.Substring(item.OriginalFilePath.LastIndexOf("/")+1)</a></label></div>
+                                        }
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td class="rightheader">译文:
@@ -133,10 +138,13 @@
                                         <td class="rightcontent">
                                             @if (string.IsNullOrEmpty(item.TargetContent))
                                             {
-                                                item.TargetContent = "&nbsp;<br/><br/><br/><br/>";
+                                                item.TargetContent = "&nbsp;<br/><br/><br/>";
                                             }
                                             @(new MvcHtmlString(item.TargetContent))
-                                            
+                                               @if (!string.IsNullOrEmpty(item.TargetFilePath))
+                                               {
+                                                   <div><label><a href="/Translation/DownLoadFile?filepath=@item.TargetFilePath">附件:@item.TargetFilePath.Substring(item.TargetFilePath.LastIndexOf("/") + 1)</a></label></div>
+                                               }
                                         </td>
                                     </tr>
                                 </table>

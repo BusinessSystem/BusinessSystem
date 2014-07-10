@@ -42,7 +42,7 @@ namespace Business.Core
                 OriginalContent = originalContent,
                 OriginalLanguage = originalLanguage,
                 TransTime = DateTime.Now,
-                OriginalFilePath = originalContent
+                OriginalFilePath = originalFilePath
             };
         }
         public static EmailFollow Create(long emailTransId, string originalContent, string originalLanguage,string targetLanguage,string originalFilePath)

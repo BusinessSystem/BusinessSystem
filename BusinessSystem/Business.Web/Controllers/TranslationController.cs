@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -30,6 +31,10 @@ namespace Business.Web.Controllers
             if (Request.Files.Count > 0 && Request.Files[0].ContentLength > 0)
             {
                 HttpPostedFileBase file = Request.Files[0];
+                string fuleName = DateTime.Now.ToString("yyyyMMddHHmmsss") + file.FileName.Substring(file.FileName.LastIndexOf("."));
+                filePath = "/uploadFile/" + fuleName;
+                string fileName = Server.MapPath("/uploadFile/") + fuleName;
+                file.SaveAs(fileName);
             }
             Manager superManager = ManageService.GetSuperManager();
             Manager selfManager = ManageService.GetManagerById(CurrentManager.Id);
@@ -240,6 +245,13 @@ namespace Business.Web.Controllers
                 }
             }
             return Json(InfoTools.GetMsgInfo(ResponseCode.Ok));
+        }
+
+        [HttpGet]
+        public ActionResult DownLoadFile(string filepath)
+        {
+            string path = Server.MapPath(filepath);
+            return File(path, "application/octet-stream", filepath.Substring(filepath.LastIndexOf("/")+1));
         }
     }
 }
