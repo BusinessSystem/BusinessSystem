@@ -902,6 +902,8 @@
     <Content Include="html\products.html" />
     <Content Include="html\russian.html" />
     <Content Include="html\spanish.html" />
+    <Content Include="html\TestAjaxCross.htm" />
+    <Content Include="html\TestDemo.htm" />
     <Content Include="html\thai.html" />
     <Content Include="html\turkish.html" />
     <Content Include="html\vietnamese.html" />
@@ -1244,7 +1246,9 @@
     <Content Include="Scripts\modernizr-2.5.3.js" />
     <Content Include="Scripts\currentMenu.js" />
     <Content Include="uploadFile\TextFile1.txt" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -1269,6 +1273,10 @@
     <ProjectReference Include="..\Business.Serives\Business.Service.csproj">
       <Project>{411656FE-EB8A-4357-A843-2BD12B1A77CD}</Project>
       <Name>Business.Service</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Business.Test\Business.Test.csproj">
+      <Project>{9091AF45-E0A3-4B10-9A30-D39697ED679A}</Project>
+      <Name>Business.Test</Name>
     </ProjectReference>
     <ProjectReference Include="..\Business.Utils\Business.Utils.csproj">
       <Project>{65B19D8A-9CB3-4D75-BE38-98BCD2E141F5}</Project>
@@ -1396,11 +1404,10 @@
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
-          <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>13263</DevelopmentServerPort>
+          <AutoAssignPort>False</AutoAssignPort>
+          <DevelopmentServerPort>9300</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>
-          </IISUrl>
+          <IISUrl>http://localhost/Business.Web</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using Business.Serives;
+using Business.Test;
 
 
 namespace Business.Web
@@ -18,6 +19,8 @@ namespace Business.Web
     {
         protected void Application_Start()
         {
+            //CreateDbTest dt = new CreateDbTest();
+            //dt.BuildTable();
             SystemApplication.Start();
 
             AreaRegistration.RegisterAllAreas();
