@@ -141,6 +141,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\EnquirySaveController.cs" />
+    <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Controllers\WebSiteAnalysisController.cs" />
     <Compile Include="Global.asax.cs">
@@ -163,12 +164,14 @@
     <Compile Include="Htmls\CommonForm\YZM.ashx.cs">
       <DependentUpon>YZM.ashx</DependentUpon>
     </Compile>
+    <Compile Include="Models\JsonpMediaTypeFormatter.cs" />
     <Compile Include="Models\LoginQuery.cs" />
     <Compile Include="Models\QQWryLocator2.cs" />
     <Compile Include="Models\ResultObject.cs" />
     <Compile Include="Models\ServerStatus.cs" />
     <Compile Include="Models\SessionableControllerHandler.cs" />
     <Compile Include="Models\SessionStateRouteHandler.cs" />
+    <Compile Include="Models\TestDemo.cs" />
     <Compile Include="Models\TestQuery.cs" />
     <Compile Include="Models\WebSiteAnalysisInfo.cs" />
     <Compile Include="Models\WebSiteAnalysisQuery.cs" />
@@ -395,7 +398,9 @@
     <Content Include="Styles\purebox-metro.css" />
     <Content Include="Styles\skin2.css" />
     <Content Include="Styles\WebSiteStyle.css" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>

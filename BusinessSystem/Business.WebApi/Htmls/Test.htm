@@ -4,24 +4,51 @@
     <title></title>
     <script src="../Scripts/jquery-1.7.1.min.js" type="text/javascript"></script>
     <script type="text/javascript">
+//        $(function () {
+//            var cur_url = window.location.href;
+//            alert(cur_url);
+//            var dataParas = '{"email": "' + cur_url + '", "language": "英语" }';
+//            
+//            $.get("/api/Test/SaveData", eval('(' + dataParas + ')'), function (data) {
+
+//                if (data != null && data.Status.Code == 200) {
+//                    var list = data.ReturnData;
+//                    var count = list.length;
+//                    for (var i = 0; i < count; ++i) {
+//                        alert(list[i]);
+//                    }
+//                } else {
+//                    alert("获取发送短信数据失败!");
+//                }
+
+//            }, "json");
+//        });
+
         $(function () {
             var cur_url = window.location.href;
-            alert(cur_url);
-            var dataParas = '{"Url": "' + cur_url + '", "Language": "英语" }';
-
-            $.post("/api/EnquirySave/SaveData", eval('(' + dataParas + ')'), function (data) {
-
-                if (data != null && data.Status.Code == 200) {
-                    var list = data.ReturnData;
-                    var count = list.length;
-                    for (var i = 0; i < count; ++i) {
-                        alert(list[i]);
+            var dataParas = "{email:'aaa',language:'英语'}";
+            $.ajax({
+                type: "GET",
+                url: "/api/Test/SaveData?callback=?",
+                //contentType:"application/json;charset=utf-8",
+                data: { email: 'aaa', language: '英语' },
+                dataType: "jsonp",
+                success: function (data) {
+                    if (data != null && data.Status.Code == 200) {
+                        var list = data.ReturnData;
+                        var count = list.length;
+                        for (var i = 0; i < count; ++i) {
+                            alert(list[i]);
+                        }
+                        alert("success!");
+                    } else {
+                        alert("获取发送短信数据失败!");
                     }
-                } else {
-                    alert("获取发送短信数据失败!");
+                },
+                error: function () {
+                    alert("异常");
                 }
-
-            }, "json");
+            });
         });
     </script>
 </head>

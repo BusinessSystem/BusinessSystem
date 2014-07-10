@@ -18,6 +18,7 @@ namespace Business.WebApi
     {
         protected void Application_Start()
         {
+            GlobalConfiguration.Configuration.Formatters.Insert(0, new JsonpMediaTypeFormatter());
             AreaRegistration.RegisterAllAreas();
 
             WebApiConfig.Register(GlobalConfiguration.Configuration);
