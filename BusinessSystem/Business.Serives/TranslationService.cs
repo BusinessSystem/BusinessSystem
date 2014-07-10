@@ -118,7 +118,7 @@ namespace Business.Serives
             if (emailTranslation != null)
             {
                 EmailFollow emailFollow = EmailFollowFactory.Create(translationId, originalContent,
-                    emailTranslation.OriginalLanguage,emailTranslation.TargetLanguage);
+                    emailTranslation.OriginalLanguage,emailTranslation.TargetLanguage,filePath);
                 emailFollow.FollowId = emailTranslation.FollowId;
                 emailFollow.HandleManagerId = emailTranslation.HandlerManagerId;
                 emailTranslation.ReceiverStatus=EmailStatusEnum.UnRead;
@@ -129,7 +129,7 @@ namespace Business.Serives
             return ResponseCode.NotFoundData;
         }
 
-        public static string ReplyTranslation(long followId,long translationId,string targetContent,Manager currentManager)
+        public static string ReplyTranslation(long followId,long translationId,string targetContent,Manager currentManager,string filePath)
         {
             EmailFollow emailFollow = emailFollowRepository.GetById(followId);
             EmailTranslation emailTranslation = emailTranslationRepository.GetById(translationId);
@@ -137,6 +137,7 @@ namespace Business.Serives
             {
                 emailFollow.TargetContent = targetContent;
                 emailFollow.HandleManagerId = currentManager.Id;
+                emailFollow.TargetFilePath = filePath;
                 emailTranslation.ReceiverStatus = EmailStatusEnum.HasRead;
                 emailTranslation.SenderStatus = EmailStatusEnum.UnRead;
                 emailTranslationRepository.Save(emailTranslation);

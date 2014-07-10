@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Text;
+using Microsoft.SqlServer.Server;
 
 namespace Business.Core
 {
@@ -23,6 +25,8 @@ namespace Business.Core
         public virtual long HandleManagerId { get; set; }
         public virtual string OriginalContent { get; set; }
         public virtual string TargetContent { get; set; }
+        public virtual string OriginalFilePath { get; set; }
+        public virtual string TargetFilePath { get; set; }
         public virtual string OriginalLanguage { get; set; }
         public virtual string TargetLanguage { get; set; }
         public virtual DateTime TransTime { get; set; }
@@ -30,17 +34,18 @@ namespace Business.Core
 
     public class EmailFollowFactory
     {
-        public static EmailFollow Create(long emailTransId, string originalContent, string originalLanguage)
+        public static EmailFollow Create(long emailTransId, string originalContent, string originalLanguage, string originalFilePath)
         {
             return new EmailFollow()
             {
                 EmailTransId = emailTransId,
                 OriginalContent = originalContent,
                 OriginalLanguage = originalLanguage,
-                TransTime = DateTime.Now
+                TransTime = DateTime.Now,
+                OriginalFilePath = originalContent
             };
         }
-        public static EmailFollow Create(long emailTransId, string originalContent, string originalLanguage,string targetLanguage)
+        public static EmailFollow Create(long emailTransId, string originalContent, string originalLanguage,string targetLanguage,string originalFilePath)
         {
             return new EmailFollow()
             {
@@ -48,7 +53,8 @@ namespace Business.Core
                 OriginalContent = originalContent,
                 OriginalLanguage = originalLanguage,
                 TargetLanguage = targetLanguage,
-                TransTime = DateTime.Now
+                TransTime = DateTime.Now,
+                OriginalFilePath = originalFilePath
             };
         }
     }

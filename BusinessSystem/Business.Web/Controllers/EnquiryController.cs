@@ -274,7 +274,7 @@ namespace Business.Web.Controllers
                         filePath);
                     emailTranslation.EnquiryId = enquiryId;
                     EmailFollow emailFollow = EmailFollowFactory.Create(0, emailContent, enquiry.VisitLanguage,
-                        enquiry.VisitLanguage);
+                        enquiry.VisitLanguage,filePath);
                     string result = TranslationService.SaveTranslation(emailTranslation, emailFollow);
                 }
             }

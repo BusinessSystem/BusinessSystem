@@ -41,7 +41,7 @@ namespace Business.Web.Controllers
                     emailTheme,
                     translationContent, filePath);
                 EmailFollow emailFollow = EmailFollowFactory.Create(0, translationContent,
-                    SystemDictionary.GetInstance.GetBaseDictionary(targetLanguage).Value);
+                    SystemDictionary.GetInstance.GetBaseDictionary(targetLanguage).Value,filePath);
                 string result = TranslationService.SaveTranslation(emailTranslation, emailFollow);
                 if (result == ResponseCode.Ok)
                 {
@@ -209,7 +209,7 @@ namespace Business.Web.Controllers
             }
             else
             {
-                TranslationService.ReplyTranslation(replyfollowId, translationId, content, CurrentManager);
+                TranslationService.ReplyTranslation(replyfollowId, translationId, content, CurrentManager,filePath);
             }
             return Redirect("/Translation/EmailTranslationDetail/" + translationId);
         }

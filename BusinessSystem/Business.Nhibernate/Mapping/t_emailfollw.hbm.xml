@@ -16,6 +16,8 @@
 		</property>
 		<property name="OriginalLanguage"/>
 		<property name="TargetLanguage"/>
+		<property name="OriginalFilePath"/>
+		<property name="TargetFilePath"/>
 		<property name="TransTime"/>
 	</class>
 </hibernate-mapping>
