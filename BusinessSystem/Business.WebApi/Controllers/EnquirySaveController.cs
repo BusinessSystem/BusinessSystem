@@ -13,8 +13,8 @@ namespace Business.WebApi.Controllers
 {
     public class EnquirySaveController : ApiController
     {
-        [HttpPost]
-        public HttpResponseMessage SaveData(TestQuery query)
+        [HttpGet]
+        public HttpResponseMessage SaveData([FromUri]EnquirySavaQuery query)
         {
             string host_ip = Request.GetClientIpAddress();
 
@@ -35,6 +35,7 @@ namespace Business.WebApi.Controllers
             EnquiryService.EnquirySave(host_ip, email, content, productName, yourName, company, tel, msn);
             List<string> retList = new List<string>();
             var returnObj = new ResultObject<List<string>>();
+            retList.Add("ok");
             returnObj.ReturnData = retList;
             returnObj.Status = ServerStatus.SaveSuccess;
             return Request.CreateResponse<ResultObject<List<string>>>(HttpStatusCode.OK, returnObj);
@@ -60,27 +61,6 @@ namespace Business.WebApi.Controllers
                     return ctx.Request.UserHostAddress;
                 }
             }
-
-            // Self-hosting. Needs reference to System.ServiceModel.dll. 
-            //if (request.Properties.ContainsKey(RemoteEndpointMessage))
-            //{
-            //    dynamic remoteEndpoint = request.Properties[RemoteEndpointMessage];
-            //    if (remoteEndpoint != null)
-            //    {
-            //        return remoteEndpoint.Address;
-            //    }
-            //}
-
-            //// Self-hosting using Owin. Needs reference to Microsoft.Owin.dll. 
-            //if (request.Properties.ContainsKey(OwinContext))
-            //{
-            //    dynamic owinContext = request.Properties[OwinContext];
-            //    if (owinContext != null)
-            //    {
-            //        return owinContext.Request.RemoteIpAddress;
-            //    }
-            //}
-
             return "未知ip";
         }
     }
