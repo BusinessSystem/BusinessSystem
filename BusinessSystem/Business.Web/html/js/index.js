@@ -1,4 +1,4 @@
-$(function() {
+ï»¿$(function() {
     $('.mainbanner').each(function() {
         var $_root = $(this);
         var $window_b = $_root.find('.mainbanner_window');
@@ -71,11 +71,11 @@ $(function() {
                     if (response.Code == 0) {
                         window.location = "/Manager/Index";
                     } else {
-                        alert("ÓÃ»§Ãû»òÕßÃÜÂë´íÎó");
+                        alert("ç”¨æˆ·åæˆ–è€…å¯†ç é”™è¯¯");
                     }
                 },
                 error: function () {
-                    alert("ÓÃ»§Ãû»òÕßÃÜÂë´íÎó");
+                    alert("ç”¨æˆ·åæˆ–è€…å¯†ç é”™è¯¯");
                 }
             });
         }
