@@ -193,7 +193,15 @@
                                         </tr>
                                         <tr>
                                             <td class="rightheader">译文:
-                                       
+                                                @if (string.IsNullOrEmpty(item.OriginalContent))
+                                                {
+                                                    item.TargetContent = "&nbsp;<br/>";
+                                                }
+                                                @(new MvcHtmlString(item.OriginalContent))
+                                                @if (!string.IsNullOrEmpty(item.OriginalFilePath))
+                                                {
+                                                    <div><label><a href="/Translation/DownLoadFile?filepath=@item.OriginalFilePath">附件：@item.OriginalFilePath.Substring(item.OriginalFilePath.LastIndexOf("/") + 1)</a></label></div>
+                                                }
                                             </td>
                                         </tr>
                                         <tr>
@@ -203,7 +211,10 @@
                                                     item.TargetContent = "&nbsp;<br/><br/><br/><br/>";
                                                 }
                                                 @(new MvcHtmlString(item.TargetContent))
-                                            
+                                                @if (!string.IsNullOrEmpty(item.TargetFilePath))
+                                                {
+                                                    <div><label><a href="/Translation/DownLoadFile?filepath=@item.TargetFilePath">附件:@item.TargetFilePath.Substring(item.TargetFilePath.LastIndexOf("/") + 1)</a></label></div>
+                                                }
                                             </td>
                                         </tr>
                                     </table>
