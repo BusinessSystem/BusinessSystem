@@ -19,7 +19,8 @@ namespace Business.Web
     {
         protected void Application_Start()
         {
-            //CreateDbTest dt = new CreateDbTest();
+            // a
+            CreateDbTest dt = new CreateDbTest();
             //dt.BuildTable();
             SystemApplication.Start();
 
