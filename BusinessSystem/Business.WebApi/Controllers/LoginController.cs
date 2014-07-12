@@ -6,6 +6,8 @@ using System.Net.Http;
 using System.Web.Http;
 using Business.WebApi.Models;
 using System.Web;
+using Business.Core;
+using Business.Serives;
 
 namespace Business.WebApi.Controllers
 {
@@ -23,12 +25,12 @@ namespace Business.WebApi.Controllers
             if (string.Compare(query.valiad, valiad_right) == 0)
             {
                 //检验用户名正确与否
-                if (true)
+                Manager manager = null;
+                string result = ManageService.Login(query.username, query.userpwd, out manager);
+                if (result == ResponseCode.Ok)//正确
                 {
-                    //进行验证
-
                     //设置验证成功,保存用户名到session中
-                    HttpContext.Current.Session["LoginAccount"] = "lingwu@163.com";
+                    HttpContext.Current.Session["LoginAccount"] = query.username;
                     returnObj.Status = ServerStatus.Success;
                 }
                 else
@@ -39,7 +41,6 @@ namespace Business.WebApi.Controllers
             }
             else
             {
-                //returnObj.Status = ServerStatus.Success;//(测试用，正式应该注释，下面解开注释)
                 returnObj.Status = ServerStatus.SearchFailed;
             }
             

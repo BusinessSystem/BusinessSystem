@@ -32,10 +32,10 @@ namespace Business.WebApi.Controllers
             string msn = query.msn ;
             string language = query.language ;//访问语言
             string recievedId = query.recievedId ;//接受者
-            EnquiryService.EnquirySave(host_ip, email, content, productName, yourName, company, tel, msn);
+            EnquiryService.EnquirySave(host_ip, email, content, productName, yourName, company, tel, msn,language,country,recievedId);
             List<string> retList = new List<string>();
             var returnObj = new ResultObject<List<string>>();
-            retList.Add("ok");
+            retList.Add("leave message success!");
             returnObj.ReturnData = retList;
             returnObj.Status = ServerStatus.SaveSuccess;
             return Request.CreateResponse<ResultObject<List<string>>>(HttpStatusCode.OK, returnObj);
