@@ -1,0 +1,249 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{22C96295-15D2-43DA-ADEA-26780C1A9EDF}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>InsuanWeb</RootNamespace>
+    <AssemblyName>InsuanWeb</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <UseIISExpress>false</UseIISExpress>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Htmls\demo.htm" />
+    <Content Include="Htmls\intaca_russian\about.html" />
+    <Content Include="Htmls\intaca_russian\contact.html" />
+    <Content Include="Htmls\intaca_russian\css\feedback.css" />
+    <Content Include="Htmls\intaca_russian\css\purebox-facebook.css" />
+    <Content Include="Htmls\intaca_russian\css\purebox-metro.css" />
+    <Content Include="Htmls\intaca_russian\css\style.css" />
+    <Content Include="Htmls\intaca_russian\data.js" />
+    <Content Include="Htmls\intaca_russian\images\close.png" />
+    <Content Include="Htmls\intaca_russian\images\inquire_now.gif" />
+    <Content Include="Htmls\intaca_russian\img\banner.jpg" />
+    <Content Include="Htmls\intaca_russian\img\company.jpg" />
+    <Content Include="Htmls\intaca_russian\img\es.gif" />
+    <Content Include="Htmls\intaca_russian\img\intaca3243_03.jpg" />
+    <Content Include="Htmls\intaca_russian\img\intaca3243_06.jpg" />
+    <Content Include="Htmls\intaca_russian\img\intaca3243_07.jpg" />
+    <Content Include="Htmls\intaca_russian\img\intaca3243_10.jpg" />
+    <Content Include="Htmls\intaca_russian\img\intaca3243_11.jpg" />
+    <Content Include="Htmls\intaca_russian\img\intaca3243_12.jpg" />
+    <Content Include="Htmls\intaca_russian\img\intaca3243_15.jpg" />
+    <Content Include="Htmls\intaca_russian\img\intaca3243_17.jpg" />
+    <Content Include="Htmls\intaca_russian\img\intaca3243_19.jpg" />
+    <Content Include="Htmls\intaca_russian\img\intaca3243_21.jpg" />
+    <Content Include="Htmls\intaca_russian\img\intaca3243_23.jpg" />
+    <Content Include="Htmls\intaca_russian\img\intaca3243_25.jpg" />
+    <Content Include="Htmls\intaca_russian\img\intaca3243_33.jpg" />
+    <Content Include="Htmls\intaca_russian\img\intaca3243_44.jpg" />
+    <Content Include="Htmls\intaca_russian\img\intaca3243_banbg.gif" />
+    <Content Include="Htmls\intaca_russian\img\intaca3243_bg.jpg" />
+    <Content Include="Htmls\intaca_russian\img\logo.png" />
+    <Content Include="Htmls\intaca_russian\img\nav.jpg" />
+    <Content Include="Htmls\intaca_russian\img\pt.gif" />
+    <Content Include="Htmls\intaca_russian\img\ru.gif" />
+    <Content Include="Htmls\intaca_russian\img\usa.gif" />
+    <Content Include="Htmls\intaca_russian\index.html" />
+    <Content Include="Htmls\intaca_russian\js\jquery-1.7.1.js" />
+    <Content Include="Htmls\intaca_russian\js\jquery.purebox.js" />
+    <Content Include="Htmls\intaca_russian\js\online.js" />
+    <Content Include="Htmls\intaca_russian\products\1-highway-and-mucipality-maintaining.html" />
+    <Content Include="Htmls\intaca_russian\products\2-fire-and-earthquake-relief.html" />
+    <Content Include="Htmls\intaca_russian\products\3-water-and-gas-rush-repair.html" />
+    <Content Include="Htmls\intaca_russian\products\4-garden-tools.html" />
+    <Content Include="Htmls\intaca_russian\products\5-hydraulic-construction-machine.html" />
+    <Content Include="Htmls\intaca_russian\products\cut-off-saw-1.html" />
+    <Content Include="Htmls\intaca_russian\products\cut-off-saw-2.html" />
+    <Content Include="Htmls\intaca_russian\products\down-the-hole-drill-2.html" />
+    <Content Include="Htmls\intaca_russian\products\electric-hydraulic-power-unit-1.html" />
+    <Content Include="Htmls\intaca_russian\products\electric-hydraulic-power-unit-2.html" />
+    <Content Include="Htmls\intaca_russian\products\electric-hydraulic-power-unit-4.html" />
+    <Content Include="Htmls\intaca_russian\products\electric-hydraulic-power-unit-5.html" />
+    <Content Include="Htmls\intaca_russian\products\handheld-tamper-1.html" />
+    <Content Include="Htmls\intaca_russian\products\hydraulic-breaker-hammer-1.html" />
+    <Content Include="Htmls\intaca_russian\products\hydraulic-breaker-hammer-2.html" />
+    <Content Include="Htmls\intaca_russian\products\hydraulic-breaker-hammer-3.html" />
+    <Content Include="Htmls\intaca_russian\products\hydraulic-circular-saw-1.html" />
+    <Content Include="Htmls\intaca_russian\products\hydraulic-circular-saw-2.html" />
+    <Content Include="Htmls\intaca_russian\products\hydraulic-circular-saw-3.html" />
+    <Content Include="Htmls\intaca_russian\products\hydraulic-diamond-saw-2.html" />
+    <Content Include="Htmls\intaca_russian\products\hydraulic-diamond-saw-3.html" />
+    <Content Include="Htmls\intaca_russian\products\hydraulic-drill-5.html" />
+    <Content Include="Htmls\intaca_russian\products\hydraulic-earth-auger-1.html" />
+    <Content Include="Htmls\intaca_russian\products\hydraulic-earth-auger-4.html" />
+    <Content Include="Htmls\intaca_russian\products\hydraulic-grooving-cleaning-tool-1.html" />
+    <Content Include="Htmls\intaca_russian\products\hydraulic-grooving-machine-1.html" />
+    <Content Include="Htmls\intaca_russian\products\hydraulic-hand-held-core-drill-2.html" />
+    <Content Include="Htmls\intaca_russian\products\hydraulic-hand-held-core-drill-3.html" />
+    <Content Include="Htmls\intaca_russian\products\hydraulic-hand-held-core-drill-5.html" />
+    <Content Include="Htmls\intaca_russian\products\hydraulic-high-pressure-cleaner-1.html" />
+    <Content Include="Htmls\intaca_russian\products\hydraulic-high-pressure-cleaner-2.html" />
+    <Content Include="Htmls\intaca_russian\products\hydraulic-impact-hammer-3.html" />
+    <Content Include="Htmls\intaca_russian\products\hydraulic-impact-wrench-2.html" />
+    <Content Include="Htmls\intaca_russian\products\hydraulic-impact-wrench-3.html" />
+    <Content Include="Htmls\intaca_russian\products\hydraulic-impact-wrench-5.html" />
+    <Content Include="Htmls\intaca_russian\products\hydraulic-power-units-1.html" />
+    <Content Include="Htmls\intaca_russian\products\hydraulic-power-units-2.html" />
+    <Content Include="Htmls\intaca_russian\products\hydraulic-power-units-3.html" />
+    <Content Include="Htmls\intaca_russian\products\hydraulic-power-units-4.html" />
+    <Content Include="Htmls\intaca_russian\products\hydraulic-power-units-5.html" />
+    <Content Include="Htmls\intaca_russian\products\hydraulic-trash-pump-1.html" />
+    <Content Include="Htmls\intaca_russian\products\hydraulic-trash-pump-3.html" />
+    <Content Include="Htmls\intaca_russian\products\hydraulic-vibration-impact-plate-1.html" />
+    <Content Include="Htmls\intaca_russian\products\hydraulic-welder-with-generator-1.html" />
+    <Content Include="Htmls\intaca_russian\products\hydraulic-welder-with-generator-2.html" />
+    <Content Include="Htmls\intaca_russian\products\hydraulic-welder-with-generator-3.html" />
+    <Content Include="Htmls\intaca_russian\products\img\cut off saw\Cut off Saw CS09.jpg" />
+    <Content Include="Htmls\intaca_russian\products\img\cut off saw\metal cutting saw.jpg" />
+    <Content Include="Htmls\intaca_russian\products\img\cut off saw\P1070034.jpg" />
+    <Content Include="Htmls\intaca_russian\products\img\cut off saw\未命名.jpg" />
+    <Content Include="Htmls\intaca_russian\products\img\Down-the-hole-drill\Down-the-hole-drill-1.jpg" />
+    <Content Include="Htmls\intaca_russian\products\img\Electric Hydraulic Power Units\2.jpg" />
+    <Content Include="Htmls\intaca_russian\products\img\Electric Hydraulic Power Units\EP 15-30.jpg" />
+    <Content Include="Htmls\intaca_russian\products\img\Electric Hydraulic Power Units\EP15-30.jpg" />
+    <Content Include="Htmls\intaca_russian\products\img\Electric Hydraulic Power Units\电动-1.jpg" />
+    <Content Include="Htmls\intaca_russian\products\img\handheld tamper\handheld tamper-1.jpg" />
+    <Content Include="Htmls\intaca_russian\products\img\handheld tamper\handheld tamper-2.jpg" />
+    <Content Include="Htmls\intaca_russian\products\img\hdraulic circular saw\demo of hydraulic circular saw.jpg" />
+    <Content Include="Htmls\intaca_russian\products\img\hdraulic circular saw\Hydraulic Circular Saw 2.jpg" />
+    <Content Include="Htmls\intaca_russian\products\img\hydraulic breaker hammer\2.jpg" />
+    <Content Include="Htmls\intaca_russian\products\img\hydraulic breaker hammer\Hydraulic Breaker.jpg" />
+    <Content Include="Htmls\intaca_russian\products\img\hydraulic breaker hammer\Hydraulic Breakers.jpg" />
+    <Content Include="Htmls\intaca_russian\products\img\hydraulic breaker hammer\Hydraulic power unit and breaker.jpg" />
+    <Content Include="Htmls\intaca_russian\products\img\hydraulic breaker hammer\Hydraulic-Breakers.jpg" />
+    <Content Include="Htmls\intaca_russian\products\img\hydraulic breaker hammer\无标题-1.jpg" />
+    <Content Include="Htmls\intaca_russian\products\img\hydraulic breaker hammer\无标题-2.jpg" />
+    <Content Include="Htmls\intaca_russian\products\img\hydraulic breaker hammer\无标题-3.jpg" />
+    <Content Include="Htmls\intaca_russian\products\img\Hydraulic Diamond saw\3.jpg" />
+    <Content Include="Htmls\intaca_russian\products\img\Hydraulic Diamond saw\chian saw2.jpg" />
+    <Content Include="Htmls\intaca_russian\products\img\Hydraulic Diamond saw\Demo of DC12.jpg" />
+    <Content Include="Htmls\intaca_russian\products\img\Hydraulic Diamond saw\Demo.jpg" />
+    <Content Include="Htmls\intaca_russian\products\img\Hydraulic Diamond saw\Hydraulic Diamond Chain Saw.jpg" />
+    <Content Include="Htmls\intaca_russian\products\img\hydraulic earth auger\Hydraulic hydraulic earth auger.jpg" />
+    <Content Include="Htmls\intaca_russian\products\img\hydraulic earth auger\IMG_3753.jpg" />
+    <Content Include="Htmls\intaca_russian\products\img\hydraulic grooving &amp;cleaning tool\Hydraulic Grooving &amp; Cleaning Tool with Pipe.jpg" />
+    <Content Include="Htmls\intaca_russian\products\img\hydraulic grooving &amp;cleaning tool\Hydraulic Grooving&amp; Cleaning Tool.jpg" />
+    <Content Include="Htmls\intaca_russian\products\img\hydraulic grooving machine\未命名.jpg" />
+    <Content Include="Htmls\intaca_russian\products\img\hydraulic hand-held Core Drill\IMG_5470.jpg" />
+    <Content Include="Htmls\intaca_russian\products\img\hydraulic hand-held Core Drill\IMG_5612.jpg" />
+    <Content Include="Htmls\intaca_russian\products\img\hydraulic Handheld drill\IMG_1589.png" />
+    <Content Include="Htmls\intaca_russian\products\img\hydraulic Handheld drill\IMG_1599.jpg" />
+    <Content Include="Htmls\intaca_russian\products\img\hydraulic Handheld drill\手持镐.jpg" />
+    <Content Include="Htmls\intaca_russian\products\img\hydraulic high pressure cleaner\demo of HC180.jpg" />
+    <Content Include="Htmls\intaca_russian\products\img\hydraulic high pressure cleaner\HC180 Hydraulic high pressure cleaner.jpg" />
+    <Content Include="Htmls\intaca_russian\products\img\hydraulic high pressure cleaner\HC180.jpg" />
+    <Content Include="Htmls\intaca_russian\products\img\Hydraulic impact hammer\hydraulic drill 2.jpg" />
+    <Content Include="Htmls\intaca_russian\products\img\Hydraulic impact hammer\hydraulic drill.jpg" />
+    <Content Include="Htmls\intaca_russian\products\img\Hydraulic impact hammer\hydraulic drill2.jpg" />
+    <Content Include="Htmls\intaca_russian\products\img\Hydraulic impact hammer\IMG_1479.jpg" />
+    <Content Include="Htmls\intaca_russian\products\img\Hydraulic impact hammer\IMG_1480.jpg" />
+    <Content Include="Htmls\intaca_russian\products\img\Hydraulic Impact Wrench\Hydraulic Impact Wrench.png" />
+    <Content Include="Htmls\intaca_russian\products\img\Hydraulic Impact Wrench\impact wrench.jpg" />
+    <Content Include="Htmls\intaca_russian\products\img\hydraulic power units\01.jpg" />
+    <Content Include="Htmls\intaca_russian\products\img\hydraulic power units\02.jpg" />
+    <Content Include="Htmls\intaca_russian\products\img\hydraulic power units\HP13-30.jpg" />
+    <Content Include="Htmls\intaca_russian\products\img\hydraulic power units\Hp18-30 40.jpg" />
+    <Content Include="Htmls\intaca_russian\products\img\hydraulic power units\Hp18-30-40.jpg" />
+    <Content Include="Htmls\intaca_russian\products\img\hydraulic power units\hydraulic-power-pack.jpg" />
+    <Content Include="Htmls\intaca_russian\products\img\hydraulic power units\IMG_3580-.jpg" />
+    <Content Include="Htmls\intaca_russian\products\img\hydraulic vibration impact plate\readme.txt" />
+    <Content Include="Htmls\Test.htm" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Htmls\intaca_russian\img\Thumbs.db" />
+    <None Include="Htmls\intaca_russian\products\img\cut off saw\Thumbs.db" />
+    <None Include="Htmls\intaca_russian\products\img\Electric Hydraulic Power Units\Thumbs.db" />
+    <None Include="Htmls\intaca_russian\products\img\hdraulic circular saw\Thumbs.db" />
+    <None Include="Htmls\intaca_russian\products\img\hydraulic breaker hammer\Thumbs.db" />
+    <None Include="Htmls\intaca_russian\products\img\Hydraulic Diamond saw\Thumbs.db" />
+    <None Include="Htmls\intaca_russian\products\img\hydraulic earth auger\Thumbs.db" />
+    <None Include="Htmls\intaca_russian\products\img\hydraulic grooving &amp;cleaning tool\Thumbs.db" />
+    <None Include="Htmls\intaca_russian\products\img\hydraulic grooving machine\Thumbs.db" />
+    <None Include="Htmls\intaca_russian\products\img\hydraulic hand-held Core Drill\Thumbs.db" />
+    <None Include="Htmls\intaca_russian\products\img\hydraulic Handheld drill\Thumbs.db" />
+    <None Include="Htmls\intaca_russian\products\img\hydraulic high pressure cleaner\Thumbs.db" />
+    <None Include="Htmls\intaca_russian\products\img\Hydraulic impact hammer\Thumbs.db" />
+    <None Include="Htmls\intaca_russian\products\img\Hydraulic Impact Wrench\Thumbs.db" />
+    <None Include="Htmls\intaca_russian\products\img\hydraulic power units\Thumbs.db" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>False</AutoAssignPort>
+          <DevelopmentServerPort>3980</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>
+          </IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

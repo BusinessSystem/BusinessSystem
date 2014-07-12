@@ -1,0 +1,5 @@
+D:\WebSites\InsuanWeb\InsuanWeb\bin\InsuanWeb.dll
+D:\WebSites\InsuanWeb\InsuanWeb\bin\InsuanWeb.pdb
+D:\WebSites\InsuanWeb\InsuanWeb\obj\Debug\ResolveAssemblyReference.cache
+D:\WebSites\InsuanWeb\InsuanWeb\obj\Debug\InsuanWeb.dll
+D:\WebSites\InsuanWeb\InsuanWeb\obj\Debug\InsuanWeb.pdb

@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link href="../Styles/purebox-facebook.css" rel="stylesheet" type="text/css" />
+    <link href="../Styles/purebox-metro.css" rel="stylesheet" type="text/css" />
+    <script src="../Scripts/jquery.js" type="text/javascript"></script>
+    <script src="../Scripts/jquery-1.7.1.min.js" type="text/javascript"></script>
+    <script src="../Scripts/jquery.purebox.js" type="text/javascript"></script>
+    <script type="text/javascript">
+    
+    </script>
+</head>
+<body>
+    <div class="bs-docs-example" style="padding-bottom: 24px;">
+        <a class="btn btn-primary" data-toggle="modal" id="purebox-onOk">确定按钮回调事件</a>
+        <input type="text" id="txt_sample" />
+    </div>
+    <script type="text/javascript">
+    $('#purebox-onOk').pb({
+	    id : 'purebox-onOk',
+	    title : 'purebox-onOk',
+	    content : $('#show'),
+	    onOk : onOk
+    });
+    function onOk() {
+	    alert('ok');
+    }
+    </script>
+</body>
+</html>
