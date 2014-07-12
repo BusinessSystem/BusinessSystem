@@ -187,7 +187,7 @@ namespace Business.Serives
 
         //:TODO 询盘写入数据
         public static void EnquirySave(string ipString, string email, string content, string productName,
-            string yourName, string company, string tel, string msn)
+            string yourName, string company, string tel, string msn, string language, string country, string recievedId)
         {
             if (string.IsNullOrWhiteSpace(productName))
             {
@@ -225,20 +225,34 @@ namespace Business.Serives
             {
                 return;
             }
-            ManagerProduct managerProduct = managerProductRepository.GetManagerProductByUrl(productName);
-            if (managerProduct == null)
-            {
-                return;
-            }
-            ManagerMainSite managerMainSite = managerMainSiteRepository.GetById(managerProduct.ManagerMainSiteId);
-            if (managerMainSite == null)
-            {
-                return;
-            }
 
+            //add by luoyaqi 20140712
+            Manager manger = managerRepository.GetManagerByUserName(recievedId);
+            if (manger == null)
+            {
+                return;
+            }
+            
+            
+            //comment by luoyaqi 20140712
+            //ManagerProduct managerProduct = managerProductRepository.GetManagerProductByUrl(productName);
+            //if (managerProduct == null)
+            //{
+            //    return;
+            //}
+            //ManagerMainSite managerMainSite = managerMainSiteRepository.GetById(managerProduct.ManagerMainSiteId);
+            //if (managerMainSite == null)
+            //{
+            //    return;
+            //}
+
+            //Enquiry enquiry = EnquiryFactory.Create(ipString, email, content, productName, yourName, company, tel, msn,
+            //    managerMainSite.LanguageName, managerMainSite.LanguageId, "未知", managerMainSite.ManagerId,
+            //    managerMainSite.ManagerName);
+            
+            //add by luoyaqi 20140712 (此处的语言还需要处理)
             Enquiry enquiry = EnquiryFactory.Create(ipString, email, content, productName, yourName, company, tel, msn,
-                managerMainSite.LanguageName, managerMainSite.LanguageId, "未知", managerMainSite.ManagerId,
-                managerMainSite.ManagerName);
+                language, 0, country, manger.Id, manger.UserName);
             enquiry.EnquiryTimes = enquiryRepository.GetEnquiryTimesByEmail(email) + 1;
             enquiryRepository.Save(enquiry);
         }
