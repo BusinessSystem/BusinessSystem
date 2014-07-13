@@ -53,6 +53,11 @@ namespace Business.Web.Controllers
             PageManager pageManager = new PageManager();
             pageManager.BaseDictionaries = BaseService.GetBaseDictionaries(ValueTypeEnum.Language);
             pageManager.ManagerTypes = EnumTools.GetEnumDescriptions<ManagerTypeEnum>();
+            if (CurrentManager.ManagerType == ManagerTypeEnum.Common)
+            {
+                pageManager.ManagerTypes.Remove(ManagerTypeEnum.Super);
+            }
+
             return View(pageManager);
         }
 
@@ -75,6 +80,10 @@ namespace Business.Web.Controllers
             pageManager.BaseDictionaries = BaseService.GetBaseDictionaries(ValueTypeEnum.Language);
             pageManager.ManagerTypes = EnumTools.GetEnumDescriptions<ManagerTypeEnum>();
             pageManager.ManagerBase = ManageService.GetManagerById(id);
+            if (CurrentManager.ManagerType == ManagerTypeEnum.Common)
+            {
+                pageManager.ManagerTypes.Remove(ManagerTypeEnum.Super);
+            }
             return View(pageManager);
         }
 
