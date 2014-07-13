@@ -182,7 +182,7 @@ namespace Business.Web.Controllers
             PageTranslationFollow translationFollow =
                 new PageTranslationFollow(emailTranslation,
                     TranslationService.GetEmailFollows(id));
-            TranslationService.ChangeEmailTranslationStatus(emailTranslation);
+            TranslationService.ChangeEmailTranslationStatus(emailTranslation,CurrentManager);
             return View(translationFollow);
         }
 
@@ -194,6 +194,10 @@ namespace Business.Web.Controllers
             if (Request.Files.Count > 0 && Request.Files[0].ContentLength > 0)
             {
                 HttpPostedFileBase file = Request.Files[0];
+                string fuleName = DateTime.Now.ToString("yyyyMMddHHmmsss") + file.FileName.Substring(file.FileName.LastIndexOf("."));
+                filePath = "/uploadFile/" + fuleName;
+                string fileName = Server.MapPath("/uploadFile/") + fuleName;
+                file.SaveAs(fileName);
             }
             long replyfollowId = 0;
             if (!string.IsNullOrEmpty(Request["replyfollowId"]))

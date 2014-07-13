@@ -39,7 +39,6 @@
                             </button>
 
                             <ul class="dropdown-menu dropdown-light pull-right width-120">
-                                 
                                 @if (languages != null && languages.Count != 0)
                                 {
                                     foreach (var language in languages)
@@ -57,6 +56,30 @@
                             </ul>
                         </div>
                            
+                           <div class="btn-group margin-top-2">
+                            <button data-toggle="dropdown" class="btn btn-light width-120 dropdown-toggle margin-top-2 common-height">
+                                用户
+                                <span class="icon-caret-down icon-on-right "></span>
+                            </button>
+
+                            <ul class="dropdown-menu dropdown-light pull-right width-120">
+                                @if (languages != null && languages.Count != 0)
+                                {
+                                    foreach (var language in languages)
+                                    {
+                                        <li >
+                                            <a href="/Enquiry/ManagerEnquiryList?email=@currentEmail&languageId=@language.LanguageId">@language.LanguageName</a>
+                                        </li>
+                                    }
+                                }
+                                <li class="divider"></li>
+                                <li >
+                                <li >
+                                    <a href="/Enquiry/ManagerEnquiryList?email=@currentEmail">未识别</a>
+                                </li>
+                            </ul>
+                        </div>
+
                     </div>
  
                 </div>
@@ -70,9 +93,12 @@
                                                    <span class="lbl">序号</span>
                                                </label>
                                            </th>
-                                           <th>客户预购的产品</th>
+                                           <th>采购商预购的产品</th>
                                            <th>E-mail</th>
                                            <th class="hidden-480">收件时间</th>
+                                           <th>
+                                               客户邮箱
+                                           </th>
                                            <th>
                                                语言
                                            </th>
@@ -109,6 +135,9 @@
                                                    </td>
                                                    <td class="hidden-480">
                                                        @item.EnquiryTime
+                                                   </td>
+                                                     <td class="hidden-480">
+                                                       @item.PurchaserEmail
                                                    </td>
                                                    <td>@item.VisitLanguage</td>
                                                    <td class="hidden-480">

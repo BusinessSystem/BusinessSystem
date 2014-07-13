@@ -235,16 +235,18 @@ namespace Business.Serives
             
             
             //comment by luoyaqi 20140712
-            //ManagerProduct managerProduct = managerProductRepository.GetManagerProductByUrl(productName);
-            //if (managerProduct == null)
-            //{
-            //    return;
-            //}
-            //ManagerMainSite managerMainSite = managerMainSiteRepository.GetById(managerProduct.ManagerMainSiteId);
-            //if (managerMainSite == null)
-            //{
-            //    return;
-            //}
+            long languageId = 0;
+            ManagerProduct managerProduct = managerProductRepository.GetManagerProductByUrl(productName);
+            if (managerProduct != null)
+            {
+                ManagerMainSite managerMainSite = managerMainSiteRepository.GetById(managerProduct.ManagerMainSiteId);
+                if (managerMainSite != null)
+                {
+                    languageId = managerMainSite.LanguageId;
+                    language = managerMainSite.LanguageName;
+                }
+            }
+
 
             //Enquiry enquiry = EnquiryFactory.Create(ipString, email, content, productName, yourName, company, tel, msn,
             //    managerMainSite.LanguageName, managerMainSite.LanguageId, "未知", managerMainSite.ManagerId,
@@ -252,7 +254,7 @@ namespace Business.Serives
             
             //add by luoyaqi 20140712 (此处的语言还需要处理)
             Enquiry enquiry = EnquiryFactory.Create(ipString, email, content, productName, yourName, company, tel, msn,
-                language, 0, country, manger.Id, manger.UserName);
+                language, languageId, country, manger.Id, manger.UserName);
             enquiry.EnquiryTimes = enquiryRepository.GetEnquiryTimesByEmail(email) + 1;
             enquiryRepository.Save(enquiry);
         }

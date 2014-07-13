@@ -139,6 +139,7 @@ namespace Business.Serives
                 emailFollow.HandleManagerId = currentManager.Id;
                 emailFollow.TargetFilePath = filePath;
                 emailTranslation.ReceiverStatus = EmailStatusEnum.HasRead;
+                emailTranslation.FollowTimes++;
                 emailTranslation.SenderStatus = EmailStatusEnum.UnRead;
                 emailTranslationRepository.Save(emailTranslation);
                 emailFollowRepository.Save(emailFollow);
@@ -161,11 +162,21 @@ namespace Business.Serives
             return emailTranslationRepository.GeEmailTranslationByEnquiryId(enquiryId);
         }
 
-        public static void ChangeEmailTranslationStatus(EmailTranslation emailTranslation)
+        public static void ChangeEmailTranslationStatus(EmailTranslation emailTranslation,Manager currentManager)
         {
-            if (emailTranslation != null && (emailTranslation.ReceiverStatus == EmailStatusEnum.UnRead))
+            if (emailTranslation != null)
             {
-                emailTranslation.ReceiverStatus = EmailStatusEnum.HasRead;
+                if (emailTranslation.ReceiverStatus == EmailStatusEnum.UnRead &&
+                    currentManager.ManagerType == ManagerTypeEnum.Super && emailTranslation.HandlerManagerId==currentManager.Id)
+                {
+                    emailTranslation.ReceiverStatus = EmailStatusEnum.HasRead;
+                }
+                if (emailTranslation.SenderStatus == EmailStatusEnum.UnRead &&
+                    currentManager.ManagerType == ManagerTypeEnum.Common &&
+                    emailTranslation.FollowId == currentManager.Id)
+                {
+                    emailTranslation.SenderStatus = EmailStatusEnum.HasRead;
+                }
                 emailTranslationRepository.Save(emailTranslation);
                 if (emailTranslation.EnquiryId > 0)
                 {
