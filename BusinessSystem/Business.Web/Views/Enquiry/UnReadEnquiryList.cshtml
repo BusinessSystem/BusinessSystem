@@ -184,27 +184,29 @@
 
                                    </div>
                         
-                       
-                                   <div class="btn-group margin-top-2">
-                                       <button data-toggle="dropdown" class="btn btn-light width-120 dropdown-toggle margin-top-2 common-height">
-                                           分配到
-                                           <span class="icon-caret-down icon-on-right "></span>
-                                       </button>
+                             @if (currentManager.ParentId == 0)
+                             {
+                                 <div class="btn-group margin-top-2">
+                                     <button data-toggle="dropdown" class="btn btn-light width-120 dropdown-toggle margin-top-2 common-height">
+                                         分配到
+                                         <span class="icon-caret-down icon-on-right "></span>
+                                     </button>
 
-                                       <ul class="dropdown-menu dropdown-light pull-right width-120">
+                                     <ul class="dropdown-menu dropdown-light pull-right width-120">
                                 
-                                           @if (childManagers != null && childManagers.Count != 0)
-                                           {
-                                               foreach (var item in childManagers)
-                                               {
-                                                   <li onclick="issueEnquiryToManager('@item.Id')">
-                                                       <a href="javascript:;" >@item.RealName</a>
-                                                   </li>
-                                               }
-                                           }
+                                         @if (childManagers != null && childManagers.Count != 0)
+                                         {
+                                             foreach (var item in childManagers)
+                                             {
+                                                 <li onclick=" issueEnquiryToManager('@item.Id') ">
+                                                     <a href="javascript:;" >@item.RealName</a>
+                                                 </li>
+                                             }
+                                         }
                                 
-                                       </ul>
-                                   </div>
+                                     </ul>
+                                 </div>
+                             }
                                </div>
                            </div>
  

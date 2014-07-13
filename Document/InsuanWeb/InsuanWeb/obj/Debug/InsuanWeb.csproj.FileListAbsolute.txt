@@ -3,3 +3,7 @@ D:\WebSites\InsuanWeb\InsuanWeb\bin\InsuanWeb.pdb
 D:\WebSites\InsuanWeb\InsuanWeb\obj\Debug\ResolveAssemblyReference.cache
 D:\WebSites\InsuanWeb\InsuanWeb\obj\Debug\InsuanWeb.dll
 D:\WebSites\InsuanWeb\InsuanWeb\obj\Debug\InsuanWeb.pdb
+F:\PrivateProject\Business\trunk\Document\InsuanWeb\InsuanWeb\bin\InsuanWeb.dll
+F:\PrivateProject\Business\trunk\Document\InsuanWeb\InsuanWeb\bin\InsuanWeb.pdb
+F:\PrivateProject\Business\trunk\Document\InsuanWeb\InsuanWeb\obj\Debug\InsuanWeb.dll
+F:\PrivateProject\Business\trunk\Document\InsuanWeb\InsuanWeb\obj\Debug\InsuanWeb.pdb
