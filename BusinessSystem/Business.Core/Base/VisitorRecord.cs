@@ -18,6 +18,10 @@ namespace Business.Core
         public virtual string Country { get; set; }
 
         public virtual DateTime VisitTime { get; set; }
+
+        public virtual string PurchaserDomain { get; set; }
+
+        public virtual string ManagerEmail { get; set; }
     }
 
     /// <summary>
@@ -25,7 +29,7 @@ namespace Business.Core
     /// </summary>
     public class VisitorRecordFactory
     {
-        public static VisitorRecord Create(string ip, string product, string language, string country)
+        public static VisitorRecord Create(string ip, string product, string language, string country,string domain,string email)
         {
             return new VisitorRecord()
             {
@@ -33,7 +37,9 @@ namespace Business.Core
                 PurchaserProduct = product,
                 Country = country,
                 Language = language,
-                VisitTime = DateTime.Now
+                VisitTime = DateTime.Now,
+                PurchaserDomain=domain,
+                ManagerEmail = email
             };
         }
     }

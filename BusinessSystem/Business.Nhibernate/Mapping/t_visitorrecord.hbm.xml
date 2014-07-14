@@ -9,5 +9,7 @@
 		<property name="PurchaserProduct"/>
 		<property name="Country"/>
 		<property name="VisitTime"/>
+		<property name="PurchaserDomain"/>
+		<property name="ManagerEmail"/>
 	</class>
 </hibernate-mapping>
