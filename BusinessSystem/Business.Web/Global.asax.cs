@@ -19,7 +19,6 @@ namespace Business.Web
     {
         protected void Application_Start()
         {
-            
             SystemApplication.Start();
 
             AreaRegistration.RegisterAllAreas();
