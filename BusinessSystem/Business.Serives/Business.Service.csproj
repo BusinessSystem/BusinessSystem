@@ -55,6 +55,7 @@
     <Compile Include="Events\Infrastructure\IPublish.cs" />
     <Compile Include="Events\Infrastructure\ISubscriptionService.cs" />
     <Compile Include="Events\Infrastructure\SubscriptionService.cs" />
+    <Compile Include="ManagerMainSiteService.cs" />
     <Compile Include="ManageService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BaseService.cs" />

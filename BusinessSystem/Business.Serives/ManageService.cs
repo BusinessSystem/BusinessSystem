@@ -34,6 +34,10 @@ namespace Business.Serives
         {
             return managerRepository.GetById(Id);
         }
+        public static Manager GetManagerByUsername(string userName)
+        {
+            return managerRepository.GetManagerByUserName(userName);
+        }
 
         public static string Login(string userName, string password, out Manager resultManager)
         {
