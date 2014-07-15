@@ -33,10 +33,19 @@ namespace Business.WebApi.Controllers
         {
             var returnObj = new Business.WebApi.Models.ResultObject<List<string>>();
             List<string> retList = new List<string>();
-            retList.Add("英语");
-            retList.Add("俄语");
-            retList.Add("韩语");
-            retList.Add("日语");
+
+            //取用户登录成功后保存的session
+            string emailAccount = HttpContext.Current.Session["LoginAccount"].ToString();
+            Business.Core.Manager manager = null;
+            manager = ManageService.GetManagerByUsername(emailAccount);
+            if (manager != null)
+            {
+                List<Business.Core.ManagerMainSite> mangerMainSiteList =  ManagerMainSiteService.GetManagerMainSitesByManagerId(manager.Id);
+                foreach (var tmp in mangerMainSiteList)
+                {
+                    retList.Add(tmp.LanguageName);
+                }
+            }
 
             returnObj.ReturnData = retList;
             returnObj.Status = Business.WebApi.Models.ServerStatus.SearchSuccess;
