@@ -8,6 +8,7 @@
 		<property name="PurchaserIp" />
 		<property name="PurchaserProduct"/>
 		<property name="Country"/>
+    <property name="Language"/>
 		<property name="VisitTime"/>
 		<property name="PurchaserDomain"/>
 		<property name="ManagerEmail"/>

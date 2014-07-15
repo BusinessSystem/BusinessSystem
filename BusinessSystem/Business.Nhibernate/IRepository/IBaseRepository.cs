@@ -17,10 +17,10 @@ namespace Business.Nhibernate.IRepository
         IList<UserDefined> GetAllUserDefineds(long mainManagerId);
     }
 
-    public interface IVisitorRecordRepository : IRepository<VisitorRecord>
-    {
-
-    }
+    //public interface IVisitorRecordRepository : IRepository<VisitorRecord>
+    //{
+    //    IList<VisitorRecord> GetAllVisitorRecordsByEmail(string managerEmail)
+    //}
 
     public interface IBaseDictionaryRepository : IRepository<BaseDictionary>
     {
