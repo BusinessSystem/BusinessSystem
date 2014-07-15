@@ -62,6 +62,7 @@
     <Compile Include="SystemDictory.cs" />
     <Compile Include="SystemInit.cs" />
     <Compile Include="TranslationService.cs" />
+    <Compile Include="VisitRecordService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Business.Core\Business.Core.csproj">
