@@ -4,45 +4,34 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using Business.WebApi.Models;
 using System.Web;
+using Business.Serives;
 
 namespace Business.WebApi.Controllers
 {
     public class WebSiteAnalysisController : ApiController
     {
         [HttpPost]
-        public HttpResponseMessage GetInfoListByIp(WebSiteAnalysisQuery query)
+        public HttpResponseMessage GetInfoListByIp(Business.Core.VisitRecord.WebSiteAnalysisQuery anaysisQuery)
         {
             /*****根据客户的邮箱账号，网站语言，和输入查询的ip来查询出访问信息*****/
             //取用户登录成功后保存的session
             string emailAccount = HttpContext.Current.Session["LoginAccount"].ToString();
             //获取传过来的的网站语言
-            string language = query.Language;
+            string language = anaysisQuery.Language;
 
-            var returnObj = new ResultObject<List<WebSiteAnalysisInfo>>();
-            List<WebSiteAnalysisInfo> retList = new List<WebSiteAnalysisInfo>();
-            for (int i = 2; i < 15; ++i)
-            {
-                WebSiteAnalysisInfo model = new WebSiteAnalysisInfo();
-                model.VIp = "192.168.1."+i.ToString();
-                model.ProductName = "http://www.baidu.com";
-                model.VCountry = "中国";
-                model.VTime = "2014-07-03";
-
-                retList.Add(model);
-            }
-
-            returnObj.Status = ServerStatus.Success;
-            returnObj.ReturnData = retList;
-            returnObj.RecordCount = 13;
-            return Request.CreateResponse<ResultObject<List<WebSiteAnalysisInfo>>>(HttpStatusCode.OK, returnObj);
+            var returnObj = new Business.WebApi.Models.ResultObject<List<Business.Core.VisitRecord.WebSiteAnalysisInfo>>();
+            int recordcount=0;
+            returnObj.ReturnData = VisitRecordService.GetVisitRecordList(anaysisQuery, emailAccount, out recordcount);
+            returnObj.RecordCount = recordcount;
+            returnObj.Status = Business.WebApi.Models.ServerStatus.Success;
+            return Request.CreateResponse<Business.WebApi.Models.ResultObject<List<Business.Core.VisitRecord.WebSiteAnalysisInfo>>>(HttpStatusCode.OK, returnObj);
         }
 
         [HttpGet]
         public HttpResponseMessage GetLanguageTypeList()
         {
-            var returnObj = new ResultObject<List<string>>();
+            var returnObj = new Business.WebApi.Models.ResultObject<List<string>>();
             List<string> retList = new List<string>();
             retList.Add("英语");
             retList.Add("俄语");
@@ -50,8 +39,8 @@ namespace Business.WebApi.Controllers
             retList.Add("日语");
 
             returnObj.ReturnData = retList;
-            returnObj.Status = ServerStatus.SearchSuccess;
-            return Request.CreateResponse<ResultObject<List<string>>>(HttpStatusCode.OK, returnObj);
+            returnObj.Status = Business.WebApi.Models.ServerStatus.SearchSuccess;
+            return Request.CreateResponse<Business.WebApi.Models.ResultObject<List<string>>>(HttpStatusCode.OK, returnObj);
         }
     }
 }

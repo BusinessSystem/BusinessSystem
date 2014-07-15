@@ -167,6 +167,7 @@
     <Compile Include="Models\EnquirySavaQuery.cs" />
     <Compile Include="Models\JsonpMediaTypeFormatter.cs" />
     <Compile Include="Models\LoginQuery.cs" />
+    <Compile Include="Models\Pager.cs" />
     <Compile Include="Models\QQWryLocator2.cs" />
     <Compile Include="Models\ResultObject.cs" />
     <Compile Include="Models\ServerStatus.cs" />
