@@ -143,6 +143,7 @@
     <Compile Include="Controllers\EnquirySaveController.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="Controllers\VisitorRecordController.cs" />
     <Compile Include="Controllers\WebSiteAnalysisController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
