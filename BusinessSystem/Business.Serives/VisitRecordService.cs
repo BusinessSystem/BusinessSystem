@@ -18,5 +18,11 @@ namespace Business.Serives
             return visitorRepository.GetVisitorRecordsList(analysisQuery, currentAccount,out recordCount);
         }
 
+        public static void VisitRecordSave(string purchaserIp, string purchaserProduct, string language, string country, string purchaserDomain, string managerEmail)
+        {
+            VisitorRecord record = VisitorRecordFactory.Create(purchaserIp,purchaserProduct,language,country,purchaserDomain,managerEmail);
+            visitorRepository.Save(record);
+        }
+
     }
 }
