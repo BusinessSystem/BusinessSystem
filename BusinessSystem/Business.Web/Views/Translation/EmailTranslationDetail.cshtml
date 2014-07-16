@@ -12,220 +12,224 @@
         <div class="span12">
             <div class="widget-box  no-border">
                 
-                <div class="widget-header widget-toolbar-light  widget-box transparent" style="padding-left: 0px;">
-                    <div class="widget-toolbar float-none  no-border">
+                    <div class="widget-header widget-toolbar-light  widget-box transparent">
+                        <div class="widget-toolbar float-none  no-border">
                          
-                         @if (Model.EmailTranslationModel.IsDeleted == Business.Utils.CoreDefaultValue.True)
-                         {
-                             <span class="btn btn-app btn-light btn-xs" onclick="recoverytranslation('@Model.EmailTranslationModel.Id')">
-                                 恢复
-                             </span>
-                         }
-                         else
-                         {
-                             <span class="btn btn-app btn-light btn-xs" onclick="deletetranslation('@Model.EmailTranslationModel.Id') ">
-                                 删除
-                             </span>
-                         }
-     
-                       <div class="btn-group margin-top-2">
-                            <button data-toggle="dropdown" class="btn btn-light width-120 dropdown-toggle margin-top-2 common-height">
-                                移动到
-                                <span class="icon-caret-down icon-on-right "></span>
-                            </button>
-        
-                            <ul  aria-activedescendant="ui-id-8" tabindex="0" role="menu" class="display-none dropdown-menu dropdown-light ui-menu ui-widget width-120 ui-widget-content ui-corner-all" id="menu">
-                
-                                <li role="presentation" class="ui-menu-item">
-                                    <a role="menuitem" tabindex="-1" class="ui-corner-all" id="ui-id-7" aria-haspopup="true" href="javascript:;"><span class="ui-menu-icon ui-icon ui-icon-carat-1-e"></span>意向客户</a>
-
-                                    <ul aria-expanded="false" aria-hidden="true" role="menu" style="display: none;" class="ui-menu ui-widget ui-widget-content ui-corner-all">
-                                        @if (intentions != null && intentions.Count != 0)
-                                        {
-                                            foreach (var item in intentions)
-                                            {
-                                                <li role="presentation" class="ui-menu-item"  onclick="moveTranslation('@item.Id','@Model.EmailTranslationModel.Id')">
-                                                    <a role="menuitem" tabindex="-1" class="ui-corner-all" href="javascript:;" >@item.Description</a>
-                                                </li>
-                                            }
-                                        }
-                        
-                                    </ul>
-                                </li>
-                                @if (currentManager.ParentId != 0)
-                                {
-                                    <li role="presentation" class="ui-menu-item" onclik="backtomainer('@Model.EmailTranslationModel.Id')">
-                                        <a role="menuitem" tabindex="-1" class="ui-corner-all" id="ui-id-8" href="javascript:;">返回总账号</a>
-                                    </li>
-                                }
-                   
-                            </ul>
-
-                        </div>
-                    </div>
-                </div>
- 
-                <div class="widget-body ">
-                    <div class="space-4"></div>
-                    <div class="profile-user-info profile-user-info-striped">
-                        <div class="profile-info-row">
-                            <div class="profile-info-name"> 主题： </div>
-
-                            <div class="profile-info-value">
-                                <span class="editable editable-click" id="username">@Model.EmailTranslationModel.Theme </span>
-                            </div>
-                        </div>
-
-                        <div class="profile-info-row">
-                            <div class="profile-info-name"> 时间： </div>
-
-                            <div class="profile-info-value">
-                                <span class="editable editable-click" id="username">@Model.EmailTranslationModel.SendTime </span>
-                            </div>
-                        </div>
-
-                        <div class="profile-info-row">
-                            <div class="profile-info-name"> 语言： </div>
-
-                            <div class="profile-info-value">
-                                <span class="editable editable-click" id="age"> @Model.EmailTranslationModel.LanguageName</span>
-                            </div>
-                        </div>
-
-                        <div class="profile-info-row">
-                            <div class="profile-info-name"> 询盘内容： </div>
-                            <div class="profile-info-value">
-                                <span class="editable " id="signup">
-                                    @(new MvcHtmlString(Model.EmailTranslationModel.Content))
+                            @if (Model.EmailTranslationModel.IsDeleted == Business.Utils.CoreDefaultValue.True)
+                            {
+                                <span class="btn btn-app btn-light btn-xs" onclick="recoverytranslation('@Model.EmailTranslationModel.Id')">
+                                    恢复
                                 </span>
-                            </div>
+                            }
+                            else
+                            {
+                                <span class="btn btn-app btn-light btn-xs" onclick="deletetranslation('@Model.EmailTranslationModel.Id') ">
+                                    删除
+                                </span>
+                            }
+     
+                            @if (currentManager.ManagerType == ManagerTypeEnum.Common &&false)
+                            {
+                                                    
+                                <div class="btn-group margin-top-2">
+                                    <button data-toggle="dropdown" class="btn btn-light width-120 dropdown-toggle margin-top-2 common-height">
+                                        移动到
+                                        <span class="icon-caret-down icon-on-right "></span>
+                                    </button>
+        
+                                    <ul  aria-activedescendant="ui-id-8" tabindex="0" role="menu" class="display-none dropdown-menu dropdown-light ui-menu ui-widget width-120 ui-widget-content ui-corner-all" id="menu">
+                
+                                        <li role="presentation" class="ui-menu-item">
+                                            <a role="menuitem" tabindex="-1" class="ui-corner-all" id="ui-id-7" aria-haspopup="true" href="javascript:;"><span class="ui-menu-icon ui-icon ui-icon-carat-1-e"></span>意向客户</a>
+
+                                            <ul aria-expanded="false" aria-hidden="true" role="menu" style="display: none;" class="ui-menu ui-widget ui-widget-content ui-corner-all">
+                                                @if (intentions != null && intentions.Count != 0)
+                                                {
+                                                    foreach (var item in intentions)
+                                                    {
+                                                        <li role="presentation" class="ui-menu-item"  onclick="moveTranslation('@item.Id') ">
+                                                            <a role="menuitem" tabindex="-1" class="ui-corner-all" href="javascript:;" >@item.Description</a>
+                                                        </li>
+                                                    }
+                                                }
+                        
+                                            </ul>
+                                        </li>
+                                        @if (currentManager.ParentId != 0)
+                                        {
+                                            <li role="presentation" class="ui-menu-item" onclick=" backtomainer() ">
+                                                <a role="menuitem" tabindex="-1" class="ui-corner-all" id="ui-id-8" href="javascript:;">返回总账号</a>
+                                            </li>
+                                        }
+                   
+                                    </ul>
+                                </div>
+                            }
                         </div>
                     </div>
-                    @{
-                                int index = 0;
-                    }
-                    @foreach (var item in Model.EmailFollows)
-                    {
-                        index = index + 1;
+ 
+                    <div class="widget-body ">
                         <div class="space-4"></div>
                         <div class="profile-user-info profile-user-info-striped">
+                            <div class="profile-info-row">
+                                <div class="profile-info-name"> 主题： </div>
+
+                                <div class="profile-info-value">
+                                    <span class="editable editable-click" id="username">@Model.EmailTranslationModel.Theme </span>
+                                </div>
+                            </div>
 
                             <div class="profile-info-row">
-                                <table  class="translationfoor">
-                                    <tr>
-                                        <td rowspan="4" class="lefrtr">@(index)F</td>
-                                        <td class="rightheader">原文: </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="rightcontent">@(new MvcHtmlString(item.OriginalContent)) &nbsp;
-                                        @if (!string.IsNullOrEmpty(item.OriginalFilePath))
-                                        {
-                                            <div><label><a href="/Translation/DownLoadFile?filepath=@item.OriginalFilePath">附件：@item.OriginalFilePath.Substring(item.OriginalFilePath.LastIndexOf("/")+1)</a></label></div>
-                                        }
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="rightheader">译文:
-                                            @if (currentManager.ManagerType == ManagerTypeEnum.Super && string.IsNullOrEmpty(item.TargetContent))
-                                            {
-                                                <button class="btn btn-app btn-light btn-xs btn-small" onclick=" showReplyTranlationForm('@item.Id') ">
-                                                    翻译
-                                                </button>
-                                            }
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="rightcontent">
-                                            @if (string.IsNullOrEmpty(item.TargetContent))
-                                            {
-                                                item.TargetContent = "&nbsp;<br/><br/><br/>";
-                                            }
-                                            @(new MvcHtmlString(item.TargetContent))
-                                               @if (!string.IsNullOrEmpty(item.TargetFilePath))
-                                               {
-                                                   <div><label><a href="/Translation/DownLoadFile?filepath=@item.TargetFilePath">附件:@item.TargetFilePath.Substring(item.TargetFilePath.LastIndexOf("/") + 1)</a></label></div>
-                                               }
-                                        </td>
-                                    </tr>
-                                </table>
-                           
+                                <div class="profile-info-name"> 时间： </div>
+
+                                <div class="profile-info-value">
+                                    <span class="editable editable-click" id="username">@Model.EmailTranslationModel.SendTime </span>
+                                </div>
                             </div>
-                
+
+                            <div class="profile-info-row">
+                                <div class="profile-info-name"> 语言： </div>
+
+                                <div class="profile-info-value">
+                                    <span class="editable editable-click" id="age"> @Model.EmailTranslationModel.LanguageName</span>
+                                </div>
+                            </div>
+
+                            <div class="profile-info-row">
+                                <div class="profile-info-name"> 询盘内容： </div>
+                                <div class="profile-info-value">
+                                    <span class="editable " id="signup">
+                                        @(new MvcHtmlString(Model.EmailTranslationModel.Content))
+                                    </span>
+                                </div>
+                            </div>
                         </div>
-                    }
+                        @{
+                            int index = 0;
+                        }
+                        @foreach (var item in Model.EmailFollows)
+                        {
+                            index = index + 1;
+                            <div class="space-4"></div>
+                            <div class="profile-user-info profile-user-info-striped">
+
+                                <div class="profile-info-row">
+                                    <table  class="translationfoor">
+                                        <tr>
+                                            <td rowspan="4" class="lefrtr">@(index)F</td>
+                                            <td class="rightheader">原文: </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="rightcontent">@(new MvcHtmlString(item.OriginalContent)) &nbsp;
+                                                @if (!string.IsNullOrEmpty(item.OriginalFilePath))
+                                                {
+                                                    <div><label><a href="/Translation/DownLoadFile?filepath=@item.OriginalFilePath">附件：@item.OriginalFilePath.Substring(item.OriginalFilePath.LastIndexOf("/") + 1)</a></label></div>
+                                                }
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="rightheader">译文:
+                                                @if (currentManager.ManagerType == ManagerTypeEnum.Super && string.IsNullOrEmpty(item.TargetContent))
+                                                {
+                                                    <button class="btn btn-app btn-light btn-xs btn-small" onclick=" showReplyTranlationForm('@item.Id') ">
+                                                        翻译
+                                                    </button>
+                                                }
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="rightcontent">
+                                                @if (string.IsNullOrEmpty(item.TargetContent))
+                                                {
+                                                    item.TargetContent = "&nbsp;<br/><br/><br/>";
+                                                }
+                                                @(new MvcHtmlString(item.TargetContent))
+                                                @if (!string.IsNullOrEmpty(item.TargetFilePath))
+                                                {
+                                                    <div><label><a href="/Translation/DownLoadFile?filepath=@item.TargetFilePath">附件:@item.TargetFilePath.Substring(item.TargetFilePath.LastIndexOf("/") + 1)</a></label></div>
+                                                }
+                                            </td>
+                                        </tr>
+                                    </table>
+                           
+                                </div>
+                
+                            </div>
+                        }
                   
-                    <div class="space-4"></div>
+                        <div class="space-4"></div>
                 
 
-                    <div class="profile-user-info profile-user-info-striped">
-                        @{
+                        <div class="profile-user-info profile-user-info-striped">
+                            @{
 
-                    string display = string.Empty;
-                        }
-                        @if (currentManager.ManagerType == ManagerTypeEnum.Super)
-                        {
-                            display = "display-none";
-                        }
-                        <form class="form-horizontal margin-20 @(display)" id="translation_reply_form" method="post" action="/Translation/TranslationReply" enctype="multipart/form-data"   role="form">
-                            <input type="hidden" name="replyfollowId" />
-                            <input type="hidden" name="emailTranslationId" value="@Model.EmailTranslationModel.Id" />
-                            <div class="form-group">
-                                <div class="col-sm-10">
-                                    <div class="widget-box">
-                                        <div class="widget-header widget-header-small  header-color-green ">
-                                            <div class="widget-toolbar">
-                                                <a href="#" data-action="collapse">
-                                                    <i class="icon-chevron-up"></i>
-                                                </a>
+                                string display = string.Empty;
+                            }
+                            @if (currentManager.ManagerType == ManagerTypeEnum.Super)
+                            {
+                                display = "display-none";
+                            }
+                            <form class="form-horizontal margin-20 @(display)" id="translation_reply_form" method="post" action="/Translation/TranslationReply" enctype="multipart/form-data"   role="form">
+                                <input type="hidden" name="replyfollowId" />
+                                <input type="hidden" name="emailTranslationId" value="@Model.EmailTranslationModel.Id" />
+                                <div class="form-group">
+                                    <div class="col-sm-10">
+                                        <div class="widget-box">
+                                            <div class="widget-header widget-header-small  header-color-green ">
+                                                <div class="widget-toolbar">
+                                                    <a href="#" data-action="collapse">
+                                                        <i class="icon-chevron-up"></i>
+                                                    </a>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <textarea name="translationContent" class="hidden" id="translationContent"></textarea>
-                                        <div class="widget-body">
-                                            <div class="widget-main no-padding">
-                                                <div class="wysiwyg-editor" id="editor2"></div>
+                                            <textarea name="translationContent" class="hidden" id="translationContent"></textarea>
+                                            <div class="widget-body">
+                                                <div class="widget-main no-padding">
+                                                    <div class="wysiwyg-editor" id="editor2"></div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
                         
-                            <div class="space-4"></div> 
-                            <div class="form-group">
-                                <label class="col-sm-1 control-label no-padding-right" for="id-input-file-2">添加附件: </label>
-                                <div class="col-sm-4">
-                                    <input type="file" name="translationFile" id="id-input-file-2" />
-                                    <span class="help-inline col-xs-12 col-sm-10">
-                                        <span class="middle red">上传多个文件时请压缩上传,文件不超过5M</span>
-                                    </span>                          
+                                <div class="space-4"></div> 
+                                <div class="form-group">
+                                    <label class="col-sm-1 control-label no-padding-right" for="id-input-file-2">添加附件: </label>
+                                    <div class="col-sm-4">
+                                        <input type="file" name="translationFile" id="id-input-file-2" />
+                                        <span class="help-inline col-xs-12 col-sm-10">
+                                            <span class="middle red">上传多个文件时请压缩上传,文件不超过5M</span>
+                                        </span>                          
+                                    </div>
                                 </div>
-                            </div>
              
-                            <div class="clearfix form-actions">
-                                <div class="col-md-offset-1 col-md-9">
-                                    @if (currentManager.ManagerType == ManagerTypeEnum.Super)
-                                    {
-                                        <button id="btn_translation_reply" class="btn btn-info" type="button">
-                                            <i class="icon-ok bigger-110"></i>
-                                            提交翻译
-                                        </button>
-                                    }
-                                    else
-                                    {
-                                        <button id="btn_translation_reply" class="btn btn-info" type="button">
-                                            <i class="icon-ok bigger-110"></i>
-                                            转ETW国际翻译
-                                        </button>
-                                    }
+                                <div class="clearfix form-actions">
+                                    <div class="col-md-offset-1 col-md-9">
+                                        @if (currentManager.ManagerType == ManagerTypeEnum.Super)
+                                        {
+                                            <button id="btn_translation_reply" class="btn btn-info" type="button">
+                                                <i class="icon-ok bigger-110"></i>
+                                                提交翻译
+                                            </button>
+                                        }
+                                        else
+                                        {
+                                            <button id="btn_translation_reply" class="btn btn-info" type="button">
+                                                <i class="icon-ok bigger-110"></i>
+                                                转ETW国际翻译
+                                            </button>
+                                        }
+                                    </div>
                                 </div>
-                            </div>
-                        </form>
-                    </div>
+                            </form>
+                        </div>
                     
                   
                    
-                    <div class="space-4"></div>
+                        <div class="space-4"></div>
+                    </div>
                 </div>
-            </div>
+            
         </div>
     </div>
     <script src="/assets/js/markdown/markdown.min.js"></script>

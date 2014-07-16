@@ -19,6 +19,9 @@ namespace Business.Nhibernate.IRepository
         IList<Manager> GetManagersByPage(ManagerTypeEnum managerType, int pageIndex, int pageSize, long parentId,
             out int totalCount);
 
+        IList<Manager> GetManagersByPage(int pageIndex, int pageSize, long parentId,
+           out int totalCount);
+
         Manager GetManagerByUserName(string userName);
 
         Manager GetSuperManager();

@@ -40,7 +40,15 @@ namespace Business.Web.Controllers
             }
             ViewBag.CurrentManagerType = managerType;
             ViewBag.CurrentManager = CurrentManager;
-            PageModel<Manager> pageModel = ManageService.GetManagerPages(managerType, pageIndex, pageSize, CurrentManager.ParentId);
+            PageModel<Manager> pageModel =null;
+            if (CurrentManager.ManagerType == ManagerTypeEnum.Common)
+            {
+                pageModel = ManageService.GetManagerPages(pageIndex, pageSize, CurrentManager.Id);
+            }
+            else
+            {
+                pageModel = ManageService.GetManagerPages(managerType, pageIndex, pageSize, CurrentManager.ParentId);
+            }
             return View(pageModel);
         }
 

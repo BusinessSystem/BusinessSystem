@@ -256,7 +256,7 @@
         $(".checkalltranslation").click(function() {
             var checkeds = $(this).is(':checked');
             if (checkeds) {
-                $("input[name='translationcheck']").attr("checked", this.checked);
+                $("input[name='translationcheck']").prop("checked", this.checked);
             } else {
                 $("input[name='translationcheck']").attr("checked", this.checked);
             }

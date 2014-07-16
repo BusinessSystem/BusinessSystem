@@ -47,6 +47,25 @@ namespace Business.Nhibernate.Repository
             }
         }
 
+        public IList<Manager> GetManagersByPage(int pageIndex, int pageSize, long parentId,
+        out int totalCount)
+        {
+            using (var session = GetSession())
+            {
+
+                var query = session.QueryOver<Manager>().Where(m => m.Id > 0);
+                if (parentId != 0)
+                {
+                    query = query.And(m => m.ParentId == parentId);
+                }
+                totalCount = query.RowCount();
+                return
+                    query.OrderBy(m => m.Id)
+                        .Desc.Take(pageSize)
+                        .Skip((pageIndex - 1)*pageSize)
+                        .List();
+            }
+        }
 
         public Manager GetSuperManager()
         {

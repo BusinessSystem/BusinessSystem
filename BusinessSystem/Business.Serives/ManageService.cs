@@ -16,11 +16,20 @@ namespace Business.Serives
         private static readonly IManagerProductRepository managerProductRepository = new ManagerProductRepository();
         private static readonly IManagerMainSiteRepository managerMainSiteRepository = new ManagerMainSiteRepository();
         private static readonly ILoginRecordRepository loginRecordRepository = new LoginRecordRepository();
+     
         public static PageModel<Manager> GetManagerPages(ManagerTypeEnum managerType, int pageIndex, int pageSize,
             long parentId)
         {
             int totalCount = 0;
             IList<Manager> managers = managerRepository.GetManagersByPage(managerType, pageIndex, pageSize, parentId,
+                out totalCount);
+            return new PageModel<Manager>(managers, pageIndex, pageSize, totalCount);
+        }
+
+        public static PageModel<Manager> GetManagerPages(int pageIndex, int pageSize,long parentId)
+        {
+            int totalCount = 0;
+            IList<Manager> managers = managerRepository.GetManagersByPage(pageIndex, pageSize, parentId,
                 out totalCount);
             return new PageModel<Manager>(managers, pageIndex, pageSize, totalCount);
         }

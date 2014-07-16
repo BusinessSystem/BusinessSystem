@@ -313,7 +313,7 @@
         $(".checkalltranslation").click(function() {
             var checkeds = $(this).is(':checked');
             if (checkeds) {
-                $("input[name='qneuirycheck']").attr("checked", this.checked);
+                $("input[name='qneuirycheck']").prop("checked", this.checked);
             } else {
                 $("input[name='qneuirycheck']").attr("checked", this.checked);
             }
