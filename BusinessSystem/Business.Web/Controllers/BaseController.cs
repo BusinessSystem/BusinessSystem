@@ -50,7 +50,7 @@ namespace Business.Web.Controllers
         public ActionResult IntentionDelete(long id)
         {
             BaseService.DeleteIntention(id);
-            return Json(InfoTools.GetMsgInfo(ResponseCode.Ok),JsonRequestBehavior.AllowGet);
+            return Redirect("/Base/IntentionList");
         }
 
 
