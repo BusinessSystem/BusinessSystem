@@ -192,7 +192,7 @@
                                     <table  class="translationfoor">
                                         <tr>
                                             <td rowspan="4" class="lefrtr">@(index)F</td>
-                                            <td class="rightheader">原文:</td>
+                                            <td class="rightheader">原文:<span class="float-right wordcount"></span></td>
                                         </tr>
                                         <tr>
                                             <td class="rightcontent">@(new MvcHtmlString(item.OriginalContent)) &nbsp;</td>
@@ -208,6 +208,7 @@
                                                 {
                                                     <div><label><a href="/Translation/DownLoadFile?filepath=@item.OriginalFilePath">附件：@item.OriginalFilePath.Substring(item.OriginalFilePath.LastIndexOf("/") + 1)</a></label></div>
                                                 }
+                                                <span class="float-right wordcount"></span>
                                             </td>
                                         </tr>
                                         <tr>
@@ -288,9 +289,6 @@
                             </div>
                         </form>
                     </div>
-                    
-                  
-                   
                     <div class="space-4"></div>
                 </div>
             </div>
@@ -344,6 +342,14 @@
                     return false;
                 }
                 $("#enquiryEmail_form").submit();
+            });
+
+            $(".wordcount").each(function() {
+                var word=$(this).parent().parent().next("tr").value();
+                var splts = word.replace(/(^\s+)|(\s+$)/g,",,");
+                var wordcount = splts.split(",,").length;
+                $(this).text("字数："+wordcount);
+
             });
         });
 
