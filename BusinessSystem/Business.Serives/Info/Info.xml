@@ -31,6 +31,7 @@
 	<Managaer  Code="1013" Message="普通子账号没有创建用户权限" Level="1" Description="普通子账号没有创建用户权限" />
 	<Managaer  Code="1014" Message="管理员子账号不能创建管理员" Level="1" Description="管理员子账号不能创建管理员" />
 	<Managaer  Code="1015" Message="普通账号不能创建管理员账号" Level="1" Description="普通账号不能创建管理员账号" />
+	<Managaer  Code="1016" Message="子账号必须为邮箱" Level="1" Description="子账号必须为邮箱" />
 
 
   <!-- Base -->

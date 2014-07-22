@@ -85,6 +85,10 @@ namespace Business.Serives
             {
                 return ResponseCode.Managaer.CompanyNullOrEmpty;
             }
+            if (currentManager.ManagerType == ManagerTypeEnum.Common && !Utils.CheckTools.IsValidEmail(manager.UserName))
+            {
+                return ResponseCode.Managaer.IsNotEmail;
+            }
             if (currentManager.ManagerType == ManagerTypeEnum.Common && currentManager.ParentId != 0)
             {
                 return ResponseCode.Managaer.ComonChildNoPermission;

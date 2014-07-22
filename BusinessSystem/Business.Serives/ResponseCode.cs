@@ -109,6 +109,11 @@ namespace Business.Serives
             /// 普通账号不能创建管理员账号
             /// </summary>
             public const string CommonPermission = "1015";
+
+            /// <summary>
+            /// 子账号必须为邮箱
+            /// </summary>
+            public const string IsNotEmail = "1016";
         }
 
         public struct Base
