@@ -19,6 +19,7 @@ namespace Business.Core
         /// </summary>
         public virtual string EnquiryContent { get; set; }
         public virtual string ProductUrl { get; set; }
+        public virtual string ProductName { get; set; }//add by luoyaqi 20140723
         public virtual string PurchaserUserName { get; set; }
         public virtual string PurchaserCompany { get; set; }
         public virtual string PurchaserTel { get; set; }
@@ -54,7 +55,7 @@ namespace Business.Core
     public class EnquiryFactory
     {
         public static Enquiry Create(string ipString, string purchaserEmail, string enquiryContent,
-            string productUrl, string purchaserUserName, string purchaserCompany, string purchaserTel,
+            string productUrl,string productName, string purchaserUserName, string purchaserCompany, string purchaserTel,
             string purchaserMsn, string visitLanguage,long languageId, string purchaserCountry, long receiverId,string receiverName)
         {
             return new Enquiry()
@@ -63,6 +64,7 @@ namespace Business.Core
                 PurchaserEmail = purchaserEmail,
                 EnquiryContent = enquiryContent,
                 ProductUrl = productUrl,
+                ProductName = productName,
                 PurchaserUserName = purchaserUserName,
                 PurchaserCompany = purchaserCompany,
                 PurchaserTel = purchaserTel,
