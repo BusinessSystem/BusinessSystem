@@ -26,5 +26,14 @@ namespace Business.Nhibernate.Repository
                 return session.QueryOver<BaseDictionary>().List();
             }
         }
+
+        //通过语言值来获取整条记录
+        public BaseDictionary GetDictionaryByValue(string value)
+        {
+            using (var session = GetSession())
+            {
+                return session.QueryOver<BaseDictionary>().Where(m => m.Value == value).SingleOrDefault<BaseDictionary>();
+            }
+        }
     }
 }

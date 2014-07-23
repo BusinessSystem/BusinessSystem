@@ -26,5 +26,6 @@ namespace Business.Nhibernate.IRepository
     {
         IList<BaseDictionary> GetBaseDictionaries(ValueTypeEnum valueType);
         IList<BaseDictionary> GetAllBaseDictionaries();
+        BaseDictionary GetDictionaryByValue(string value);//add by luoyaqi
     }
 }

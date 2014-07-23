@@ -11,6 +11,7 @@
 			<column name="Content" sql-type="Text"/>
 		</property>
 		<property name="ProductUrl"/>
+    <property name="ProductName"/>
 		<property name="PurchaserUserName"/>
 		<property name="PurchaserCompany"/>
 		<property name="PurchaserTel"/>
