@@ -9,6 +9,7 @@ namespace Business.WebApi.Models
     {
         public string email { get; set; }
         public string content { get; set; }
+        public string productUrl { get; set; }
         public string productName { get; set; }
         public string yourName { get; set; }
         public string company { get; set; }

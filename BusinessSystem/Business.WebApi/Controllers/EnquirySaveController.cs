@@ -25,14 +25,15 @@ namespace Business.WebApi.Controllers
             string country = ip2.Country;
             string email = query.email;
             string content = query.content;
-            string productName = query.productName ;
+            string productUrl = query.productUrl;//信息的来源页面，直接抓取
+            string productName = query.productName ;//可更改的产品地址
             string yourName = query.yourName ;
             string company = query.company ;
             string tel = query.tel;
             string msn = query.msn ;
             string language = query.language ;//访问语言
             string recievedId = query.recievedId ;//接受者
-            EnquiryService.EnquirySave(host_ip, email, content, productName, yourName, company, tel, msn,language,country,recievedId);
+            EnquiryService.EnquirySave(host_ip, email, content, productUrl, productName, yourName, company, tel, msn,language,country,recievedId);
             List<string> retList = new List<string>();
             var returnObj = new ResultObject<List<string>>();
             retList.Add("leave message success!");
