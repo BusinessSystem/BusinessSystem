@@ -96,5 +96,11 @@ namespace Business.Serives
          {
              return baseDictionaryRepository.GetById(id);
          }
+
+         //通过语言值来获取整条记录
+         public static BaseDictionary GetDictionaryByValue(string value)
+         {
+             return baseDictionaryRepository.GetDictionaryByValue(value);
+         }
      }
 }

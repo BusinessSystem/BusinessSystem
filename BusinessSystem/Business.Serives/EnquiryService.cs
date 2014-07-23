@@ -20,7 +20,7 @@ namespace Business.Serives
         private static IEmailTranslationRepository emailTranslationRepository = new EmailTranslationRepository();
         private static IManagerProductRepository managerProductRepository = new ManagerProductRepository();
         private static IManagerMainSiteRepository managerMainSiteRepository = new ManagerMainSiteRepository();
-      
+        private static IBaseDictionaryRepository baseDictionaryRepository = new BaseDictionaryRepository();
 
         public static IList<EnquiryTransFollow> GeEnquiryTransFollowsByEnquiryId(long enquiryId)
         {
@@ -186,13 +186,9 @@ namespace Business.Serives
         }
 
         //:TODO 询盘写入数据
-        public static void EnquirySave(string ipString, string email, string content, string productName,
+        public static void EnquirySave(string ipString, string email, string content, string productUrl,string productName,
             string yourName, string company, string tel, string msn, string language, string country, string recievedId)
         {
-            if (string.IsNullOrWhiteSpace(productName))
-            {
-                return;
-            }
             if (string.IsNullOrWhiteSpace(content))
             {
                 return;
@@ -201,21 +197,28 @@ namespace Business.Serives
             {
                 return;
             }
-            if (string.IsNullOrWhiteSpace(tel))
+            if (string.IsNullOrWhiteSpace(productUrl))
             {
                 return;
+            }
+            if (string.IsNullOrWhiteSpace(tel))
+            {
+                //return;
+                tel = "";
             }
             if (string.IsNullOrWhiteSpace(yourName))
             {
-                return;
+                //return;
+                yourName = "";
             }
             if (string.IsNullOrWhiteSpace(company))
             {
-
+                company = "";
             }
             if (string.IsNullOrWhiteSpace(msn))
             {
-                return;
+                //return;
+                msn = "";
             }
             if (!CheckTools.IsValidEmail(email))
             {
@@ -227,7 +230,7 @@ namespace Business.Serives
             }
 
             //add by luoyaqi 20140712
-            Manager manger = managerRepository.GetManagerByUserName(recievedId);
+            Manager manger = managerRepository.GetManagerByUserName(recievedId.Trim());
             if (manger == null)
             {
                 return;
@@ -236,27 +239,40 @@ namespace Business.Serives
             
             //comment by luoyaqi 20140712
             long languageId = 0;
-            ManagerProduct managerProduct = managerProductRepository.GetManagerProductByUrl(productName);
-            if (managerProduct != null)
+
+            BaseDictionary baseDictionary = baseDictionaryRepository.GetDictionaryByValue(language);
+            if (baseDictionary != null)
             {
-                ManagerMainSite managerMainSite = managerMainSiteRepository.GetById(managerProduct.ManagerMainSiteId);
-                if (managerMainSite != null)
-                {
-                    languageId = managerMainSite.LanguageId;
-                    language = managerMainSite.LanguageName;
-                }
+                //Manager mangerObj = managerRepository.GetManagerByUserName(recievedId.Trim());
+                //if (mangerObj != null)
+                //{
+                    Enquiry enquiry = EnquiryFactory.Create(ipString, email, content, productUrl, productName, yourName, company, tel, msn,
+                    language, baseDictionary.Id, country, manger.Id, manger.UserName);
+
+                    enquiry.EnquiryTimes = enquiryRepository.GetEnquiryTimesByEmail(email) + 1;
+                    enquiryRepository.Save(enquiry);
+                //}
             }
 
+            //ManagerProduct managerProduct = managerProductRepository.GetManagerProductByUrl(productName);
+            //if (managerProduct != null)
+            //{
+            //    ManagerMainSite managerMainSite = managerMainSiteRepository.GetById(managerProduct.ManagerMainSiteId);
+            //    if (managerMainSite != null)
+            //    {
+            //        Enquiry enquiry = EnquiryFactory.Create(ipString, email, content, productUrl, productName, yourName, company, tel, msn,
+            //        managerMainSite.LanguageName, managerMainSite.LanguageId, country, managerMainSite.ManagerId,
+            //        managerMainSite.ManagerName);
 
+            //        enquiry.EnquiryTimes = enquiryRepository.GetEnquiryTimesByEmail(email) + 1;
+            //        enquiryRepository.Save(enquiry);
+            //    }
+            //}
+
+            //add by luoyaqi 20140712 (此处的语言还需要处理) and commend by luoyaqi 20140719
             //Enquiry enquiry = EnquiryFactory.Create(ipString, email, content, productName, yourName, company, tel, msn,
-            //    managerMainSite.LanguageName, managerMainSite.LanguageId, "未知", managerMainSite.ManagerId,
-            //    managerMainSite.ManagerName);
+            //    language, languageId, country, manger.Id, manger.UserName);
             
-            //add by luoyaqi 20140712 (此处的语言还需要处理)
-            Enquiry enquiry = EnquiryFactory.Create(ipString, email, content, productName, yourName, company, tel, msn,
-                language, languageId, country, manger.Id, manger.UserName);
-            enquiry.EnquiryTimes = enquiryRepository.GetEnquiryTimesByEmail(email) + 1;
-            enquiryRepository.Save(enquiry);
         }
     }
 }
