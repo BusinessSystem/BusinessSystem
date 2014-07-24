@@ -3,6 +3,7 @@
     IList<Business.Core.Intention> intentions = ViewBag.Intentions;
     IList<Business.Core.UserDefined> userDefineds = ViewBag.UserDefineds;
     Business.Core.Manager currentManager = ViewBag.CurrentManager;
+    IList<BaseDictionary> languages = ViewBag.Languages;
 }
 @model Business.Web.PageModel.PageEnquiry
 @if (Model != null &&Model.Enquiry!=null)
@@ -244,7 +245,40 @@
                             {
                                 <input type="hidden" name="emailTranslationId" value="0" />
                             }
-                           
+                         
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label no-padding-right" for="form-field-select-1">由: </label>
+                        <div class="col-sm-9">
+                            <select name="originalLanguage" class="form-control col-xs-8 col-sm-4 width-30" id="form-field-select-1">
+                                @if (languages != null && languages.Count != 0)
+                                {
+                                    foreach (var dic in languages)
+                                    {
+                                        <option value="@(dic.Id)">@dic.Value</option>
+                                    }
+                                   
+                                }
+                            </select>
+                            <label class="col-sm-1 control-label  text-center" for="form-field-select-2">译成</label>
+                            <select name="targetLanguage" class="form-control col-xs-8 col-sm-4 width-30" id="form-field-select-2">
+                                  @if (languages != null && languages.Count != 0)
+                                {
+                                    foreach (var dic in languages)
+                                    {
+                                        <option value="@(dic.Id)">@dic.Value</option>
+                                    }
+
+                                }
+                            </select>
+                                 
+                            <span class="help-inline col-xs-12 col-sm-7">
+                                <span class="middle red"></span>
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <div class="space-4"></div>
+
                             <input type="hidden" name="enquiryId" value="@Model.Enquiry.Id" />
                             <div class="form-group">
                                 <div class="col-sm-10">

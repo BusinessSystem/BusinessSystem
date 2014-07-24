@@ -37,10 +37,7 @@ namespace Business.Web.Controllers
             }
             PageModel<Enquiry> pageModel = EnquiryService.GetEnquirysBySuperManager(email,  languageId, pageIndex, pageSize);
             ViewBag.CurrentManager = CurrentManager;
-            ViewBag.Languages =
-                ManageService.GetManagerMainSitesByManagerId(CurrentManager.ParentId == 0
-                    ? CurrentManager.Id
-                    : CurrentManager.ParentId);
+            ViewBag.Languages = BaseService.GetBaseDictionaries(ValueTypeEnum.Language);
             ViewBag.CurrentLanguageId = languageId;
             ViewBag.CurrentEmail = email;
             return View(pageModel);
@@ -86,11 +83,8 @@ namespace Business.Web.Controllers
             ViewBag.Intentions = BaseService.GetIntentions(CurrentManager.ParentId != 0 ? CurrentManager.ParentId : CurrentManager.Id);
             ViewBag.UserDefineds = BaseService.GetUserDefineds(CurrentManager.ParentId != 0 ? CurrentManager.ParentId : CurrentManager.Id);
             ViewBag.ChildManagers = ManageService.GetChildManagers(CurrentManager.Id);
-            ViewBag.Languages =
-                ManageService.GetManagerMainSitesByManagerId(CurrentManager.ParentId == 0
-                    ? CurrentManager.Id
-                    : CurrentManager.ParentId);
-
+            ViewBag.Languages = BaseService.GetBaseDictionaries(ValueTypeEnum.Language);
+             
             ViewBag.CurrentIntentionId = intentionId;
             ViewBag.CurrentUserdefinedId = userDefinedId;
             ViewBag.CurrentLanguageId = languageId;
@@ -137,10 +131,7 @@ namespace Business.Web.Controllers
             ViewBag.Intentions = BaseService.GetIntentions(CurrentManager.ParentId != 0 ? CurrentManager.ParentId : CurrentManager.Id);
             ViewBag.UserDefineds = BaseService.GetUserDefineds(CurrentManager.ParentId != 0 ? CurrentManager.ParentId : CurrentManager.Id);
             ViewBag.ChildManagers = ManageService.GetChildManagers(CurrentManager.Id);
-            ViewBag.Languages =
-                ManageService.GetManagerMainSitesByManagerId(CurrentManager.ParentId == 0
-                    ? CurrentManager.Id
-                    : CurrentManager.ParentId);
+            ViewBag.Languages = BaseService.GetBaseDictionaries(ValueTypeEnum.Language);
 
             ViewBag.CurrentIntentionId = intentionId;
             ViewBag.CurrentUserdefinedId = userDefinedId;
@@ -220,10 +211,7 @@ namespace Business.Web.Controllers
              ViewBag.Intentions = BaseService.GetIntentions(CurrentManager.ParentId != 0 ? CurrentManager.ParentId : CurrentManager.Id);
              ViewBag.UserDefineds = BaseService.GetUserDefineds(CurrentManager.ParentId != 0 ? CurrentManager.ParentId : CurrentManager.Id);
              ViewBag.ChildManagers = ManageService.GetChildManagers(CurrentManager.Id);
-             ViewBag.Languages =
-               ManageService.GetManagerMainSitesByManagerId(CurrentManager.ParentId == 0
-                   ? CurrentManager.Id
-                   : CurrentManager.ParentId);
+             ViewBag.Languages = BaseService.GetBaseDictionaries(ValueTypeEnum.Language);
              ViewBag.CurrentIntentionId = intentionId;
              ViewBag.CurrentUserdefinedId = userDefinedId;
              ViewBag.CurrentLanguageId = languageId;
@@ -246,6 +234,7 @@ namespace Business.Web.Controllers
             ViewBag.CurrentManager = CurrentManager;
             ViewBag.Intentions = BaseService.GetIntentions(CurrentManager.ParentId != 0 ? CurrentManager.ParentId : CurrentManager.Id);
             ViewBag.UserDefineds = BaseService.GetUserDefineds(CurrentManager.ParentId != 0 ? CurrentManager.ParentId : CurrentManager.Id);
+            ViewBag.Languages = BaseService.GetBaseDictionaries(ValueTypeEnum.Language);
             return View(pageEnquiry);
         }
 

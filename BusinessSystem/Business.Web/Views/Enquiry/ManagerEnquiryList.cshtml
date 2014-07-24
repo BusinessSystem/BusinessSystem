@@ -1,6 +1,6 @@
 ﻿@{
     ViewBag.Title = "<li><i class=\"\"></i><a href=\"/Enquiry/ManagerEnquiryList\">询盘中心</a></li><li class=\"active\">用户询盘</li>";
-    IList<ManagerMainSite> languages = ViewBag.Languages;
+    IList<BaseDictionary> languages = ViewBag.Languages;
     long currentLanguageId = ViewBag.CurrentLanguageId;
     string currentEmail = ViewBag.CurrentEmail;
 }
@@ -44,7 +44,7 @@
                                     foreach (var language in languages)
                                     {
                                         <li >
-                                            <a href="/Enquiry/ManagerEnquiryList?email=@currentEmail&languageId=@language.LanguageId">@language.LanguageName</a>
+                                            <a href="/Enquiry/ManagerEnquiryList?email=@currentEmail&languageId=@language.Id">@language.Value</a>
                                         </li>
                                     }
                                 }

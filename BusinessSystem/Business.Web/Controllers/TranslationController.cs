@@ -176,6 +176,7 @@ namespace Business.Web.Controllers
         [HttpGet]
         public ActionResult EmailTranslationDetail(long id)
         {
+            ViewBag.Languages = BaseService.GetBaseDictionaries(ValueTypeEnum.Language);
             ViewBag.CurrentManager = CurrentManager;
             ViewBag.Intentions = BaseService.GetIntentions(CurrentManager.ParentId != 0 ? CurrentManager.ParentId : CurrentManager.Id);
             EmailTranslation emailTranslation = TranslationService.GeEmailTranslationById(id);

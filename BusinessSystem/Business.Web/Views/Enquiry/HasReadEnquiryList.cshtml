@@ -4,7 +4,7 @@
     IList<UserDefined> userDefineds = ViewBag.UserDefineds;
     Manager currentManager = ViewBag.CurrentManager;
     IList<Manager> childManagers = ViewBag.ChildManagers;
-    IList<ManagerMainSite> languages = ViewBag.Languages;
+    IList<BaseDictionary> languages = ViewBag.Languages;
     long currentLanguageId = ViewBag.CurrentLanguageId;
     long currentIntentionId = ViewBag.CurrentIntentionId;
     long currentUserDefinedId = ViewBag.CurrentUserdefinedId;
@@ -61,7 +61,7 @@
                                          foreach (var language in languages)
                                          {
                                              <li >
-                                                 <a href=" /Enquiry/HasReadEnquiryList?email=@currentEmail&intentionId=@currentIntentionId&languageId=@language.LanguageId&userDefinedId=@currentUserDefinedId">@language.LanguageName</a>
+                                                 <a href=" /Enquiry/HasReadEnquiryList?email=@currentEmail&intentionId=@currentIntentionId&languageId=@language.Id&userDefinedId=@currentUserDefinedId">@language.Value</a>
                                              </li>
                                          }
                                      }
