@@ -13,7 +13,7 @@ namespace Business.Serives.Events
         public IList<IEventHandler<T>> GetSubscriptions<T>()
         {
             IList<IEventHandler<T>> consumers = new List<IEventHandler<T>>();
-            Type[] types = Assembly.Load("Business.Serives.Events").GetTypes();
+            Type[] types = Assembly.Load("Business.Serives").GetTypes();
             foreach (var type in types)
             {
                 if (type.IsInterface)

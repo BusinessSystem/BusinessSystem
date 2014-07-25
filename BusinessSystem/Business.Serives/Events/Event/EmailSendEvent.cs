@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Business.Serives.Events
+namespace Business.Serives.Events.Event
 {
     public class EmailSendEvent
     {
@@ -20,5 +20,7 @@ namespace Business.Serives.Events
             ToEmail = toEmail;
             SendTime = DateTime.Now;
         }
+
+        
     }
 }
