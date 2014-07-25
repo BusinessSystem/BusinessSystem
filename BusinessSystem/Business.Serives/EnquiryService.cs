@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.NetworkInformation;
 using System.Text;
+using System.Threading.Tasks;
 using Business.Core;
 using Business.Nhibernate.IRepository;
 using Business.Nhibernate.Repository;
+using Business.Serives.Events;
+using Business.Serives.Events.Event;
 using Business.Utils;
 
 namespace Business.Serives
@@ -246,13 +249,16 @@ namespace Business.Serives
                 //Manager mangerObj = managerRepository.GetManagerByUserName(recievedId.Trim());
                 //if (mangerObj != null)
                 //{
-                    Enquiry enquiry = EnquiryFactory.Create(ipString, email, content, productUrl, productName, yourName, company, tel, msn,
+                Enquiry enquiry = EnquiryFactory.Create(ipString, email, content, productUrl, productName, yourName,
+                    company, tel, msn,
                     language, baseDictionary.Id, country, manger.Id, manger.UserName);
 
-                    enquiry.EnquiryTimes = enquiryRepository.GetEnquiryTimesByEmail(email) + 1;
-                    enquiryRepository.Save(enquiry);
+                enquiry.EnquiryTimes = enquiryRepository.GetEnquiryTimesByEmail(email) + 1;
+                enquiryRepository.Save(enquiry);
+                SendEmail("YiSearch 邮件询盘提醒", "YiSearch 邮件询盘提醒", email);
                 //}
             }
+
 
             //ManagerProduct managerProduct = managerProductRepository.GetManagerProductByUrl(productName);
             //if (managerProduct != null)
@@ -274,5 +280,17 @@ namespace Business.Serives
             //    language, languageId, country, manger.Id, manger.UserName);
             
         }
+
+        private static void SendEmail(string subject,string content,string toEmail)
+        {
+            Task.Factory.StartNew(() =>
+            {
+                EmailSendEvent sendEvent = new EmailSendEvent(content, subject, toEmail);
+                ISubscriptionService subscriptionService = new SubscriptionService();
+                IEventPublisher eventPublisher = new EventPublisher(subscriptionService);
+                eventPublisher.Publish(sendEvent);
+            });
+        }
+
     }
 }
