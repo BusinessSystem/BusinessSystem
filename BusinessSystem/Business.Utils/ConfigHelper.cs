@@ -16,8 +16,7 @@
         {
             if (string.IsNullOrEmpty(appKey))
             {
-                //throw new ArgumentNullException("appKey");
-                return string.Empty;
+               return string.Empty;
             }
             return System.Configuration.ConfigurationManager.AppSettings[appKey];
         }
