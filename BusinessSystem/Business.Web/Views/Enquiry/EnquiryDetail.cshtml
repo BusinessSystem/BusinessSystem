@@ -5,6 +5,7 @@
     Business.Core.Manager currentManager = ViewBag.CurrentManager;
     IList<BaseDictionary> languages = ViewBag.Languages;
 }
+@using Business.Core
 @model Business.Web.PageModel.PageEnquiry
 @if (Model != null &&Model.Enquiry!=null)
 {
@@ -168,7 +169,19 @@
                                 <span class="editable editable-click" id="age"> @Model.Enquiry.VisitLanguage &nbsp;</span>
                             </div>
                         </div>
+                          <div class="profile-info-row">
+                            <div class="profile-info-name"> 翻译目标语言: </div>
 
+                            <div class="profile-info-value">
+                                <span class="editable editable-click" id="age">
+                                    @if (Model.EmailTranslation != null)
+                                    {
+                                        @:@Model.EmailTranslation.TargetLanguage
+                                    }
+                                    &nbsp;
+                                </span>
+                            </div>
+                        </div>
                         <div class="profile-info-row">
                             <div class="profile-info-name"> 询盘内容： </div>
                             <div class="profile-info-value">
@@ -247,25 +260,14 @@
                             }
                          
                     <div class="form-group">
-                        <label class="col-sm-2 control-label no-padding-right" for="form-field-select-1">由: </label>
                         <div class="col-sm-9">
-                            <select name="originalLanguage" class="form-control col-xs-8 col-sm-4 width-30" id="form-field-select-1">
-                                @if (languages != null && languages.Count != 0)
-                                {
-                                    foreach (var dic in languages)
-                                    {
-                                        <option value="@(dic.Id)">@dic.Value</option>
-                                    }
-                                   
-                                }
-                            </select>
-                            <label class="col-sm-1 control-label  text-center" for="form-field-select-2">译成</label>
+                            <label class="col-sm-1 control-label  text-center" for="form-field-select-2">目标语言</label>
                             <select name="targetLanguage" class="form-control col-xs-8 col-sm-4 width-30" id="form-field-select-2">
                                   @if (languages != null && languages.Count != 0)
                                 {
                                     foreach (var dic in languages)
                                     {
-                                        <option value="@(dic.Id)">@dic.Value</option>
+                                        <option value="@(dic.Value)">@dic.Value</option>
                                     }
 
                                 }

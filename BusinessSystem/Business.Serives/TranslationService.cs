@@ -112,7 +112,7 @@ namespace Business.Serives
             return emailTranslationRepository.GetById(translationId);
         }
 
-        public static string CreateEmailFollow(long translationId,string originalContent,string filePath)
+        public static string CreateEmailFollow(long translationId,string originalContent,string filePath,string targetLanguage="")
         {
             EmailTranslation emailTranslation = emailTranslationRepository.GetById(translationId);
             if (emailTranslation != null)
@@ -121,6 +121,7 @@ namespace Business.Serives
                     emailTranslation.OriginalLanguage,emailTranslation.TargetLanguage,filePath);
                 emailFollow.FollowId = emailTranslation.FollowId;
                 emailFollow.HandleManagerId = emailTranslation.HandlerManagerId;
+                emailFollow.TargetLanguage = targetLanguage;
                 emailTranslation.ReceiverStatus=EmailStatusEnum.UnRead;
                 emailTranslationRepository.Save(emailTranslation);
                 emailFollowRepository.Save(emailFollow);

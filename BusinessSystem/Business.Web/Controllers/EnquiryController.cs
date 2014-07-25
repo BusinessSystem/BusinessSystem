@@ -253,21 +253,23 @@ namespace Business.Web.Controllers
             }
             if (enquiryId != 0)
             {
-
+                string targetLanguage = Request["targetLanguage"];
                 if (emailTranslationId != 0)
                 {
-                    TranslationService.CreateEmailFollow(emailTranslationId, emailContent, filePath);
+                    TranslationService.CreateEmailFollow(emailTranslationId, emailContent, filePath, targetLanguage);
                 }
                 else
                 {
                     Manager superManager = ManageService.GetSuperManager();
                     Enquiry enquiry = EnquiryService.GetEnquiryById(enquiryId);
                     EmailTranslation emailTranslation = EmailTranslationFactory.Create(superManager.Id,
-                        enquiry.VisitLanguage, CurrentManager.RealName, CurrentManager.Id, "用户询盘", emailContent,
+                        enquiry.VisitLanguage, CurrentManager.RealName, CurrentManager.Id,"询盘邮件", emailContent,
                         filePath);
+                    emailTranslation.TargetLanguage = targetLanguage;
                     emailTranslation.EnquiryId = enquiryId;
                     EmailFollow emailFollow = EmailFollowFactory.Create(0, emailContent, enquiry.VisitLanguage,
                         enquiry.VisitLanguage,filePath);
+                    emailFollow.TargetLanguage = targetLanguage;
                     string result = TranslationService.SaveTranslation(emailTranslation, emailFollow);
                 }
             }

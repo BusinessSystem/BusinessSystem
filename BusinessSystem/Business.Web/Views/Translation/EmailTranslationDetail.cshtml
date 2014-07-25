@@ -89,10 +89,23 @@
                             </div>
 
                             <div class="profile-info-row">
-                                <div class="profile-info-name"> 语言： </div>
+                                <div class="profile-info-name"> 原语言： </div>
 
                                 <div class="profile-info-value">
                                     <span class="editable editable-click" id="age"> @Model.EmailTranslationModel.LanguageName</span>
+                                </div>
+                            </div>
+                            
+                              <div class="profile-info-row">
+                                <div class="profile-info-name"> 目标语言： </div>
+
+                                <div class="profile-info-value">
+                                    <span class="editable editable-click" id="age">
+                                        @if (Model.EmailTranslationModel!= null)
+                                        {
+                                            @:@Model.EmailTranslationModel.TargetLanguage;
+                                        }
+                                    </span>
                                 </div>
                             </div>
 
@@ -175,41 +188,6 @@
                                 <input type="hidden" name="emailTranslationId" value="@Model.EmailTranslationModel.Id" />
                                 
                                 <div class="space-4"></div>
-
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label no-padding-right" for="form-field-select-1">由: </label>
-                        <div class="col-sm-9">
-                            <select name="originalLanguage" class="form-control col-xs-8 col-sm-4 width-30" id="form-field-select-1">
-                                @if (languages != null && languages.Count != 0)
-                                {
-                                    foreach (var dic in languages)
-                                    {
-                                        <option value="@(dic.Id)">@dic.Value</option>
-                                    }
-                                   
-                                }
-                            </select>
-                            <label class="col-sm-1 control-label  text-center" for="form-field-select-2">译成</label>
-                            <select name="targetLanguage" class="form-control col-xs-8 col-sm-4 width-30" id="form-field-select-2">
-                               @if (languages != null && languages.Count != 0)
-                                {
-                                    foreach (var dic in languages)
-                                    {
-                                        <option value="@(dic.Id)">@dic.Value</option>
-                                    }
-
-                                }
-                            </select>
-                                 
-                            <span class="help-inline col-xs-12 col-sm-7">
-                                <span class="middle red"></span>
-                            </span>
-                        </div>
-                    </div>
-                    
-                    <div class="space-4"></div>
-
-
                                 <div class="form-group">
                                     <div class="col-sm-10">
                                         <div class="widget-box">
