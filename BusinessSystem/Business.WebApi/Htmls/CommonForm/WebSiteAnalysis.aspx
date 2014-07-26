@@ -54,10 +54,10 @@
                 $("#sl_type").focus();
                 return;
             }
-            var dataParas = '{ "VIp": "' + v_ip + '", "OrderByValue": "' + orderByValue + '", "OrderByDesc": "' + orderByDesc + '", "Language":"'+language+'"}';
+            var dataParas = '{ "VIp": "' + v_ip + '", "OrderByValue": "' + orderByValue + '", "OrderByDesc": "' + orderByDesc + '", "Language":"' + language + '"}';
 
             //分页
-            $("#pager").JPager("page", 10, 1, { action: { url: "/api/WebSiteAnalysis/GetInfoListByIp", data: dataParas} }, "visitor_list_tbody", "visitor_list_tmpl", "", "", "divMsg");
+            $("#pager").JPager("page", 40, 1, { action: { url: "/api/WebSiteAnalysis/GetInfoListByIp", data: dataParas} }, "visitor_list_tbody", "visitor_list_tmpl", "", "", "divMsg");
         }
 
         //初始化下拉框
@@ -70,7 +70,7 @@
                     var len = list.length;
                     var options = "<option value=\"\"></option>";
                     for (var i = 0; i < len; i++) {
-                        if (languageType== list[i].toString()) {
+                        if (languageType == list[i].toString()) {
                             var tmp = "<option value=\"" + list[i].toString() + "\" selected=\"selected\">" + list[i].toString() + "</option>";
                         } else {
                             var tmp = "<option value=\"" + list[i].toString() + "\">" + list[i].toString() + "</option>";
@@ -83,12 +83,12 @@
                     $("#sp_type").html(getLanguage());
 
                     //给下拉框绑定事件
-//                    $("#sl_type").change(function () {
-//                        //先给标题赋值
-//                        $("#sp_type").html($("#sl_type option:selected").val());
-//                        //清空信息列表
-//                        //$("#visitor_list_tbody").empty();
-//                    });
+                    //                    $("#sl_type").change(function () {
+                    //                        //先给标题赋值
+                    //                        $("#sp_type").html($("#sl_type option:selected").val());
+                    //                        //清空信息列表
+                    //                        //$("#visitor_list_tbody").empty();
+                    //                    });
 
                     queryDetail();
                 } else {
@@ -123,65 +123,76 @@
         <td style="text-align: center">${VTime}</td>
     </tr>
     </script>
-    <div style="width: 100%">
-        <input type="hidden" id="orderDesc" value="desc" />
-        <input type="hidden" id="orderValue" value="queryDetail" />
-        <div class="margin_top">
-        </div>
-        <div>
-            <div style="text-align:center;">
-                <h1>
-                    您现在进入的是<span style="color: Red;" id="sp_type"></span>客户群体市场分析页面</h1>
+    <div class="panel">
+        <div style="width: 100%">
+            <input type="hidden" id="orderDesc" value="desc" />
+            <input type="hidden" id="orderValue" value="queryDetail" />
+            <div class="margin_top">
             </div>
-            <table id="tb_search" style="text-align: center; width: 100%;" cellpadding="0" cellspacing="1"
-                class="blove2">
-                <tr>
-                    <td style="width: 15%" class="blove">国际市场选择
-                    </td>
-                    <td style="width: 35%; text-align: left" class="whiteBG" colspan="3">
-                        <select id="sl_type" style="width:160px;">
-                        </select>
-                    </td>
-                    <td style="width: 15%" class="blove">
-                        查询采购商来看产品回数
-                    </td>
-                    <td style="width: 35%; text-align: left" class="whiteBG" colspan="3">
-                        <input type="text" id="txt_ip" /><span style="color: Red">(*拷贝下面左边IP放入查询栏)</span>
-                    </td>
-                </tr>
-            </table>
-            <div class="btndiv">
-                <input type="button" value="查询" onclick="queryDetail();" id="prom_query"
-                    class="button" />
+            <div>
+                <div style="text-align: center;">
+                    <h1>
+                        您现在进入的是<span style="color: Red;" id="sp_type"></span><span style="color: Red;" id="Span1">客户群体市场</span>分析页面</h1>
+                </div>
+                <div id="div1" style="width: 100%">
+                    <table width="100%" border="0" align="center" cellpadding="0" cellspacing="1" class="blove">
+                        <tr>
+                            <td height="20" colspan="11" class="graybg" id="clientTip">
+                                共有<span id="peopleNum">***</span>位客户访问的了<span id="companyName">***</span>公司共<span id="productCount">***</span>产品
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <table id="tb_search" style="text-align: center; width: 100%;" cellpadding="0" cellspacing="1"
+                    class="blove2">
+                    <tr>
+                        <td style="width: 15%" class="blove">
+                            国际市场选择
+                        </td>
+                        <td style="width: 35%; text-align: left" class="whiteBG" colspan="3">
+                            <select id="sl_type" style="width: 160px;">
+                            </select>
+                        </td>
+                        <td style="width: 15%" class="blove">
+                            查询采购商来看产品回数
+                        </td>
+                        <td style="width: 35%; text-align: left" class="whiteBG" colspan="3">
+                            <input type="text" id="txt_ip" /><span style="color: Red">(*拷贝下面左边IP放入查询栏)</span>
+                        </td>
+                    </tr>
+                </table>
+                <div class="btndiv">
+                    <input type="button" value="查询" onclick="queryDetail();" id="prom_query" class="button" />
+                </div>
+                <div class="margin_top">
+                </div>
+                <table class="gvOne" cellspacing="1" cellpadding="0" id="tb_nation_debt_detail" style="width: 100%;">
+                    <tr>
+                        <th scope="col">
+                            <span>采购商所在位置（IP）</span>
+                        </th>
+                        <th scope="col">
+                            <span>采购商所看产品</span>
+                        </th>
+                        <th scope="col">
+                            <span>采购商所在位置地图显示</span>
+                        </th>
+                        <th scope="col">
+                            <span>浏览时间（北京时间）</span><img id="VTime" src="../../images/arrow_up2.gif" />
+                        </th>
+                    </tr>
+                    <tbody id="visitor_list_tbody">
+                    </tbody>
+                </table>
+                <div class="margin_top">
+                </div>
             </div>
             <div class="margin_top">
             </div>
-            <table class="gvOne" cellspacing="1" cellpadding="0" id="tb_nation_debt_detail" style="width: 100%;">
-                <tr>
-                    <th scope="col">
-                        <span>采购商所在位置（IP）</span>
-                    </th>
-                    <th scope="col">
-                        <span>采购商所看产品</span>
-                    </th>
-                    <th scope="col">
-                        <span>采购商所在位置地图显示</span>
-                    </th>
-                    <th scope="col">
-                        <span>浏览时间（北京时间）</span><img id="VTime" src="../../images/arrow_up2.gif" />
-                    </th>
-                </tr>
-                <tbody id="visitor_list_tbody">
-                </tbody>
-            </table>
-            <div class="margin_top">
+            <div id="page" style="text-align: right">
             </div>
-        </div>
-        <div class="margin_top">
-        </div>
-        <div id="page" style="text-align: right">
-        </div>
-        <div id="divMsg">
+            <div id="divMsg">
+            </div>
         </div>
     </div>
     </form>
