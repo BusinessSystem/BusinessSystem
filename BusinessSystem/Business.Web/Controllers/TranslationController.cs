@@ -45,8 +45,10 @@ namespace Business.Web.Controllers
                     CurrentManager.Id,
                     emailTheme,
                     translationContent, filePath);
+                BaseDictionary dictionary = BaseService.GetDictionaryById(targetLanguage);
+                emailTranslation.TargetLanguage = dictionary.Value;
                 EmailFollow emailFollow = EmailFollowFactory.Create(0, translationContent,
-                    SystemDictionary.GetInstance.GetBaseDictionary(targetLanguage).Value,filePath);
+                  dictionary.Value, filePath);
                 string result = TranslationService.SaveTranslation(emailTranslation, emailFollow);
                 if (result == ResponseCode.Ok)
                 {
