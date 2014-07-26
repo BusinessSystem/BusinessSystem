@@ -123,6 +123,7 @@ namespace Business.Serives
                 emailFollow.HandleManagerId = emailTranslation.HandlerManagerId;
                 emailFollow.TargetLanguage = targetLanguage;
                 emailTranslation.ReceiverStatus=EmailStatusEnum.UnRead;
+                emailTranslation.TargetLanguage = targetLanguage;
                 emailTranslationRepository.Save(emailTranslation);
                 emailFollowRepository.Save(emailFollow);
                return ResponseCode.Ok;

@@ -27,6 +27,7 @@
 		<property name="FollowTimes"  />
     <property name="IntentionDescription"  />
     <property name="TranslationSource"  />
-    <property name="EnquiryId"  />
+		<property name="EnquiryId"  />
+		<property name="TargetLanguage"  />
 	</class>
 </hibernate-mapping>
