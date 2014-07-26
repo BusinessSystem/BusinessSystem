@@ -253,7 +253,7 @@
                     }
                     <div class="space-4"></div>
                 
-
+               @if(currentManager.ManagerType==ManagerTypeEnum.Common){
                     <div class="profile-user-info profile-user-info-striped">
                         <form class="form-horizontal margin-20" id="enquiryEmail_form" method="post" action="/Enquiry/SendEnquiryEmail" enctype="multipart/form-data"   role="form">
                             @if (@Model.EmailTranslation != null)
@@ -265,28 +265,28 @@
                                 <input type="hidden" name="emailTranslationId" value="0" />
                             }
                          
-                    <div class="form-group">
-                        <div class="col-sm-9">
-                               <div class="space-4"></div>
-                            <label class="col-sm-2 control-label  text-center" for="form-field-select-2">目标语言：</label>
-                            <select name="targetLanguage" class="form-control col-xs-8 col-sm-4 width-30" id="form-field-select-2">
-                                @if (languages != null && languages.Count != 0)
-                                {
-                                    foreach (var dic in languages)
-                                    {
-                                        <option value="@(dic.Value)">@dic.Value</option>
-                                    }
+                            <div class="form-group">
+                                <div class="col-sm-9">
+                                    <div class="space-4"></div>
+                                    <label class="col-sm-2 control-label  text-center" for="form-field-select-2">目标语言：</label>
+                                    <select name="targetLanguage" class="form-control col-xs-8 col-sm-4 width-30" id="form-field-select-2">
+                                        @if (languages != null && languages.Count != 0)
+                                        {
+                                            foreach (var dic in languages)
+                                            {
+                                                <option value="@(dic.Value)">@dic.Value</option>
+                                            }
 
-                                }
-                            </select>
+                                        }
+                                    </select>
                                  
-                            <span class="help-inline col-xs-12 col-sm-7">
-                                <span class="middle red"></span>
-                            </span>
-                        </div>
-                    </div>
+                                    <span class="help-inline col-xs-12 col-sm-7">
+                                        <span class="middle red"></span>
+                                    </span>
+                                </div>
+                            </div>
                     
-                    <div class="space-4"></div>
+                            <div class="space-4"></div>
 
                             <input type="hidden" name="enquiryId" value="@Model.Enquiry.Id" />
                             <div class="form-group">
@@ -332,6 +332,7 @@
                             </div>
                         </form>
                     </div>
+}
                     <div class="space-4"></div>
                 </div>
             </div>
