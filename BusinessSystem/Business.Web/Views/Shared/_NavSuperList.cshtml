@@ -1,4 +1,5 @@
-﻿<ul class="nav nav-list">
+﻿@model Business.Core.Manager
+<ul class="nav nav-list">
     <li>
         <a href="/Manager/Index">
             <i class="icon-dashboard"></i>
@@ -6,8 +7,15 @@
         </a>
     </li>
     
-     
-
+    @if (Model != null && Model.ParentId==0)
+    {
+        <li>
+            <a href="/Enquiry/ManagerEnquiryList">
+                <i class="icon-dashboard"></i>
+                <span class="menu-text"> 用户询盘 </span>
+            </a>
+        </li>
+    }
     <li>
         <a href="/Translation/UnReadTranslationList" class="dropdon-toggle">
             <i class="icon-list"></i>
@@ -60,7 +68,12 @@
                     用户管理
                 </a>
             </li>
-        
+          <li>
+                <a href="/Manager/ManagerMainSiteList" target="_self">
+                    <i class="icon-double-angle-right"></i>
+                    用户主站
+                </a>
+            </li>
           
             <li>
                 <a href="/Manager/ChangePassword">
