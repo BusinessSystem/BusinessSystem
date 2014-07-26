@@ -39,7 +39,10 @@
             <li>
                 <a href="/Translation/HasReadTranslationList">
                     <i class="icon-double-angle-right"></i>
-                    已读邮件翻译
+                    已读邮件翻译 @if (ViewBag.HasReadEmailCount != null && ViewBag.HasReadEmailCount != 0)
+                           {
+                               @:(@ViewBag.UnReadTranslationCount)
+                           }
                 </a>
             </li>
             

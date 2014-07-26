@@ -26,6 +26,11 @@ namespace Business.Web.Controllers
             int unReadTranslationCount = TranslationService.GetEmailTranslationsCount(CurrentManager.ManagerType,
                  EmailStatusEnum.UnRead, CurrentManager.Id);
             ViewBag.UnReadTranslationCount = unReadTranslationCount;
+
+            int hasReadEmailCount = TranslationService.GetEmailTranslationsCount(CurrentManager.ManagerType,
+                 EmailStatusEnum.HasRead, CurrentManager.Id);
+            ViewBag.HasReadEmailCount = hasReadEmailCount;
+
             if (CurrentManager.ManagerType == ManagerTypeEnum.Super)
             {
                 return PartialView("~/Views/Shared/_NavSuperList.cshtml", CurrentManager);
@@ -34,7 +39,9 @@ namespace Business.Web.Controllers
             ViewBag.UnReadEnquiryCount = unReadEnquiryCount;
             int unReadEmailEnquiryCount = EnquiryService.GetUnReadEmailEnquiryCount(CurrentManager.Id,
                EmailStatusEnum.UnRead);
+            
             ViewBag.UnReadEmailEnquiryCount = unReadEmailEnquiryCount;
+         
             return PartialView(CurrentManager);
         }
     }
