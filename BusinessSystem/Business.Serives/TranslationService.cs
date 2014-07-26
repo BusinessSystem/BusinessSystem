@@ -141,7 +141,7 @@ namespace Business.Serives
                 emailFollow.HandleManagerId = currentManager.Id;
                 emailFollow.TargetFilePath = filePath;
                 emailTranslation.ReceiverStatus = EmailStatusEnum.HasRead;
-                emailTranslation.FollowTimes++;
+                emailTranslation.FollowTimes = emailTranslation.FollowTimes + 1;
                 emailTranslation.SenderStatus = EmailStatusEnum.UnRead;
                 emailTranslationRepository.Save(emailTranslation);
                 emailFollowRepository.Save(emailFollow);
@@ -150,6 +150,7 @@ namespace Business.Serives
                     Enquiry enquiry = enquiryRepository.GetById(emailTranslation.EnquiryId);
                     if (enquiry != null)
                     {
+                        enquiry.FollowUpTimes = enquiry.FollowUpTimes + 1;
                         enquiry.EmailStatus = EmailStatusEnum.UnRead;
                         enquiryRepository.Save(enquiry);
                     }
