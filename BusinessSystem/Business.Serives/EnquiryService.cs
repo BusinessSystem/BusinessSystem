@@ -227,10 +227,10 @@ namespace Business.Serives
             {
                 return;
             }
-            if (!CheckTools.IsAllNumber(tel))
-            {
-                return;
-            }
+            //if (!CheckTools.IsAllNumber(tel))
+            //{
+            //    return;
+            //}
 
             //add by luoyaqi 20140712
             Manager manger = managerRepository.GetManagerByUserName(recievedId.Trim());

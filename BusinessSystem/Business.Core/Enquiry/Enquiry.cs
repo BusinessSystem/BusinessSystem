@@ -58,7 +58,7 @@ namespace Business.Core
     {
         public static Enquiry Create(string ipString, string purchaserEmail, string enquiryContent,
             string productUrl,string productName, string purchaserUserName, string purchaserCompany, string purchaserTel,
-            string purchaserMsn, string visitLanguage,long languageId, string purchaserCountry, long receiverId,string receiverName)
+            string purchaserMsn, string visitLanguage,long languageId, string purchaserCountry, long receiverId, string receiverName)
         {
             return new Enquiry()
             {

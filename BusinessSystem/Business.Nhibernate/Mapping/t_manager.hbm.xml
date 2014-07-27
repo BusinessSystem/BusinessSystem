@@ -15,5 +15,6 @@
 		<property name="Language"/>
 		<property name="Creator"/>
 		<property name="CreateTime"/>
+    <property name="BindEmail"/>
 	</class>
 </hibernate-mapping>

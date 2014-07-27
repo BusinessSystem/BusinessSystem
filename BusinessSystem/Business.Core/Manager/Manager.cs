@@ -22,6 +22,7 @@ namespace Business.Core
         public virtual int Language { get; set; }
         public virtual string Creator { get; set; }
         public virtual DateTime CreateTime { get; set; }
+        public virtual string BindEmail { get; set; }//绑定客户邮箱
 
         public virtual void  EncryptPassword()
         {
