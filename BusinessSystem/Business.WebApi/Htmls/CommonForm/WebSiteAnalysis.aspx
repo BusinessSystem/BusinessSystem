@@ -151,7 +151,7 @@
                     <tr>
                         <td style="width: 100%" class="blove">
                             共有<span id="peopleNum" style="color:Red;"></span>位客户访问的了<span id="companyName" style="color:Red;"></span>公司共<span
-                                id="productCount" style="color:Red;"></span>产品
+                                id="productCount" style="color:Red;"></span>次产品
                         </td>
                     </tr>
                 </table>

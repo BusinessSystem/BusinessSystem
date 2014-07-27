@@ -165,6 +165,7 @@
     <Compile Include="Htmls\CommonForm\YZM.ashx.cs">
       <DependentUpon>YZM.ashx</DependentUpon>
     </Compile>
+    <Compile Include="Models\CompanyAndSummaryInfo.cs" />
     <Compile Include="Models\EnquirySavaQuery.cs" />
     <Compile Include="Models\JsonpMediaTypeFormatter.cs" />
     <Compile Include="Models\LoginQuery.cs" />
