@@ -11,23 +11,6 @@ namespace Business.WebApi.Controllers
 {
     public class WebSiteAnalysisController : ApiController
     {
-        [HttpPost]
-        public HttpResponseMessage GetInfoListByIp(Business.Core.VisitRecord.WebSiteAnalysisQuery anaysisQuery)
-        {
-            /*****根据客户的邮箱账号，网站语言，和输入查询的ip来查询出访问信息*****/
-            //取用户登录成功后保存的session
-            string emailAccount = HttpContext.Current.Session["LoginAccount"].ToString();
-            //获取传过来的的网站语言
-            string language = anaysisQuery.Language;
-
-            var returnObj = new Business.WebApi.Models.ResultObject<List<Business.Core.VisitRecord.WebSiteAnalysisInfo>>();
-            int recordcount=0;
-            returnObj.ReturnData = VisitRecordService.GetVisitRecordList(anaysisQuery, emailAccount, out recordcount);
-            returnObj.RecordCount = recordcount;
-            returnObj.Status = Business.WebApi.Models.ServerStatus.Success;
-            return Request.CreateResponse<Business.WebApi.Models.ResultObject<List<Business.Core.VisitRecord.WebSiteAnalysisInfo>>>(HttpStatusCode.OK, returnObj);
-        }
-
         [HttpGet]
         public HttpResponseMessage GetLanguageTypeList()
         {
@@ -38,6 +21,12 @@ namespace Business.WebApi.Controllers
             string emailAccount = HttpContext.Current.Session["LoginAccount"].ToString();
             Business.Core.Manager manager = null;
             manager = ManageService.GetManagerByUsername(emailAccount);
+
+            if (manager.ParentId != 0)
+            {
+                manager = ManageService.GetManagerById(manager.ParentId);
+            }
+
             if (manager != null)
             {
                 List<Business.Core.ManagerMainSite> mangerMainSiteList =  ManagerMainSiteService.GetManagerMainSitesByManagerId(manager.Id);
@@ -50,6 +39,37 @@ namespace Business.WebApi.Controllers
             returnObj.ReturnData = retList;
             returnObj.Status = Business.WebApi.Models.ServerStatus.SearchSuccess;
             return Request.CreateResponse<Business.WebApi.Models.ResultObject<List<string>>>(HttpStatusCode.OK, returnObj);
+        }
+
+        /// <summary>
+        /// 获取公司和当前查询的市场的客户数和访问产品数
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        public HttpResponseMessage GetCompanyInfo(Business.WebApi.Models.WebSiteAnalysisQuery query)
+        {
+            var returnObj = new Business.WebApi.Models.ResultObject<Business.WebApi.Models.CompanyAndSummaryInfo>();
+            Business.WebApi.Models.CompanyAndSummaryInfo model = new Models.CompanyAndSummaryInfo();
+
+            //取用户登录成功后保存的session
+            string emailAccount = HttpContext.Current.Session["LoginAccount"].ToString();
+            Business.Core.Manager manager = null;
+            manager = ManageService.GetManagerByUsername(emailAccount);
+            if (manager.ParentId != 0)
+            {
+                manager = ManageService.GetManagerById(manager.ParentId);
+            }
+
+            if (manager != null)
+            {
+                model.CompanyName = manager.Company;//公司名
+                model.PeopleNum = VisitRecordService.GetIpCount(query.Language, manager.UserName);
+                model.ProductCount = VisitRecordService.GetVisitRecordCount(query.Language, manager.UserName);
+            }
+
+            returnObj.ReturnData = model;
+            returnObj.Status = Business.WebApi.Models.ServerStatus.SearchSuccess;
+            return Request.CreateResponse<Business.WebApi.Models.ResultObject<Business.WebApi.Models.CompanyAndSummaryInfo>>(HttpStatusCode.OK, returnObj);
         }
     }
 }
