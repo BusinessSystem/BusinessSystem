@@ -94,6 +94,7 @@ namespace Business.Core
                 IsDeleted = Utils.CoreDefaultValue.False,
                 LanguageName = language,
                 SenderName = senderName,
+                FollowName = senderName,
                 FollowTimes = 1
             };
         }
