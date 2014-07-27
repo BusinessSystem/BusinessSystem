@@ -1,2 +1,0 @@
-// download by http://www.codefans.net
-var kuaixun = {"content":"We will take part in Shanghai Bauma exhibition during 2012-11-27--2012-11-30, the booth No: E1.551","id":"2010","type":"system","url":""}
