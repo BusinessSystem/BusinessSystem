@@ -37,6 +37,10 @@ namespace Business.Web.Controllers
             }
             int unReadEnquiryCount = EnquiryService.GetReadEnquiryCount(CurrentManager.Id,HandlerStatusEnum.UnRead);
             ViewBag.UnReadEnquiryCount = unReadEnquiryCount;
+
+            int hasReadEnquiryCount = EnquiryService.GetReadEnquiryCount(CurrentManager.Id, HandlerStatusEnum.HasRead);
+            ViewBag.HasReadEnquiryCount = hasReadEnquiryCount;
+
             int unReadEmailEnquiryCount = EnquiryService.GetUnReadEmailEnquiryCount(CurrentManager.Id,
                EmailStatusEnum.UnRead);
             

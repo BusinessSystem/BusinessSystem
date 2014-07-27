@@ -44,7 +44,10 @@
                 <li>
                     <a href="/Enquiry/HasReadEnquiryList">
                         <i class="icon-double-angle-right"></i>
-                        已读询盘 
+                        已读询盘   @if (ViewBag.HasReadEnquiryCount != null && ViewBag.HasReadEnquiryCount != 0)
+                               {
+                                   @:(@ViewBag.HasReadEnquiryCount)
+                               }
                     </a>
                 </li>
 
