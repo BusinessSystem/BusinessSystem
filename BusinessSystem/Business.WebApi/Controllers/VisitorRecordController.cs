@@ -4,6 +4,8 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using Business.Serives;
+using System.Web;
 
 namespace Business.WebApi.Controllers
 {
@@ -47,6 +49,31 @@ namespace Business.WebApi.Controllers
             returnObj.ReturnData = retList;
             returnObj.Status = Business.WebApi.Models.ServerStatus.SaveSuccess;
             return Request.CreateResponse<Business.WebApi.Models.ResultObject<List<string>>>(HttpStatusCode.OK, returnObj);
+        }
+
+        [HttpPost]
+        public HttpResponseMessage GetInfoListByIp(Business.Core.VisitRecord.WebSiteAnalysisQuery anaysisQuery)
+        {
+            /*****根据客户的邮箱账号，网站语言，和输入查询的ip来查询出访问信息*****/
+            //取用户登录成功后保存的session
+            string emailAccount = HttpContext.Current.Session["LoginAccount"].ToString();
+            //获取传过来的的网站语言
+            string language = anaysisQuery.Language;
+
+            Business.Core.Manager manager = null;
+            manager = ManageService.GetManagerByUsername(emailAccount);
+
+            if (manager.ParentId != 0)
+            {
+                manager = ManageService.GetManagerById(manager.ParentId);
+            }
+
+            var returnObj = new Business.WebApi.Models.ResultObject<List<Business.Core.VisitRecord.WebSiteAnalysisInfo>>();
+            int recordcount = 0;
+            returnObj.ReturnData = VisitRecordService.GetVisitRecordList(anaysisQuery, manager.UserName, out recordcount);
+            returnObj.RecordCount = recordcount;
+            returnObj.Status = Business.WebApi.Models.ServerStatus.Success;
+            return Request.CreateResponse<Business.WebApi.Models.ResultObject<List<Business.Core.VisitRecord.WebSiteAnalysisInfo>>>(HttpStatusCode.OK, returnObj);
         }
     }
 
