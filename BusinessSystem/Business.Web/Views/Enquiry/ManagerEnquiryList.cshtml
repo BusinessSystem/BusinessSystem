@@ -56,29 +56,7 @@
                             </ul>
                         </div>
                            
-                           <div class="btn-group margin-top-2">
-                            <button data-toggle="dropdown" class="btn btn-light width-120 dropdown-toggle margin-top-2 common-height">
-                                用户
-                                <span class="icon-caret-down icon-on-right "></span>
-                            </button>
-
-                            <ul class="dropdown-menu dropdown-light pull-right width-120">
-                                @if (languages != null && languages.Count != 0)
-                                {
-                                    foreach (var language in languages)
-                                    {
-                                        <li >
-                                            <a href="/Enquiry/ManagerEnquiryList?email=@currentEmail&languageId=@language.Id">@language.Value</a>
-                                        </li>
-                                    }
-                                }
-                                <li class="divider"></li>
-                                <li >
-                                <li >
-                                    <a href="/Enquiry/ManagerEnquiryList?email=@currentEmail">未识别</a>
-                                </li>
-                            </ul>
-                        </div>
+                           
 
                     </div>
  
