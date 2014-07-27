@@ -12,6 +12,53 @@ namespace Business.Nhibernate.Repository
 {
     public class VisitorRecordRepository:Repository<VisitorRecord>,IVisitorRecordRepository
     {
+
+        /// <summary>
+        /// 获取访问产品的次数，根据客户访问的站体类型
+        /// </summary>
+        /// <param name="language"></param>
+        /// <param name="mainAccount"></param>
+        /// <returns></returns>
+        public int GetVisitorRecordCount(string language, string mainAccount)
+        {
+            using (var session = GetSession())
+            {
+                var query = session.QueryOver<VisitorRecord>().Where(m => m.Id > 0);
+                if (!string.IsNullOrWhiteSpace(mainAccount))
+                {
+                    query = query.And(m => m.ManagerEmail == mainAccount);
+                }
+                if (!string.IsNullOrWhiteSpace(language))
+                {
+                    query = query.And(m => m.Language == language);
+                }
+                return query.RowCount();        
+            }
+
+        }
+
+        /// <summary>
+        /// 获取访问产品的客户数，根据客户访问的站体类型
+        /// </summary>
+        /// <param name="language"></param>
+        /// <param name="mainAccount"></param>
+        /// <returns></returns>
+        public int GetVisitorRecordClientNumCount(string language, string mainAccount)
+        {
+            using (var session = GetSession())
+            {
+                string sqlstr = @"select count(distinct PurchaserIp) from t_visitorrecord where
+                                  ManagerEmail='" +mainAccount+"' and Language='"+language+"'";
+                var obj = session.CreateSQLQuery(sqlstr).UniqueResult();
+                int coun = 0;
+                if (obj != null)
+                {
+                    coun = Convert.ToInt32(obj.ToString());
+                }
+                return coun;
+            }
+        }
+
         //public IList<VisitorRecord> GetAllVisitorRecordsByEmail(string managerEmail)
         //{
         //    using (var session = GetSession())
