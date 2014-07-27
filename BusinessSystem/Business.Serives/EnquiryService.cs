@@ -254,9 +254,9 @@ namespace Business.Serives
                     language, baseDictionary.Id, country, manger.Id, manger.UserName);
 
                 enquiry.EnquiryTimes = enquiryRepository.GetEnquiryTimesByEmail(email) + 1;
+                enquiry.ReceiverEmail = manger.UserName;
                 enquiryRepository.Save(enquiry);
                 SendEmail("YiSearch 邮件询盘提醒", "YiSearch 邮件询盘提醒", email);
-                //}
             }
 
 

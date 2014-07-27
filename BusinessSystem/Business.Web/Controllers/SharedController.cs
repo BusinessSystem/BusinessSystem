@@ -43,7 +43,6 @@ namespace Business.Web.Controllers
 
             int unReadEmailEnquiryCount = EnquiryService.GetUnReadEmailEnquiryCount(CurrentManager.Id,
                EmailStatusEnum.UnRead);
-            
             ViewBag.UnReadEmailEnquiryCount = unReadEmailEnquiryCount;
          
             return PartialView(CurrentManager);

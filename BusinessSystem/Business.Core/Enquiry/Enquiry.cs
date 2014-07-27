@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.Design;
 using System.Linq;
 using System.Text;
 
@@ -42,6 +43,7 @@ namespace Business.Core
         public virtual EmailStatusEnum EmailStatus { get; set; }
         public virtual long LanguageId { get; set; }
         public virtual int EnquiryTimes { get; set; }
+        public virtual string ReceiverEmail { get; set; }
     }
 
     public enum HandlerStatusEnum : short
