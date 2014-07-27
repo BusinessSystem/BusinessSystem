@@ -74,7 +74,14 @@
                                             @(item.LanguageName ?? "未识别")
                                         </td>
                                         <td >
-                                           @item.HandlerManagerName
+                                           @if (currentManager.ManagerType == ManagerTypeEnum.Super)
+                                           {
+                                                 @:@item.HandlerManagerName
+                                             }
+                                           else
+                                           {
+                                                  @:@item.FollowName
+                                             }
                                         </td>
                                     </tr>
                                 }
