@@ -57,13 +57,34 @@
             var dataParas = '{ "VIp": "' + v_ip + '", "OrderByValue": "' + orderByValue + '", "OrderByDesc": "' + orderByDesc + '", "Language":"' + language + '"}';
 
             //分页
-            $("#pager").JPager("page", 40, 1, { action: { url: "/api/WebSiteAnalysis/GetInfoListByIp", data: dataParas} }, "visitor_list_tbody", "visitor_list_tmpl", "", "", "divMsg");
+            $("#pager").JPager("page", 13, 1, { action: { url: "/api/VisitorRecord/GetInfoListByIp", data: dataParas} }, "visitor_list_tbody", "visitor_list_tmpl", "", "", "divMsg", function (data) {
+                if (data != null && data.Status.Code == 200) {
+                    GetCompanyInfo();
+                }
+            });
+        }
+
+        function GetCompanyInfo() {
+            var language = $("#sl_type").val();
+            if (language == "") {
+                alert("加载语言失败");
+            }
+            var dataParas = '{"Language":"' + language + '"}';
+            $.post("/api/WebSiteAnalysis/GetCompanyInfo", eval('(' + dataParas + ')'), function (data) {
+                if (data != null && data.Status.Code == 200) {
+                    var companyModel = data.ReturnData;
+                    $("#peopleNum").html(companyModel["PeopleNum"]);
+                    $("#companyName").html(companyModel["CompanyName"]);
+                    $("#productCount").html(companyModel["ProductCount"]);
+                }
+            }, "json");
         }
 
         //初始化下拉框
         function init() {
             var languageType = getLanguage();
             var dataParas = '{}';
+      
             $.get("/api/WebSiteAnalysis/GetLanguageTypeList", eval('(' + dataParas + ')'), function (data) {
                 if (data != null && data.Status.Code == 200) {
                     var list = data.ReturnData;
@@ -81,15 +102,7 @@
 
                     //给标题赋值
                     $("#sp_type").html(getLanguage());
-
-                    //给下拉框绑定事件
-                    //                    $("#sl_type").change(function () {
-                    //                        //先给标题赋值
-                    //                        $("#sp_type").html($("#sl_type option:selected").val());
-                    //                        //清空信息列表
-                    //                        //$("#visitor_list_tbody").empty();
-                    //                    });
-
+                    
                     queryDetail();
                 } else {
                     alert("获取发送短信数据失败!");
@@ -134,14 +147,15 @@
                     <h1>
                         您现在进入的是<span style="color: Red;" id="sp_type"></span><span style="color: Red;" id="Span1">客户群体市场</span>分析页面</h1>
                 </div>
-                <div id="div1" style="width: 100%">
-                    <table width="100%" border="0" align="center" cellpadding="0" cellspacing="1" class="blove">
-                        <tr>
-                            <td height="20" colspan="11" class="graybg" id="clientTip">
-                                共有<span id="peopleNum">***</span>位客户访问的了<span id="companyName">***</span>公司共<span id="productCount">***</span>产品
-                            </td>
-                        </tr>
-                    </table>
+                <table width="100%" border="0" align="center" cellpadding="0" cellspacing="1" class="blove2">
+                    <tr>
+                        <td style="width: 100%" class="blove">
+                            共有<span id="peopleNum" style="color:Red;"></span>位客户访问的了<span id="companyName" style="color:Red;"></span>公司共<span
+                                id="productCount" style="color:Red;"></span>产品
+                        </td>
+                    </tr>
+                </table>
+                <div class="margin_top">
                 </div>
                 <table id="tb_search" style="text-align: center; width: 100%;" cellpadding="0" cellspacing="1"
                     class="blove2">
