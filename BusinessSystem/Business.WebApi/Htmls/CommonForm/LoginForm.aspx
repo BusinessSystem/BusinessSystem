@@ -184,7 +184,7 @@
                                                                     <span class="login_txt">用户名：&nbsp;&nbsp; </span>
                                                                 </td>
                                                                 <td height="38" colspan="2" class="top_hui_text" style="text-align: left">
-                                                                    <input type="text" id="username" value="admin" class="username" />
+                                                                    <input type="text" id="username" value="" class="username" />
                                                                 </td>
                                                             </tr>
                                                             <tr>
@@ -192,7 +192,7 @@
                                                                     <span class="login_txt">密 码： &nbsp;&nbsp; </span>
                                                                 </td>
                                                                 <td height="35" colspan="2" class="top_hui_text" style="text-align: left">
-                                                                    <input type="password" id="password" value="12" class="password" />
+                                                                    <input type="password" id="password" value="" class="password" />
                                                                 </td>
                                                             </tr>
                                                             <tr>
