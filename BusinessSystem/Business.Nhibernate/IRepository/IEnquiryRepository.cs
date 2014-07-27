@@ -9,7 +9,7 @@ namespace Business.Nhibernate.IRepository
 {
     public interface IEnquiryRepository : IRepository<Enquiry>
     {
-        IList<Enquiry> GetEnquirysBySuperManager(string email, long languageId, int pageindex, int pageSize, out int totalCount);
+        IList<Enquiry> GetEnquirysBySuperManager(string email, long languageId, int pageindex, int pageSize, string receiverEmail, out int totalCount);
 
         IList<Enquiry> GetEnquirysByStatus(string email,long managerId, long languageId, long intentId, long useDefinedId,
             HandlerStatusEnum handlerStatus, int pageindex, int pageSize, out int totalCount);

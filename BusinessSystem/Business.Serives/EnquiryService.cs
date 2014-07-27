@@ -116,11 +116,11 @@ namespace Business.Serives
         /// <param name="pageindex"></param>
         /// <param name="pageSize"></param>
         /// <returns></returns>
-        public static PageModel<Enquiry> GetEnquirysBySuperManager(string email, long languageId, int pageindex, int pageSize)
+        public static PageModel<Enquiry> GetEnquirysBySuperManager(string email, long languageId, int pageindex, int pageSize,string receiverEmail)
         {
             int totalCount = 0;
             IList<Enquiry> enquiries = enquiryRepository.GetEnquirysBySuperManager(email, languageId, pageindex,
-                pageSize, out totalCount);
+                pageSize,receiverEmail, out totalCount);
             PageModel<Enquiry> pageModel = new PageModel<Enquiry>(enquiries, pageindex, pageSize, totalCount);
             return pageModel;
         }

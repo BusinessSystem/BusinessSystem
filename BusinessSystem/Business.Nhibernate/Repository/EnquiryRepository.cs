@@ -10,7 +10,7 @@ namespace Business.Nhibernate.Repository
 {
     public class EnquiryRepository:Repository<Enquiry>,IEnquiryRepository
     {
-        public IList<Enquiry> GetEnquirysBySuperManager(string email,  long languageId,  int pageindex, int pageSize, out int totalCount)
+        public IList<Enquiry> GetEnquirysBySuperManager(string email,  long languageId,  int pageindex, int pageSize, string receiverEmail, out int totalCount)
         {
             using (var session = GetSession())
             {
@@ -23,7 +23,10 @@ namespace Business.Nhibernate.Repository
                 {
                     query = query.And(m => m.LanguageId == languageId);
                 }
-                
+                if (!string.IsNullOrEmpty(receiverEmail))
+                {
+                    query = query.And(m=>m.ReceiverEmail==receiverEmail);
+                }
                 totalCount = query.RowCount();
                 return query.OrderBy(m => m.Id).Desc.Take(pageSize)
                     .Skip((pageindex - 1) * pageSize)

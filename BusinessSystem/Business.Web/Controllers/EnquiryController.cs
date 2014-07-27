@@ -35,7 +35,8 @@ namespace Business.Web.Controllers
             {
                 long.TryParse(Request["languageId"].ToString(), out languageId);
             }
-            PageModel<Enquiry> pageModel = EnquiryService.GetEnquirysBySuperManager(email,  languageId, pageIndex, pageSize);
+            string receiverEmail = Request["receiverEmail"];
+            PageModel<Enquiry> pageModel = EnquiryService.GetEnquirysBySuperManager(email, languageId, pageIndex, pageSize, receiverEmail);
             ViewBag.CurrentManager = CurrentManager;
             ViewBag.Languages = BaseService.GetBaseDictionaries(ValueTypeEnum.Language);
             ViewBag.CurrentLanguageId = languageId;
