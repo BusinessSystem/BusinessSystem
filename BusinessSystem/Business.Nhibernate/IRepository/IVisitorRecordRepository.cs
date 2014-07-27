@@ -10,6 +10,10 @@ namespace Business.Nhibernate.IRepository
 {
     public interface IVisitorRecordRepository:IRepository<VisitorRecord>
     {
+        int GetVisitorRecordCount(string language, string mainAccount);
+
+        int GetVisitorRecordClientNumCount(string language, string mainAccount);
+
         //IList<VisitorRecord> GetAllVisitorRecordsByEmail(string managerEmail);
         List<WebSiteAnalysisInfo> GetVisitorRecordsList(WebSiteAnalysisQuery recordQuery, string currentAccount, out int recordCount);
 
