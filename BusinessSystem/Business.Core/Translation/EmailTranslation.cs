@@ -95,7 +95,7 @@ namespace Business.Core
                 LanguageName = language,
                 SenderName = senderName,
                 FollowName = senderName,
-                FollowTimes = 1
+                FollowTimes = 0
             };
         }
     }

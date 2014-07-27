@@ -76,7 +76,7 @@ namespace Business.Core
                 IsIssuedChildManager = Utils.CoreDefaultValue.False,
                 HandlerStatus = HandlerStatusEnum.UnRead,
                 HandlerTime = Utils.CoreDefaultValue.MinTime,
-                FollowUpTimes = 1,
+                FollowUpTimes = 0,
                 IsDeleted = Utils.CoreDefaultValue.False,
                 HandlerId = receiverId,
                 HandlerName = receiverName,
