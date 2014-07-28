@@ -71,7 +71,7 @@ namespace Business.Core
     public class ManagerFactory
     {
         public static Manager Create(string userName, string password, long parentId, ManagerTypeEnum managerType
-            , string realName, string company, short isAutoDistribute, int language, string creator)
+            , string realName, string company, short isAutoDistribute, int language, string creator,string bindEmail)
         {
             return new Manager()
             {
@@ -84,7 +84,8 @@ namespace Business.Core
                 IsAutoDistribute = isAutoDistribute,
                 Language=language,
                 Creator = creator,
-                CreateTime = DateTime.Now
+                CreateTime = DateTime.Now,
+                BindEmail = bindEmail
             };
         }
     }

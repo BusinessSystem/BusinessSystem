@@ -82,7 +82,7 @@ namespace Business.Serives
         /// <summary>
         /// 用户模板
         /// </summary>
-        public struct  Managaer
+        public struct Managaer
         {
             public const string UserNullOrEmpty = "1001";
             public const string PasswordNullOrEmpty = "1002";
@@ -96,10 +96,12 @@ namespace Business.Serives
             public const string NewPasswordNullOrEmpty = "1010";
             public const string ConfirmPasswordError = "1011";
             public const string OldPasswordError = "1012";
+
             /// <summary>
             /// 普通子账号没有创建用户权限
             /// </summary>
             public const string ComonChildNoPermission = "1013";
+
             /// <summary>
             /// 管理员子账号不能创建管理员
             /// </summary>
@@ -114,6 +116,8 @@ namespace Business.Serives
             /// 子账号必须为邮箱
             /// </summary>
             public const string IsNotEmail = "1016";
+
+            public const string BindEmailIsNullOrEmpty = "1017";
         }
 
         public struct Base

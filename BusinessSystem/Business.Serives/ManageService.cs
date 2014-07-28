@@ -69,6 +69,11 @@ namespace Business.Serives
             {
                 return ResponseCode.Managaer.UserNullOrEmpty;
             }
+            if (string.IsNullOrEmpty(manager.BindEmail))
+            {
+                return ResponseCode.Managaer.BindEmailIsNullOrEmpty;
+            }
+          
             if (string.IsNullOrEmpty(manager.Password))
             {
                 return ResponseCode.Managaer.PasswordNullOrEmpty;
@@ -85,7 +90,7 @@ namespace Business.Serives
             {
                 return ResponseCode.Managaer.CompanyNullOrEmpty;
             }
-            if (currentManager.ManagerType == ManagerTypeEnum.Common && !Utils.CheckTools.IsValidEmail(manager.UserName))
+            if (Utils.CheckTools.IsValidEmail(manager.BindEmail))
             {
                 return ResponseCode.Managaer.IsNotEmail;
             }

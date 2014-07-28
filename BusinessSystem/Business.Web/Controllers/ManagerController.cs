@@ -123,7 +123,7 @@ namespace Business.Web.Controllers
 
         [HttpPost]
         public ActionResult ManagerAdd(string userName, string password, string realName,
-            string company, int language, ManagerTypeEnum managerType)
+            string company, int language, ManagerTypeEnum managerType, string bindEmail)
         {
             short isAutoDistribute = Utils.CoreDefaultValue.False;
             if (!string.IsNullOrEmpty(Request["isAutoDistribute"]))
@@ -132,7 +132,7 @@ namespace Business.Web.Controllers
             }
             long parentId = CurrentManager.Id;
             Manager manager = ManagerFactory.Create(userName, password, parentId, managerType, realName, company,
-                isAutoDistribute, language, CurrentManager.UserName);
+                isAutoDistribute, language, CurrentManager.UserName,bindEmail);
             manager.EncryptPassword();
             string responseCode = ManageService.Save(CurrentManager,manager);
             return Json(InfoTools.GetMsgInfo(responseCode), JsonRequestBehavior.AllowGet);
