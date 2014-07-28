@@ -64,6 +64,7 @@
                                     </label>
                                 </th>
                                 <th>用户名</th>
+                                 <th>用户邮箱</th>
                                 <th>真实姓名</th>
                                 <th class="hidden-480">公司名称</th>
                                 <th>
@@ -91,7 +92,10 @@
                                             </td>
 
                                             <td>
-                                                <a href="#">@item.UserName</a>
+                                                @item.UserName
+                                            </td>
+                                             <td>
+                                                 @item.BindEmail
                                             </td>
                                             <td>@item.RealName</td>
                                             <td class="hidden-480">@item.Company</td>

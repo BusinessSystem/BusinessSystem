@@ -90,7 +90,7 @@ namespace Business.Serives
             {
                 return ResponseCode.Managaer.CompanyNullOrEmpty;
             }
-            if (Utils.CheckTools.IsValidEmail(manager.BindEmail))
+            if (!Utils.CheckTools.IsValidEmail(manager.BindEmail))
             {
                 return ResponseCode.Managaer.IsNotEmail;
             }

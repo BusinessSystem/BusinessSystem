@@ -97,7 +97,7 @@ namespace Business.Web.Controllers
 
         [HttpPost]
         public ActionResult ManagerEdit(long id,string userName,  string realName,
-            string company, int language,ManagerTypeEnum managerType)
+            string company, int language, ManagerTypeEnum managerType, string bindEmail)
         {
             short isAutoDistribute = Utils.CoreDefaultValue.False;
             if (!string.IsNullOrEmpty(Request["isAutoDistribute"]))
@@ -115,6 +115,7 @@ namespace Business.Web.Controllers
                 manager.IsAutoDistribute = isAutoDistribute;
                 manager.ManagerType = managerType;
                 manager.EncryptPassword();
+                manager.BindEmail = bindEmail;
                 responseCode = ManageService.Save(CurrentManager,manager);
             }
             return Json(InfoTools.GetMsgInfo(responseCode), JsonRequestBehavior.AllowGet);
