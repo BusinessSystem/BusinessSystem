@@ -63,6 +63,26 @@ namespace Business.Serives
             return ResponseCode.Ok;
         }
 
+        //站体分析登录验证
+        public static string LoginWebSiteAnalysis(string username, string pwd, out Manager resultmanager)
+        {
+            Manager manager = managerRepository.GetManagerByUserName(username);
+            resultmanager = manager;
+            if (manager == null)
+            {
+                return ResponseCode.Managaer.UserNameError;
+            }
+            if (!manager.MatchPassword(pwd))
+            {
+                return ResponseCode.Managaer.UserPasswordError;
+            }
+            if (manager.ManagerType == ManagerTypeEnum.Super)
+            {
+                return ResponseCode.Managaer.MangerNoPermission;
+            }
+            return ResponseCode.Ok;
+        }
+            
         public static string Save(Manager currentManager, Manager manager)
         {
             if (string.IsNullOrEmpty(manager.UserName))
