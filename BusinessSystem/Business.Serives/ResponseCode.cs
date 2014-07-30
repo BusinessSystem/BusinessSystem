@@ -118,6 +118,11 @@ namespace Business.Serives
             public const string IsNotEmail = "1016";
 
             public const string BindEmailIsNullOrEmpty = "1017";
+            /// <summary>
+            /// 管理员没有产看站体分析的权限
+            /// </summary>
+            public const string MangerNoPermission = "1018";
+
         }
 
         public struct Base
