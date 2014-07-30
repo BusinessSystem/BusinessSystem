@@ -138,6 +138,8 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AanlysisSiteController.cs" />
+    <Compile Include="Controllers\CompanyInfoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\EnquirySaveController.cs" />
@@ -147,6 +149,13 @@
     <Compile Include="Controllers\WebSiteAnalysisController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Htmls\CommonForm\AnalysisSiteForm.aspx.cs">
+      <DependentUpon>AnalysisSiteForm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Htmls\CommonForm\AnalysisSiteForm.aspx.designer.cs">
+      <DependentUpon>AnalysisSiteForm.aspx</DependentUpon>
     </Compile>
     <Compile Include="Htmls\CommonForm\LoginForm.aspx.cs">
       <DependentUpon>LoginForm.aspx</DependentUpon>
@@ -238,6 +247,7 @@
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Htmls\CommonForm\AnalysisSiteForm.aspx" />
     <Content Include="Htmls\CommonForm\WebSiteAnalysis.aspx" />
     <Content Include="Htmls\demo.htm" />
     <Content Include="Htmls\CommonForm\LoginForm.aspx" />

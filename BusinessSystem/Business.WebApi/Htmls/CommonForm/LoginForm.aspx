@@ -17,7 +17,7 @@
                 alert("账号不能为空");
                 $("#username").focus();
                 return false;
-            } else if (password == "") {
+            }else if (password == "") {
                 alert("密码不能为空");
                 $("#password").focus();
                 return false;
@@ -39,10 +39,14 @@
                 data: "{ username: '" + username + "', userpwd: '" + password + "', valiad:'" + valiad + "' }",
                 dataType: "json",
                 success: function (data) {
-                    if (data!=null&&data.Status.Code == 200) {
+                    if (data != null && data.Status.Code == 200) {
                         window.location.href = "WebSiteAnalysis.aspx?languageType=" + encodeURI(languageType); //继续把语言传送给站体分析页
 
-                    } else {
+                    } else if (data != null && data.Status.Code == 401) {
+                        alert("系统管理员没有登录权限!");
+                        return false;
+                    }
+                    else {
                         alert("账号不存在或者密码错误或验证码错误");
                         return false;
                     }
@@ -167,7 +171,7 @@
                                             &nbsp;
                                         </td>
                                         <td width="96%" height="38">
-                                           <h3><span class="login_txt_bt">登陆信息网后台管理</span></h3>
+                                           <h3><span class="login_txt_bt">登陆站体分析管理系统</span></h3>
                                         </td>
                                     </tr>
                                     <tr>
@@ -200,7 +204,7 @@
                                                                     <span class="login_txt">验证码：</span>
                                                                 </td>
                                                                 <td height="35" colspan="2" class="top_hui_text" style="text-align: left;">
-                                                                    <input type="text" id="txtValid" value="aaa" style="width: 80px;" />
+                                                                    <input type="text" id="txtValid" value="" style="width: 80px;" />
                                                                     <%--<img id="Img1" src="~/Admin/Image.aspx" width="56" runat="server" height="20" onclick= "javascript:this.src= 'Image.aspx?id= ' + Math.random(); " alt= "看不清楚？点击刷新验证码 " />--%> 
                                                                     <img src="YZM.ashx" style="width:56px; height:20px;" onclick="this.src='YZM.ashx?aaa='+new Date()" alt="看不清楚？点击刷新验证码 "" />
                                                                 </td>

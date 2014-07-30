@@ -34,7 +34,7 @@ namespace Business.WebApi.Htmls
                     //将字符画到画布上
                     g.DrawString(codeStr, new System.Drawing.Font("楷书", 20), System.Drawing.Brushes.Red, pt);
 
-                    Pen p = new Pen(Brushes.Red, 3);
+                    Pen p = new Pen(Brushes.Red, 1);
                     Rectangle rec = new Rectangle(0, 0, 30, 20);
                     g.DrawPie(p, rec, 360, 360);
 

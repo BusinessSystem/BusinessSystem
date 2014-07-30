@@ -26,12 +26,16 @@ namespace Business.WebApi.Controllers
             {
                 //检验用户名正确与否
                 Manager manager = null;
-                string result = ManageService.Login(query.username, query.userpwd, out manager);
+                string result = ManageService.LoginWebSiteAnalysis(query.username, query.userpwd, out manager);
                 if (result == ResponseCode.Ok)//正确
                 {
                     //设置验证成功,保存用户名到session中
                     HttpContext.Current.Session["LoginAccount"] = query.username;
                     returnObj.Status = ServerStatus.Success;
+                }
+                else if (result == ResponseCode.Managaer.MangerNoPermission)
+                {
+                    returnObj.Status = ServerStatus.Unauthorized;
                 }
                 else
                 {
