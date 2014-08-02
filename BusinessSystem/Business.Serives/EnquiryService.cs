@@ -193,7 +193,8 @@ namespace Business.Serives
         }
 
         //:TODO 询盘写入数据
-        public static void EnquirySave(string ipString, string email, string content, string productUrl,string productName,
+        public static void EnquirySave(string ipString, string email, string content, string productUrl,
+            string productName,
             string yourName, string company, string tel, string msn, string language, string country, string recievedId)
         {
             if (string.IsNullOrWhiteSpace(content))
@@ -242,17 +243,12 @@ namespace Business.Serives
             {
                 return;
             }
-            
-            
-            //comment by luoyaqi 20140712
+ 
             long languageId = 0;
 
             BaseDictionary baseDictionary = baseDictionaryRepository.GetDictionaryByValue(language);
             if (baseDictionary != null)
             {
-                //Manager mangerObj = managerRepository.GetManagerByUserName(recievedId.Trim());
-                //if (mangerObj != null)
-                //{
                 Enquiry enquiry = EnquiryFactory.Create(ipString, email, content, productUrl, productName, yourName,
                     company, tel, msn,
                     language, baseDictionary.Id, country, manger.Id, manger.UserName);
@@ -262,27 +258,6 @@ namespace Business.Serives
                 enquiryRepository.Save(enquiry);
                 SendEmail("YiSearch 邮件询盘提醒", "YiSearch 邮件询盘提醒", manger.BindEmail);
             }
-
-
-            //ManagerProduct managerProduct = managerProductRepository.GetManagerProductByUrl(productName);
-            //if (managerProduct != null)
-            //{
-            //    ManagerMainSite managerMainSite = managerMainSiteRepository.GetById(managerProduct.ManagerMainSiteId);
-            //    if (managerMainSite != null)
-            //    {
-            //        Enquiry enquiry = EnquiryFactory.Create(ipString, email, content, productUrl, productName, yourName, company, tel, msn,
-            //        managerMainSite.LanguageName, managerMainSite.LanguageId, country, managerMainSite.ManagerId,
-            //        managerMainSite.ManagerName);
-
-            //        enquiry.EnquiryTimes = enquiryRepository.GetEnquiryTimesByEmail(email) + 1;
-            //        enquiryRepository.Save(enquiry);
-            //    }
-            //}
-
-            //add by luoyaqi 20140712 (此处的语言还需要处理) and commend by luoyaqi 20140719
-            //Enquiry enquiry = EnquiryFactory.Create(ipString, email, content, productName, yourName, company, tel, msn,
-            //    language, languageId, country, manger.Id, manger.UserName);
-            
         }
 
         public  static void SendEmail(string subject,string content,string toEmail)
