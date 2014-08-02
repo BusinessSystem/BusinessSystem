@@ -155,6 +155,10 @@ namespace Business.Serives
             enquiry.HandlerId = childManager.Id;
             enquiry.HandlerName = childManager.RealName;
             enquiryRepository.Save(enquiry);
+            if (childManager.ParentId != 0)
+            {
+                EnquiryService.SendEmail("YiSearch 询盘任务处理", "YiSearch 主账号已分配询盘任务",childManager.BindEmail);
+            }
             return ResponseCode.Ok;
         }
 
@@ -256,7 +260,7 @@ namespace Business.Serives
                 enquiry.EnquiryTimes = enquiryRepository.GetEnquiryTimesByEmail(email) + 1;
                 enquiry.ReceiverEmail = manger.UserName;
                 enquiryRepository.Save(enquiry);
-                SendEmail("YiSearch 邮件询盘提醒", "YiSearch 邮件询盘提醒", email);
+                SendEmail("YiSearch 邮件询盘提醒", "YiSearch 邮件询盘提醒", manger.BindEmail);
             }
 
 
@@ -281,7 +285,7 @@ namespace Business.Serives
             
         }
 
-        private static void SendEmail(string subject,string content,string toEmail)
+        public  static void SendEmail(string subject,string content,string toEmail)
         {
             Task.Factory.StartNew(() =>
             {

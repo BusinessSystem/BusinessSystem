@@ -315,6 +315,7 @@ namespace Business.Web.Controllers
                 {
                     EnquiryService.IssueEnquiryToChild(managerId, long.Parse(enquiryId));
                 }
+               
             }
             return Json(InfoTools.GetMsgInfo(ResponseCode.Ok));
         }
