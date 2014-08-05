@@ -1,0 +1,241 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>计算器</title>
+<script type="text/javascript">
+var a='';
+var b='';
+var opentor ='';
+var action ='';
+var m = '' ;
+var n = '' ;
+function set_num(number)//数字
+{
+if(opentor=='')
+{
+a = ''+a + number;
+document.getElementById('res').value = a;
+}
+else{
+b = ''+b + number;
+document.getElementById('res').value = b;
+}
+//alert(a);
+//alert(b);
+}
+function backspace()//撤销
+{
+//alert("hhhhh");
+if(b!='')
+{
+b=b.substring(0,b.length-1);
+document.getElementById('res').value = b;
+}
+else{
+a=a.substring(0,a.length-1);
+document.getElementById('res').value = a;
+}
+
+}
+function ce()//只记录第一次输入的值
+{
+a = document.getElementById('res').value = a;
+b='';
+//opentor='';
+}
+
+
+function set_op(op)//运算符
+{
+opentor = op;
+if(action!='')//连加
+{
+   c =eval(a+opentor+b);
+   document.getElementById('res').value = c;
+}
+action = op;
+a=c;
+b=0;
+opentor=='+';
+if(opentor=op)
+{
+   b='';
+   //document.getElementById('res').value = b;
+   //b=b;
+}
+}
+
+function sqrtt()//平方根
+{
+//alert("hhhhh");
+a =Math.sqrt(a);
+document.getElementById('res').value = a;
+
+}
+
+function compte()//计算结果
+{
+/* c =eval(a+opentor+b);
+
+document.getElementById('res').value = c;
+a =eval(a+opentor+b);*/
+document.getElementById('res').value = a = eval(a+opentor+b);
+if(b/a==0)
+{
+   document.getElementById('res').value = "除数不能为零";
+}
+if(opentor!="")
+{
+   b='';
+   //document.getElementById('res').value = b;
+   //b=b;
+}
+
+}
+
+function mc()
+{
+m =''
+//alert(m);
+document.getElementById('res').value ="";
+document.getElementById('m').value ="";
+
+}
+function mr()
+{
+//m =m;
+document.getElementById('res').value = m;
+
+}
+
+function ms()
+{
+m =document.getElementById('res').value;
+//alert(m);
+document.getElementById('m').value ="m";
+
+}
+function mds()
+{
+alert(m);
+alert(document.getElementById('res').value);
+alert(typeof(m));
+alert(typeof(parseFloat(document.getElementById('res').value)));
+//m = parseFloat(m) + parseFloat(document.getElementById('res').value);
+m = eval(m + '+'+document.getElementById('res').value);
+alert(m)
+
+}
+
+function ep()//清0
+{
+//if(opentor=='')
+//{
+//alert(typeof(a));
+//a = -parseFloat(a);
+//document.getElementById('res').value = a
+//
+//
+//}
+//else{
+a = -parseFloat(a);
+document.getElementById('res').value = a;
+//}
+
+}
+
+function ept()//清0
+{
+//alert("hhhhh");
+a = eval(1+'/'+document.getElementById('res').value);
+document.getElementById('res').value=a;
+
+
+}
+
+function pp()//清0
+{
+//alert("hhhhh");
+document.getElementById('res').value = '',a='',b='',opentor='';
+
+
+}
+function get_mod(){
+
+}
+</script>
+<style type="text/css">
+&lt;!--
+body {
+ background:#D4D0C8;
+}
+#box { width:283px; border:solid 1px #ccc;}
+table{ width:280px; text-align:center;}
+table#jsq{ line-height:30px; border:none;}
+input { color:#0000FF;}
+#num1,#num2,#num3,#num4,#num5,#num6,#num7,#num8,#num9,#num0,#dot,#ep,#mc,#mr,#ms,#add,#subtract,#multiply,#divide,#sqrt,#ept,#equals,#mod{ width:42px;}
+#mc,#mr,#ms,#add,#subtract,#multiply,#divide,#equals{ color:#ff0000;}
+#backspace,#ce,#clear{ width:68px; margin-left:5px; color:#FF0000;}
+--&gt;
+</style>
+
+</head>
+
+<body>
+	<div id="box"><table width="100%"><tbody><tr><td width="70"><input name="m" id="m" size="3" type="text"></td><td colspan="3"><input name="res" id="res" size="30" type="text"></td></tr>
+    <tr><td style="color:#F00; font-weight:bold; text-align:center;"> ETW </td>
+    <td><input name="backspace" id="backspace" value="backspace" onclick="backspace();" type="button"></td>
+    <td><input name="ce" id="ce" value="ce" onclick="ce();" type="button"></td>
+    <td><input name="clear" id="clear" value="c" onclick="pp();" type="button"></td>
+   </tr>
+  </tbody></table>
+<table id="jsq" border="0">
+  <tbody><tr><td colspan="6"></td></tr>
+  <tr>
+    <td width="70"><input name="mc" id="mc" value="mc" onclick="mc();" type="button"></td>
+    <td width="55"> <input name="num7" id="num7" value="7" onclick="set_num(7);" type="button"></td>
+    <td width="55"><input name="num8" id="num8" value="8" onclick="set_num(8);" type="button"></td>
+   
+    <td width="86"><input name="num9" id="num9" value="9" onclick="set_num(9);" type="button"></td>
+   
+    <td width="55"><input name="add" id="add" value="+" onclick="set_op('+');" type="button"></td>
+    <td width="44"><input name="sqrt" id="sqrt" value="sqrt" onclick="sqrtt();" type="button"></td>
+  </tr>
+  <tr>
+    <td><input name="mr" id="mr" value="mr" onclick="mr();" type="button"></td>
+    <td><input name="num4" id="num4" value="4" onclick="set_num(4);" type="button"></td>
+    <td><input name="num5" id="num5" value="5" onclick="set_num(5);" type="button"></td>
+   
+    <td><input name="num6" id="num6" value="6" onclick="set_num(6);" type="button"></td>
+   
+    <td><input name="subtract" id="subtract" value="-" onclick="set_op('-');" type="button"></td>
+    <td><input name="subtract" id="mod" value="%" onclick="get_mod('%');" type="button"></td>
+  </tr>
+  <tr>
+    <td><input name="ms" id="ms" value="ms" onclick="ms();" type="button"></td>
+    <td><input name="num1" id="num1" value="1" onclick="set_num(1);" type="button"></td>
+    <td><input name="num2" id="num2" value="2" onclick="set_num(2);" type="button"></td>
+    <td><input name="num3" id="num3" value="3" onclick="set_num(3);" type="button"></td>
+   
+    <td><input name="multiply" id="multiply" value="*" onclick="set_op('*');" type="button"></td>
+    <td><input name="ept" id="ept" value="1/x" onclick="ept();" type="button"></td>
+  </tr>
+  <tr>
+    <td><input name="m+" id="m+" style="width:42px; color:#ff0000;" value="m+" onclick="mds();" type="button"></td>
+    <td><input name="num0" id="num0" value="0" onclick="set_num(0);" type="button"></td>
+    <td><input name="dot" id="dot" value="." onclick="set_num('.');" type="button"></td>
+   
+    <td><input name="ep" id="ep" value="+/-" onclick="ep();" type="button"></td>
+   
+    <td><input name="divide" id="divide" value="/" onclick="set_op('/');" type="button"></td>
+    <td><input name="equals" id="equals" value="=" onclick="compte();" type="button"></td>
+  </tr>
+</tbody></table></div>
+<script type="text/javascript">
+document.oncontextmenu   =   function(){ alert("Window Error！"); return   false;}
+</script>
+
+
+</body>
+</html>
