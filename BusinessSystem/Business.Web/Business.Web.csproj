@@ -530,6 +530,7 @@
     <Content Include="html\about.html" />
     <Content Include="html\arabic.html" />
     <Content Include="html\btwl.html" />
+    <Content Include="html\Calcu.html" />
     <Content Include="html\case.html" />
     <Content Include="html\contact.html" />
     <Content Include="html\css\IE.css" />
