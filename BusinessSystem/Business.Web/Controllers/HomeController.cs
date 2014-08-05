@@ -26,5 +26,15 @@ namespace Business.Web.Controllers
 
             return View();
         }
+
+        public ActionResult Market()
+        {
+            return View();
+        }
+
+        public ActionResult Reader()
+        {
+            return View();
+        }
     }
 }

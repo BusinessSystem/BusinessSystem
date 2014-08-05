@@ -1388,6 +1388,8 @@
     <Content Include="Views\Shared\_NavSuperList.cshtml" />
     <Content Include="Views\Enquiry\ManagerEnquiryList.cshtml" />
     <Content Include="Views\Manager\LoginRecord.cshtml" />
+    <Content Include="Views\Home\Market.cshtml" />
+    <Content Include="Views\Home\Reader.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup>
