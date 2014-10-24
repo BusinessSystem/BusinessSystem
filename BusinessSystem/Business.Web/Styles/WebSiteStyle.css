@@ -1,0 +1,320 @@
+﻿*
+{
+    margin: 0px;
+    padding: 0px;
+    list-style:none;
+}
+ /*ie6要加这个才不会一直出现右侧滚动条*/
+html {
+	height:100%;
+	overflow:hidden;
+}
+body {
+	height:100%;
+	overflow:hidden;
+    background: #E1E1E2;
+    color: #000000;
+    font-family: verdana, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif, 宋体;
+    font-size: 12px;
+}
+
+.logo
+{
+    height: 65px;
+    width: 100%;
+    background-image: url('../Images/bg_bot.gif');
+    background-repeat: repeat-x;
+    position:absolute;
+    top:0px;
+    left:0px;
+}
+
+.logoItem
+{
+    background-image: url('../Images/bg_bot.gif');
+    background-repeat: no-repeat;
+    padding-top: 8px;
+    padding-left: 40px;
+    float: left;
+}
+
+.lineItem
+{
+    background-image: url('../Images/line.jpg');
+    background-repeat: no-repeat;
+    float: right;
+    height: 65px;
+    padding-right: 250px;
+}
+
+.hidepanel
+{
+    width: 14px;
+    background-image: url('../Images/open_bg.jpg');
+    background-repeat: repeat-y;
+    vertical-align: middle;
+    padding: 0px;
+    position:absolute;
+    top:26px;
+    left:0px;
+    bottom:0px;
+    z-index:2;
+}
+
+
+  a:link,   span.a,   a:link,   span.a
+{
+    color: #22229C;
+}
+  a:visited,   a:visited
+{
+    color: #22229C;
+}
+  a:hover,   a:active,   a:hover,   a:active
+{
+    color: #FF4400;
+}
+  span.a,   span.a
+{
+    cursor: pointer;
+}
+  td,   td
+{
+    font-family: verdana, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif, 宋体;
+    font-size: 12px;
+}
+  textarea,   textarea
+{
+    font-family: verdana, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif, 宋体;
+    font-size: 12px;
+}
+.main
+{
+    position: absolute;
+    left: 2px;
+    top: 28px;
+    bottom: 2px;
+    right: 2px;
+    overflow: auto;
+}
+
+/**标签**/
+/*  .pnlOut,   .pnlOut
+{
+    position: relative;
+    width: 100%;
+    height: 26px;
+    float: left;
+    overflow: hidden;
+    padding: 0px;
+}
+  .pnlIn,   .pnlIn
+{
+    position: absolute;
+    float: left;
+    left: 0px;
+    padding: 0px;
+}
+  .rank,   .rank
+{
+    border-right: 1px solid #DBDBDB;
+    height: 26px;
+    text-align: center;
+    background-image: url(../Images/gray_center.jpg);
+    background-repeat: repeat-x;
+    font-size: 12px;
+    line-height: 26px;
+    padding: 0px 1px 0px 2px;
+}
+  .ranklast,   .ranklast
+{
+    border-right: none;
+    height: 26px;
+    text-align: center;
+    background-image: url(../Images/gray_center.jpg);
+    background-repeat: repeat-x;
+    font-size: 12px;
+    line-height: 26px;
+    padding: 0px 2px 0px 2px;
+}
+  .rankclick,   .rankclick
+{
+    border-right: 1px solid #DBDBDB;
+    height: 26px;
+    text-align: center;
+    background-image: url(../Images/yellow_center.jpg);
+    background-repeat: repeat-x;
+    font-size: 12px;
+    line-height: 26px;
+    padding: 0px 1px 0px 2px;
+}
+  .rankclicklast,   .rankclicklast
+{
+    border-right: none;
+    height: 26px;
+    text-align: center;
+    background-image: url(../Images/yellow_center.jpg);
+    background-repeat: repeat-x;
+    font-size: 12px;
+    line-height: 26px;
+    padding: 0px 2px 0px 2px;
+}*/
+/**END 标签**/
+
+/** DIV **/
+  .panel
+{
+    border: 2px outset;
+    padding: 10px;
+    margin: 5px;
+    background: url(../Images/gradient_panel.gif);
+}
+  .graybg,   .graybg
+{
+    background: #869BBF url(../Images/gradient_panel.gif);
+    padding:10px;
+}
+  .blove,   .blove
+{
+    padding:6px 4px 6px 4px;
+    background-color:#E1E4F2;
+}
+  .whiteBG
+{
+    padding:2px 4px 2px 4px;
+    background-color:#F5F5FF;
+}
+  .blove2
+{
+    background: none repeat scroll 0 0 #D1D1E1;
+    border: 1px solid #0B198C;
+    color: #000000;
+}
+  .head,   .head
+{
+    border-top:1px solid #D1D1E1;
+    border-left:1px solid #D1D1E1;
+    border-right:1px solid #D1D1E1;
+}
+  .blove5,   .blove5
+{
+    background: #869BBF url(../Images/gradient_tcat.gif);
+    color: #FFFFFF;
+    font-weight: bold;
+    padding:6px 4px 6px 4px;
+}
+  .blove5 a:link,   .blove5 a:link
+{
+    color: #ffffff;
+    text-decoration: none;
+}
+  .blove5 a:visited,   .blove5 a:visited
+{
+    color: #ffffff;
+    text-decoration: none;
+}
+  .blove5 a:hover,   .blove5 a:active,   .blove5 a:hover,   .blove5 a:active
+{
+    color: #FFFF66;
+    text-decoration: underline;
+}
+  .btndiv,   .btndiv
+{
+    width: 100%;
+    text-align: center;
+    padding: 8px 0 8px 0;
+    clear: both;
+}
+  .system_ts,   .system_ts
+{
+    background: none repeat scroll 0 0 #D1D1E1;
+    border: 1px solid #0B198C;
+    color: #000000;
+}
+  .system_ts_top,   .system_ts_top
+{ 
+    background: #869BBF url(../Images/gradient_tcat.gif);
+    color: #FFFFFF;
+    font-weight: bold;
+    padding:6px 4px 6px 4px;
+    border-top:1px solid #D1D1E1;
+    border-left:1px solid #D1D1E1;
+    border-right:1px solid #D1D1E1;
+    height:16px;
+}
+  .system_search,   .system_search
+{
+    padding:6px 4px 6px 4px;
+    background-color:#F5F5FF;
+    text-align:center;
+}
+/**************************************************************/
+  .margin_top,   .margin_top
+{ 
+    width:100%;
+    height:10px; 
+}
+/** END DIV **/
+
+/** GridView **/
+table.gvOne
+{
+    background: none repeat scroll 0 0 #D1D1E1;
+    border: 1px solid #0B198C;
+    color: #000000;
+}
+table.gvOne tr th
+{
+    background: #5C7099 url("../Images/gradient_thead.gif");
+    color: #FFFFFF;
+    font-weight: bold;
+    padding:6px 4px 6px 4px;
+}
+table.gvOne tr td
+{
+    background-color:#F5F5FF;
+    color: #000000;
+    padding:6px 4px 6px 4px;
+}
+
+
+table.gvTwo
+{
+}
+table.gvTwo tr th
+{
+    background: #5C7099 url("../Images/gradient_thead.gif");
+    color: #FFFFFF;
+    padding:6px 4px 6px 4px;
+}
+table.gvTwo tr td
+{
+    background-color:#F5F5FF;
+    color: #000000;
+    padding:6px 4px 6px 4px;
+}
+
+.quotetop {
+    background: url("../Images/css_img_quote.gif") no-repeat scroll right 50% #E4EAF2;
+    border-color: #000000 #000000 #000000 #8394B2;
+    border-right: 1px dotted #000000;
+    border-style: dotted dotted dotted solid;
+    border-width: 1px 1px 0 4px;
+    color: #000000;
+    font-size: 12px;
+    font-weight: bold;
+    margin: 8px auto 0;
+    padding: 3px;
+}
+
+.quotemain {
+    background: none repeat scroll 0 0 #FAFCFE;
+    border-color: #000000 #000000 #000000 #8394B2;
+    border-right: 1px dotted #000000;
+    border-style: dotted dotted dotted solid;
+    border-width: 0 1px 1px 4px;
+    color: #465584;
+    margin: 0 auto 8px;
+    padding: 4px;
+}
+/** END GridView **/
