@@ -27,6 +27,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <FilesToIncludeForPublish>OnlyFilesToRunTheApp</FilesToIncludeForPublish>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -134,15 +135,44 @@
     <Compile Include="Controllers\AdminBaseController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\EnquiryController.cs" />
+    <Compile Include="Controllers\EnquirySaveController.cs" />
     <Compile Include="Controllers\HandlerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ManagerController.cs" />
     <Compile Include="Controllers\SharedController.cs" />
     <Compile Include="Controllers\TranslationController.cs" />
+    <Compile Include="Controllers\VisitorRecordController.cs" />
+    <Compile Include="Controllers\WebSiteAnalysisController.cs" />
     <Compile Include="Framework\CookieHelper.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Htmls\CommonForm\LoginForm.aspx.cs">
+      <DependentUpon>LoginForm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Htmls\CommonForm\LoginForm.aspx.designer.cs">
+      <DependentUpon>LoginForm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Htmls\CommonForm\WebSiteAnalysis.aspx.cs">
+      <DependentUpon>WebSiteAnalysis.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Htmls\CommonForm\WebSiteAnalysis.aspx.designer.cs">
+      <DependentUpon>WebSiteAnalysis.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Htmls\CommonForm\YZM.ashx.cs">
+      <DependentUpon>YZM.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EnquirySavaQuery.cs" />
+    <Compile Include="Models\LoginQuery.cs" />
+    <Compile Include="Models\PagerOrder.cs" />
+    <Compile Include="Models\QQWryLocator2.cs" />
+    <Compile Include="Models\ResultObject.cs" />
+    <Compile Include="Models\ServerStatus.cs" />
+    <Compile Include="Models\WebSiteAnalysisInfo.cs" />
+    <Compile Include="Models\WebSiteAnalysisQuery.cs" />
     <Compile Include="PageModel\PageDictionary.cs" />
     <Compile Include="PageModel\PageEnquiry.cs" />
     <Compile Include="PageModel\PageManager.cs" />
@@ -526,6 +556,8 @@
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Htmls\CommonForm\LoginForm.aspx" />
+    <Content Include="Htmls\CommonForm\WebSiteAnalysis.aspx" />
     <Content Include="html\3dzhanshi.html" />
     <Content Include="html\about.html" />
     <Content Include="html\arabic.html" />
@@ -913,6 +945,22 @@
     <Content Include="html\zhaopin.html" />
     <Content Include="Images\20140617030834321_easyicon_net_32.png" />
     <Content Include="Images\confirm_delete.png" />
+    <Content Include="Images\content-bg.gif" />
+    <Content Include="Images\icon-demo.gif" />
+    <Content Include="Images\icon-login-seaver.gif" />
+    <Content Include="Images\loading01.gif" />
+    <Content Include="Images\login-buttom-gb1.gif" />
+    <Content Include="Images\login-content-bg.gif" />
+    <Content Include="Images\login-top-bg.gif" />
+    <Content Include="Images\login-wel.gif" />
+    <Content Include="Images\login_bg.jpg" />
+    <Content Include="Images\logo.gif" />
+    <Content Include="Images\menu_bg.gif" />
+    <Content Include="Images\right_smbg.jpg" />
+    <Content Include="Images\Submit_bg.gif" />
+    <Content Include="Images\top-right.gif" />
+    <Content Include="Images\top_bt.jpg" />
+    <Content Include="index.htm" />
     <Content Include="Scripts\artDialog415\artDialog.js" />
     <Content Include="Scripts\artDialog415\basic\artDialog.basic.js" />
     <Content Include="Scripts\artDialog415\basic\index.html" />
@@ -1246,6 +1294,8 @@
     <Content Include="Scripts\knockout-2.1.0.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
     <Content Include="Scripts\currentMenu.js" />
+    <Content Include="Styles\skin2.css" />
+    <Content Include="Styles\WebSiteStyle.css" />
     <Content Include="uploadFile\TextFile1.txt" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -1348,8 +1398,10 @@
     <None Include="assets\font\fontawesome-webfont.ttf" />
     <None Include="assets\font\fontawesome-webfont.woff" />
     <None Include="assets\font\FontAwesome.otf" />
+    <Content Include="Htmls\CommonForm\YZM.ashx" />
     <None Include="html\images\banner.psd" />
     <None Include="html\images\header-bg1.psd" />
+    <None Include="Models\QQWry.dat" />
     <None Include="Scripts\artDialog415\basic\_doc\highlight\LICENSE" />
     <Content Include="Views\Manager\ManagerList.cshtml" />
     <Content Include="Views\Shared\_Header.cshtml" />
