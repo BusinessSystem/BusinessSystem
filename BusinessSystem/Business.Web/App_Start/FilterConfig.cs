@@ -9,5 +9,16 @@ namespace Business.Web
         {
             filters.Add(new HandleErrorAttribute());
         }
+
+       
+    }
+
+    public class ErrorAttribute : FilterAttribute, IExceptionFilter
+    {
+        public void OnException(ExceptionContext filterContent) {
+            var a = 1;
+
+        
+        }
     }
 }
