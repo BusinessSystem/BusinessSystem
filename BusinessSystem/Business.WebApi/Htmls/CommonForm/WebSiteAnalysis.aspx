@@ -192,7 +192,7 @@
                             <span>采购商所在位置地图显示</span>
                         </th>
                         <th scope="col">
-                            <span>浏览时间（北京时间）</span><img id="VTime" src="../../images/arrow_up2.gif" />
+                            <span>浏览时间（北京时间）</span><img id="VTime" src="/Images/arrow_up2.gif" />
                         </th>
                     </tr>
                     <tbody id="visitor_list_tbody">
