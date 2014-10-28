@@ -10,7 +10,8 @@ namespace Business.Web.Controllers
     {
         public ActionResult Index()
         {
-            return RedirectToAction("Login", "Handler");
+            return Redirect("/");
+            //return RedirectToAction("Login", "Handler");
         }
 
         public ActionResult About()

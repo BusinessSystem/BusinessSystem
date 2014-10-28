@@ -37,7 +37,7 @@ namespace Business.Web.Controllers
         public ActionResult LoginOut()
         {
             CookieHelper.ClearLoginCookie();
-            return Redirect("/html/index.html");
+            return Redirect("/");
         }
 
         private string GetIp()
