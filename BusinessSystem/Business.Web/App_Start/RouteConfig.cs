@@ -11,6 +11,8 @@ namespace Business.Web
     {
         public static void RegisterRoutes(RouteCollection routes)
         {
+            //routes.IgnoreRoute("");
+            routes.RouteExistingFiles = false;
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
             routes.MapRoute(
                 name: "Default",

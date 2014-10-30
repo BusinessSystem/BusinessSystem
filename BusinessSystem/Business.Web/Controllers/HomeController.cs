@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Business.Serives;
 
 namespace Business.Web.Controllers
 {
@@ -11,7 +12,6 @@ namespace Business.Web.Controllers
         public ActionResult Index()
         {
             return Redirect("/index.html");
-            //return RedirectToAction("Login", "Handler");
         }
 
         public ActionResult About()
