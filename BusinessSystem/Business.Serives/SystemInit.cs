@@ -37,8 +37,8 @@ namespace Business.Serives
             IManagerRepository managerRepository = new ManagerRepository();
             if (managerRepository.GetManagerByUserName("systemadmin") == null)
             {
-                Manager adminManager = ManagerFactory.Create("systemadmin", "admin2014", 0, ManagerTypeEnum.Super,
-                    "超级管理员", "ETW", Utils.CoreDefaultValue.False, 0, "系统","yisearch@163.com");
+                Manager adminManager = ManagerFactory.Create("systemadmin", "systemadmin2014", 0, ManagerTypeEnum.Super,
+                    "超级管理员", "YiSearch", Utils.CoreDefaultValue.False, 0, "系统","yisearch@163.com");
                 adminManager.EncryptPassword();
                 managerRepository.Save(adminManager);
             }
