@@ -263,7 +263,7 @@ namespace Business.Web.Controllers
         public ActionResult ManagerMainSiteAdd()
         {
             IList<BaseDictionary> baseDictionaries = BaseService.GetBaseDictionaries(ValueTypeEnum.Language);
-            ViewBag.CommonManagers = ManageService.GetMmanagerTypeManagers(ManagerTypeEnum.Common);
+            ViewBag.CommonManagers = ManageService.GetMmanagerTypeManagers(ManagerTypeEnum.Super);
             return View(baseDictionaries);
         }
 
@@ -271,7 +271,7 @@ namespace Business.Web.Controllers
         public ActionResult ManagerMainSiteEdit(long id)
         {
             ViewBag.BaseDictionaries = BaseService.GetBaseDictionaries(ValueTypeEnum.Language);
-            ViewBag.CommonManagers = ManageService.GetMmanagerTypeManagers(ManagerTypeEnum.Common);
+            ViewBag.CommonManagers = ManageService.GetMmanagerTypeManagers(ManagerTypeEnum.Super);
              ManagerMainSite managerMainSite = ManageService.GetManagerMainSiteById(id);
              return View(managerMainSite);
         }

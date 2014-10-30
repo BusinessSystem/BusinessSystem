@@ -65,7 +65,7 @@ namespace Business.Web.Controllers
             }
             else
             {
-                filterContext.Result = Redirect("/html/index.html");
+                filterContext.Result = Redirect("/index.html");
             }
 
         }
