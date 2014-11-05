@@ -204,12 +204,15 @@ namespace Business.Serives
         {
             return managerRepository.GetChildManagers(parentId);
         }
-
+        
         public static IList<Manager> GetMmanagerTypeManagers(ManagerTypeEnum managerType)
         {
             return managerRepository.GetManagerTypeManagers(managerType);
         }
-
+        public static IList<Manager> GetMainManagerTypeManagers(ManagerTypeEnum managerType)
+        {
+            return managerRepository.GetMainManagerTypeManagers(managerType);
+        }
         public static IList<PwdChangeRecord> GetPwdChangeRecords(long managerId, int pageIndex, int pageSize)
         {
             return pwdChangeRecordRepository.GetPwdChangeRecords(managerId, pageIndex, pageSize);

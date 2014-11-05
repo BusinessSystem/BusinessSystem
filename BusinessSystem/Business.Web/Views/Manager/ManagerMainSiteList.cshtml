@@ -234,15 +234,15 @@
     function deleteManagerProduct(id) {
         art.dialog({
             icon: "question",
-            content: "确定删除该用户产品？",
+            content: "确定删除该主站？",
             ok: function () {
                 $.ajax({
-                    url: "/Manager/ManagerProductDelete",
+                    url: "/Manager/ManagerMainSiteDelete",
                     type: "post",
                     datatype: "json",
                     data: { id: id },
                     success: function (response) {
-                        window.location.href = "/Manager/ManagerProductList";
+                        window.location.href = "/Manager/ManagerMainSiteList";
                     },
                     error: function () {
 

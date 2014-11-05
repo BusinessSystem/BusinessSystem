@@ -214,6 +214,12 @@ namespace Business.Web.Controllers
             }
             return View(managerProduct);
         }
+        [HttpPost]
+        public ActionResult ManagerMainSiteDelete(long id)
+        {
+            ManageService.MainSiteDelete(id);
+            return Json(InfoTools.GetMsgInfo(ResponseCode.Ok), JsonRequestBehavior.AllowGet);
+        }
 
         [HttpPost]
         public ActionResult ManagerProductEdit(long managerproductId, long mainSiteId, string productUrl,
@@ -263,7 +269,7 @@ namespace Business.Web.Controllers
         public ActionResult ManagerMainSiteAdd()
         {
             IList<BaseDictionary> baseDictionaries = BaseService.GetBaseDictionaries(ValueTypeEnum.Language);
-            ViewBag.CommonManagers = ManageService.GetMmanagerTypeManagers(ManagerTypeEnum.Super);
+            ViewBag.CommonManagers = ManageService.GetMainManagerTypeManagers(ManagerTypeEnum.Common);
             return View(baseDictionaries);
         }
 
@@ -271,7 +277,7 @@ namespace Business.Web.Controllers
         public ActionResult ManagerMainSiteEdit(long id)
         {
             ViewBag.BaseDictionaries = BaseService.GetBaseDictionaries(ValueTypeEnum.Language);
-            ViewBag.CommonManagers = ManageService.GetMmanagerTypeManagers(ManagerTypeEnum.Super);
+            ViewBag.CommonManagers = ManageService.GetMainManagerTypeManagers(ManagerTypeEnum.Common);
              ManagerMainSite managerMainSite = ManageService.GetManagerMainSiteById(id);
              return View(managerMainSite);
         }
@@ -341,7 +347,7 @@ namespace Business.Web.Controllers
             ViewBag.CurrentManagerId = managerId;
             ViewBag.CurrentLanguageId = language;
             ViewBag.BaseDictionarys = BaseService.GetBaseDictionaries(ValueTypeEnum.Language);
-            ViewBag.CommonManagers = ManageService.GetMmanagerTypeManagers(ManagerTypeEnum.Common);
+            ViewBag.CommonManagers = ManageService.GetMainManagerTypeManagers(ManagerTypeEnum.Common);
             PageModel<ManagerMainSite> pageModel = ManageService.GetManagerMainSitePages(managerId, language, siteUrl,
                 pageIndex, pageSize);
             return View(pageModel);
