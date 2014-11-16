@@ -1,5 +1,6 @@
 ﻿using System.Web;
 using System.Web.Mvc;
+using Business.Utils;
 
 namespace Business.Web
 {
@@ -17,8 +18,9 @@ namespace Business.Web
     {
         public void OnException(ExceptionContext filterContent) {
             var a = 1;
-
+            LogHelper.Error("", filterContent.Exception);
         
         }
+
     }
 }

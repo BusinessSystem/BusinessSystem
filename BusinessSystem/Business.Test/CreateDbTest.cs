@@ -15,10 +15,11 @@ namespace Business.Test
         /// 自动生成数据库表
         /// </summary>
         [TestCase(TestName = "自动生成数据库表")]
-        [Explicit]
+         
         public void BuildTable()
         {
-            SessionProvider.RebuildSchema();
+            LogHelper.Error("", new Exception("ddfsofowefwoifw"));
+           // LogHelper.WriteLog(actionExecutedContext.GetType(), actionExecutedContext.Exception); SessionProvider.RebuildSchema();
         }
     }
 }

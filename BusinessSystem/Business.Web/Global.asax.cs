@@ -15,6 +15,8 @@ using System.Net;
 using System.Threading.Tasks;
 using System.Net.Http.Headers;
 using System.Web.SessionState;
+using Business.Web.App_Start;
+using Business.Utils;
 
 
 namespace Business.Web
@@ -26,13 +28,13 @@ namespace Business.Web
     {
         protected void Application_Start()
         {
-            SystemApplication.Start();
 
+
+            GlobalConfiguration.Configuration.Formatters.Insert(0, new JsonpMediaTypeFormatter());
             AreaRegistration.RegisterAllAreas();
 
             /*********add by lyq 2014-10-15**********/
-            GlobalConfiguration.Configuration.Formatters.Insert(0, new JsonpMediaTypeFormatter());
-            AreaRegistration.RegisterAllAreas();
+            
 
             WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
@@ -47,7 +49,7 @@ namespace Business.Web
             base.Init();
         }
 
-        void MvcApplication_PostAuthenticateRequest(object sender, EventArgs e)
+        private void MvcApplication_PostAuthenticateRequest(object sender, EventArgs e)
         {
             System.Web.HttpContext.Current.SetSessionStateBehavior(SessionStateBehavior.Required);
         }
@@ -55,6 +57,7 @@ namespace Business.Web
 
 
     #region JsonpMediaTypeFormatter add by lyq 2014-10-15
+
     public class JsonpMediaTypeFormatter : JsonMediaTypeFormatter
     {
         private string callbackQueryParameter;
@@ -73,7 +76,8 @@ namespace Business.Web
             set { callbackQueryParameter = value; }
         }
 
-        public override Task WriteToStreamAsync(Type type, object value, Stream stream, HttpContent content, TransportContext transportContext)
+        public override Task WriteToStreamAsync(Type type, object value, Stream writeStream, HttpContent content,
+            TransportContext transportContext)
         {
             string callback;
 
@@ -81,11 +85,11 @@ namespace Business.Web
             {
                 return Task.Factory.StartNew(() =>
                 {
-                    var writer = new StreamWriter(stream);
+                    var writer = new StreamWriter(writeStream);
                     writer.Write(callback + "(");
                     writer.Flush();
 
-                    base.WriteToStreamAsync(type, value, stream, content, transportContext).Wait();
+                    base.WriteToStreamAsync(type, value, writeStream, content, transportContext).Wait();
 
                     writer.Write(")");
                     writer.Flush();
@@ -93,10 +97,9 @@ namespace Business.Web
             }
             else
             {
-                return base.WriteToStreamAsync(type, value, stream, content, transportContext);
+                return base.WriteToStreamAsync(type, value, writeStream, content, transportContext);
             }
         }
-
 
         private bool IsJsonpRequest(out string callback)
         {
@@ -110,5 +113,8 @@ namespace Business.Web
             return !string.IsNullOrEmpty(callback);
         }
     }
+
     #endregion
+
+
 }
