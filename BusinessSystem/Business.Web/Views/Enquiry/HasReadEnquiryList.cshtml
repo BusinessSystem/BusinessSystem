@@ -251,7 +251,19 @@
                                         </td>
 
                                         <td  title="@item.ProductUrl">
-                                            <a href="/Enquiry/EnquiryDetail/@item.Id" title="@item.ProductUrl">@item.ProductUrl.Substring(0,20)</a>
+                                            <a href="/Enquiry/EnquiryDetail/@item.Id" title="@item.ProductUrl">
+											@if (!string.IsNullOrEmpty(item.ProductUrl))
+                                                           {
+                                                               if (item.ProductUrl.Length > 20)
+                                                               {
+                                                                   @:@item.ProductUrl.Substring(0, 20)
+                                                               }
+                                                               else
+                                                               {
+                                                                   @:@item.ProductUrl
+                                                               }
+                                                           }                     
+														   </a>
                                         </td>
                                         <td>@item.PurchaserEmail
                                            @if (item.EnquiryTimes > 1)
